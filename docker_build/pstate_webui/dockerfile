@@ -1,0 +1,12 @@
+FROM ubuntu:16.04
+
+RUN apt-get update -y
+RUN apt-get upgrade -y
+
+RUN apt-get install -y curl nginx python3 python3-pip
+
+RUN pip3 install django uwsgi
+
+ADD ictsc_prep_school /root/
+WORKDIR /root/
+CMD ["uwsgi","--http",":80","--module","ictsc_prep_school.wsgi"]

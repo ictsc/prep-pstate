@@ -1,3 +1,4 @@
+from django.contrib.auth.base_user import AbstractBaseUser
 from django.db import models
 
 
@@ -44,3 +45,9 @@ class ProblemEnvironment(TemplateModel):
     #   TODO    :   terraform-managerのコードをpstateに持ってきたら下のコメントアウトを外す.
     # environment = models.ForeignKey(Environment)
     problem = models.ForeignKey(Problem)
+
+
+class Team(AbstractBaseUser):
+    team_name = models.CharField(max_length=100)
+    description = models.TextField()
+    remarks = models.TextField()

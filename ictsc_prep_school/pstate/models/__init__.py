@@ -38,12 +38,12 @@ class ProblemEnvironment(TemplateModel):
     vnc_server_username = models.CharField(max_length=50, blank=True, null=True)
     vnc_server_password = models.CharField(max_length=50, blank=True, null=True)
     is_enabled = models.BooleanField("有効フラグ", default=False)
-    state = models.CharField(choices=STATE_CHOICES, default='IN_PREPARATION')
-    team = models.ForeignKey(Team)
-    participant = models.ForeignKey(Participant)
+    state = models.CharField(choices=STATE_CHOICES, default='IN_PREPARATION', max_length=100)
+    team = models.ForeignKey("Team", on_delete=False)
+    participant = models.ForeignKey("Participant", on_delete=False)
     #   TODO    :   terraform-managerのコードをpstateに持ってきたら下のコメントアウトを外す.
     # environment = models.ForeignKey(Environment)
-    problem = models.ForeignKey(Problem)
+    problem = models.ForeignKey(Problem, on_delete=False)
 
 
 class Team(AbstractBaseUser):
@@ -53,11 +53,11 @@ class Team(AbstractBaseUser):
 
 
 class Participant(AbstractBaseUser):
-    team = models.ForeignKey(Team, blank=True, null=True)
+    team = models.ForeignKey(Team, blank=True, null=True, on_delete=False)
 
 
 class Grade(TemplateModel):
     score = models.FloatField()
-    team = models.ForeignKey(Team, blank=True, null=True)
-    participant = models.ForeignKey(Participant, blank=True, null=True)
-    problem = models.ForeignKey(Problem)
+    team = models.ForeignKey(Team, blank=True, null=True, on_delete=False)
+    participant = models.ForeignKey(Participant, blank=True, null=True, on_delete=False)
+    problem = models.ForeignKey(Problem, on_delete=False)

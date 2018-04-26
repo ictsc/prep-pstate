@@ -51,3 +51,7 @@ class Team(AbstractBaseUser):
     team_name = models.CharField(max_length=100)
     description = models.TextField()
     remarks = models.TextField()
+
+
+class Participant(AbstractBaseUser):
+    pass

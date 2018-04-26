@@ -55,3 +55,10 @@ class Team(AbstractBaseUser):
 
 class Participant(AbstractBaseUser):
     pass
+
+
+class Grade(TemplateModel):
+    score = models.FloatField()
+    team = models.ForeignKey(Team, blank=True, null=True)
+    participant = models.ForeignKey(Participant, blank=True, null=True)
+    problem = models.ForeignKey(Problem)

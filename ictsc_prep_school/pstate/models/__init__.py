@@ -39,9 +39,8 @@ class ProblemEnvironment(TemplateModel):
     vnc_server_password = models.CharField(max_length=50, blank=True, null=True)
     is_enabled = models.BooleanField("有効フラグ", default=False)
     state = models.CharField(choices=STATE_CHOICES, default='IN_PREPARATION')
-    #   TODO    :   モデルの設計の方針が決まったら下のコメントアウトを外す.
-    # team = models.ForeignKey(Team)
-    # participant = models.ForeignKey(Participant)
+    team = models.ForeignKey(Team)
+    participant = models.ForeignKey(Participant)
     #   TODO    :   terraform-managerのコードをpstateに持ってきたら下のコメントアウトを外す.
     # environment = models.ForeignKey(Environment)
     problem = models.ForeignKey(Problem)

@@ -53,7 +53,7 @@ class Team(AbstractBaseUser):
 
 
 class Participant(AbstractBaseUser):
-    pass
+    team = models.ForeignKey(Team, blank=True, null=True)
 
 
 class Grade(TemplateModel):

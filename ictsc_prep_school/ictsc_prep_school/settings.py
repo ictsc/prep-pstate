@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'pstate',
+    'terraform_manager',
     'django_adminlte',
     'django_adminlte_theme',
 ]

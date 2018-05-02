@@ -1,4 +1,5 @@
 from django.contrib.auth.base_user import AbstractBaseUser
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
@@ -46,18 +47,30 @@ class ProblemEnvironment(TemplateModel):
     problem = models.ForeignKey(Problem, on_delete=False)
 
 
-class Team(AbstractBaseUser):
+class User(AbstractUser):
+    pass
+
+
+class Team(User):
     team_name = models.CharField(max_length=100)
-    description = models.TextField()
-    remarks = models.TextField()
+    description = models.TextField(blank=True, null=True)
+    remarks = models.TextField(blank=True, null=True)
+
+    class Meta:
+        verbose_name = 'Team'
+        verbose_name_plural = 'Teams'
 
 
-class Participant(AbstractBaseUser):
-    team = models.ForeignKey(Team, blank=True, null=True, on_delete=False)
+class Participant(User):
+    assign_team = models.ForeignKey("Team", blank=True, null=True, on_delete=False)
+
+    class Meta:
+        verbose_name = 'Participant'
+        verbose_name_plural = 'Participants'
 
 
 class Grade(TemplateModel):
     score = models.FloatField()
-    team = models.ForeignKey(Team, blank=True, null=True, on_delete=False)
+    team = models.ForeignKey("Team", blank=True, null=True, on_delete=False)
     participant = models.ForeignKey(Participant, blank=True, null=True, on_delete=False)
     problem = models.ForeignKey(Problem, on_delete=False)

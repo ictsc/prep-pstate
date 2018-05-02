@@ -62,7 +62,8 @@ class Team(User):
 
 
 class Participant(User):
-    assign_team = models.ForeignKey("Team", blank=True, null=True, on_delete=False)
+    assign_team = models.ForeignKey("Team", verbose_name="所属チーム",
+                                    help_text="所属するチームを選択してください", blank=True, null=True, on_delete=False)
 
     class Meta:
         verbose_name = 'Participant'

@@ -8,13 +8,13 @@ RUN apt-get update \
   && pip3 install --upgrade pip
 
 # ライブラリのインストール.
-RUN mkdir /terraform-manager
-WORKDIR /terraform-manager/
-COPY ./requirements.txt /terraform-manager/
+RUN mkdir /pstate
+WORKDIR /pstate/
+COPY ./requirements.txt /pstate/
 RUN pip3 install -r requirements.txt
 
 # ソースファイルのコピー.
-COPY ./ /terraform-manager/
+COPY ./ /pstate/
 
-ENV PYTHONPATH /terraform-manager/ictsc_prep_school:$PYTHONPATH
-CMD ["uwsgi","--http",":80","--file","/terraform-manager/ictsc_prep_school/terraform_manager/wsgi.py"]
+ENV PYTHONPATH /pstate/ictsc_prep_school:$PYTHONPATH
+CMD ["uwsgi","--http",":80","--file","/pstate/ictsc_prep_school/terraform_manager/wsgi.py"]

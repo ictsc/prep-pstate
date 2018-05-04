@@ -5,8 +5,11 @@ RUN apt-get upgrade -y
 
 RUN apt-get install -y curl nginx python3 python3-pip
 
-RUN pip3 install django uwsgi
-
-ADD ictsc_prep_school /root/
+ADD ./requirements.txt /root/
 WORKDIR /root/
-CMD ["uwsgi","--http",":80","--module","ictsc_prep_school.wsgi"]
+RUN pip3 install -r requirements.txt
+
+ADD ./ictsc_prep_school /root/
+
+#CMD ["uwsgi","--http",":80","--module","ictsc_prep_school.wsgi"]
+CMD ["python3","manage.py","runserver","0.0.0.0:80"]

@@ -47,7 +47,7 @@ Execute the following command in the project root directory.
 
 Create
 ```
-docker build -t terraform-manager-api  -f docker/api/Dockerfile .
+docker build -t terraform-manager-api  -f docker_build/terraform_manager_api/Dockerfile .
 ```
 
 Run

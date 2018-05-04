@@ -17,4 +17,5 @@ RUN pip3 install -r requirements.txt
 COPY ./ /pstate/
 
 ENV PYTHONPATH /pstate/ictsc_prep_school:$PYTHONPATH
-CMD ["uwsgi","--http",":80","--file","/pstate/ictsc_prep_school/terraform_manager/wsgi.py"]
+WORKDIR /pstate/ictsc_prep_school
+CMD ["uwsgi","--http",":80","--file","/pstate/ictsc_prep_school/ictsc_prep_school/wsgis/terraform_manager.py"]

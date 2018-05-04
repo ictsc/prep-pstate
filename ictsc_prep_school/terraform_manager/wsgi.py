@@ -9,6 +9,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "ictsc_prep_school.settings.terraform_manager.develop")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "ictsc_prep_school.ictsc_prep_school.settings.terraform_manager.develop")
 
 application = get_wsgi_application()

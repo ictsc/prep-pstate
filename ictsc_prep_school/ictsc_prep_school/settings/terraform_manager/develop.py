@@ -1,4 +1,4 @@
-from ictsc_prep_school.settings.terraform_manager.base import *
+from ictsc_prep_school.ictsc_prep_school.settings.terraform_manager.base import *
 
 DATABASES = {
     'default': {

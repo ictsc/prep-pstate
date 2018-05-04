@@ -4,7 +4,8 @@ from django.views.generic import ListView, DetailView, CreateView
 
 from pstate.models import Participant, Team
 
-from pstate.forms.add_participant import ParticipantForm, TeamForm
+from pstate.forms.add_participant import ParticipantForm
+from pstate.forms.add_team import TeamForm
 
 
 def login(request):

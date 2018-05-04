@@ -2,9 +2,9 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView
 
-from pstate.models import Participant
+from pstate.models import Participant, Team
 
-from pstate.forms.add_participant import ParticipantForm
+from pstate.forms.add_participant import ParticipantForm, TeamForm
 
 
 def login(request):
@@ -27,3 +27,17 @@ class ParticipantCreateView(CreateView):
     form_class = ParticipantForm
     template_name = 'admin_pages/participant/add.html'
     success_url = '/manage/participants/'
+
+
+class TeamListView(ListView):
+
+    model = Team
+    paginate_by = 100
+    template_name = 'admin_pages/team/index.html'
+
+
+class TeamCreateView(CreateView):
+
+    form_class = TeamForm
+    template_name = 'admin_pages/team/add.html'
+    success_url = '/manage/teams/'

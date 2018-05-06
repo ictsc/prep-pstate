@@ -1,0 +1,9 @@
+{% extends 'adminlte/base.html' %}
+{% block title %}{% endblock %}
+{% block content %}
+<div align="right">
+    <button class="btn btn-primary" onClick="location.href='{% url 'team-edit' pk=team.id %}'" >Edit</button>
+    <button class="btn btn-primary" onClick="location.href='{% url 'team-delete' pk=team.id %}'" >Delete</button>
+</div>
+{{ team.id }}
+{% endblock %}

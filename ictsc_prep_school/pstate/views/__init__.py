@@ -53,7 +53,7 @@ class TeamDetailView(DetailView):
 class TeamUpdateView(UpdateView):
 
     model = Team
-    fields = ['__all__']
+    fields = ('__all__')
     template_name = 'admin_pages/team/edit.html'
     success_url = '/manage/teams/'
 

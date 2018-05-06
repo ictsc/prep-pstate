@@ -16,8 +16,8 @@
     <tbody>
     {% for participant in object_list %}
         <tr>
-            <td>{{ participant.id }}</td>
-            <td>{{ participant.username }}</td>
+            <td><a href="{% url 'participant-detail' pk=participant.id %}">{{ participant.id }}</a></td>
+            <td><a href="{% url 'participant-detail' pk=participant.id %}">{{ participant.username }}</a></td>
             <td>{{ participant.email }}</td>
         </tr>
     {% endfor %}

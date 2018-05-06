@@ -63,3 +63,23 @@ class TeamDeleteView(DeleteView):
     model = Team
     template_name = 'admin_pages/team/delete.html'
     success_url = '/manage/teams/'
+
+
+class ParticipantDetailView(DetailView):
+
+    model = Participant
+    template_name = 'admin_pages/participant/detail.html'
+
+
+class ParticipantUpdateView(UpdateView):
+
+    model = Participant
+    fields = ('__all__')
+    template_name = 'admin_pages/participant/edit.html'
+    success_url = '/manage/participants/'
+
+class ParticipantDeleteView(DeleteView):
+
+    model = Participant
+    template_name = 'admin_pages/participant/delete.html'
+    success_url = '/manage/participants/'

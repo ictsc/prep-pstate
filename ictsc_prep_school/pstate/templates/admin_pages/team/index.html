@@ -2,6 +2,9 @@
 
 {% block title %}My App{% endblock %}
 {% block content %}
+<div align="right">
+    <button class="btn btn-primary" onClick="location.href='{% url 'team-add' %}'" >Add</button>
+</div>
 <table class="table table-striped table-bordered">
     <thead>
     <tr>

@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from pstate.models import Participant, Team
 
@@ -41,4 +41,25 @@ class TeamCreateView(CreateView):
 
     form_class = TeamForm
     template_name = 'admin_pages/team/add.html'
+    success_url = '/manage/teams/'
+
+
+class TeamDetailView(DetailView):
+
+    model = Team
+    template_name = 'admin_pages/team/detail.html'
+
+
+class TeamUpdateView(UpdateView):
+
+    model = Team
+    fields = ['__all__']
+    template_name = 'admin_pages/team/edit.html'
+    success_url = '/manage/teams/'
+
+
+class TeamDeleteView(DeleteView):
+
+    model = Team
+    template_name = 'admin_pages/team/delete.html'
     success_url = '/manage/teams/'

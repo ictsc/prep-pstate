@@ -24,8 +24,8 @@
         <td>
             <a href="{% url 'provider-detail' pk=provider.id %}">{{ provider.name }}</a>
         </td>
-        <td><button class="btn btn-info" onClick="location.href=''">Edit</button></td>
-        <td><button class="btn btn-danger" onClick="location.href=''">Delete</button></td>
+        <td><button class="btn btn-info" onClick="location.href='{% url 'provider-edit' pk=provider.id %}'">Edit</button></td>
+        <td><button class="btn btn-danger" onClick="location.href='{% url 'provider-delete' pk=provider.id %}'">Delete</button></td>
     </tr>
     {% endfor %}
     </tbody>

@@ -10,7 +10,8 @@ from pstate.views import ParticipantListView, ParticipantCreateView,\
     ProblemEnvironmentListView, ProblemEnvironmentDetailView, ProblemEnvironmentCreateView, ProblemEnvironmentUpdateView, ProblemEnvironmentDeleteView
 
 from pstate.views import ProviderListView, ProviderDetailView, ProviderCreateView, ProviderUpdateView, \
-    ProviderDeleteView
+    ProviderDeleteView, ProblemUpdateView, ProblemDeleteView
+
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -33,6 +34,8 @@ urlpatterns = [
     url(r'^problems/$', ProblemListView.as_view(), name='problem-list'),
     url(r'^problems/(?P<pk>[0-9]+)/$', ProblemDetailView.as_view(), name='problem-detail'),
     url(r'^problems/add/$', ProblemCreateView.as_view(), name='problem-create'),
+    url(r'^problems/(?P<pk>[0-9]+)/edit/$', ProblemUpdateView.as_view(), name='problem-edit'),
+    url(r'^problems/(?P<pk>[0-9]+)/delete/$', ProblemDeleteView.as_view(), name='problem-delete'),
     # problem_environments
     url(r'^problem_environments/$', ProblemEnvironmentListView.as_view(), name='problemenvironment-list'),
     url(r'^problem_environments/(?P<pk>[0-9]+)/$', ProblemEnvironmentDetailView.as_view(), name='problemenvironment-detail'),

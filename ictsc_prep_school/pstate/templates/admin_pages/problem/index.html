@@ -28,8 +28,8 @@
         <td>
             <a href="{% url 'problem-detail' pk=problem.id %}">{{ problem.name }}</a>
         </td>
-        <td><button class="btn btn-info" onClick="location.href=''">Edit</button></td>
-        <td><button class="btn btn-danger" onClick="location.href=''">Delete</button></td>
+        <td><button class="btn btn-info" onClick="location.href='{% url 'problem-edit' pk=problem.id %}'">Edit</button></td>
+        <td><button class="btn btn-danger" onClick="location.href='{% url 'problem-delete' pk=problem.id %}'">Delete</button></td>
     </tr>
     {% endfor %}
     </tbody>

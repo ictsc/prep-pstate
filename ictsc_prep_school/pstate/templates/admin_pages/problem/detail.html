@@ -2,30 +2,66 @@
 
 {% block title %}My App{% endblock %}
 {% block content %}
-<h1>Problem</h1>
-<h2>Problem name : {{ problem.display_name }}</h2>
+<h1>{{ problem.display_name }}</h1>
 <div align="right">
     <button class="btn btn-info" onClick="location.href=''">Preview</button>
     <button class="btn btn-info" onClick="location.href=''">Test run</button>
     <button class="btn btn-info" onClick="location.href=''">Create problem environment</button>
 </div>
 <div align="right">
-    <button class="btn btn-info" onClick="location.href=''">Edit</button>
-    <button class="btn btn-danger" onClick="location.href=''">Delete</button>
+    <button class="btn btn-danger" onClick="location.href='{% url 'problem-delete' pk=problem.id %}'">Delete</button>
 </div>
-<div>
-    <h3>問題文</h3>
-    {{ problem.description }}
+<div class="problem-body">
+    <div class="nav-tabs-custom">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab_1" data-toggle="tab">Problem sentence</a></li>
+            <li><a href="#tab_2" data-toggle="tab">Problem attachments</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="tab_1">
+                <div align="right">
+                    <button class="btn btn-info" onClick="location.href='{% url 'problem-edit' pk=problem.id %}'">Edit</button>
+                </div>
+            </div>
+            <div class="tab-pane" id="tab_2">
+                <div align="right">
+                    <button class="btn btn-info" onClick="location.href='{% url 'problem-edit' pk=problem.id %}'">Edit</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <div>
     <h2>Terraform</h2>
-    <h3>Provider</h3>
-    <TODO>Providerの情報を表示する</TODO>
-    <h3>TerraformFile</h3>
-    <TODO>TerraformFileの中身を表示する</TODO>
-    <h3>ShellScript</h3>
-    <TODO>ShellScriptの一覧を表示する</TODO>
-    <h3>Variables</h3>
-    <TODO>変数の一覧を表示する</TODO>
+    <div class="nav-tabs-custom">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab_1" data-toggle="tab">Terraform - TerraformFile</a></li>
+            <li><a href="#tab_2" data-toggle="tab">Terraform - Provider</a></li>
+            <li><a href="#tab_3" data-toggle="tab">Terraform - ShellScript</a></li>
+            <li><a href="#tab_4" data-toggle="tab">Terraform - Variables</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="tab_1">
+                <div align="right">
+                    <button class="btn btn-info" onClick="location.href='{% url 'problem-edit' pk=problem.id %}'">Edit</button>
+                </div>
+            </div>
+            <div class="tab-pane" id="tab_2">
+                <div align="right">
+                    <button class="btn btn-info" onClick="location.href='{% url 'problem-edit' pk=problem.id %}'">Edit</button>
+                </div>
+            </div>
+            <div class="tab-pane" id="tab_3">
+                <div align="right">
+                    <button class="btn btn-info" onClick="location.href='{% url 'problem-edit' pk=problem.id %}'">Edit</button>
+                </div>
+            </div>
+            <div class="tab-pane" id="tab_4">
+                <div align="right">
+                    <button class="btn btn-info" onClick="location.href='{% url 'problem-edit' pk=problem.id %}'">Edit</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

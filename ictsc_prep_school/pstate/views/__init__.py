@@ -12,6 +12,8 @@ from pstate.forms.add_provider import ProviderForm
 
 from terraform_manager.models import Provider
 
+from pstate.forms.add_terraformfile import TerraformFileForm
+
 
 def login(request):
     return render(request, 'admin_pages/auth/login.html')
@@ -115,6 +117,21 @@ class ProblemCreateView(CreateView):
     success_url = "/manage/problems/"
 
 
+class ProblemUpdateView(UpdateView):
+
+    model = Problem
+    fields = '__all__'
+    template_name = 'admin_pages/problem/edit.html'
+    success_url = '/manage/problems/'
+
+
+class ProblemDeleteView(DeleteView):
+
+    model = Problem
+    template_name = 'admin_pages/common/delete.html'
+    success_url = '/manage/problems/'
+
+
 class ProblemEnvironmentListView(ListView):
 
     model = ProblemEnvironment
@@ -185,3 +202,17 @@ class ProviderDeleteView(DeleteView):
     model = Provider
     template_name = 'admin_pages/setting/provider/delete.html'
     success_url = '/manage/setting/providers/'
+
+
+class TerraformFileCreateView(CreateView):
+
+    form_class = TerraformFileForm
+    template_name = 'admin_pages/common/add.html'
+    success_url = '/manage/problems/'
+
+    def form_valid(self, form):
+        terraform_file = form.save(commit=True)
+        problem = Problem.objects.get(id=self.kwargs['pk'])
+        problem.terraform_file_id = terraform_file
+        problem.save()
+        return super(TerraformFileCreateView, self).form_valid(form)

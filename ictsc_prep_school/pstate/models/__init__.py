@@ -2,6 +2,8 @@ from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+from terraform_manager.models import TerraformFile, Environment
+
 
 class TemplateModel(models.Model):
     class Meta:
@@ -14,12 +16,11 @@ class TemplateModel(models.Model):
 class Problem(TemplateModel):
     name = models.CharField("問題名(管理用)", max_length=200)
     display_name = models.CharField("問題名(参加者向け)", max_length=200)
-    description = models.TextField("問題文")
+    description = models.TextField("問題文", blank=True, null=True)
     start_date = models.DateTimeField("問題公開日時", blank=True, null=True)
     end_date = models.DateTimeField("問題公開終了日時", blank=True, null=True)
     is_enabled = models.BooleanField("公開フラグ", default=False)
-    #   TODO    :   terraform-managerのコードをpstateに持ってきたら下のコメントアウトを外す.
-    # terraform_file_id = models.ForeignKey('TerraformFile')
+    terraform_file_id = models.ForeignKey(TerraformFile, on_delete=False, null=True)
 
     def __str__(self):
         return '{} : {}'.format(self.name, self.display_name)
@@ -45,8 +46,7 @@ class ProblemEnvironment(TemplateModel):
     state = models.CharField(choices=STATE_CHOICES, default='IN_PREPARATION', max_length=100)
     team = models.ForeignKey("Team", on_delete=False)
     participant = models.ForeignKey("Participant", on_delete=False)
-    #   TODO    :   terraform-managerのコードをpstateに持ってきたら下のコメントアウトを外す.
-    # environment = models.ForeignKey(Environment)
+    environment = models.ForeignKey(Environment, on_delete=True, null=True)
     problem = models.ForeignKey(Problem, on_delete=False)
 
 

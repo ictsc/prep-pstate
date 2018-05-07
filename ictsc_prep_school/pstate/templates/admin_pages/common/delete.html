@@ -2,7 +2,7 @@
 {% block title %}{% endblock %}
 {% block content %}
 <form action="" method="post">{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Update" />
+    <p>Are you sure you want to delete "{{ object }}"?</p>
+    <input type="submit" value="Confirm" />
 </form>
 {% endblock %}

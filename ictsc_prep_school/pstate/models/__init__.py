@@ -38,14 +38,31 @@ class ProblemEnvironment(TemplateModel):
 
     )
 
+    VNC_DEFAULT_USER_NAME = 'ubuntu'
+
+    def generate_vnc_server_port():
+        # import random
+        # return str(random.randint(1025, 50000))
+        # 5901固定、必要に応じてrandom生成を有効化する.
+        return str(5901)
+
+    def generate_vnc_server_password():
+        import string
+        import random
+        import os
+        length = 14
+        chars = string.ascii_letters + string.digits + '!@#$%^&*()'
+        random.seed = (os.urandom(1024))
+        return ''.join(random.choice(chars) for i in range(length))
+
     vnc_server_ipv4_address = models.GenericIPAddressField(protocol='IPv4', blank=True, null=True)
-    vnc_server_port = models.CharField(max_length=5, blank=True, null=True)
-    vnc_server_username = models.CharField(max_length=50, blank=True, null=True)
-    vnc_server_password = models.CharField(max_length=50, blank=True, null=True)
+    vnc_server_port = models.CharField(max_length=5, blank=True, null=True, default=generate_vnc_server_port)
+    vnc_server_username = models.CharField(max_length=50, blank=True, null=True, default=VNC_DEFAULT_USER_NAME)
+    vnc_server_password = models.CharField(max_length=50, blank=True, null=True, default=generate_vnc_server_password)
     is_enabled = models.BooleanField("有効フラグ", default=False)
     state = models.CharField(choices=STATE_CHOICES, default='IN_PREPARATION', max_length=100)
-    team = models.ForeignKey("Team", on_delete=False)
-    participant = models.ForeignKey("Participant", on_delete=False)
+    team = models.ForeignKey("Team", on_delete=False, blank=True, null=True)
+    participant = models.ForeignKey("Participant", on_delete=False, blank=True, null=True)
     environment = models.ForeignKey(Environment, on_delete=True, null=True)
     problem = models.ForeignKey(Problem, on_delete=False)
 

@@ -12,6 +12,8 @@ from pstate.forms.add_provider import ProviderForm
 
 from terraform_manager.models import Provider
 
+from pstate.forms.add_terraformfile import TerraformFileForm
+
 
 def login(request):
     return render(request, 'admin_pages/auth/login.html')
@@ -200,3 +202,10 @@ class ProviderDeleteView(DeleteView):
     model = Provider
     template_name = 'admin_pages/setting/provider/delete.html'
     success_url = '/manage/setting/providers/'
+
+
+class TerraformFileCreateView(CreateView):
+
+    form_class = TerraformFileForm
+    template_name = 'admin_pages/common/add.html'
+    success_url = '/manage/problems/'

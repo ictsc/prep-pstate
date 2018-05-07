@@ -8,6 +8,9 @@ from pstate.forms.add_participant import ParticipantForm
 from pstate.forms.add_team import TeamForm
 from pstate.forms.add_problem import ProblemForm
 from pstate.forms.add_problemenvironment import ProblemEnvironmentForm
+from pstate.forms.add_provider import ProviderForm
+
+from terraform_manager.models import Provider
 
 
 def login(request):
@@ -146,3 +149,39 @@ class ProblemEnvironmentDeleteView(DeleteView):
     model = ProblemEnvironment
     template_name = 'admin_pages/problem_environment/delete.html'
     success_url = '/manage/problem_environments/'
+
+
+class ProviderListView(ListView):
+
+    model = Provider
+    paginate_by = 100
+    template_name = 'admin_pages/setting/provider/index.html'
+
+
+class ProviderDetailView(DetailView):
+
+    model = Provider
+    paginate_by = 100
+    template_name = 'admin_pages/setting/provider/detail.html'
+
+
+class ProviderCreateView(CreateView):
+
+    form_class = ProviderForm
+    template_name = 'admin_pages/setting/provider/add.html'
+    success_url = "/manage/setting/providers/"
+
+
+class ProviderUpdateView(UpdateView):
+
+    model = Provider
+    fields = ('__all__')
+    template_name = 'admin_pages/setting/provider/edit.html'
+    success_url = '/manage/setting/providers/'
+
+
+class ProviderDeleteView(DeleteView):
+
+    model = Provider
+    template_name = 'admin_pages/setting/provider/delete.html'
+    success_url = '/manage/setting/providers/'

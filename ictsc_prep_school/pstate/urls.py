@@ -9,6 +9,9 @@ from pstate.views import ParticipantListView, ParticipantCreateView,\
     ProblemListView, ProblemDetailView, ProblemCreateView,\
     ProblemEnvironmentListView, ProblemEnvironmentDetailView, ProblemEnvironmentCreateView, ProblemEnvironmentUpdateView, ProblemEnvironmentDeleteView
 
+from pstate.views import ProviderListView, ProviderDetailView, ProviderCreateView, ProviderUpdateView, \
+    ProviderDeleteView
+
 urlpatterns = [
     path('', views.index, name='index'),
     path('dashboard', views.dashboard, name='dashboard'),
@@ -36,4 +39,10 @@ urlpatterns = [
     url(r'^problem_environments/add/$', ProblemEnvironmentCreateView.as_view(), name='problemenvironment-create'),
     url(r'^problem_environments/(?P<pk>[0-9]+)/edit/$', ProblemEnvironmentUpdateView.as_view(), name='problemenvironment-edit'),
     url(r'^problem_environments/(?P<pk>[0-9]+)/delete/$', ProblemEnvironmentDeleteView.as_view(), name='problemenvironment-delete'),
+    # setting/providers
+    url(r'^setting/providers/$', ProviderListView.as_view(), name='provider-list'),
+    url(r'^setting/providers/(?P<pk>[0-9]+)/$', ProviderDetailView.as_view(), name='provider-detail'),
+    url(r'^setting/providers/add/$', ProviderCreateView.as_view(), name='provider-create'),
+    url(r'^setting/providers/(?P<pk>[0-9]+)/edit/$', ProviderUpdateView.as_view(), name='provider-edit'),
+    url(r'^setting/providers/(?P<pk>[0-9]+)/delete/$', ProviderDeleteView.as_view(), name='provider-delete'),
 ]

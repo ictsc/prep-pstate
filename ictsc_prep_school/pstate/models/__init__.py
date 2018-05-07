@@ -21,6 +21,9 @@ class Problem(TemplateModel):
     #   TODO    :   terraform-managerのコードをpstateに持ってきたら下のコメントアウトを外す.
     # terraform_file_id = models.ForeignKey('TerraformFile')
 
+    def __str__(self):
+        return '{} : {}'.format(self.name, self.display_name)
+
 
 class ProblemEnvironment(TemplateModel):
     STATE_CHOICES = (

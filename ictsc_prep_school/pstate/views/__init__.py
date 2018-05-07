@@ -19,6 +19,10 @@ def index(request):
     return render(request, 'admin_pages/index.html')
 
 
+def dashboard(request):
+    return render(request, 'admin_pages/dashboard.html')
+
+
 class ParticipantListView(ListView):
 
     model = Participant

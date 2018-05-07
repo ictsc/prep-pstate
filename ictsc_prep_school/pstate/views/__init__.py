@@ -115,6 +115,21 @@ class ProblemCreateView(CreateView):
     success_url = "/manage/problems/"
 
 
+class ProblemUpdateView(UpdateView):
+
+    model = Problem
+    fields = '__all__'
+    template_name = 'admin_pages/problem/edit.html'
+    success_url = '/manage/problems/'
+
+
+class ProblemDeleteView(DeleteView):
+
+    model = Problem
+    template_name = 'admin_pages/common/delete.html'
+    success_url = '/manage/problems/'
+
+
 class ProblemEnvironmentListView(ListView):
 
     model = ProblemEnvironment

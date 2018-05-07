@@ -11,6 +11,7 @@ from pstate.views import ParticipantListView, ParticipantCreateView,\
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('dashboard', views.dashboard, name='dashboard'),
     # auth
     path('login/', views.login, name='login'),
     # teams

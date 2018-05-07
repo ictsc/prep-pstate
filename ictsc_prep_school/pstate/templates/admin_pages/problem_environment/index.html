@@ -10,10 +10,12 @@
     <thead>
     <tr>
         <th>ID</th>
-        <th>STATE</th>
+        <th>State</th>
         <th>Team</th>
         <th>Problem name</th>
         <th>Problem name(For management)</th>
+        <th>Created At</th>
+        <th>Updated At</th>
     </tr>
     </thead>
     <tbody>
@@ -33,6 +35,12 @@
         </td>
         <td>
             {{ problemenvironment.problem.name }}
+        </td>
+        <td>
+            {{ problemenvironment.created_at }}
+        </td>
+        <td>
+            {{ problemenvironment.updated_at }}
         </td>
     </tr>
     {% endfor %}

@@ -176,7 +176,7 @@ class ProviderUpdateView(UpdateView):
 
     model = Provider
     fields = ('__all__')
-    template_name = 'admin_pages/setting/provider/edit.html'
+    template_name = 'admin_pages/common/edit.html'
     success_url = '/manage/setting/providers/'
 
 

@@ -2,10 +2,11 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
-from pstate.models import Participant, Team
+from pstate.models import Participant, Team, Problem
 
 from pstate.forms.add_participant import ParticipantForm
 from pstate.forms.add_team import TeamForm
+from pstate.forms.add_problem import ProblemForm
 
 
 def login(request):
@@ -83,3 +84,25 @@ class ParticipantDeleteView(DeleteView):
     model = Participant
     template_name = 'admin_pages/participant/delete.html'
     success_url = '/manage/participants/'
+
+
+class ProblemListView(ListView):
+
+    model = Problem
+    paginate_by = 100
+    template_name = 'admin_pages/problem/index.html'
+
+
+class ProblemDetailView(DetailView):
+
+    model = Problem
+    paginate_by = 100
+    template_name = 'admin_pages/problem/detail.html'
+
+
+class ProblemCreateView(CreateView):
+
+    form_class = ProblemForm
+    template_name = 'admin_pages/problem/add.html'
+    success_url = "/manage/problems/"
+

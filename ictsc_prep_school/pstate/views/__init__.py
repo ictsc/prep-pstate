@@ -209,3 +209,10 @@ class TerraformFileCreateView(CreateView):
     form_class = TerraformFileForm
     template_name = 'admin_pages/common/add.html'
     success_url = '/manage/problems/'
+
+    def form_valid(self, form):
+        terraform_file = form.save(commit=True)
+        problem = Problem.objects.get(id=self.kwargs['pk'])
+        problem.terraform_file_id = terraform_file
+        problem.save()
+        return super(TerraformFileCreateView, self).form_valid(form)

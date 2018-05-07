@@ -34,6 +34,11 @@
 </div>
 <div>
     <h2>Terraform</h2>
+    {% if problem.terraform_file_id == None %}
+    <div align="right">
+        <button class="btn btn-primary" onClick="location.href='{% url 'terraformfile-create' pk=problem.id %}'" >Add</button>
+    </div>
+    {% else %}
     <div class="nav-tabs-custom">
         <ul class="nav nav-tabs">
             <li class="active"><a href="#tab_1" data-toggle="tab">Terraform - TerraformFile</a></li>
@@ -64,5 +69,6 @@
             </div>
         </div>
     </div>
+    {% endif %}
 </div>
 {% endblock %}

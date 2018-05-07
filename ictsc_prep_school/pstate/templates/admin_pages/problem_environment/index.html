@@ -1,0 +1,41 @@
+{% extends 'adminlte/base.html' %}
+
+{% block title %}My App{% endblock %}
+{% block content %}
+<h1>ProblemEnvironments</h1>
+<div align="right">
+    <button class="btn btn-primary" onClick="location.href='{% url 'problemenvironment-create' %}'" >Add</button>
+</div>
+<table class="table table-striped table-bordered">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>STATE</th>
+        <th>Team</th>
+        <th>Problem name</th>
+        <th>Problem name(For management)</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for problemenvironment in object_list %}
+    <tr>
+        <td>
+            <a href="{% url 'problemenvironment-detail' pk=problemenvironment.id %}">{{ problemenvironment.id }}</a>
+        </td>
+        <td>
+            {{ problemenvironment.state }}
+        </td>
+        <td>
+            <a href="{% url 'problemenvironment-detail' pk=problemenvironment.id %}">{{ problemenvironment.team }}</a>
+        </td>
+        <td>
+            {{ problemenvironment.problem.display_name }}
+        </td>
+        <td>
+            {{ problemenvironment.problem.name }}
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

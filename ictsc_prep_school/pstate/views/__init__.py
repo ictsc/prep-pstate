@@ -2,11 +2,12 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
-from pstate.models import Participant, Team, Problem
+from pstate.models import Participant, Team, Problem, ProblemEnvironment
 
 from pstate.forms.add_participant import ParticipantForm
 from pstate.forms.add_team import TeamForm
 from pstate.forms.add_problem import ProblemForm
+from pstate.forms.add_problemenvironment import ProblemEnvironmentForm
 
 
 def login(request):
@@ -106,3 +107,38 @@ class ProblemCreateView(CreateView):
     template_name = 'admin_pages/problem/add.html'
     success_url = "/manage/problems/"
 
+
+class ProblemEnvironmentListView(ListView):
+
+    model = ProblemEnvironment
+    paginate_by = 100
+    template_name = 'admin_pages/problem_environment/index.html'
+
+
+class ProblemEnvironmentDetailView(DetailView):
+
+    model = ProblemEnvironment
+    paginate_by = 100
+    template_name = 'admin_pages/problem_environment/detail.html'
+
+
+class ProblemEnvironmentCreateView(CreateView):
+
+    form_class = ProblemEnvironmentForm
+    template_name = 'admin_pages/problem_environment/add.html'
+    success_url = "/manage/problem_environments/"
+
+
+class ProblemEnvironmentUpdateView(UpdateView):
+
+    model = ProblemEnvironment
+    fields = ('__all__')
+    template_name = 'admin_pages/problem_environment/edit.html'
+    success_url = '/manage/problem_environments/'
+
+
+class ProblemEnvironmentDeleteView(DeleteView):
+
+    model = ProblemEnvironment
+    template_name = 'admin_pages/problem_environment/delete.html'
+    success_url = '/manage/problem_environments/'

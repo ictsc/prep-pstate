@@ -12,6 +12,7 @@ from pstate.views import ParticipantListView, ParticipantCreateView,\
 from pstate.views import ProviderListView, ProviderDetailView, ProviderCreateView, ProviderUpdateView, \
     ProviderDeleteView, ProblemUpdateView, ProblemDeleteView
 
+from pstate.views import TerraformFileCreateView
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -36,6 +37,8 @@ urlpatterns = [
     url(r'^problems/add/$', ProblemCreateView.as_view(), name='problem-create'),
     url(r'^problems/(?P<pk>[0-9]+)/edit/$', ProblemUpdateView.as_view(), name='problem-edit'),
     url(r'^problems/(?P<pk>[0-9]+)/delete/$', ProblemDeleteView.as_view(), name='problem-delete'),
+    # terraformfiles
+    url(r'^problems/(?P<pk>[0-9]+)/terraform_file/add/$', TerraformFileCreateView.as_view(), name='terraformfile-create'),
     # problem_environments
     url(r'^problem_environments/$', ProblemEnvironmentListView.as_view(), name='problemenvironment-list'),
     url(r'^problem_environments/(?P<pk>[0-9]+)/$', ProblemEnvironmentDetailView.as_view(), name='problemenvironment-detail'),

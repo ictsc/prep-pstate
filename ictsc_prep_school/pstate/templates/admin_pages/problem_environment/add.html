@@ -1,0 +1,10 @@
+{% extends 'adminlte/base.html' %}
+
+{% block title %}Add ProblemEnvironment{% endblock %}
+{% block content %}
+<h1>Add ProblemEnvironment</h1>
+<form action="" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Add" />
+</form>
+{% endblock %}

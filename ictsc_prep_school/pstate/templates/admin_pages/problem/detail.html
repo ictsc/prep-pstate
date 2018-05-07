@@ -1,0 +1,31 @@
+{% extends 'adminlte/base.html' %}
+
+{% block title %}My App{% endblock %}
+{% block content %}
+<h1>Problem</h1>
+<h2>Problem name : {{ problem.display_name }}</h2>
+<div align="right">
+    <button class="btn btn-info" onClick="location.href=''">Preview</button>
+    <button class="btn btn-info" onClick="location.href=''">Test run</button>
+    <button class="btn btn-info" onClick="location.href=''">Create problem environment</button>
+</div>
+<div align="right">
+    <button class="btn btn-info" onClick="location.href=''">Edit</button>
+    <button class="btn btn-danger" onClick="location.href=''">Delete</button>
+</div>
+<div>
+    <h3>問題文</h3>
+    {{ problem.description }}
+</div>
+<div>
+    <h2>Terraform</h2>
+    <h3>Provider</h3>
+    <TODO>Providerの情報を表示する</TODO>
+    <h3>TerraformFile</h3>
+    <TODO>TerraformFileの中身を表示する</TODO>
+    <h3>ShellScript</h3>
+    <TODO>ShellScriptの一覧を表示する</TODO>
+    <h3>Variables</h3>
+    <TODO>変数の一覧を表示する</TODO>
+</div>
+{% endblock %}

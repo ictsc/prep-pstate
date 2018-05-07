@@ -22,6 +22,7 @@
                 <div align="right">
                     <button class="btn btn-info" onClick="location.href='{% url 'problem-edit' pk=problem.id %}'">Edit</button>
                 </div>
+                {{ problem.description|linebreaks }}
             </div>
             <div class="tab-pane" id="tab_2">
                 <div align="right">

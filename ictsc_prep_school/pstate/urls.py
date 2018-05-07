@@ -3,7 +3,7 @@ from django.urls import path
 
 from pstate import views
 
-from pstate.views import ParticipantListView, ParticipantCreateView, TeamListView, TeamCreateView, TeamDetailView, TeamUpdateView, TeamDeleteView, ParticipantUpdateView, ParticipantDeleteView
+from pstate.views import ParticipantListView, ParticipantCreateView, TeamListView, TeamCreateView, TeamDetailView, TeamUpdateView, TeamDeleteView, ParticipantUpdateView, ParticipantDeleteView, ProblemListView, ProblemDetailView, ProblemCreateView
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -18,4 +18,7 @@ urlpatterns = [
     url(r'^participants/(?P<pk>[0-9]+)/$', views.ParticipantDetailView.as_view(), name='participant-detail'),
     url(r'^participants/(?P<pk>[0-9]+)/edit/$', views.ParticipantUpdateView.as_view(), name='participant-edit'),
     url(r'^participants/(?P<pk>[0-9]+)/delete/$', views.ParticipantDeleteView.as_view(), name='participant-delete'),
+    url(r'^problems/$', ProblemListView.as_view(), name='problem-list'),
+    url(r'^problems/(?P<pk>[0-9]+)/$', ProblemDetailView.as_view(), name='problem-detail'),
+    url(r'^problems/add/$', ProblemCreateView.as_view(), name='problem-create'),
 ]

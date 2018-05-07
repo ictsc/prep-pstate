@@ -219,6 +219,17 @@ def direct_apply(environment_id, terraform_file_id, var):
         return_code, stdout, stderr = tf.apply(var=var)
         os.environ.pop("TF_CLI_ARGS")
         save_log(environment_id, return_code, stdout, stderr)
+        #   terraform output vnc_global_ip
+        cmd = ['terraform', 'output', 'vnc_global_ip']
+        import subprocess
+        os.chdir(TERRAFORM_ENVIRONMENT_ROOT_PATH + str(environment_id))
+        result = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        return_code, stdout, stderr = result.returncode, result.stdout.decode('utf-8'), result.stderr.decode('utf-8')
+        from pstate.models import ProblemEnvironment
+        problem_environment = ProblemEnvironment.objects.get(environment=environment)
+        problem_environment.vnc_server_ipv4_address = stdout.strip()
+        problem_environment.save()
+        save_log(environment_id, return_code, stdout, stderr)
         environment.state = 'APPLIED'
         environment.save()
     except:

@@ -10,7 +10,10 @@
     <thead>
     <tr>
         <th> ID </th>
-        <th> Name </th>
+        <th> Username </th>
+        <th> First Name </th>
+        <th> Last Name </th>
+        <th> Team </th>
         <th> E-mail </th>
     </tr>
     </thead>
@@ -19,6 +22,9 @@
         <tr>
             <td><a href="{% url 'participant-detail' pk=participant.id %}">{{ participant.id }}</a></td>
             <td><a href="{% url 'participant-detail' pk=participant.id %}">{{ participant.username }}</a></td>
+            <td>{{ participant.first_name }}</td>
+            <td>{{ participant.last_name }}</td>
+            <td>{{ participant.assign_team.team_name }}</td>
             <td>{{ participant.email }}</td>
         </tr>
     {% endfor %}

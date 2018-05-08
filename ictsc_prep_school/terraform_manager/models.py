@@ -34,7 +34,7 @@ class Log(models.Model):
     Terraformの実行環境でコマンドを実行ログを格納するモデル.
     """
 
-    environment = models.ForeignKey(Environment, on_delete=True)
+    environment = models.ForeignKey(Environment, on_delete=True, related_name='logs')
     return_code = models.IntegerField(blank=True)
     stdout = models.TextField(blank=True)
     stderr = models.TextField(blank=True)

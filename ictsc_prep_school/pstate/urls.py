@@ -14,6 +14,8 @@ from pstate.views import ProviderListView, ProviderDetailView, ProviderCreateVie
 
 from pstate.views import TerraformFileCreateView
 
+from pstate.views import ProblemEnvironmentCreateExecuteView
+
 urlpatterns = [
     path('', views.index, name='index'),
     path('dashboard', views.dashboard, name='dashboard'),
@@ -37,6 +39,7 @@ urlpatterns = [
     url(r'^problems/add/$', ProblemCreateView.as_view(), name='problem-create'),
     url(r'^problems/(?P<pk>[0-9]+)/edit/$', ProblemUpdateView.as_view(), name='problem-edit'),
     url(r'^problems/(?P<pk>[0-9]+)/delete/$', ProblemDeleteView.as_view(), name='problem-delete'),
+    url(r'^problems/(?P<pk>[0-9]+)/problem_environment/add/$', ProblemEnvironmentCreateExecuteView.as_view(), name='problems-problemenvironment-create'),
     # terraformfiles
     url(r'^problems/(?P<pk>[0-9]+)/terraform_file/add/$', TerraformFileCreateView.as_view(), name='terraformfile-create'),
     # problem_environments

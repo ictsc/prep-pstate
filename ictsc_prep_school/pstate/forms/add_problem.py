@@ -8,3 +8,7 @@ class ProblemForm(forms.ModelForm):
     class Meta:
         model = Problem
         fields = ('name', 'display_name', 'description', 'start_date', 'end_date', 'is_enabled', )
+
+
+class ProblemEnvironmentCreateExecuteForm(forms.Form):
+    pass

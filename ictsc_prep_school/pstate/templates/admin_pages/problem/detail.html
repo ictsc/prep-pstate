@@ -5,7 +5,7 @@
 <h1>{{ problem.display_name }}</h1>
 <div align="right">
     <button class="btn btn-info" onClick="location.href=''">Preview</button>
-    <button class="btn btn-info" onClick="location.href=''">Test run</button>
+    <button class="btn btn-info" onClick="location.href='{% url 'problems-problemenvironment-create' pk=problem.id %}'">Test run</button>
     <button class="btn btn-info" onClick="location.href=''">Create problem environment</button>
 </div>
 <div align="right">

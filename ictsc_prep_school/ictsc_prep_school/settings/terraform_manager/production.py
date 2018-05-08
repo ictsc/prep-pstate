@@ -13,3 +13,5 @@ DATABASES = {
 
 BROKER_URL = 'redis://:6379/0'
 CELERY_RESULT_BACKEND = 'redis://:6379/0'
+
+DEBUG = False

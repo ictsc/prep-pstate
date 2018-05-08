@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, FormView
@@ -22,144 +23,131 @@ def login(request):
     return render(request, 'admin_pages/auth/login.html')
 
 
-#@login_required
+@login_required
+def logout(request):
+    return render(request, 'admin_pages/auth/logout.html')
+
+
+@login_required
 def index(request):
     return render(request, 'admin_pages/index.html')
 
 
+@login_required
 def dashboard(request):
     return render(request, 'admin_pages/dashboard.html')
 
 
-class ParticipantListView(ListView):
-
+class ParticipantListView(LoginRequiredMixin, ListView):
     model = Participant
     paginate_by = 100
     template_name = 'admin_pages/participant/index.html'
 
 
-class ParticipantCreateView(CreateView):
-
+class ParticipantCreateView(LoginRequiredMixin, CreateView):
     form_class = ParticipantForm
     template_name = 'admin_pages/participant/add.html'
     success_url = '/manage/participants/'
 
 
-class TeamListView(ListView):
-
+class TeamListView(LoginRequiredMixin, ListView):
     model = Team
     paginate_by = 100
     template_name = 'admin_pages/team/index.html'
 
 
-class TeamCreateView(CreateView):
-
+class TeamCreateView(LoginRequiredMixin, CreateView):
     form_class = TeamForm
     template_name = 'admin_pages/team/add.html'
     success_url = '/manage/teams/'
 
 
-class TeamDetailView(DetailView):
-
+class TeamDetailView(LoginRequiredMixin, DetailView):
     model = Team
     template_name = 'admin_pages/team/detail.html'
 
 
-class TeamUpdateView(UpdateView):
-
+class TeamUpdateView(LoginRequiredMixin, UpdateView):
     model = Team
     form_class = TeamForm
     template_name = 'admin_pages/team/edit.html'
     success_url = '/manage/teams/'
 
 
-class TeamDeleteView(DeleteView):
-
+class TeamDeleteView(LoginRequiredMixin, DeleteView):
     model = Team
     template_name = 'admin_pages/common/delete.html'
     success_url = '/manage/teams/'
 
 
-class ParticipantDetailView(DetailView):
-
+class ParticipantDetailView(LoginRequiredMixin, DetailView):
     model = Participant
     template_name = 'admin_pages/participant/detail.html'
 
 
-class ParticipantUpdateView(UpdateView):
-
+class ParticipantUpdateView(LoginRequiredMixin, UpdateView):
     model = Participant
     form_class = ParticipantForm
     template_name = 'admin_pages/participant/edit.html'
     success_url = '/manage/participants/'
 
 
-class ParticipantDeleteView(DeleteView):
-
+class ParticipantDeleteView(LoginRequiredMixin, DeleteView):
     model = Participant
     template_name = 'admin_pages/common/delete.html'
     success_url = '/manage/participants/'
 
 
-class ProblemListView(ListView):
-
+class ProblemListView(LoginRequiredMixin, ListView):
     model = Problem
     paginate_by = 100
     template_name = 'admin_pages/problem/index.html'
 
 
-class ProblemDetailView(DetailView):
-
+class ProblemDetailView(LoginRequiredMixin, DetailView):
     model = Problem
     paginate_by = 100
     template_name = 'admin_pages/problem/detail.html'
 
 
-class ProblemCreateView(CreateView):
-
+class ProblemCreateView(LoginRequiredMixin, CreateView):
     form_class = ProblemForm
     template_name = 'admin_pages/problem/add.html'
     success_url = "/manage/problems/"
 
 
-class ProblemUpdateView(UpdateView):
-
+class ProblemUpdateView(LoginRequiredMixin, UpdateView):
     model = Problem
     fields = '__all__'
     template_name = 'admin_pages/problem/edit.html'
     success_url = '/manage/problems/'
 
 
-class ProblemDeleteView(DeleteView):
-
+class ProblemDeleteView(LoginRequiredMixin, DeleteView):
     model = Problem
     template_name = 'admin_pages/common/delete.html'
     success_url = '/manage/problems/'
 
 
-class ProblemEnvironmentListView(ListView):
-
+class ProblemEnvironmentListView(LoginRequiredMixin, ListView):
     model = ProblemEnvironment
     paginate_by = 100
     template_name = 'admin_pages/problem_environment/index.html'
 
 
-class ProblemEnvironmentDetailView(DetailView):
-
+class ProblemEnvironmentDetailView(LoginRequiredMixin, DetailView):
     model = ProblemEnvironment
     paginate_by = 100
     template_name = 'admin_pages/problem_environment/detail.html'
 
 
-class ProblemEnvironmentCreateView(CreateView):
-
+class ProblemEnvironmentCreateView(LoginRequiredMixin, CreateView):
     form_class = ProblemEnvironmentForm
     template_name = 'admin_pages/problem_environment/add.html'
     success_url = "/manage/problem_environments/"
 
 
 class ProblemEnvironmentUpdateView(UpdateView):
-
     model = ProblemEnvironment
     fields = ('__all__')
     template_name = 'admin_pages/problem_environment/edit.html'
@@ -167,50 +155,43 @@ class ProblemEnvironmentUpdateView(UpdateView):
 
 
 class ProblemEnvironmentDeleteView(DeleteView):
-
     model = ProblemEnvironment
     template_name = 'admin_pages/common/delete.html'
     success_url = '/manage/problem_environments/'
 
 
-class ProviderListView(ListView):
-
+class ProviderListView(LoginRequiredMixin, ListView):
     model = Provider
     paginate_by = 100
     template_name = 'admin_pages/setting/provider/index.html'
 
 
-class ProviderDetailView(DetailView):
-
+class ProviderDetailView(LoginRequiredMixin, DetailView):
     model = Provider
     paginate_by = 100
     template_name = 'admin_pages/setting/provider/detail.html'
 
 
-class ProviderCreateView(CreateView):
-
+class ProviderCreateView(LoginRequiredMixin, CreateView):
     form_class = ProviderForm
     template_name = 'admin_pages/setting/provider/add.html'
     success_url = "/manage/setting/providers/"
 
 
-class ProviderUpdateView(UpdateView):
-
+class ProviderUpdateView(LoginRequiredMixin, UpdateView):
     model = Provider
     fields = ('__all__')
     template_name = 'admin_pages/common/edit.html'
     success_url = '/manage/setting/providers/'
 
 
-class ProviderDeleteView(DeleteView):
-
+class ProviderDeleteView(LoginRequiredMixin, DeleteView):
     model = Provider
     template_name = 'admin_pages/setting/provider/delete.html'
     success_url = '/manage/setting/providers/'
 
 
-class TerraformFileCreateView(CreateView):
-
+class TerraformFileCreateView(LoginRequiredMixin, CreateView):
     form_class = TerraformFileForm
     template_name = 'admin_pages/common/add.html'
     success_url = '/manage/problems/'
@@ -223,7 +204,7 @@ class TerraformFileCreateView(CreateView):
         return super(TerraformFileCreateView, self).form_valid(form)
 
 
-class ProblemEnvironmentCreateExecuteView(FormView):
+class ProblemEnvironmentCreateExecuteView(LoginRequiredMixin, FormView):
     template_name = 'admin_pages/problem/problem_environment_create_execute.html'
     form_class = ProblemEnvironmentCreateExecuteForm
     success_url = "/manage/problems/"

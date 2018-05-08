@@ -37,6 +37,7 @@ class ParticipantListView(ListView):
     paginate_by = 100
     template_name = 'admin_pages/participant/index.html'
 
+
 class ParticipantCreateView(CreateView):
 
     form_class = ParticipantForm
@@ -75,7 +76,7 @@ class TeamUpdateView(UpdateView):
 class TeamDeleteView(DeleteView):
 
     model = Team
-    template_name = 'admin_pages/team/delete.html'
+    template_name = 'admin_pages/common/delete.html'
     success_url = '/manage/teams/'
 
 
@@ -88,14 +89,15 @@ class ParticipantDetailView(DetailView):
 class ParticipantUpdateView(UpdateView):
 
     model = Participant
-    fields = ('__all__')
+    form_class = ParticipantForm
     template_name = 'admin_pages/participant/edit.html'
     success_url = '/manage/participants/'
+
 
 class ParticipantDeleteView(DeleteView):
 
     model = Participant
-    template_name = 'admin_pages/participant/delete.html'
+    template_name = 'admin_pages/common/delete.html'
     success_url = '/manage/participants/'
 
 
@@ -167,7 +169,7 @@ class ProblemEnvironmentUpdateView(UpdateView):
 class ProblemEnvironmentDeleteView(DeleteView):
 
     model = ProblemEnvironment
-    template_name = 'admin_pages/problem_environment/delete.html'
+    template_name = 'admin_pages/common/delete.html'
     success_url = '/manage/problem_environments/'
 
 

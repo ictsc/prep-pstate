@@ -3,31 +3,22 @@
 {% block title %}My App{% endblock %}
 {% block content %}
 <h1>Problems</h1>
-<div align="right">
-    <button class="btn btn-primary" onClick="location.href='{% url 'pstate-manage:problem-create' %}'" >Add</button>
-</div>
 <table class="table table-striped table-bordered">
     <thead>
     <tr>
         <th>ID</th>
         <th>Problem name</th>
-        <th>Problem name(For management)</th>
-        <th></th>
     </tr>
     </thead>
     <tbody>
     {% for problem in object_list %}
     <tr>
         <td>
-            <a href="{% url 'pstate-manage:problem-detail' pk=problem.id %}">{{ problem.id }}</a>
+            <a href="{% url 'pstate-user:problem-detail' pk=problem.id %}">{{ problem.id }}</a>
         </td>
         <td>
-            <a href="{% url 'pstate-manage:problem-detail' pk=problem.id %}">{{ problem.display_name }}</a>
+            <a href="{% url 'pstate-user:problem-detail' pk=problem.id %}">{{ problem.display_name }}</a>
         </td>
-        <td>
-            <a href="{% url 'pstate-manage:problem-detail' pk=problem.id %}">{{ problem.name }}</a>
-        </td>
-        <td><button class="btn btn-danger" onClick="location.href='{% url 'pstate-manage:problem-delete' pk=problem.id %}'">Delete</button></td>
     </tr>
     {% endfor %}
     </tbody>

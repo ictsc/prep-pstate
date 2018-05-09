@@ -1,7 +1,9 @@
+from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, FormView
 
 from pstate.models import Participant, Team, Problem, ProblemEnvironment
@@ -18,6 +20,12 @@ from pstate.forms.add_terraformfile import TerraformFileForm
 
 from pstate.forms.add_problem import ProblemEnvironmentCreateExecuteForm
 
+from pstate.forms.change_password import NoOlbPasswordCheckPasswordChangeForm
+
+from pstate.forms.add_participant import ParticipantUpdateForm
+
+from pstate.forms.add_team import TeamUpdateForm
+
 
 def login(request):
     return render(request, 'admin_pages/auth/login.html')
@@ -26,6 +34,61 @@ def login(request):
 @login_required
 def logout(request):
     return render(request, 'admin_pages/auth/logout.html')
+
+
+@login_required
+def change_password(request):
+    if request.method == 'POST':
+        form = NoOlbPasswordCheckPasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('change_password')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = NoOlbPasswordCheckPasswordChangeForm(request.user)
+    return render(request, 'admin_pages/common/change_password.html', {
+        'form': form
+    })
+
+
+@login_required
+def change_team_password(request, pk):
+    if request.method == 'POST':
+        user = Team.objects.get(id=pk)
+        form = NoOlbPasswordCheckPasswordChangeForm(user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('change_password')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = NoOlbPasswordCheckPasswordChangeForm(request.user)
+    return render(request, 'admin_pages/common/change_password.html', {
+        'form': form
+    })
+
+
+def change_participant_password(request, pk):
+    if request.method == 'POST':
+        user = Participant.objects.get(id=pk)
+        form = NoOlbPasswordCheckPasswordChangeForm(user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('change_password')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = NoOlbPasswordCheckPasswordChangeForm(request.user)
+    return render(request, 'admin_pages/common/change_password.html', {
+        'form': form
+    })
 
 
 @login_required
@@ -69,7 +132,7 @@ class TeamDetailView(LoginRequiredMixin, DetailView):
 
 class TeamUpdateView(LoginRequiredMixin, UpdateView):
     model = Team
-    form_class = TeamForm
+    form_class = TeamUpdateForm
     template_name = 'admin_pages/team/edit.html'
     success_url = '/manage/teams/'
 
@@ -87,7 +150,7 @@ class ParticipantDetailView(LoginRequiredMixin, DetailView):
 
 class ParticipantUpdateView(LoginRequiredMixin, UpdateView):
     model = Participant
-    form_class = ParticipantForm
+    form_class = ParticipantUpdateForm
     template_name = 'admin_pages/participant/edit.html'
     success_url = '/manage/participants/'
 

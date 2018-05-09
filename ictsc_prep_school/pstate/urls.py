@@ -1,6 +1,5 @@
 from django.conf.urls import url
 from django.urls import path
-from django.contrib.auth import views as auth_views
 
 from pstate import views
 
@@ -24,10 +23,6 @@ app_name = 'pstate-manage'
 urlpatterns = [
     path('', views.index, name='index'),
     path('dashboard', views.dashboard, name='dashboard'),
-    # auth
-    url(r'^login/$', auth_views.login, {'template_name': 'admin_pages/auth/login.html'}, name='login'),
-    url(r'^logout/$', auth_views.logout, {'next_page': '/manage'}, name='logout'),
-    # url(r'^password/$', views.change_password, name='change_password'),
     # teams
     url(r'^teams/$', TeamListView.as_view(), name='team-list'),
     url(r'^teams/(?P<pk>[0-9]+)/$', TeamDetailView.as_view(), name='team-detail'),

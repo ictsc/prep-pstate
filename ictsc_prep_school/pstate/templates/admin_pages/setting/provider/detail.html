@@ -4,8 +4,8 @@
 {% block content %}
 <h2>{{ provider.name }}</h2>
 <div align="right">
-    <button class="btn btn-info" onClick="location.href='{% url 'provider-edit' pk=provider.id %}'">Edit</button>
-    <button class="btn btn-danger" onClick="location.href='{% url 'provider-delete' pk=provider.id %}'">Delete</button>
+    <button class="btn btn-info" onClick="location.href='{% url 'pstate-manage:provider-edit' pk=provider.id %}'">Edit</button>
+    <button class="btn btn-danger" onClick="location.href='{% url 'pstate-manage:provider-delete' pk=provider.id %}'">Delete</button>
 </div>
 <div class="nav-tabs-custom">
     <ul class="nav nav-tabs">

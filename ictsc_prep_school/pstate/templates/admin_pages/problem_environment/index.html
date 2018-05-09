@@ -4,7 +4,7 @@
 {% block content %}
 <h1>ProblemEnvironments</h1>
 <div align="right">
-    <button class="btn btn-primary" onClick="location.href='{% url 'problemenvironment-create' %}'" >Add</button>
+    <button class="btn btn-primary" onClick="location.href='{% url 'pstate-manage:problemenvironment-create' %}'" >Add</button>
 </div>
 <table class="table table-striped table-bordered">
     <thead>
@@ -22,7 +22,7 @@
     {% for problemenvironment in object_list %}
     <tr>
         <td>
-            <a href="{% url 'problemenvironment-detail' pk=problemenvironment.id %}">{{ problemenvironment.id }}</a>
+            <a href="{% url 'pstate-manage:problemenvironment-detail' pk=problemenvironment.id %}">{{ problemenvironment.id }}</a>
         </td>
         <td>
             {{ problemenvironment.state }}

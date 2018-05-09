@@ -2,35 +2,35 @@
 
 {% block nav_links %}
     <li>
-        <a href="{% url 'dashboard' %}">
+        <a href="{% url 'pstate-manage:dashboard' %}">
             <i class="fa fa-home"></i> <span>Home</span>
         </a>
     </li>
     <li>
-        <a href="{% url 'problem-list' %}">
+        <a href="{% url 'pstate-manage:problem-list' %}">
             <i class="fa fa-question"></i> <span>Problems</span>
         </a>
     </li>
     <li>
-        <a href="{% url 'problemenvironment-list' %}">
+        <a href="{% url 'pstate-manage:problemenvironment-list' %}">
             <i class="fa fa-clone"></i> <span>ProblemEnvironments</span>
         </a>
     </li>
     <li>
-        <a href="{% url 'team-list' %}">
+        <a href="{% url 'pstate-manage:team-list' %}">
             <i class="fa fa-users"></i> <span>Teams</span>
         </a>
     </li>
     <li>
-        <a href="{% url 'participant-list' %}">
+        <a href="{% url 'pstate-manage:participant-list' %}">
             <i class="fa fa-user"></i> <span>Participants</span>
         </a>
     </li>
     <li class="treeview">
         <a href=""><i class="fa fa-gear"></i>Settings<i class="fa fa-angle-left pull-right"></i></a>
         <ul class="treeview-menu">
-            <li><a href="{% url 'provider-list' %}"><i class="fa fa-cloud"></i>Provider</a></li>
-            <li><a href="{% url 'attribute-list' %}"><i class="fa fa-tags"></i>Attribute</a></li>
+            <li><a href="{% url 'pstate-manage:provider-list' %}"><i class="fa fa-cloud"></i>Provider</a></li>
+            <li><a href="{% url 'pstate-manage:attribute-list' %}"><i class="fa fa-tags"></i>Attribute</a></li>
         </ul>
     </li>
 {% endblock nav_links %}

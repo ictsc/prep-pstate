@@ -5,7 +5,7 @@
     {{ form.as_p }}
     <p>
         <label for="id_password">Password:</label>
-        <a href="javascript:window.open('{% url 'participant-change_password' pk=participant.id %}', 'yourWindowName', 'width=800,height=400');">Change password</a>
+        <a href="javascript:window.open('{% url 'pstate-manage:participant-change_password' pk=participant.id %}', 'yourWindowName', 'width=800,height=400');">Change password</a>
     </p>
     <input type="submit" class="btn btn-info" value="Update" />
 </form>

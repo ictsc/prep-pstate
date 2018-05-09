@@ -3,8 +3,8 @@
 {% block content %}
 <h1>{{ participant.username }}</h1>
 <div align="right">
-    <button class="btn btn-info" onClick="location.href='{% url 'participant-edit' pk=participant.id %}'" >Edit</button>
-    <button class="btn btn-danger" onClick="location.href='{% url 'participant-delete' pk=participant.id %}'" >Delete</button>
+    <button class="btn btn-info" onClick="location.href='{% url 'pstate-manage:participant-edit' pk=participant.id %}'" >Edit</button>
+    <button class="btn btn-danger" onClick="location.href='{% url 'pstate-manage:participant-delete' pk=participant.id %}'" >Delete</button>
 </div>
 
 <div class="nav-tabs-custom">

@@ -4,7 +4,7 @@
 {% block content %}
 <h1>Attributes</h1>
 <div align="right">
-    <button class="btn btn-primary" onClick="location.href='{% url 'attribute-create' %}'" >Add</button>
+    <button class="btn btn-primary" onClick="location.href='{% url 'pstate-manage:attribute-create' %}'" >Add</button>
 </div>
 <table class="table table-striped table-bordered">
     <thead>
@@ -24,8 +24,8 @@
         <td>
             {{ attribute.value }}
         </td>
-        <td><button class="btn btn-info" onClick="location.href='{% url 'attribute-edit' pk=attribute.id %}'">Edit</button></td>
-        <td><button class="btn btn-danger" onClick="location.href='{% url 'attribute-delete' pk=attribute.id %}'">Delete</button></td>
+        <td><button class="btn btn-info" onClick="location.href='{% url 'pstate-manage:attribute-edit' pk=attribute.id %}'">Edit</button></td>
+        <td><button class="btn btn-danger" onClick="location.href='{% url 'pstate-manage:attribute-delete' pk=attribute.id %}'">Delete</button></td>
     </tr>
     {% endfor %}
     </tbody>

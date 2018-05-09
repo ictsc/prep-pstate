@@ -17,6 +17,9 @@ from pstate.views import TerraformFileCreateView
 
 from pstate.views import ProblemEnvironmentCreateExecuteView
 
+from pstate.views import AttributeListView, AttributeCreateView, AttributeUpdateView, \
+    AttributeDeleteView
+
 urlpatterns = [
     path('', views.index, name='index'),
     path('dashboard', views.dashboard, name='dashboard'),
@@ -59,4 +62,9 @@ urlpatterns = [
     url(r'^setting/providers/add/$', ProviderCreateView.as_view(), name='provider-create'),
     url(r'^setting/providers/(?P<pk>[0-9]+)/edit/$', ProviderUpdateView.as_view(), name='provider-edit'),
     url(r'^setting/providers/(?P<pk>[0-9]+)/delete/$', ProviderDeleteView.as_view(), name='provider-delete'),
+    # setting/attributes
+    url(r'^setting/attributes/$', AttributeListView.as_view(), name='attribute-list'),
+    url(r'^setting/attributes/add/$', AttributeCreateView.as_view(), name='attribute-create'),
+    url(r'^setting/attributes/(?P<pk>[0-9]+)/edit/$', AttributeUpdateView.as_view(), name='attribute-edit'),
+    url(r'^setting/attributes/(?P<pk>[0-9]+)/delete/$', AttributeDeleteView.as_view(), name='attribute-delete'),
 ]

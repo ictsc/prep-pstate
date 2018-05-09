@@ -28,7 +28,7 @@
             {{ problemenvironment.state }}
         </td>
         <td>
-            <a href="{% url 'problemenvironment-detail' pk=problemenvironment.id %}">{{ problemenvironment.team }}</a>
+            {{ problemenvironment.team }}
         </td>
         <td>
             {{ problemenvironment.problem.display_name }}

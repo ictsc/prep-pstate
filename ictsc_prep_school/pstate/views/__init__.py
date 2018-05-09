@@ -329,6 +329,7 @@ class AttributeCreateView(LoginRequiredMixin, CreateView):
 class AttributeUpdateView(LoginRequiredMixin, UpdateView):
     model = Attribute
     fields = '__all__'
+    template_name = 'admin_pages/common/edit.html'
     success_url = '/manage/setting/attributes'
 
 

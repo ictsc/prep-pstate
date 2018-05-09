@@ -1,6 +1,6 @@
 {% extends 'adminlte/lib/_main_sidebar.html' %}
-
 {% block nav_links %}
+{% if request.user.is_staff %}
     <li>
         <a href="{% url 'pstate-manage:dashboard' %}">
             <i class="fa fa-home"></i> <span>Home</span>
@@ -33,4 +33,21 @@
             <li><a href="{% url 'pstate-manage:attribute-list' %}"><i class="fa fa-tags"></i>Attribute</a></li>
         </ul>
     </li>
+{% else %}
+    <li>
+        <a href="{% url 'pstate-user:dashboard' %}">
+            <i class="fa fa-home"></i> <span>Home</span>
+        </a>
+    </li>
+    <li>
+        <a href="{% url 'pstate-user:problem-list' %}">
+            <i class="fa fa-question"></i> <span>Problems</span>
+        </a>
+    </li>
+    <li>
+        <a href="{% url 'pstate-user:problemenvironment-list' %}">
+            <i class="fa fa-clone"></i> <span>ProblemEnvironments</span>
+        </a>
+    </li>
+{% endif %}
 {% endblock nav_links %}

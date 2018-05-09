@@ -3,6 +3,10 @@
 {% block content %}
 <form action="" method="post">{% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="Update" />
+    <p>
+        <label for="id_password">Password:</label>
+        <a href="javascript:window.open('{% url 'participant-change_password' pk=participant.id %}', 'yourWindowName', 'width=800,height=400');">Change password</a>
+    </p>
+    <input type="submit" class="btn btn-info" value="Update" />
 </form>
 {% endblock %}

@@ -23,18 +23,21 @@ urlpatterns = [
     # auth
     url(r'^login/$', auth_views.login, {'template_name': 'admin_pages/auth/login.html'}, name='login'),
     url(r'^logout/$', auth_views.logout, {'next_page': '/manage'}, name='logout'),
+    # url(r'^password/$', views.change_password, name='change_password'),
     # teams
     url(r'^teams/$', TeamListView.as_view(), name='team-list'),
     url(r'^teams/(?P<pk>[0-9]+)/$', TeamDetailView.as_view(), name='team-detail'),
     url(r'^teams/add/$', TeamCreateView.as_view(), name='team-add'),
     url(r'^teams/(?P<pk>[0-9]+)/edit/$', TeamUpdateView.as_view(), name='team-edit'),
     url(r'^teams/(?P<pk>[0-9]+)/delete/$', TeamDeleteView.as_view(), name='team-delete'),
+    url(r'^teams/(?P<pk>[0-9]+)/change_password/$', views.change_team_password, name='team-change_password'),
     # participants
     url(r'^participants/$', ParticipantListView.as_view(), name='participant-list'),
     url(r'^participants/(?P<pk>[0-9]+)/$', views.ParticipantDetailView.as_view(), name='participant-detail'),
     url(r'^participants/add/$', ParticipantCreateView.as_view(), name='participant-add'),
     url(r'^participants/(?P<pk>[0-9]+)/edit/$', views.ParticipantUpdateView.as_view(), name='participant-edit'),
     url(r'^participants/(?P<pk>[0-9]+)/delete/$', views.ParticipantDeleteView.as_view(), name='participant-delete'),
+    url(r'^participants/(?P<pk>[0-9]+)/change_password/$', views.change_participant_password, name='participant-change_password'),
     # problems
     url(r'^problems/$', ProblemListView.as_view(), name='problem-list'),
     url(r'^problems/(?P<pk>[0-9]+)/$', ProblemDetailView.as_view(), name='problem-detail'),

@@ -20,6 +20,7 @@ from pstate.views import ProblemEnvironmentCreateExecuteView
 from pstate.views import AttributeListView, AttributeCreateView, AttributeUpdateView, \
     AttributeDeleteView
 
+app_name = 'pstate-manage'
 urlpatterns = [
     path('', views.index, name='index'),
     path('dashboard', views.dashboard, name='dashboard'),

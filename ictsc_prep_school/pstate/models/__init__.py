@@ -68,7 +68,7 @@ class ProblemEnvironment(TemplateModel):
 
 
 class User(AbstractUser):
-    pass
+    is_team = models.BooleanField(default=False)
 
 
 class Team(User):
@@ -79,6 +79,10 @@ class Team(User):
     class Meta:
         verbose_name = 'Team'
         verbose_name_plural = 'Teams'
+
+    def save(self, *args, **kwargs):
+        self.is_team = True
+        super(Team, self).save(*args, **kwargs)
 
 
 class Participant(User):

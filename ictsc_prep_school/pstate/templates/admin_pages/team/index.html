@@ -4,7 +4,7 @@
 {% block content %}
 <h1>Teams</h1>
 <div align="right">
-    <button class="btn btn-primary" onClick="location.href='{% url 'team-add' %}'" >Add</button>
+    <button class="btn btn-primary" onClick="location.href='{% url 'pstate-manage:team-add' %}'" >Add</button>
 </div>
 <table class="table table-striped table-bordered">
     <thead>
@@ -17,8 +17,8 @@
     <tbody>
     {% for team in object_list %}
         <tr>
-            <td><a href="{% url 'team-detail' pk=team.id %}">{{ team.id }}</a></td>
-            <td><a href="{% url 'team-detail' pk=team.id %}">{{ team.team_name }}</a></td>
+            <td><a href="{% url 'pstate-manage:team-detail' pk=team.id %}">{{ team.id }}</a></td>
+            <td><a href="{% url 'pstate-manage:team-detail' pk=team.id %}">{{ team.team_name }}</a></td>
             <td>{{ team.email }}</td>
         </tr>
     {% endfor %}

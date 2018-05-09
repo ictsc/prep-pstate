@@ -3,8 +3,8 @@
 {% block content %}
 <h1>{{ object.team_name }}</h1>
 <div align="right">
-    <button class="btn btn-info" onClick="location.href='{% url 'team-edit' pk=team.id %}'" >Edit</button>
-    <button class="btn btn-danger" onClick="location.href='{% url 'team-delete' pk=team.id %}'" >Delete</button>
+    <button class="btn btn-info" onClick="location.href='{% url 'pstate-manage:team-edit' pk=team.id %}'" >Edit</button>
+    <button class="btn btn-danger" onClick="location.href='{% url 'pstate-manage:team-delete' pk=team.id %}'" >Delete</button>
 </div>
 
 <div class="nav-tabs-custom">
@@ -42,10 +42,10 @@
                 {% for participant in object.participant.all %}
                 <tr>
                     <td>
-                        <a href="{% url 'participant-detail' pk=participant.id %}">{{ participant.id }}</a>
+                        <a href="{% url 'pstate-manage:participant-detail' pk=participant.id %}">{{ participant.id }}</a>
                     </td>
                     <td>
-                        <a href="{% url 'participant-detail' pk=participant.id %}">{{ participant.username }}</a>
+                        <a href="{% url 'pstate-manage:participant-detail' pk=participant.id %}">{{ participant.username }}</a>
                     </td>
                     <td>
                         {{ participant.first_name }}

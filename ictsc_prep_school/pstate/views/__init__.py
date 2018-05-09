@@ -29,6 +29,8 @@ from pstate.forms.add_team import TeamUpdateForm
 from pstate.forms.add_participant import ParticipantRegisterForm
 from pstate.forms.add_team import TeamRegisterForm
 
+from terraform_manager.models import Attribute
+
 
 def login(request):
     return render(request, 'admin_pages/auth/login.html')
@@ -309,3 +311,28 @@ class ParticipantRegisterView(CreateView):
     form_class = ParticipantRegisterForm
     template_name = 'user_pages/common/register_participant.html'
     success_url = '/user'
+
+
+class AttributeListView(LoginRequiredMixin, ListView):
+    model = Attribute
+    paginate_by = 100
+    template_name = 'admin_pages/setting/attribute/index.html'
+
+
+class AttributeCreateView(LoginRequiredMixin, CreateView):
+    model = Attribute
+    fields = '__all__'
+    template_name = 'admin_pages/setting/attribute/add.html'
+    success_url = '/manage/setting/attributes'
+
+
+class AttributeUpdateView(LoginRequiredMixin, UpdateView):
+    model = Attribute
+    fields = '__all__'
+    success_url = '/manage/setting/attributes'
+
+
+class AttributeDeleteView(LoginRequiredMixin, DeleteView):
+    model = Attribute
+    template_name = 'admin_pages/common/delete.html'
+    success_url = '/manage/setting/attributes'

@@ -1,0 +1,33 @@
+{% extends 'adminlte/base.html' %}
+
+{% block title %}My App{% endblock %}
+{% block content %}
+<h1>Attributes</h1>
+<div align="right">
+    <button class="btn btn-primary" onClick="location.href='{% url 'attribute-create' %}'" >Add</button>
+</div>
+<table class="table table-striped table-bordered">
+    <thead>
+    <tr>
+        <th>Key</th>
+        <th>Value</th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for attribute in object_list %}
+    <tr>
+        <td>
+            {{ attribute.key }}
+        </td>
+        <td>
+            {{ attribute.value }}
+        </td>
+        <td><button class="btn btn-info" onClick="location.href='{% url 'attribute-edit' pk=attribute.id %}'">Edit</button></td>
+        <td><button class="btn btn-danger" onClick="location.href='{% url 'attribute-delete' pk=attribute.id %}'">Delete</button></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

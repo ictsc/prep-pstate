@@ -26,6 +26,9 @@ from pstate.forms.add_participant import ParticipantUpdateForm
 
 from pstate.forms.add_team import TeamUpdateForm
 
+from pstate.forms.add_participant import ParticipantRegisterForm
+from pstate.forms.add_team import TeamRegisterForm
+
 
 def login(request):
     return render(request, 'admin_pages/auth/login.html')
@@ -294,3 +297,15 @@ class ProblemEnvironmentCreateExecuteView(LoginRequiredMixin, FormView):
                                                  problem=problem)
         problem_environment.save()
         return HttpResponseRedirect(self.success_url)
+
+
+class TeamRegisterView(CreateView):
+    form_class = TeamRegisterForm
+    template_name = 'user_pages/common/register_team.html'
+    success_url = '/user'
+
+
+class ParticipantRegisterView(CreateView):
+    form_class = ParticipantRegisterForm
+    template_name = 'user_pages/common/register_participant.html'
+    success_url = '/user'

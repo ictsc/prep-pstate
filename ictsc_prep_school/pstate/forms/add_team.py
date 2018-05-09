@@ -27,6 +27,21 @@ class TeamForm(forms.ModelForm):
         return team
 
 
+class TeamRegisterForm(TeamForm):
+
+    class Meta:
+        model = Team
+        fields = ['team_name', 'username', 'password', 'email']
+        exclude = ['last_login', 'first_name', 'last_name', 'date_joined', 'is_superuser', 'groups', 'user_permissions',
+                   'is_staff', 'description', 'remarks']
+        widgets = {
+            'team_name': forms.TextInput(attrs={'class': "form-control"}),
+            'password': forms.PasswordInput(attrs={'class': "form-control"}),
+            'username': forms.TextInput(attrs={'class': "form-control"}),
+            'email': forms.EmailInput(attrs={'class': "form-control"}),
+        }
+
+
 class TeamUpdateForm(forms.ModelForm):
 
     class Meta:

@@ -13,6 +13,13 @@ class TemplateModel(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 
+class ProblemAttachment(models.Model):
+    label = models.CharField(max_length=200, blank=True, null=True)
+    caption = models.TextField(blank=True, null=True)
+    # TODO  :   ファイルを格納する手段を検討する.
+    terraform_file = models.ForeignKey(TerraformFile, on_delete=False, null=True)
+
+
 class Problem(TemplateModel):
     name = models.CharField("問題名(管理用)", max_length=200)
     display_name = models.CharField("問題名(参加者向け)", max_length=200)

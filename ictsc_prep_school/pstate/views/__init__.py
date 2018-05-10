@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, FormView
 
@@ -30,6 +30,15 @@ from pstate.forms.add_participant import ParticipantRegisterForm
 from pstate.forms.add_team import TeamRegisterForm
 
 from terraform_manager.models import Attribute
+
+from pstate.forms.add_problem import ProblemDescriptionUpdateForm
+
+from terraform_manager.models import TerraformFile
+
+from pstate.forms.add_terraformfile import  TerraformFileUpdateForm
+
+from pstate.forms.add_shell_script import ShellScriptForm, ShellScriptUpdateForm
+from terraform_manager.models import ShellScript
 
 
 def login(request):
@@ -104,6 +113,10 @@ def index(request):
 @login_required
 def dashboard(request):
     return render(request, 'admin_pages/dashboard.html')
+
+
+def close_window(request):
+    return render(request, 'admin_pages/common/close.html')
 
 
 class ParticipantListView(LoginRequiredMixin, ListView):
@@ -185,10 +198,22 @@ class ProblemCreateView(LoginRequiredMixin, CreateView):
 
 
 class ProblemUpdateView(LoginRequiredMixin, UpdateView):
-    model = Problem
+    model = ProblemForm
     fields = '__all__'
     template_name = 'admin_pages/problem/edit.html'
     success_url = '/manage/problems/'
+
+
+class ProblemDescriptionUpdateView(LoginRequiredMixin, UpdateView):
+    model = Problem
+    form_class = ProblemDescriptionUpdateForm
+    template_name = 'admin_pages/common/edit.html'
+    success_url = '/manage/problems/'
+
+    def form_valid(self, form):
+        form.save(commit=True)
+        from django.http import HttpResponse
+        return HttpResponse('<script type="text/javascript">window.close();</script>')
 
 
 class ProblemDeleteView(LoginRequiredMixin, DeleteView):
@@ -261,7 +286,7 @@ class ProviderDeleteView(LoginRequiredMixin, DeleteView):
 
 class TerraformFileCreateView(LoginRequiredMixin, CreateView):
     form_class = TerraformFileForm
-    template_name = 'admin_pages/common/add.html'
+    template_name = 'admin_pages/terraform_file/add.html'
     success_url = '/manage/problems/'
 
     def form_valid(self, form):
@@ -269,7 +294,19 @@ class TerraformFileCreateView(LoginRequiredMixin, CreateView):
         problem = Problem.objects.get(id=self.kwargs['pk'])
         problem.terraform_file_id = terraform_file
         problem.save()
-        return super(TerraformFileCreateView, self).form_valid(form)
+        from django.http import HttpResponse
+        return HttpResponse('<script type="text/javascript">window.close();</script>')
+
+
+class TerraformFileUpdateView(LoginRequiredMixin, UpdateView):
+    model = TerraformFile
+    form_class = TerraformFileUpdateForm
+    template_name = 'admin_pages/terraform_file/edit.html'
+
+    def form_valid(self, form):
+        form.save(commit=True)
+        from django.http import HttpResponse
+        return HttpResponse('<script type="text/javascript">window.close();</script>')
 
 
 class ProblemEnvironmentCreateExecuteView(LoginRequiredMixin, FormView):
@@ -337,3 +374,34 @@ class AttributeDeleteView(LoginRequiredMixin, DeleteView):
     model = Attribute
     template_name = 'admin_pages/common/delete.html'
     success_url = '/manage/setting/attributes'
+
+
+class ShellScriptCreateView(LoginRequiredMixin, CreateView):
+    form_class = ShellScriptForm
+    template_name = 'admin_pages/terraform_file/add.html'
+    success_url = '/manage/problems/'
+
+    def form_valid(self, form):
+        shell_script = form.save(commit=False)
+        problem = Problem.objects.get(id=self.kwargs['pk'])
+        shell_script.terraform_file = problem.terraform_file_id
+        shell_script.save()
+        from django.http import HttpResponse
+        return HttpResponse('<script type="text/javascript">window.close();</script>')
+
+
+class ShellScriptUpdateView(LoginRequiredMixin, UpdateView):
+    model = ShellScript
+    form_class = ShellScriptUpdateForm
+    template_name = 'admin_pages/terraform_file/edit.html'
+
+    def form_valid(self, form):
+        form.save(commit=True)
+        from django.http import HttpResponse
+        return HttpResponse('<script type="text/javascript">window.close();</script>')
+
+
+class ShellScriptDeleteView(LoginRequiredMixin, DeleteView):
+    model = ShellScript
+    template_name = 'admin_pages/common/delete.html'
+    success_url = '/manage/close_window/'

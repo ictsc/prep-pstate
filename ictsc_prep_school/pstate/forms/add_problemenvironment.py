@@ -7,4 +7,4 @@ class ProblemEnvironmentForm(forms.ModelForm):
 
     class Meta:
         model = ProblemEnvironment
-        fields = ('__all__')
+        fields = ['team', ]

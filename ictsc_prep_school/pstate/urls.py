@@ -19,6 +19,18 @@ from pstate.views import ProblemEnvironmentCreateExecuteView
 from pstate.views import AttributeListView, AttributeCreateView, AttributeUpdateView, \
     AttributeDeleteView
 
+from pstate.views import ProblemDescriptionUpdateView
+
+from pstate.views import TerraformFileUpdateView
+
+from pstate.views import ShellScriptUpdateView, ShellScriptCreateView
+
+from pstate.views import ShellScriptDeleteView
+
+from pstate.views import VariableCreateView, VariableUpdateView, VariableDeleteView
+
+from pstate.views import ProblemEnvironmentTestRunExecuteView
+
 app_name = 'pstate-manage'
 urlpatterns = [
     path('', views.index, name='index'),
@@ -42,10 +54,21 @@ urlpatterns = [
     url(r'^problems/(?P<pk>[0-9]+)/$', ProblemDetailView.as_view(), name='problem-detail'),
     url(r'^problems/add/$', ProblemCreateView.as_view(), name='problem-create'),
     url(r'^problems/(?P<pk>[0-9]+)/edit/$', ProblemUpdateView.as_view(), name='problem-edit'),
+    url(r'^problems/(?P<pk>[0-9]+)/body/edit/$', ProblemDescriptionUpdateView.as_view(), name='problem-body-edit'),
     url(r'^problems/(?P<pk>[0-9]+)/delete/$', ProblemDeleteView.as_view(), name='problem-delete'),
-    url(r'^problems/(?P<pk>[0-9]+)/problem_environment/add/$', ProblemEnvironmentCreateExecuteView.as_view(), name='problems-problemenvironment-create'),
+    url(r'^problems/(?P<pk>[0-9]+)/problem_environment/add/$', ProblemEnvironmentCreateView.as_view(), name='problems-problemenvironment-create'),
+    url(r'^problems/(?P<pk>[0-9]+)/problem_environment/test_run/$', ProblemEnvironmentTestRunExecuteView.as_view(), name='problems-problemenvironment-test_run'),
     # terraformfiles
     url(r'^problems/(?P<pk>[0-9]+)/terraform_file/add/$', TerraformFileCreateView.as_view(), name='terraformfile-create'),
+    url(r'^terraform_files/(?P<pk>[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/edit/$', TerraformFileUpdateView.as_view(), name='terraformfile-edit'),
+    # variables
+    url(r'^problems/(?P<pk>[0-9]+)/variable/add/$', VariableCreateView.as_view(), name='variable-create'),
+    url(r'^terraform_file/variables(?P<pk>[0-9]+)/edit/$', VariableUpdateView.as_view(), name='variable-edit'),
+    url(r'^terraform_file/variables/(?P<pk>[0-9]+)/delete/$', VariableDeleteView.as_view(), name='variable-delete'),
+    # shell scripts
+    url(r'^problems/(?P<pk>[0-9]+)/shell_script/add/$', ShellScriptCreateView.as_view(), name='shell_script-create'),
+    url(r'^shell_scripts/(?P<pk>[0-9]+)/edit/$', ShellScriptUpdateView.as_view(), name='shell_script-edit'),
+    url(r'^shell_scripts/(?P<pk>[0-9]+)/delete/$', ShellScriptDeleteView.as_view(), name='shell_script-delete'),
     # problem_environments
     url(r'^problem_environments/$', ProblemEnvironmentListView.as_view(), name='problemenvironment-list'),
     url(r'^problem_environments/(?P<pk>[0-9]+)/$', ProblemEnvironmentDetailView.as_view(), name='problemenvironment-detail'),
@@ -63,4 +86,6 @@ urlpatterns = [
     url(r'^setting/attributes/add/$', AttributeCreateView.as_view(), name='attribute-create'),
     url(r'^setting/attributes/(?P<pk>[0-9]+)/edit/$', AttributeUpdateView.as_view(), name='attribute-edit'),
     url(r'^setting/attributes/(?P<pk>[0-9]+)/delete/$', AttributeDeleteView.as_view(), name='attribute-delete'),
+    # util
+    url(r'^close_window/$', views.close_window, name='window-close'),
 ]

@@ -1,0 +1,28 @@
+{% extends 'adminlte/base.html' %}
+
+{% block title %}{% endblock %}
+{% block content %}
+{% load static %}
+<script src="{% static "ace/src/ace.js" %}" type="text/javascript" charset="utf-8"></script>
+<script src="{% static "ace/src/cobalt.js" %}" type="text/javascript" charset="utf-8"></script>
+<form action="" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <div id="editor-div" style="height: 500px; width: 100%;"></div>
+    <div align="right">
+        <input type="submit" class="btn btn-primary" value="Add" />
+    </div>
+</form>
+<script type="text/javascript">
+    document.getElementById( 'text' ).style.display = 'none';
+    document.getElementById( 'editor-div' ).innerHTML = document.getElementById( 'text' ).value;
+    // or editor.setValue( "the new text here" );
+    var editor = ace.edit( 'editor-div' );
+    editor.setTheme( 'ace/theme/cobalt' );
+    editor.getSession().setMode( 'ace/mode/perl' );
+    document.getElementById( 'editor-div' ).style.fontSize = '14';
+    editor.getSession().on('change', function(){
+        var textcode = editor.getSession().getValue();
+        document.getElementById( 'text' ).value = textcode;
+    });
+</script>
+{% endblock %}

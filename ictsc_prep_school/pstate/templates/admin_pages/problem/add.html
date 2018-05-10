@@ -1,14 +1,9 @@
 {% extends 'adminlte/base.html' %}
-
-{% block title %}Add problem{% endblock %}
+{% block title %}{% endblock %}
 {% block content %}
-<h1>Add problem</h1>
+<h1>Add Problem</h1>
 <form action="" method="post">{% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="Add" />
+    <input class="btn btn-primary" type="submit" value="Add" />
 </form>
-<TODO>TerraformFileを保存できるようにする</TODO>
-<TODO>TerraformProviderを選択できるようにする</TODO>
-<TODO>ShellScriptを保存できるようにする</TODO>
-<TODO>Variablesを保存できるようにする</TODO>
 {% endblock %}

@@ -27,6 +27,8 @@ from pstate.views import ShellScriptUpdateView, ShellScriptCreateView
 
 from pstate.views import ShellScriptDeleteView
 
+from pstate.views import VariableCreateView, VariableUpdateView, VariableDeleteView
+
 app_name = 'pstate-manage'
 urlpatterns = [
     path('', views.index, name='index'),
@@ -55,7 +57,11 @@ urlpatterns = [
     url(r'^problems/(?P<pk>[0-9]+)/problem_environment/add/$', ProblemEnvironmentCreateExecuteView.as_view(), name='problems-problemenvironment-create'),
     # terraformfiles
     url(r'^problems/(?P<pk>[0-9]+)/terraform_file/add/$', TerraformFileCreateView.as_view(), name='terraformfile-create'),
-    url(r'^terraform_file/(?P<pk>[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/edit/$', TerraformFileUpdateView.as_view(), name='terraformfile-edit'),
+    url(r'^terraform_files/(?P<pk>[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/edit/$', TerraformFileUpdateView.as_view(), name='terraformfile-edit'),
+    # variables
+    url(r'^problems/(?P<pk>[0-9]+)/variable/add/$', VariableCreateView.as_view(), name='variable-create'),
+    url(r'^terraform_file/variables(?P<pk>[0-9]+)/edit/$', VariableUpdateView.as_view(), name='variable-edit'),
+    url(r'^terraform_file/variables/(?P<pk>[0-9]+)/delete/$', VariableDeleteView.as_view(), name='variable-delete'),
     # shell scripts
     url(r'^problems/(?P<pk>[0-9]+)/shell_script/add/$', ShellScriptCreateView.as_view(), name='shell_script-create'),
     url(r'^shell_scripts/(?P<pk>[0-9]+)/edit/$', ShellScriptUpdateView.as_view(), name='shell_script-edit'),

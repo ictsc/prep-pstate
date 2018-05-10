@@ -43,6 +43,8 @@ from terraform_manager.models import ShellScript
 from pstate.forms.add_variable import VariableUpdateForm, VariableForm
 from terraform_manager.models import Variable
 
+from pstate.forms.add_problem import ProblemUpdateForm
+
 
 def login(request):
     return render(request, 'admin_pages/auth/login.html')
@@ -201,10 +203,14 @@ class ProblemCreateView(LoginRequiredMixin, CreateView):
 
 
 class ProblemUpdateView(LoginRequiredMixin, UpdateView):
-    model = ProblemForm
-    fields = '__all__'
-    template_name = 'admin_pages/problem/edit.html'
+    model = Problem
+    form_class = ProblemUpdateForm
+    template_name = 'admin_pages/common/edit.html'
     success_url = '/manage/problems/'
+
+    def form_valid(self, form):
+        form.save(commit=True)
+        return HttpResponse('<script type="text/javascript">window.close();</script>')
 
 
 class ProblemDescriptionUpdateView(LoginRequiredMixin, UpdateView):
@@ -215,7 +221,6 @@ class ProblemDescriptionUpdateView(LoginRequiredMixin, UpdateView):
 
     def form_valid(self, form):
         form.save(commit=True)
-        from django.http import HttpResponse
         return HttpResponse('<script type="text/javascript">window.close();</script>')
 
 

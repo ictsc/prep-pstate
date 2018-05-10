@@ -25,12 +25,18 @@ class ProblemListView(LoginRequiredMixin, ListView):
     #   FIXME   :   fix template_name file path
     template_name = 'user_pages/problem/index.html'
 
+    def get_queryset(self):
+        return Problem.objects.filter(is_enabled=True)
+
 
 class ProblemDetailView(LoginRequiredMixin, DetailView):
     model = Problem
     paginate_by = 100
     #   FIXME   :   fix template_name file path
     template_name = 'user_pages/problem/detail.html'
+
+    def get_queryset(self):
+        return Problem.objects.filter(is_enabled=True)
 
 
 class ProblemEnvironmentListView(LoginRequiredMixin, ListView):
@@ -53,6 +59,14 @@ class ProblemEnvironmentDetailView(LoginRequiredMixin, DetailView):
     paginate_by = 100
     #   FIXME   :   fix template_name file path
     template_name = 'user_pages/problem_environment/detail.html'
+
+    def get_queryset(self):
+        if self.request.user.is_team:
+            from pstate.models import Team
+            return ProblemEnvironment.objects.filter(team=Team.objects.get(id=self.request.user.id))
+        else:
+            from pstate.models import Participant
+            return ProblemEnvironment.objects.filter(participant=Participant.objects.get(id=self.request.user.id))
 
 
 class ProblemEnvironmentCreateView(LoginRequiredMixin, CreateView):

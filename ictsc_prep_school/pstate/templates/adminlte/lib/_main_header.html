@@ -1,4 +1,5 @@
 {% extends 'adminlte/lib/_main_header.html' %}
+{% load adminlte_helpers i18n %}
 {% block logo %}
 <a href="#" class="logo">
     <!-- mini logo for sidebar mini 50x50 pixels -->
@@ -6,4 +7,16 @@
     <!-- logo for regular state and mobile devices -->
     <span class="logo-lg">ICTSC PREP SCHOOL</span>
 </a>
+{% endblock %}
+
+{% block menu_footer %}
+<li class="user-footer">
+    <div class="pull-left">
+        <a href="{% block change_password_url %}{% if request.user.is_staff %}{% url 'admin:password_change' %}{% else %}{% url 'pstate-user:change_password' %}{% endif %}{% endblock %}"
+           class="btn btn-default btn-flat">{% trans 'Change password' %}</a>
+    </div>
+    <div class="pull-right">
+        <a href="{% block logout_url %}{% logout_url %}{% endblock %}" class="btn btn-default btn-flat">Sign out</a>
+    </div>
+</li>
 {% endblock %}

@@ -29,6 +29,8 @@ from pstate.views import ShellScriptDeleteView
 
 from pstate.views import VariableCreateView, VariableUpdateView, VariableDeleteView
 
+from pstate.views import ProblemEnvironmentTestRunExecuteView
+
 app_name = 'pstate-manage'
 urlpatterns = [
     path('', views.index, name='index'),
@@ -54,7 +56,8 @@ urlpatterns = [
     url(r'^problems/(?P<pk>[0-9]+)/edit/$', ProblemUpdateView.as_view(), name='problem-edit'),
     url(r'^problems/(?P<pk>[0-9]+)/body/edit/$', ProblemDescriptionUpdateView.as_view(), name='problem-body-edit'),
     url(r'^problems/(?P<pk>[0-9]+)/delete/$', ProblemDeleteView.as_view(), name='problem-delete'),
-    url(r'^problems/(?P<pk>[0-9]+)/problem_environment/add/$', ProblemEnvironmentCreateExecuteView.as_view(), name='problems-problemenvironment-create'),
+    url(r'^problems/(?P<pk>[0-9]+)/problem_environment/add/$', ProblemEnvironmentCreateView.as_view(), name='problems-problemenvironment-create'),
+    url(r'^problems/(?P<pk>[0-9]+)/problem_environment/test_run/$', ProblemEnvironmentTestRunExecuteView.as_view(), name='problems-problemenvironment-test_run'),
     # terraformfiles
     url(r'^problems/(?P<pk>[0-9]+)/terraform_file/add/$', TerraformFileCreateView.as_view(), name='terraformfile-create'),
     url(r'^terraform_files/(?P<pk>[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/edit/$', TerraformFileUpdateView.as_view(), name='terraformfile-edit'),

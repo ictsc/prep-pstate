@@ -103,21 +103,34 @@
                 </div>
                 <h3>ShellScript</h3>
                 {% for shell_script in problem.terraform_file_id.shell_script.all %}
+                <h4>{{ shell_script.name }}</h4>
                 <div align="right">
                     <button class="btn btn-info" onClick="javascript:window.open('{% url 'pstate-manage:shell_script-edit' pk=shell_script.id %}', 'yourWindowName', 'width=1200,height=1000');" >Edit</button>
                     <button class="btn btn-danger" onClick="javascript:window.open('{% url 'pstate-manage:shell_script-delete' pk=shell_script.id %}', 'yourWindowName', 'width=1200,height=1000');" >Edit</button>
                 </div>
-                <h4>{{ shell_script.name }}</h4>
                 <table class="table table-striped table-bordered">
                     <tbody>
                         <tr><th>Name</th><td>{{ shell_script.name }}</td></tr>
                         <tr><th>FileName</th><td>{{ shell_script.file_name }}</td></tr>
                     </tbody>
                 </table>
-                {{ shell_script.body }}
-                <!--    TODO    :   idが重複しててダメっぽい   -->
-                <!--<div id="editor-div" style="height: 500px; width: 100%;"></div>-->
-                <!--<textarea id="text" name="text"></textarea>-->
+                <div id="editor-div-{{ forloop.counter }}" style="height: 500px; width: 100%;"></div>
+                <textarea id="text-{{ forloop.counter }}" name="text-{{ forloop.counter }}">{{ shell_script.body }}</textarea>
+
+                <script type="text/javascript">
+                    document.getElementById( 'text-{{ forloop.counter }}' ).style.display = 'none';
+                    document.getElementById( 'editor-div-{{ forloop.counter }}' ).innerHTML = document.getElementById( 'text-{{ forloop.counter }}' ).value;
+                    // or editor.setValue( "the new text here" );
+                    var editor = ace.edit( 'editor-div-{{ forloop.counter }}' );
+                    editor.setTheme( 'ace/theme/cobalt' );
+                    editor.getSession().setMode( 'ace/mode/perl' );
+                    editor.setReadOnly(true);
+                    document.getElementById( 'editor-div-{{ forloop.counter }}' ).style.fontSize = '14';
+                    editor.getSession().on('change', function(){
+                        var textcode = editor.getSession().getValue();
+                        document.getElementById( 'text-{{ forloop.counter }}' ).value = textcode;
+                    });
+                </script>
                 {% endfor %}
             </div>
             <div class="tab-pane" id="tab_4t">

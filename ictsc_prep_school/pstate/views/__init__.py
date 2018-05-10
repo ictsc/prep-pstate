@@ -40,6 +40,9 @@ from pstate.forms.add_terraformfile import  TerraformFileUpdateForm
 from pstate.forms.add_shell_script import ShellScriptForm, ShellScriptUpdateForm
 from terraform_manager.models import ShellScript
 
+from pstate.forms.add_variable import VariableUpdateForm, VariableForm
+from terraform_manager.models import Variable
+
 
 def login(request):
     return render(request, 'admin_pages/auth/login.html')
@@ -403,5 +406,34 @@ class ShellScriptUpdateView(LoginRequiredMixin, UpdateView):
 
 class ShellScriptDeleteView(LoginRequiredMixin, DeleteView):
     model = ShellScript
+    template_name = 'admin_pages/common/delete.html'
+    success_url = '/manage/close_window/'
+
+
+class VariableCreateView(LoginRequiredMixin, CreateView):
+    form_class = VariableForm
+    template_name = 'admin_pages/common/add.html'
+    success_url = '/manage/problems/'
+
+    def form_valid(self, form):
+        variable = form.save(commit=True)
+        problem = Problem.objects.get(id=self.kwargs['pk'])
+        problem.terraform_file_id.variables.add(variable)
+        problem.terraform_file_id.save()
+        return HttpResponse('<script type="text/javascript">window.close();</script>')
+
+
+class VariableUpdateView(LoginRequiredMixin, UpdateView):
+    model = Variable
+    form_class = VariableUpdateForm
+    template_name = 'admin_pages/common/edit.html'
+
+    def form_valid(self, form):
+        form.save(commit=True)
+        return HttpResponse('<script type="text/javascript">window.close();</script>')
+
+
+class VariableDeleteView(LoginRequiredMixin, DeleteView):
+    model = Variable
     template_name = 'admin_pages/common/delete.html'
     success_url = '/manage/close_window/'

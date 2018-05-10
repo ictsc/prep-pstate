@@ -80,9 +80,9 @@ def change_team_password(request, pk):
         form = NoOlbPasswordCheckPasswordChangeForm(user, request.POST)
         if form.is_valid():
             user = form.save()
-            update_session_auth_hash(request, user)  # Important!
+            # update_session_auth_hash(request, user)  # Important!
             messages.success(request, 'Your password was successfully updated!')
-            return redirect('change_password')
+            return redirect('pstate-manage:team-change_password', pk=pk)
         else:
             messages.error(request, 'Please correct the error below.')
     else:

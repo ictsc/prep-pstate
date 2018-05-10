@@ -232,7 +232,7 @@ class ProblemDeleteView(LoginRequiredMixin, DeleteView):
 
 class ProblemEnvironmentListView(LoginRequiredMixin, ListView):
     model = ProblemEnvironment
-    paginate_by = 100
+    paginate_by = 15
     template_name = 'admin_pages/problem_environment/index.html'
 
 

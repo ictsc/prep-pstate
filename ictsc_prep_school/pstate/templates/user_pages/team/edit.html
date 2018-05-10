@@ -1,0 +1,12 @@
+{% extends 'adminlte/base.html' %}
+{% block title %}{% endblock %}
+{% block content %}
+<form action="" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <p>
+        <label for="id_password">Password:</label>
+        <a href="javascript:window.open('{% url 'pstate-user:change_password' %}', 'yourWindowName', 'width=800,height=400');">Change password</a>
+    </p>
+    <input type="submit" class="btn btn-info" value="Update" />
+</form>
+{% endblock %}

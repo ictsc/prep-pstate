@@ -4,8 +4,6 @@
 {% block content %}
 <form action="" method="post">{% csrf_token %}
     {{ form.as_p }}
-    <div align="right">
         <input type="submit" class="btn btn-primary" value="Add" />
-    </div>
 </form>
 {% endblock %}

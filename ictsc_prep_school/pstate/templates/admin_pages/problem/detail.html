@@ -2,6 +2,9 @@
 
 {% block title %}My App{% endblock %}
 {% block content %}
+{% load static %}
+<script src="{% static "ace/src/ace.js" %}" type="text/javascript" charset="utf-8"></script>
+<script src="{% static "ace/src/cobalt.js" %}" type="text/javascript" charset="utf-8"></script>
 <h1>{{ problem.display_name }}</h1>
 <div align="right">
     <button class="btn btn-info" onClick="location.href=''">Preview</button>
@@ -51,7 +54,8 @@
                 <div align="right">
                     <button class="btn btn-info" onClick="location.href='{% url 'pstate-manage:problem-edit' pk=problem.id %}'">Edit</button>
                 </div>
-                {{ problem.terraform_file_id.body|linebreaks }}
+                <div id="editor-div" style="height: 500px; width: 100%;"></div>
+                <textarea id="text" name="text">{{ problem.terraform_file_id.body }}</textarea>
             </div>
             <div class="tab-pane" id="tab_2t">
                 <div align="right">
@@ -122,4 +126,18 @@
     </div>
     {% endif %}
 </div>
+<script type="text/javascript">
+    document.getElementById( 'text' ).style.display = 'none';
+    document.getElementById( 'editor-div' ).innerHTML = document.getElementById( 'text' ).value;
+    // or editor.setValue( "the new text here" );
+    var editor = ace.edit( 'editor-div' );
+    editor.setTheme( 'ace/theme/cobalt' );
+    editor.getSession().setMode( 'ace/mode/perl' );
+    editor.setReadOnly(true);
+    document.getElementById( 'editor-div' ).style.fontSize = '14';
+    editor.getSession().on('change', function(){
+        var textcode = editor.getSession().getValue();
+        document.getElementById( 'text' ).value = textcode;
+    });
+</script>
 {% endblock %}

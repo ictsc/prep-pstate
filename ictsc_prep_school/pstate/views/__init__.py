@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, FormView
@@ -51,11 +51,13 @@ def login(request):
 
 
 @login_required
+@permission_required('user.is_staff', raise_exception=True)
 def logout(request):
     return render(request, 'admin_pages/auth/logout.html')
 
 
 @login_required
+@permission_required('user.is_staff', raise_exception=True)
 def change_password(request):
     if request.method == 'POST':
         form = NoOlbPasswordCheckPasswordChangeForm(request.user, request.POST)
@@ -74,6 +76,7 @@ def change_password(request):
 
 
 @login_required
+@permission_required('user.is_staff', raise_exception=True)
 def change_team_password(request, pk):
     if request.method == 'POST':
         user = Team.objects.get(id=pk)
@@ -92,6 +95,8 @@ def change_team_password(request, pk):
     })
 
 
+@login_required
+@permission_required('user.is_staff', raise_exception=True)
 def change_participant_password(request, pk):
     if request.method == 'POST':
         user = Participant.objects.get(id=pk)
@@ -111,11 +116,13 @@ def change_participant_password(request, pk):
 
 
 @login_required
+@permission_required('user.is_staff', raise_exception=True)
 def index(request):
     return render(request, 'admin_pages/index.html')
 
 
 @login_required
+@permission_required('user.is_staff', raise_exception=True)
 def dashboard(request):
     return render(request, 'admin_pages/dashboard.html')
 
@@ -124,85 +131,92 @@ def close_window(request):
     return render(request, 'admin_pages/common/close.html')
 
 
-class ParticipantListView(LoginRequiredMixin, ListView):
+class LoginRequiredAndPermissionRequiredMixin(LoginRequiredMixin, PermissionRequiredMixin):
+    permission_required = 'user.is_staff'
+    raise_exception = True
+
+
+class ParticipantListView(LoginRequiredAndPermissionRequiredMixin, ListView):
     model = Participant
     paginate_by = 100
     template_name = 'admin_pages/participant/index.html'
 
 
-class ParticipantCreateView(LoginRequiredMixin, CreateView):
+class ParticipantCreateView(LoginRequiredAndPermissionRequiredMixin, CreateView):
     form_class = ParticipantForm
     template_name = 'admin_pages/participant/add.html'
     success_url = '/manage/participants/'
 
 
-class TeamListView(LoginRequiredMixin, ListView):
+class TeamListView(LoginRequiredAndPermissionRequiredMixin, ListView):
     model = Team
     paginate_by = 100
     template_name = 'admin_pages/team/index.html'
 
 
-class TeamCreateView(LoginRequiredMixin, CreateView):
+class TeamCreateView(LoginRequiredAndPermissionRequiredMixin, CreateView):
     form_class = TeamForm
     template_name = 'admin_pages/team/add.html'
     success_url = '/manage/teams/'
 
 
-class TeamDetailView(LoginRequiredMixin, DetailView):
+class TeamDetailView(LoginRequiredAndPermissionRequiredMixin, DetailView):
     model = Team
     template_name = 'admin_pages/team/detail.html'
 
 
-class TeamUpdateView(LoginRequiredMixin, UpdateView):
+class TeamUpdateView(LoginRequiredAndPermissionRequiredMixin, UpdateView):
     model = Team
     form_class = TeamUpdateForm
     template_name = 'admin_pages/team/edit.html'
     success_url = '/manage/teams/'
 
 
-class TeamDeleteView(LoginRequiredMixin, DeleteView):
+class TeamDeleteView(LoginRequiredAndPermissionRequiredMixin, DeleteView):
     model = Team
     template_name = 'admin_pages/common/delete.html'
     success_url = '/manage/teams/'
 
 
-class ParticipantDetailView(LoginRequiredMixin, DetailView):
+class ParticipantDetailView(LoginRequiredAndPermissionRequiredMixin, DetailView):
     model = Participant
     template_name = 'admin_pages/participant/detail.html'
 
 
-class ParticipantUpdateView(LoginRequiredMixin, UpdateView):
+class ParticipantUpdateView(LoginRequiredAndPermissionRequiredMixin, UpdateView):
     model = Participant
     form_class = ParticipantUpdateForm
     template_name = 'admin_pages/participant/edit.html'
     success_url = '/manage/participants/'
 
 
-class ParticipantDeleteView(LoginRequiredMixin, DeleteView):
+class ParticipantDeleteView(LoginRequiredAndPermissionRequiredMixin, DeleteView):
     model = Participant
     template_name = 'admin_pages/common/delete.html'
     success_url = '/manage/participants/'
 
 
-class ProblemListView(LoginRequiredMixin, ListView):
+class ProblemListView(LoginRequiredAndPermissionRequiredMixin, ListView):
     model = Problem
     paginate_by = 100
     template_name = 'admin_pages/problem/index.html'
+    permission_required = 'user.is_staff'
+    raise_exception = True
 
 
-class ProblemDetailView(LoginRequiredMixin, DetailView):
+class ProblemDetailView(LoginRequiredAndPermissionRequiredMixin, DetailView):
     model = Problem
     paginate_by = 100
     template_name = 'admin_pages/problem/detail.html'
 
 
-class ProblemCreateView(LoginRequiredMixin, CreateView):
+class ProblemCreateView(LoginRequiredAndPermissionRequiredMixin, CreateView):
     form_class = ProblemForm
     template_name = 'admin_pages/problem/add.html'
     success_url = "/manage/problems/"
 
 
-class ProblemUpdateView(LoginRequiredMixin, UpdateView):
+class ProblemUpdateView(LoginRequiredAndPermissionRequiredMixin, UpdateView):
     model = Problem
     form_class = ProblemUpdateForm
     template_name = 'admin_pages/common/edit.html'
@@ -213,7 +227,7 @@ class ProblemUpdateView(LoginRequiredMixin, UpdateView):
         return HttpResponse('<script type="text/javascript">window.close();</script>')
 
 
-class ProblemDescriptionUpdateView(LoginRequiredMixin, UpdateView):
+class ProblemDescriptionUpdateView(LoginRequiredAndPermissionRequiredMixin, UpdateView):
     model = Problem
     form_class = ProblemDescriptionUpdateForm
     template_name = 'admin_pages/common/edit.html'
@@ -224,25 +238,25 @@ class ProblemDescriptionUpdateView(LoginRequiredMixin, UpdateView):
         return HttpResponse('<script type="text/javascript">window.close();</script>')
 
 
-class ProblemDeleteView(LoginRequiredMixin, DeleteView):
+class ProblemDeleteView(LoginRequiredAndPermissionRequiredMixin, DeleteView):
     model = Problem
     template_name = 'admin_pages/common/delete.html'
     success_url = '/manage/problems/'
 
 
-class ProblemEnvironmentListView(LoginRequiredMixin, ListView):
+class ProblemEnvironmentListView(LoginRequiredAndPermissionRequiredMixin, ListView):
     model = ProblemEnvironment
     paginate_by = 15
     template_name = 'admin_pages/problem_environment/index.html'
 
 
-class ProblemEnvironmentDetailView(LoginRequiredMixin, DetailView):
+class ProblemEnvironmentDetailView(LoginRequiredAndPermissionRequiredMixin, DetailView):
     model = ProblemEnvironment
     paginate_by = 100
     template_name = 'admin_pages/problem_environment/detail.html'
 
 
-class ProblemEnvironmentCreateView(LoginRequiredMixin, CreateView):
+class ProblemEnvironmentCreateView(LoginRequiredAndPermissionRequiredMixin, CreateView):
     form_class = ProblemEnvironmentForm
     template_name = 'admin_pages/common/add.html'
     success_url = "/manage/problem_environments/"
@@ -271,7 +285,7 @@ class ProblemEnvironmentCreateView(LoginRequiredMixin, CreateView):
         return HttpResponseRedirect(self.success_url)
 
 
-class ProblemEnvironmentTestRunExecuteView(LoginRequiredMixin, FormView):
+class ProblemEnvironmentTestRunExecuteView(LoginRequiredAndPermissionRequiredMixin, FormView):
     template_name = 'admin_pages/problem/problem_environment_create_execute.html'
     form_class = ProblemEnvironmentCreateExecuteForm
     success_url = "/manage/problems/"
@@ -313,38 +327,38 @@ class ProblemEnvironmentDeleteView(DeleteView):
     success_url = '/manage/problem_environments/'
 
 
-class ProviderListView(LoginRequiredMixin, ListView):
+class ProviderListView(LoginRequiredAndPermissionRequiredMixin, ListView):
     model = Provider
     paginate_by = 100
     template_name = 'admin_pages/setting/provider/index.html'
 
 
-class ProviderDetailView(LoginRequiredMixin, DetailView):
+class ProviderDetailView(LoginRequiredAndPermissionRequiredMixin, DetailView):
     model = Provider
     paginate_by = 100
     template_name = 'admin_pages/setting/provider/detail.html'
 
 
-class ProviderCreateView(LoginRequiredMixin, CreateView):
+class ProviderCreateView(LoginRequiredAndPermissionRequiredMixin, CreateView):
     form_class = ProviderForm
     template_name = 'admin_pages/setting/provider/add.html'
     success_url = "/manage/setting/providers/"
 
 
-class ProviderUpdateView(LoginRequiredMixin, UpdateView):
+class ProviderUpdateView(LoginRequiredAndPermissionRequiredMixin, UpdateView):
     model = Provider
     fields = ('__all__')
     template_name = 'admin_pages/common/edit.html'
     success_url = '/manage/setting/providers/'
 
 
-class ProviderDeleteView(LoginRequiredMixin, DeleteView):
+class ProviderDeleteView(LoginRequiredAndPermissionRequiredMixin, DeleteView):
     model = Provider
     template_name = 'admin_pages/setting/provider/delete.html'
     success_url = '/manage/setting/providers/'
 
 
-class TerraformFileCreateView(LoginRequiredMixin, CreateView):
+class TerraformFileCreateView(LoginRequiredAndPermissionRequiredMixin, CreateView):
     form_class = TerraformFileForm
     template_name = 'admin_pages/terraform_file/add.html'
     success_url = '/manage/problems/'
@@ -358,7 +372,7 @@ class TerraformFileCreateView(LoginRequiredMixin, CreateView):
         return HttpResponse('<script type="text/javascript">window.close();</script>')
 
 
-class TerraformFileUpdateView(LoginRequiredMixin, UpdateView):
+class TerraformFileUpdateView(LoginRequiredAndPermissionRequiredMixin, UpdateView):
     model = TerraformFile
     form_class = TerraformFileUpdateForm
     template_name = 'admin_pages/terraform_file/edit.html'
@@ -369,7 +383,7 @@ class TerraformFileUpdateView(LoginRequiredMixin, UpdateView):
         return HttpResponse('<script type="text/javascript">window.close();</script>')
 
 
-class ProblemEnvironmentCreateExecuteView(LoginRequiredMixin, FormView):
+class ProblemEnvironmentCreateExecuteView(LoginRequiredAndPermissionRequiredMixin, FormView):
     template_name = 'admin_pages/problem/problem_environment_create_execute.html'
     form_class = ProblemEnvironmentCreateExecuteForm
     success_url = "/manage/problems/"
@@ -410,33 +424,33 @@ class ParticipantRegisterView(CreateView):
     success_url = '/user'
 
 
-class AttributeListView(LoginRequiredMixin, ListView):
+class AttributeListView(LoginRequiredAndPermissionRequiredMixin, ListView):
     model = Attribute
     paginate_by = 100
     template_name = 'admin_pages/setting/attribute/index.html'
 
 
-class AttributeCreateView(LoginRequiredMixin, CreateView):
+class AttributeCreateView(LoginRequiredAndPermissionRequiredMixin, CreateView):
     model = Attribute
     fields = '__all__'
     template_name = 'admin_pages/setting/attribute/add.html'
     success_url = '/manage/setting/attributes'
 
 
-class AttributeUpdateView(LoginRequiredMixin, UpdateView):
+class AttributeUpdateView(LoginRequiredAndPermissionRequiredMixin, UpdateView):
     model = Attribute
     fields = '__all__'
     template_name = 'admin_pages/common/edit.html'
     success_url = '/manage/setting/attributes'
 
 
-class AttributeDeleteView(LoginRequiredMixin, DeleteView):
+class AttributeDeleteView(LoginRequiredAndPermissionRequiredMixin, DeleteView):
     model = Attribute
     template_name = 'admin_pages/common/delete.html'
     success_url = '/manage/setting/attributes'
 
 
-class ShellScriptCreateView(LoginRequiredMixin, CreateView):
+class ShellScriptCreateView(LoginRequiredAndPermissionRequiredMixin, CreateView):
     form_class = ShellScriptForm
     template_name = 'admin_pages/terraform_file/add.html'
     success_url = '/manage/problems/'
@@ -450,7 +464,7 @@ class ShellScriptCreateView(LoginRequiredMixin, CreateView):
         return HttpResponse('<script type="text/javascript">window.close();</script>')
 
 
-class ShellScriptUpdateView(LoginRequiredMixin, UpdateView):
+class ShellScriptUpdateView(LoginRequiredAndPermissionRequiredMixin, UpdateView):
     model = ShellScript
     form_class = ShellScriptUpdateForm
     template_name = 'admin_pages/terraform_file/edit.html'
@@ -461,13 +475,13 @@ class ShellScriptUpdateView(LoginRequiredMixin, UpdateView):
         return HttpResponse('<script type="text/javascript">window.close();</script>')
 
 
-class ShellScriptDeleteView(LoginRequiredMixin, DeleteView):
+class ShellScriptDeleteView(LoginRequiredAndPermissionRequiredMixin, DeleteView):
     model = ShellScript
     template_name = 'admin_pages/common/delete.html'
     success_url = '/manage/close_window/'
 
 
-class VariableCreateView(LoginRequiredMixin, CreateView):
+class VariableCreateView(LoginRequiredAndPermissionRequiredMixin, CreateView):
     form_class = VariableForm
     template_name = 'admin_pages/common/add.html'
     success_url = '/manage/problems/'
@@ -480,7 +494,7 @@ class VariableCreateView(LoginRequiredMixin, CreateView):
         return HttpResponse('<script type="text/javascript">window.close();</script>')
 
 
-class VariableUpdateView(LoginRequiredMixin, UpdateView):
+class VariableUpdateView(LoginRequiredAndPermissionRequiredMixin, UpdateView):
     model = Variable
     form_class = VariableUpdateForm
     template_name = 'admin_pages/common/edit.html'
@@ -490,7 +504,7 @@ class VariableUpdateView(LoginRequiredMixin, UpdateView):
         return HttpResponse('<script type="text/javascript">window.close();</script>')
 
 
-class VariableDeleteView(LoginRequiredMixin, DeleteView):
+class VariableDeleteView(LoginRequiredAndPermissionRequiredMixin, DeleteView):
     model = Variable
     template_name = 'admin_pages/common/delete.html'
     success_url = '/manage/close_window/'

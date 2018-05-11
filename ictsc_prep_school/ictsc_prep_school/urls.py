@@ -13,7 +13,7 @@ urlpatterns = [
     # 管理者ページ
     path('manage/', include('pstate.urls.admin')),
     # 参加者向けページ
-    path('user/', include('pstate.user_page_urls')),
+    path('user/', include('pstate.urls.user')),
     # 登録フォーム
     url('register/team/$', TeamRegisterView.as_view(), name='team-register'),
     url('register/participant/$', ParticipantRegisterView.as_view(), name='participant-register'),

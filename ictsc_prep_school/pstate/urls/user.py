@@ -1,18 +1,13 @@
 from django.conf.urls import url
 from django.urls import path
 
-
-from pstate.views.user import ProblemListView, ProblemDetailView, \
-    ProblemEnvironmentListView, ProblemEnvironmentDetailView
-
-from pstate.views.user import change_password, TeamDetailView, TeamUpdateView
-
-from pstate.views import user
+from pstate.views.user import index, dashboard, ProblemListView, ProblemDetailView, ProblemEnvironmentListView, \
+    ProblemEnvironmentDetailView, TeamDetailView, TeamUpdateView, change_password
 
 app_name = 'pstate-user'
 urlpatterns = [
-    path('', user.index, name='index'),
-    path('dashboard', user.dashboard, name='dashboard'),
+    path('', index, name='index'),
+    path('dashboard', dashboard, name='dashboard'),
     # problems
     url(r'^problems/$', ProblemListView.as_view(), name='problem-list'),
     url(r'^problems/(?P<pk>[0-9]+)/$', ProblemDetailView.as_view(), name='problem-detail'),

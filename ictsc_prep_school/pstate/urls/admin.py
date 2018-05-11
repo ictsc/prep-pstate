@@ -1,54 +1,37 @@
 from django.conf.urls import url
 from django.urls import path
 
-from pstate import views
-
-from pstate.views import ParticipantListView, ParticipantCreateView,\
-    TeamListView, TeamCreateView, TeamDetailView, TeamUpdateView, TeamDeleteView,\
-    ParticipantUpdateView, ParticipantDeleteView,\
-    ProblemListView, ProblemDetailView, ProblemCreateView,\
-    ProblemEnvironmentListView, ProblemEnvironmentDetailView, ProblemEnvironmentCreateView, ProblemEnvironmentUpdateView, ProblemEnvironmentDeleteView
-
-from pstate.views import ProviderListView, ProviderDetailView, ProviderCreateView, ProviderUpdateView, \
-    ProviderDeleteView, ProblemUpdateView, ProblemDeleteView
-
-from pstate.views import TerraformFileCreateView
-
-from pstate.views import ProblemEnvironmentCreateExecuteView
-
-from pstate.views import AttributeListView, AttributeCreateView, AttributeUpdateView, \
-    AttributeDeleteView
-
-from pstate.views import ProblemDescriptionUpdateView
-
-from pstate.views import TerraformFileUpdateView
-
-from pstate.views import ShellScriptUpdateView, ShellScriptCreateView
-
-from pstate.views import ShellScriptDeleteView
-
-from pstate.views import VariableCreateView, VariableUpdateView, VariableDeleteView
-
-from pstate.views import ProblemEnvironmentTestRunExecuteView
+from pstate.views.admin import index, dashboard, change_team_password, change_participant_password, close_window
+from pstate.views.admin.participants import ParticipantListView, ParticipantDetailView, ParticipantCreateView, \
+    ParticipantUpdateView, ParticipantDeleteView
+from pstate.views.admin.problem_environments import ProblemEnvironmentCreateView, ProblemEnvironmentTestRunExecuteView, \
+    ProblemEnvironmentListView, ProblemEnvironmentDetailView, ProblemEnvironmentUpdateView, ProblemEnvironmentDeleteView
+from pstate.views.admin.problems import ProblemListView, ProblemDetailView, ProblemCreateView, ProblemUpdateView, \
+    ProblemDescriptionUpdateView, ProblemDeleteView
+from pstate.views.admin.providers import ProviderListView, ProviderDetailView, ProviderCreateView, ProviderUpdateView, \
+    ProviderDeleteView, AttributeListView, AttributeCreateView, AttributeUpdateView, AttributeDeleteView
+from pstate.views.admin.teams import TeamListView, TeamDetailView, TeamCreateView, TeamUpdateView, TeamDeleteView
+from pstate.views.admin.terraform_files import TerraformFileCreateView, TerraformFileUpdateView, VariableCreateView, \
+    VariableUpdateView, VariableDeleteView, ShellScriptCreateView, ShellScriptUpdateView, ShellScriptDeleteView
 
 app_name = 'pstate-manage'
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('dashboard', views.dashboard, name='dashboard'),
+    path('', index, name='index'),
+    path('dashboard', dashboard, name='dashboard'),
     # teams
     url(r'^teams/$', TeamListView.as_view(), name='team-list'),
     url(r'^teams/(?P<pk>[0-9]+)/$', TeamDetailView.as_view(), name='team-detail'),
     url(r'^teams/add/$', TeamCreateView.as_view(), name='team-add'),
     url(r'^teams/(?P<pk>[0-9]+)/edit/$', TeamUpdateView.as_view(), name='team-edit'),
     url(r'^teams/(?P<pk>[0-9]+)/delete/$', TeamDeleteView.as_view(), name='team-delete'),
-    url(r'^teams/(?P<pk>[0-9]+)/change_password/$', views.change_team_password, name='team-change_password'),
+    url(r'^teams/(?P<pk>[0-9]+)/change_password/$', change_team_password, name='team-change_password'),
     # participants
     url(r'^participants/$', ParticipantListView.as_view(), name='participant-list'),
-    url(r'^participants/(?P<pk>[0-9]+)/$', views.ParticipantDetailView.as_view(), name='participant-detail'),
+    url(r'^participants/(?P<pk>[0-9]+)/$', ParticipantDetailView.as_view(), name='participant-detail'),
     url(r'^participants/add/$', ParticipantCreateView.as_view(), name='participant-add'),
-    url(r'^participants/(?P<pk>[0-9]+)/edit/$', views.ParticipantUpdateView.as_view(), name='participant-edit'),
-    url(r'^participants/(?P<pk>[0-9]+)/delete/$', views.ParticipantDeleteView.as_view(), name='participant-delete'),
-    url(r'^participants/(?P<pk>[0-9]+)/change_password/$', views.change_participant_password, name='participant-change_password'),
+    url(r'^participants/(?P<pk>[0-9]+)/edit/$', ParticipantUpdateView.as_view(), name='participant-edit'),
+    url(r'^participants/(?P<pk>[0-9]+)/delete/$', ParticipantDeleteView.as_view(), name='participant-delete'),
+    url(r'^participants/(?P<pk>[0-9]+)/change_password/$', change_participant_password, name='participant-change_password'),
     # problems
     url(r'^problems/$', ProblemListView.as_view(), name='problem-list'),
     url(r'^problems/(?P<pk>[0-9]+)/$', ProblemDetailView.as_view(), name='problem-detail'),
@@ -87,5 +70,5 @@ urlpatterns = [
     url(r'^setting/attributes/(?P<pk>[0-9]+)/edit/$', AttributeUpdateView.as_view(), name='attribute-edit'),
     url(r'^setting/attributes/(?P<pk>[0-9]+)/delete/$', AttributeDeleteView.as_view(), name='attribute-delete'),
     # util
-    url(r'^close_window/$', views.close_window, name='window-close'),
+    url(r'^close_window/$', close_window, name='window-close'),
 ]

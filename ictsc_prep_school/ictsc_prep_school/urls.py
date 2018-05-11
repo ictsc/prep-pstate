@@ -1,27 +1,20 @@
 from django.conf.urls import url
 from django.contrib import admin
-from django.http import HttpResponseRedirect
-from django.shortcuts import render
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
 
-from pstate.views import TeamRegisterView, ParticipantRegisterView
-
-
-def index(request):
-    if request.user.is_authenticated:
-        if request.user.is_staff:
-            return render(request, 'admin_pages/index.html')
-        else:
-            return render(request, 'user_pages/index.html')
-    return HttpResponseRedirect('/auth/login/')
-
+from pstate.views import index
+from pstate.views.admin.registers import ParticipantRegisterView, TeamRegisterView
 
 urlpatterns = [
     path('', index, name='index'),
+    # Django admin
     path('admin/', admin.site.urls),
-    path('manage/', include('pstate.urls')),
-    path('user/', include('pstate.user_page_urls')),
+    # 管理者ページ
+    path('manage/', include('pstate.urls.admin')),
+    # 参加者向けページ
+    path('user/', include('pstate.urls.user')),
+    # 登録フォーム
     url('register/team/$', TeamRegisterView.as_view(), name='team-register'),
     url('register/participant/$', ParticipantRegisterView.as_view(), name='participant-register'),
     # auth

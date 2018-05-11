@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
@@ -51,11 +51,13 @@ def login(request):
 
 
 @login_required
+@permission_required('user.is_staff', raise_exception=True)
 def logout(request):
     return render(request, 'admin_pages/auth/logout.html')
 
 
 @login_required
+@permission_required('user.is_staff', raise_exception=True)
 def change_password(request):
     if request.method == 'POST':
         form = NoOlbPasswordCheckPasswordChangeForm(request.user, request.POST)
@@ -74,6 +76,7 @@ def change_password(request):
 
 
 @login_required
+@permission_required('user.is_staff', raise_exception=True)
 def change_team_password(request, pk):
     if request.method == 'POST':
         user = Team.objects.get(id=pk)
@@ -92,6 +95,8 @@ def change_team_password(request, pk):
     })
 
 
+@login_required
+@permission_required('user.is_staff', raise_exception=True)
 def change_participant_password(request, pk):
     if request.method == 'POST':
         user = Participant.objects.get(id=pk)
@@ -111,11 +116,13 @@ def change_participant_password(request, pk):
 
 
 @login_required
+@permission_required('user.is_staff', raise_exception=True)
 def index(request):
     return render(request, 'admin_pages/index.html')
 
 
 @login_required
+@permission_required('user.is_staff', raise_exception=True)
 def dashboard(request):
     return render(request, 'admin_pages/dashboard.html')
 

@@ -1,6 +1,6 @@
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 
-from pstate.forms.add_team import TeamForm, TeamUpdateForm
+from pstate.forms.teams import TeamForm, TeamUpdateForm
 from pstate.models import Team
 from pstate.views.admin import LoginRequiredAndPermissionRequiredMixin
 

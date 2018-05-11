@@ -1,6 +1,6 @@
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 
-from pstate.forms.add_provider import ProviderForm
+from pstate.forms.providers import ProviderForm
 from pstate.views.admin import LoginRequiredAndPermissionRequiredMixin
 from terraform_manager.models import Provider, Attribute
 

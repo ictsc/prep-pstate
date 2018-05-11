@@ -1,9 +1,9 @@
 from django.http import HttpResponse
 from django.views.generic import CreateView, UpdateView, DeleteView
 
-from pstate.forms.add_shell_script import ShellScriptForm, ShellScriptUpdateForm
-from pstate.forms.add_terraformfile import TerraformFileForm, TerraformFileUpdateForm
-from pstate.forms.add_variable import VariableForm, VariableUpdateForm
+from pstate.forms.shell_scripts import ShellScriptForm, ShellScriptUpdateForm
+from pstate.forms.terraform_files import TerraformFileForm, TerraformFileUpdateForm
+from pstate.forms.variables import VariableForm, VariableUpdateForm
 from pstate.models import Problem
 from pstate.views.admin import LoginRequiredAndPermissionRequiredMixin
 from terraform_manager.models import TerraformFile, ShellScript, Variable

@@ -1,6 +1,6 @@
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 
-from pstate.forms.add_participant import ParticipantForm, ParticipantUpdateForm
+from pstate.forms.participants import ParticipantForm, ParticipantUpdateForm
 from pstate.models import Participant
 from pstate.views.admin import LoginRequiredAndPermissionRequiredMixin
 

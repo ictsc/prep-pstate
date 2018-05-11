@@ -1,8 +1,8 @@
 from django.http import HttpResponseRedirect
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView, FormView
 
-from pstate.forms.add_problem import ProblemEnvironmentCreateExecuteForm
-from pstate.forms.add_problemenvironment import ProblemEnvironmentForm
+from pstate.forms.problems import ProblemEnvironmentCreateExecuteForm
+from pstate.forms.problem_environments import ProblemEnvironmentForm
 from pstate.models import Problem, ProblemEnvironment
 from pstate.views.admin import LoginRequiredAndPermissionRequiredMixin
 

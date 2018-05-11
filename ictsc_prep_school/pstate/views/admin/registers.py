@@ -1,7 +1,7 @@
 from django.views.generic import CreateView
 
-from pstate.forms.add_participant import ParticipantRegisterForm
-from pstate.forms.add_team import TeamRegisterForm
+from pstate.forms.participants import ParticipantRegisterForm
+from pstate.forms.teams import TeamRegisterForm
 
 
 class TeamRegisterView(CreateView):

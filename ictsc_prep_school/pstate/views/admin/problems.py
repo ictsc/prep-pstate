@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 
-from pstate.forms.add_problem import ProblemForm, ProblemUpdateForm, ProblemDescriptionUpdateForm
+from pstate.forms.problems import ProblemForm, ProblemUpdateForm, ProblemDescriptionUpdateForm
 from pstate.models import Problem
 from pstate.views.admin import LoginRequiredAndPermissionRequiredMixin
 

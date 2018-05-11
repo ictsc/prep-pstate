@@ -11,7 +11,7 @@ from pstate.models import Problem, ProblemEnvironment
 from pstate.forms.change_password import NoOlbPasswordCheckPasswordChangeForm
 from pstate.models import Team
 
-from pstate.forms.add_team import TeamUserUpdateForm
+from pstate.forms.teams import TeamUserUpdateForm
 
 
 @login_required

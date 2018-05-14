@@ -22,7 +22,7 @@ class Environment(models.Model):
         ('FAILED', 'FAILED'),
     )
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    terraform_file = models.ForeignKey('TerraformFile', unique=False, on_delete=True)
+    terraform_file = models.ForeignKey('TerraformFile', unique=False, on_delete=False)
     state = models.CharField(max_length=20, choices=STATE_CHOICES, default='IN_WAITING_FOR_START')
     is_locked = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -34,7 +34,7 @@ class Log(models.Model):
     Terraformの実行環境でコマンドを実行ログを格納するモデル.
     """
 
-    environment = models.ForeignKey(Environment, on_delete=True, related_name='logs')
+    environment = models.ForeignKey(Environment, on_delete=models.CASCADE, related_name='logs')
     return_code = models.IntegerField(blank=True)
     stdout = models.TextField(blank=True)
     stderr = models.TextField(blank=True)
@@ -99,7 +99,7 @@ class ShellScript(models.Model):
     body = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    terraform_file = models.ForeignKey('TerraformFile', related_name='shell_script', unique=False, on_delete=True)
+    terraform_file = models.ForeignKey('TerraformFile', related_name='shell_script', unique=False, on_delete=models.CASCADE)
 
 
 class TerraformFile(models.Model):

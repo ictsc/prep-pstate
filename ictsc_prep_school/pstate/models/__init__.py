@@ -63,7 +63,7 @@ class ProblemEnvironment(TemplateModel):
     state = models.CharField(choices=STATE_CHOICES, default='IN_PREPARATION', max_length=100)
     team = models.ForeignKey("Team", on_delete=False, blank=True, null=True)
     participant = models.ForeignKey("Participant", on_delete=False, blank=True, null=True)
-    environment = models.ForeignKey(Environment, on_delete=True, null=True)
+    environment = models.ForeignKey(Environment, on_delete=models.CASCADE, null=True)
     problem = models.ForeignKey(Problem, on_delete=False)
 
 
@@ -71,7 +71,7 @@ class ProblemEnvironmentLog(TemplateModel):
     message = models.TextField(blank=True, null=True)
     before_state = models.CharField(choices=ProblemEnvironment.STATE_CHOICES, max_length=100, blank=True, null=True)
     after_state = models.CharField(choices=ProblemEnvironment.STATE_CHOICES, max_length=100, blank=True, null=True)
-    problem_environment = models.ForeignKey("ProblemEnvironment", on_delete=True, related_name="logs")
+    problem_environment = models.ForeignKey("ProblemEnvironment", related_name="logs", on_delete=models.CASCADE)
 
 
 class User(AbstractUser):

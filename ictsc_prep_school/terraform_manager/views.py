@@ -46,7 +46,7 @@ class EnvironmentViewSet(viewsets.ModelViewSet):
     @detail_route(methods=['put'])
     def init(self, *args, **kwargs):
         from terraform_manager.terraform_manager_tasks import init
-        if self.get_object().locked:
+        if self.get_object().is_locked:
             return Response(status=status.HTTP_409_CONFLICT)
         else:
             init.delay(self.get_object().id)
@@ -55,7 +55,7 @@ class EnvironmentViewSet(viewsets.ModelViewSet):
     @detail_route(methods=['put'])
     def plan(self, *args, **kwargs):
         from terraform_manager.terraform_manager_tasks import plan
-        if self.get_object().locked:
+        if self.get_object().is_locked:
             return Response(status=status.HTTP_409_CONFLICT)
         else:
             var = self.request.data['var']
@@ -65,7 +65,7 @@ class EnvironmentViewSet(viewsets.ModelViewSet):
     @detail_route(methods=['put'])
     def apply(self, *args, **kwargs):
         from terraform_manager.terraform_manager_tasks import apply
-        if self.get_object().locked:
+        if self.get_object().is_locked:
             return Response(status=status.HTTP_409_CONFLICT)
         else:
             var = self.request.data['var']
@@ -75,7 +75,7 @@ class EnvironmentViewSet(viewsets.ModelViewSet):
     @detail_route(methods=['put'], url_path='destroy')
     def _destroy(self, *args, **kwargs):
         from terraform_manager.terraform_manager_tasks import destroy
-        if self.get_object().locked:
+        if self.get_object().is_locked:
             return Response(status=status.HTTP_409_CONFLICT)
         else:
             var = self.request.data['var']

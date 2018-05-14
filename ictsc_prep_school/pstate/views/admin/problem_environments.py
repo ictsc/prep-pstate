@@ -17,7 +17,7 @@ class ProblemEnvironmentCreateView(LoginRequiredAndPermissionRequiredMixin, Crea
         # workerに対して処理の実行命令.
         from terraform_manager.models import Environment
         environment = Environment(terraform_file=problem.terraform_file_id,
-                                  locked=False)
+                                  is_locked=False)
         environment.save()
 
         # データの作成.
@@ -75,7 +75,7 @@ class ProblemEnvironmentTestRunExecuteView(LoginRequiredAndPermissionRequiredMix
         problem = Problem.objects.get(id=self.kwargs['pk'])
         from terraform_manager.models import Environment
         environment = Environment(terraform_file=problem.terraform_file_id,
-                                  locked=False)
+                                  is_locked=False)
         environment.save()
 
         # データの作成.
@@ -110,7 +110,7 @@ class ProblemEnvironmentCreateExecuteView(LoginRequiredAndPermissionRequiredMixi
         # workerに対して処理の実行命令.
         from terraform_manager.models import Environment
         environment = Environment(terraform_file=problem.terraform_file_id,
-                                  locked=False)
+                                  is_locked=False)
         environment.save()
 
         from terraform_manager.terraform_manager_tasks import direct_apply

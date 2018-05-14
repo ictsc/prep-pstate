@@ -51,7 +51,7 @@ class ProblemEnvironment(TemplateModel):
         import random
         import os
         length = 14
-        chars = string.ascii_letters + string.digits + '!@#$%^&*()'
+        chars = string.ascii_letters + string.digits
         random.seed = (os.urandom(1024))
         return ''.join(random.choice(chars) for i in range(length))
 

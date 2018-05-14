@@ -71,7 +71,7 @@ class ProblemEnvironmentLog(TemplateModel):
     message = models.TextField(blank=True, null=True)
     before_state = models.CharField(choices=ProblemEnvironment.STATE_CHOICES, max_length=100, blank=True, null=True)
     after_state = models.CharField(choices=ProblemEnvironment.STATE_CHOICES, max_length=100, blank=True, null=True)
-    problem_environment = models.ForeignKey("ProblemEnvironment", on_delete=True, related_name="logs")
+    problem_environment = models.ForeignKey("ProblemEnvironment", related_name="logs", on_delete=True)
 
 
 class User(AbstractUser):

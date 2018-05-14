@@ -19,6 +19,12 @@ class TerraformFileCreateView(LoginRequiredAndPermissionRequiredMixin, CreateVie
         problem = Problem.objects.get(id=self.kwargs['pk'])
         problem.terraform_file_id = terraform_file
         problem.save()
+
+        # VNCサーバのパスワードを問題環境作成時に自動で転送するためVNC_SERVER_PASSWORDを追加する.
+        variable = Variable(key="VNC_SERVER_PASSWORD", value=None)
+        variable.save()
+        problem.terraform_file_id.variables.add(variable)
+        problem.terraform_file_id.save()
         from django.http import HttpResponse
         return HttpResponse('<script type="text/javascript">window.close();</script>')
 

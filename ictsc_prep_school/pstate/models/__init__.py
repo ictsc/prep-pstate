@@ -67,6 +67,15 @@ class ProblemEnvironment(TemplateModel):
     environment = models.ForeignKey(Environment, on_delete=models.CASCADE, null=True)
     problem = models.ForeignKey(Problem, on_delete=False)
 
+    def save(self, *args, **kwargs):
+        problem_environment = ProblemEnvironment.objects.filter(id=self.id)
+        if problem_environment.exists():
+            ProblemEnvironmentLog(message="Change state",
+                                  before_state=problem_environment[0].state,
+                                  after_state=self.state,
+                                  problem_environment=self).save()
+        super(ProblemEnvironment, self).save(*args, **kwargs)
+
 
 class ProblemEnvironmentLog(TemplateModel):
     message = models.TextField(blank=True, null=True)

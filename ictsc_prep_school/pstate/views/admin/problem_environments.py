@@ -2,7 +2,7 @@ from django.http import HttpResponseRedirect
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView, FormView
 
 from pstate.forms.problems import ProblemEnvironmentCreateExecuteForm, ProblemEnvironmentDestroyExecuteForm
-from pstate.forms.problem_environments import ProblemEnvironmentForm
+from pstate.forms.problem_environments import ProblemEnvironmentForm, ProblemEnvironmentUpdateForm
 from pstate.models import Problem, ProblemEnvironment, ProblemEnvironmentLog
 from pstate.views.admin import LoginRequiredAndPermissionRequiredMixin
 
@@ -55,8 +55,8 @@ class ProblemEnvironmentDetailView(LoginRequiredAndPermissionRequiredMixin, Deta
 
 class ProblemEnvironmentUpdateView(LoginRequiredAndPermissionRequiredMixin, UpdateView):
     model = ProblemEnvironment
-    fields = '__all__'
-    template_name = 'admin_pages/problem_environment/edit.html'
+    form_class = ProblemEnvironmentUpdateForm
+    template_name = 'admin_pages/common/edit.html'
     success_url = '/manage/problem_environments/'
 
 

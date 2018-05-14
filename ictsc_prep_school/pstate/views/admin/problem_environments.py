@@ -20,9 +20,6 @@ class ProblemEnvironmentCreateView(LoginRequiredAndPermissionRequiredMixin, Crea
                                   locked=False)
         environment.save()
 
-        from terraform_manager.terraform_manager_tasks import direct_apply
-        var = []
-        direct_apply.delay(environment.id, problem.terraform_file_id.id, var)
         # データの作成.
         problem_environment = ProblemEnvironment(vnc_server_ipv4_address=None,
                                                  is_enabled=True,
@@ -31,7 +28,13 @@ class ProblemEnvironmentCreateView(LoginRequiredAndPermissionRequiredMixin, Crea
                                                  environment=environment,
                                                  problem=problem)
         problem_environment.save()
-        return HttpResponseRedirect(self.success_url)
+
+        # VNCサーバのパスワードを参照しworkerに対して処理の実行命令する際に転送する.
+        var = {"VNC_SERVER_PASSWORD": problem_environment.vnc_server_password}
+        # workerに対して実行命令を発行.
+        from terraform_manager.terraform_manager_tasks import direct_apply
+        direct_apply.delay(environment.id, problem.terraform_file_id.id, var)
+        return HttpResponseRedirect(self.success_url + str(problem_environment.id))
 
 
 class ProblemEnvironmentListView(LoginRequiredAndPermissionRequiredMixin, ListView):
@@ -62,19 +65,14 @@ class ProblemEnvironmentDeleteView(LoginRequiredAndPermissionRequiredMixin, Dele
 class ProblemEnvironmentTestRunExecuteView(LoginRequiredAndPermissionRequiredMixin, FormView):
     template_name = 'admin_pages/problem/problem_environment_create_execute.html'
     form_class = ProblemEnvironmentCreateExecuteForm
-    success_url = "/manage/problems/"
+    success_url = "/manage/problem_environments/"
 
     def form_valid(self, form):
         problem = Problem.objects.get(id=self.kwargs['pk'])
-        # workerに対して処理の実行命令.
         from terraform_manager.models import Environment
         environment = Environment(terraform_file=problem.terraform_file_id,
                                   locked=False)
         environment.save()
-
-        from terraform_manager.terraform_manager_tasks import direct_apply
-        var = []
-        direct_apply.delay(environment.id, problem.terraform_file_id.id, var)
 
         # データの作成.
         problem_environment = ProblemEnvironment(vnc_server_ipv4_address=None,
@@ -85,7 +83,13 @@ class ProblemEnvironmentTestRunExecuteView(LoginRequiredAndPermissionRequiredMix
                                                  environment=environment,
                                                  problem=problem)
         problem_environment.save()
-        return HttpResponseRedirect(self.success_url)
+
+        # VNCサーバのパスワードを参照しworkerに対して処理の実行命令する際に転送する.
+        var = {"VNC_SERVER_PASSWORD": problem_environment.vnc_server_password}
+        # workerに対して実行命令を発行.
+        from terraform_manager.terraform_manager_tasks import direct_apply
+        direct_apply.delay(environment.id, problem.terraform_file_id.id, var)
+        return HttpResponseRedirect(self.success_url + str(problem_environment.id))
 
 
 class ProblemEnvironmentCreateExecuteView(LoginRequiredAndPermissionRequiredMixin, FormView):

@@ -55,7 +55,7 @@ Execute the following command in the project root directory.
 
 Create
 ```
-docker build -t terraform-manager-worker  -f docker/worker/Dockerfile .
+docker build -t terraform-manager-worker  -f docker_build/terraform_manager_worker/Dockerfile .
 ```
 
 Run

@@ -19,6 +19,7 @@ class TerraformFileCreateView(LoginRequiredAndPermissionRequiredMixin, CreateVie
         problem = Problem.objects.get(id=self.kwargs['pk'])
         problem.terraform_file_id = terraform_file
         problem.save()
+
         from django.http import HttpResponse
         return HttpResponse('<script type="text/javascript">window.close();</script>')
 

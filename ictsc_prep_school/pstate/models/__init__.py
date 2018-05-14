@@ -33,6 +33,7 @@ class ProblemEnvironment(TemplateModel):
         ('IN_PROGRESS', 'IN_PROGRESS'),
         ('FINISH', 'FINISH'),
         ('WAITING_FOR_SCORING', 'WAITING_FOR_SCORING'),
+        ('SCORING_HAS_ENDED', 'SCORING_HAS_ENDED'),
         ('WAITING_FOR_DELETE', 'WAITING_FOR_DELETE'),
         ('DELETED', 'DELETED'),
 

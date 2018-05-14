@@ -21,11 +21,14 @@
             <i class="fa fa-users"></i> <span>Teams</span>
         </a>
     </li>
+{% comment "Hidden participant" %}
+リリース当初はチーム単位の参加となるため、参加者を管理する機能は提供しない
     <li>
         <a href="{% url 'pstate-manage:participant-list' %}">
             <i class="fa fa-user"></i> <span>Participants</span>
         </a>
     </li>
+{% endcomment %}
     <li class="treeview">
         <a href=""><i class="fa fa-gear"></i>Settings<i class="fa fa-angle-left pull-right"></i></a>
         <ul class="treeview-menu">

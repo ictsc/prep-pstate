@@ -44,7 +44,7 @@ def init(environment_id):
 
     if not os.path.isdir(TERRAFORM_ENVIRONMENT_ROOT_PATH + environment_id):
         prepare_environment(environment_id=environment_id, terraform_file_id=environment.terraform_file.id)
-    environment.locked = True
+    environment.is_locked = True
     environment.state = 'IN_INITIALIZE'
     environment.save()
     try:
@@ -57,7 +57,7 @@ def init(environment_id):
         environment.state = 'FAILED'
         environment.save()
     finally:
-        environment.locked = False
+        environment.is_locked = False
         environment.state = 'INITIALIZED'
         environment.save()
 
@@ -76,11 +76,11 @@ def plan(environment_id, var):
     if not os.path.isdir(TERRAFORM_ENVIRONMENT_ROOT_PATH + environment_id):
         prepare_environment(environment_id, environment.terraform_file.id)
         init(environment_id)
-    if environment.locked:
+    if environment.is_locked:
         # ロックしているときはコマンドを実行しない.
         raise Exception()
 
-    environment.locked = True
+    environment.is_locked = True
     environment.state = 'IN_PLANNING'
     environment.save()
     try:
@@ -93,7 +93,7 @@ def plan(environment_id, var):
         environment.state = 'FAILED'
         environment.save()
     finally:
-        environment.locked = False
+        environment.is_locked = False
         environment.state = 'PLANNED'
         environment.save()
 
@@ -112,11 +112,11 @@ def apply(environment_id, var):
     if not os.path.isdir(TERRAFORM_ENVIRONMENT_ROOT_PATH + environment_id):
         prepare_environment(environment_id, environment.terraform_file.id)
         init(environment_id)
-    if environment.locked:
+    if environment.is_locked:
         # ロックしているときはコマンドを実行しない.
         raise Exception()
 
-    environment.locked = True
+    environment.is_locked = True
     environment.state = 'IN_APPLYING'
     environment.save()
     try:
@@ -132,7 +132,7 @@ def apply(environment_id, var):
         environment.state = 'FAILED'
         environment.save()
     finally:
-        environment.locked = False
+        environment.is_locked = False
         environment.state = 'APPLIED'
         environment.save()
 
@@ -152,11 +152,11 @@ def destroy(environment_id, var):
     if not os.path.isdir(TERRAFORM_ENVIRONMENT_ROOT_PATH + environment_id):
         prepare_environment(environment_id, environment.terraform_file.id)
         init(environment_id)
-    if environment.locked:
+    if environment.is_locked:
         # ロックしているときはコマンドを実行しない.
         raise Exception()
 
-    environment.locked = True
+    environment.is_locked = True
     environment.state = 'IN_DESTROYING'
     environment.save()
     try:
@@ -172,7 +172,7 @@ def destroy(environment_id, var):
         environment.state = 'FAILED'
         environment.save()
     finally:
-        environment.locked = False
+        environment.is_locked = False
         environment.state = 'DESTROYED'
         environment.save()
 
@@ -189,7 +189,7 @@ def direct_apply(environment_id, terraform_file_id, var):
 
     from terraform_manager.models import Environment
     environment = Environment.objects.get(id=environment_id)
-    environment.locked = True
+    environment.is_locked = True
     environment.save()
     try:
         #   terraform init
@@ -238,7 +238,7 @@ def direct_apply(environment_id, terraform_file_id, var):
         environment.state = 'FAILED'
         environment.save()
     finally:
-        environment.locked = False
+        environment.is_locked = False
         environment.save()
 
 

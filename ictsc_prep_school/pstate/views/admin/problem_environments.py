@@ -59,6 +59,9 @@ class ProblemEnvironmentUpdateView(LoginRequiredAndPermissionRequiredMixin, Upda
     template_name = 'admin_pages/common/edit.html'
     success_url = '/manage/problem_environments/'
 
+    def get_success_url(self, **kwargs):
+        return self.success_url + str(self.object.id)
+
 
 class ProblemEnvironmentDeleteView(LoginRequiredAndPermissionRequiredMixin, DeleteView):
     model = ProblemEnvironment

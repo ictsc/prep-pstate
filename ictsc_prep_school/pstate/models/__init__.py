@@ -33,6 +33,7 @@ class ProblemEnvironment(TemplateModel):
         ('IN_PROGRESS', 'IN_PROGRESS'),
         ('FINISH', 'FINISH'),
         ('WAITING_FOR_SCORING', 'WAITING_FOR_SCORING'),
+        ('SCORING_HAS_ENDED', 'SCORING_HAS_ENDED'),
         ('WAITING_FOR_DELETE', 'WAITING_FOR_DELETE'),
         ('DELETED', 'DELETED'),
 
@@ -65,6 +66,15 @@ class ProblemEnvironment(TemplateModel):
     participant = models.ForeignKey("Participant", on_delete=False, blank=True, null=True)
     environment = models.ForeignKey(Environment, on_delete=models.CASCADE, null=True)
     problem = models.ForeignKey(Problem, on_delete=False)
+
+    def save(self, *args, **kwargs):
+        problem_environment = ProblemEnvironment.objects.filter(id=self.id)
+        if problem_environment.exists():
+            ProblemEnvironmentLog(message="Change state",
+                                  before_state=problem_environment[0].state,
+                                  after_state=self.state,
+                                  problem_environment=self).save()
+        super(ProblemEnvironment, self).save(*args, **kwargs)
 
 
 class ProblemEnvironmentLog(TemplateModel):

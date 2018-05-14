@@ -4,6 +4,7 @@
 {% block content %}
 <h1>{{ problemenvironment.id }}</h1>
 <div align="right">
+    <button class="btn btn-info" onClick="location.href='{% url 'pstate-manage:problemenvironment-edit' pk=problemenvironment.id %}'" >Edit</button>
     <button class="btn btn-danger" onClick="location.href='{% url 'pstate-manage:problemenvironment-destroy' pk=problemenvironment.id %}'" >Destroy(Terraform)</button>
     <button class="btn btn-danger" onClick="location.href='{% url 'pstate-manage:problemenvironment-delete' pk=problemenvironment.id %}'" >Delete</button>
 </div>

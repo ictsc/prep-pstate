@@ -4,8 +4,8 @@
 {% block content %}
 <h1>{{ problemenvironment.id }}</h1>
 <div align="right">
-    <button class="btn btn-danger" onClick="" >Destroy</button>
-    <!--<button class="btn btn-danger" onClick="location.href='{% url 'pstate-manage:problemenvironment-delete' pk=problemenvironment.id %}'" >Destroy</button>-->
+    <button class="btn btn-danger" onClick="location.href='{% url 'pstate-manage:problemenvironment-destroy' pk=problemenvironment.id %}'" >Destroy(Terraform)</button>
+    <button class="btn btn-danger" onClick="location.href='{% url 'pstate-manage:problemenvironment-delete' pk=problemenvironment.id %}'" >Delete</button>
 </div>
 
 <div class="nav-tabs-custom">
@@ -21,6 +21,7 @@
                 <tbody>
                     <tr><th>ID</th><td>{{ problemenvironment.id }}</td></tr>
                     <tr><th>State</th><td>{{ problemenvironment.state }}</td></tr>
+                    <tr><th>State(Terraform)</th><td>{{ problemenvironment.environment.state }}</td></tr>
                     <tr><th>Team</th><td>{{ problemenvironment.team }}</td></tr>
                     <tr><th>Problem name</th><td>{{ problemenvironment.problem.name }}</td></tr>
                     <tr><th>Problem name(For management)</th><td>{{ problemenvironment.problem.display_name }}</td></tr>

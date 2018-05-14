@@ -3,7 +3,7 @@ from django.views.generic import CreateView, ListView, DetailView, UpdateView, D
 
 from pstate.forms.problems import ProblemEnvironmentCreateExecuteForm, ProblemEnvironmentDestroyExecuteForm
 from pstate.forms.problem_environments import ProblemEnvironmentForm
-from pstate.models import Problem, ProblemEnvironment
+from pstate.models import Problem, ProblemEnvironment, ProblemEnvironmentLog
 from pstate.views.admin import LoginRequiredAndPermissionRequiredMixin
 
 
@@ -34,6 +34,10 @@ class ProblemEnvironmentCreateView(LoginRequiredAndPermissionRequiredMixin, Crea
         # workerに対して実行命令を発行.
         from terraform_manager.terraform_manager_tasks import direct_apply
         direct_apply.delay(environment.id, problem.terraform_file_id.id, var)
+        ProblemEnvironmentLog(message="Creating problem environment started",
+                              before_state=None,
+                              after_state="IN_PREPARATION",
+                              problem_environment=problem_environment).save()
         return HttpResponseRedirect(self.success_url + str(problem_environment.id))
 
 
@@ -89,6 +93,10 @@ class ProblemEnvironmentTestRunExecuteView(LoginRequiredAndPermissionRequiredMix
         # workerに対して実行命令を発行.
         from terraform_manager.terraform_manager_tasks import direct_apply
         direct_apply.delay(environment.id, problem.terraform_file_id.id, var)
+        ProblemEnvironmentLog(message="Creating problem environment started",
+                              before_state=None,
+                              after_state="IN_PREPARATION",
+                              problem_environment=problem_environment).save()
         return HttpResponseRedirect(self.success_url + str(problem_environment.id))
 
 
@@ -133,4 +141,8 @@ class ProblemEnvironmentDestroyView(LoginRequiredAndPermissionRequiredMixin, For
         from terraform_manager.terraform_manager_tasks import destroy
         var = []
         destroy.delay(environment.id, var)
+        ProblemEnvironmentLog(message="Problem environment destroying started",
+                              before_state=problem_environment.state,
+                              after_state="WAITING_FOR_DELETE",
+                              problem_environment=problem_environment).save()
         return HttpResponseRedirect(self.success_url + str(problem_environment.id))

@@ -1,0 +1,9 @@
+{% extends 'adminlte/base.html' %}
+{% block title %}{% endblock %}
+{% block content %}
+<h1>Destroy(Terraform)</h1>
+<form action="" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input class="btn btn-danger" type="submit" value="Execute" />
+</form>
+{% endblock %}

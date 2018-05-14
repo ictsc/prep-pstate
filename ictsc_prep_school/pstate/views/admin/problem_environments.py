@@ -1,9 +1,9 @@
 from django.http import HttpResponseRedirect
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView, FormView
 
-from pstate.forms.problems import ProblemEnvironmentCreateExecuteForm
+from pstate.forms.problems import ProblemEnvironmentCreateExecuteForm, ProblemEnvironmentDestroyExecuteForm
 from pstate.forms.problem_environments import ProblemEnvironmentForm
-from pstate.models import Problem, ProblemEnvironment
+from pstate.models import Problem, ProblemEnvironment, ProblemEnvironmentLog
 from pstate.views.admin import LoginRequiredAndPermissionRequiredMixin
 
 
@@ -34,6 +34,10 @@ class ProblemEnvironmentCreateView(LoginRequiredAndPermissionRequiredMixin, Crea
         # workerに対して実行命令を発行.
         from terraform_manager.terraform_manager_tasks import direct_apply
         direct_apply.delay(environment.id, problem.terraform_file_id.id, var)
+        ProblemEnvironmentLog(message="Creating problem environment started",
+                              before_state=None,
+                              after_state="IN_PREPARATION",
+                              problem_environment=problem_environment).save()
         return HttpResponseRedirect(self.success_url + str(problem_environment.id))
 
 
@@ -89,6 +93,10 @@ class ProblemEnvironmentTestRunExecuteView(LoginRequiredAndPermissionRequiredMix
         # workerに対して実行命令を発行.
         from terraform_manager.terraform_manager_tasks import direct_apply
         direct_apply.delay(environment.id, problem.terraform_file_id.id, var)
+        ProblemEnvironmentLog(message="Creating problem environment started",
+                              before_state=None,
+                              after_state="IN_PREPARATION",
+                              problem_environment=problem_environment).save()
         return HttpResponseRedirect(self.success_url + str(problem_environment.id))
 
 
@@ -119,3 +127,22 @@ class ProblemEnvironmentCreateExecuteView(LoginRequiredAndPermissionRequiredMixi
                                                  problem=problem)
         problem_environment.save()
         return HttpResponseRedirect(self.success_url)
+
+
+class ProblemEnvironmentDestroyView(LoginRequiredAndPermissionRequiredMixin, FormView):
+    template_name = 'admin_pages/problem/problem_environment_destroy_execute.html'
+    form_class = ProblemEnvironmentDestroyExecuteForm
+    success_url = "/manage/problem_environments/"
+
+    def form_valid(self, form):
+        problem_environment = ProblemEnvironment.objects.get(id=self.kwargs['pk'])
+        environment = problem_environment.environment
+        # workerに対して処理の実行命令.
+        from terraform_manager.terraform_manager_tasks import destroy
+        var = []
+        destroy.delay(environment.id, var)
+        ProblemEnvironmentLog(message="Problem environment destroying started",
+                              before_state=problem_environment.state,
+                              after_state="WAITING_FOR_DELETE",
+                              problem_environment=problem_environment).save()
+        return HttpResponseRedirect(self.success_url + str(problem_environment.id))

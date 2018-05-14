@@ -67,6 +67,13 @@ class ProblemEnvironment(TemplateModel):
     problem = models.ForeignKey(Problem, on_delete=False)
 
 
+class ProblemEnvironmentLog(TemplateModel):
+    message = models.TextField(blank=True, null=True)
+    before_state = models.CharField(choices=ProblemEnvironment.STATE_CHOICES, max_length=100, blank=True, null=True)
+    after_state = models.CharField(choices=ProblemEnvironment.STATE_CHOICES, max_length=100, blank=True, null=True)
+    problem_environment = models.ForeignKey("ProblemEnvironment", on_delete=True, related_name="logs")
+
+
 class User(AbstractUser):
     is_team = models.BooleanField(default=False)
 

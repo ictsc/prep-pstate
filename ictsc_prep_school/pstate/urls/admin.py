@@ -5,7 +5,8 @@ from pstate.views.admin import index, dashboard, change_team_password, change_pa
 from pstate.views.admin.participants import ParticipantListView, ParticipantDetailView, ParticipantCreateView, \
     ParticipantUpdateView, ParticipantDeleteView
 from pstate.views.admin.problem_environments import ProblemEnvironmentCreateView, ProblemEnvironmentTestRunExecuteView, \
-    ProblemEnvironmentListView, ProblemEnvironmentDetailView, ProblemEnvironmentUpdateView, ProblemEnvironmentDeleteView
+    ProblemEnvironmentListView, ProblemEnvironmentDetailView, ProblemEnvironmentUpdateView, \
+    ProblemEnvironmentDeleteView, ProblemEnvironmentDestroyView
 from pstate.views.admin.problems import ProblemListView, ProblemDetailView, ProblemCreateView, ProblemUpdateView, \
     ProblemDescriptionUpdateView, ProblemDeleteView
 from pstate.views.admin.providers import ProviderListView, ProviderDetailView, ProviderCreateView, ProviderUpdateView, \
@@ -58,6 +59,7 @@ urlpatterns = [
     url(r'^problem_environments/add/$', ProblemEnvironmentCreateView.as_view(), name='problemenvironment-create'),
     url(r'^problem_environments/(?P<pk>[0-9]+)/edit/$', ProblemEnvironmentUpdateView.as_view(), name='problemenvironment-edit'),
     url(r'^problem_environments/(?P<pk>[0-9]+)/delete/$', ProblemEnvironmentDeleteView.as_view(), name='problemenvironment-delete'),
+    url(r'^problem_environments/(?P<pk>[0-9]+)/destroy/$', ProblemEnvironmentDestroyView.as_view(), name='problemenvironment-destroy'),
     # setting/providers
     url(r'^setting/providers/$', ProviderListView.as_view(), name='provider-list'),
     url(r'^setting/providers/(?P<pk>[0-9]+)/$', ProviderDetailView.as_view(), name='provider-detail'),

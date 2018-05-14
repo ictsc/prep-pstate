@@ -4,8 +4,8 @@
 {% block content %}
 <h1>{{ problemenvironment.id }}</h1>
 <div align="right">
-    <button class="btn btn-danger" onClick="" >Destroy</button>
-    <!--<button class="btn btn-danger" onClick="location.href='{% url 'pstate-manage:problemenvironment-delete' pk=problemenvironment.id %}'" >Destroy</button>-->
+    <button class="btn btn-danger" onClick="location.href='{% url 'pstate-manage:problemenvironment-destroy' pk=problemenvironment.id %}'" >Destroy(Terraform)</button>
+    <button class="btn btn-danger" onClick="location.href='{% url 'pstate-manage:problemenvironment-delete' pk=problemenvironment.id %}'" >Delete</button>
 </div>
 
 <div class="nav-tabs-custom">
@@ -21,6 +21,7 @@
                 <tbody>
                     <tr><th>ID</th><td>{{ problemenvironment.id }}</td></tr>
                     <tr><th>State</th><td>{{ problemenvironment.state }}</td></tr>
+                    <tr><th>State(Terraform)</th><td>{{ problemenvironment.environment.state }}</td></tr>
                     <tr><th>Team</th><td>{{ problemenvironment.team }}</td></tr>
                     <tr><th>Problem name</th><td>{{ problemenvironment.problem.name }}</td></tr>
                     <tr><th>Problem name(For management)</th><td>{{ problemenvironment.problem.display_name }}</td></tr>
@@ -41,6 +42,26 @@
             </table>
         </div>
         <div class="tab-pane" id="tab_3">
+            <table class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Message</th>
+                    <th>Before state</th>
+                    <th>After state</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for log in problemenvironment.logs.all %}
+                <tr>
+                    <td>{{ log.created_at }}</td>
+                    <td>{{ log.message }}</td>
+                    <td>{{ log.before_state }}</td>
+                    <td>{{ log.after_state }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
         </div>
         <div class="tab-pane" id="tab_4">
             <table class="table table-striped table-bordered">

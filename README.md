@@ -33,8 +33,8 @@ Initial data is put in DB.
 ```
 python manage.py migrate
 python manage.py createsuperuser
-python manage.py loaddata fixtures/attribute.json
-python manage.py loaddata fixtures/provider.json
+python manage.py loaddata fixtures/terraform_manager/attribute.json
+python manage.py loaddata fixtures/terraform_manager/provider.json
 ```
 
 ### 2. (optional) Creating and starting an API container

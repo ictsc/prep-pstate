@@ -25,6 +25,7 @@ RUN mkdir /terraform-environment
 
 WORKDIR /pstate/ictsc_prep_school/
 ENV PYTHONPATH /pstate/ictsc_prep_school:$PYTHONPATH
+ENV DJANGO_SETTINGS_MODULE ictsc_prep_school.settings.terraform_manager.develop
 CMD celery -A terraform_manager.terraform_manager_tasks worker --loglevel=info
 
 #   TODO    :   redisとDB接続先とterraform実行環境のパスを外部から変数として設定できるようにする.

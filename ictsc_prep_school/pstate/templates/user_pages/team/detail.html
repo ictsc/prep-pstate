@@ -1,6 +1,6 @@
 {% extends 'adminlte/base.html' %}
 {% block title %}{% endblock %}
-{% block content %}
+{% block content %}{% load tz %}
 <h1>{{ object_list.0.team_name }}</h1>
 <div align="right">
     <button class="btn btn-info" onClick="location.href='{% url 'pstate-user:team-edit' %}'" >Edit</button>

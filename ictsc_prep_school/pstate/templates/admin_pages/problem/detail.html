@@ -1,7 +1,7 @@
 {% extends 'adminlte/base.html' %}
 
 {% block title %}{% endblock %}
-{% block content %}
+{% block content %}{% load tz %}
 {% load static %}
 <script src="{% static "ace/src/ace.js" %}" type="text/javascript" charset="utf-8"></script>
 <script src="{% static "ace/src/cobalt.js" %}" type="text/javascript" charset="utf-8"></script>
@@ -40,8 +40,8 @@
                         <tr><th>ID</th><td>{{ problem.id }}</td></tr>
                         <tr><th>Problem name</th><td>{{ problem.display_name }}</td></tr>
                         <tr><th>Problem name(For management)</th><td>{{ problem.name }}</td></tr>
-                        <tr><th>Created at</th><td>{{ problem.created_at }}</td></tr>
-                        <tr><th>Updated at</th><td>{{ problem.updated_at }}</td></tr>
+                        <tr><th>Created at</th><td>{{ problem.created_at | localtime }}</td></tr>
+                        <tr><th>Updated at</th><td>{{ problem.updated_at | localtime }}</td></tr>
                         <tr><th>Start date</th><td>{{ problem.start_date }}</td></tr>
                         <tr><th>End date</th><td>{{ problem.end_date }}</td></tr>
                         <tr><th>Published</th><td>{{ problem.is_enabled }}</td></tr>

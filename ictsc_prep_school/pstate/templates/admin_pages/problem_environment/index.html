@@ -1,7 +1,7 @@
 {% extends 'adminlte/base.html' %}
 
 {% block title %}{% endblock %}
-{% block content %}
+{% block content %}{% load tz %}
 <h1>Problem Environments</h1>
 <table class="table table-striped table-bordered">
     <thead>
@@ -34,10 +34,10 @@
             {{ problemenvironment.problem.name }}
         </td>
         <td>
-            {{ problemenvironment.created_at }}
+            {{ problemenvironment.created_at| localtime }}
         </td>
         <td>
-            {{ problemenvironment.updated_at }}
+            {{ problemenvironment.updated_at | localtime }}
         </td>
     </tr>
     {% endfor %}

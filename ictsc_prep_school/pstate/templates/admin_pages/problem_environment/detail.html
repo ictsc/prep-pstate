@@ -27,7 +27,7 @@
                     <tr><th>Problem name</th><td>{{ problemenvironment.problem.name }}</td></tr>
                     <tr><th>Problem name(For management)</th><td>{{ problemenvironment.problem.display_name }}</td></tr>
                     <tr><th>Created At</th><td>{{ problemenvironment.created_at | localtime }}</td></tr>
-                    <tr><th>Updated At</th><td>{{ problemenvironment.updated_at }}</td></tr>
+                    <tr><th>Updated At</th><td>{{ problemenvironment.updated_at | localtime }}</td></tr>
                 </tbody>
             </table>
         </div>

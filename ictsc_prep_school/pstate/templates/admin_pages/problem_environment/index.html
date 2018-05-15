@@ -37,7 +37,7 @@
             {{ problemenvironment.created_at| localtime }}
         </td>
         <td>
-            {{ problemenvironment.updated_at }}
+            {{ problemenvironment.updated_at | localtime }}
         </td>
     </tr>
     {% endfor %}

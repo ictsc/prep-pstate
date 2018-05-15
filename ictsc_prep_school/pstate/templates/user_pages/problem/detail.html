@@ -1,6 +1,6 @@
 {% extends 'adminlte/base.html' %}
 {% block title %}{% endblock %}
-{% block content %}
+{% block content %}{% load tz %}
 <h1>{{ problem.display_name }}</h1>
 <div align="right">
     <button class="btn btn-info" onClick="location.href=''">Start</button>

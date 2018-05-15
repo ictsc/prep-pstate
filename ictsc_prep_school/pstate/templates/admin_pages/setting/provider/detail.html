@@ -1,7 +1,7 @@
 {% extends 'adminlte/base.html' %}
 
 {% block title %}{% endblock %}
-{% block content %}
+{% block content %}{% load tz %}
 <h2>{{ provider.name }}</h2>
 <div align="right">
     <button class="btn btn-info" onClick="location.href='{% url 'pstate-manage:provider-edit' pk=provider.id %}'">Edit</button>

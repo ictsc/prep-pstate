@@ -1,6 +1,6 @@
 {% extends 'adminlte/base.html' %}
 {% block title %}{% endblock %}
-{% block content %}
+{% block content %}{% load tz %}
 <form action="" method="post">{% csrf_token %}
     {{ form.as_p }}
     <p>

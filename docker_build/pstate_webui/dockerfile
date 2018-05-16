@@ -12,4 +12,5 @@ RUN pip3 install -r requirements.txt
 ADD ./ictsc_prep_school /root/
 
 ENV DJANGO_SETTINGS_MODULE ictsc_prep_school.settings.pstate.develop
+RUN python3 manage.py collectstatic --noinput
 CMD ["uwsgi","--http",":80","--file","/root/ictsc_prep_school/wsgis/pstate.py"]

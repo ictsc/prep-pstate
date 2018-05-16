@@ -1,4 +1,6 @@
+from django.conf import settings
 from django.conf.urls import url
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
@@ -21,4 +23,4 @@ urlpatterns = [
     url(r'^auth/login/$', auth_views.login, {'template_name': 'admin_pages/auth/login.html'}, name='login'),
     url(r'^auth/logout/$', auth_views.logout, {'next_page': '/auth/login'}, name='logout'),
     # url(r'^password/$', views.change_password, name='change_password'),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -122,10 +122,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
+# 静的ファイルのディレクトリ名とURLパス
 STATIC_URL = '/static/'
+
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-#STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
-ROOT_PATH = os.path.dirname(__file__)
+
+# 静的ファイルが保存されるディレクトリパス
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+
+# 静的ファイル以外にもファイルを配信するファイルが存在しているディレクトリパス
 STATICFILES_DIRS = (
     [os.path.join(PROJECT_ROOT, 'static')]
 )

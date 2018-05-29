@@ -1,0 +1,215 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-05-29 20:58+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: ictsc_prep_school/pstate/templates/403.html:4
+#: ictsc_prep_school/pstate/templates/403.html:9
+#: ictsc_prep_school/pstate/templates/404.html:4
+#: ictsc_prep_school/pstate/templates/404.html:9
+msgid "404"
+msgstr ""
+
+#: ictsc_prep_school/pstate/templates/403.html:12
+#: ictsc_prep_school/pstate/templates/404.html:12
+msgid "Oops! Page not found."
+msgstr ""
+
+#: ictsc_prep_school/pstate/templates/403.html:16
+#: ictsc_prep_school/pstate/templates/404.html:16
+msgid "return to dashboard"
+msgstr ""
+
+#: ictsc_prep_school/pstate/templates/403.html:16
+#: ictsc_prep_school/pstate/templates/404.html:16
+msgid " or try using the search form."
+msgstr ""
+
+#: ictsc_prep_school/pstate/templates/adminlte/lib/_main_header.html:16
+#: ictsc_prep_school/pstate/templates/user_pages/team/edit.html:9
+msgid "Change password"
+msgstr "パスワードを変更"
+
+#: ictsc_prep_school/pstate/templates/adminlte/lib/_main_header.html:19
+msgid "Sign out"
+msgstr "サインアウト"
+
+#: ictsc_prep_school/pstate/templates/adminlte/lib/_main_sidebar.html:8
+#: ictsc_prep_school/pstate/templates/adminlte/lib/_main_sidebar.html:44
+msgid "Home"
+msgstr ""
+
+#: ictsc_prep_school/pstate/templates/adminlte/lib/_main_sidebar.html:13
+#: ictsc_prep_school/pstate/templates/adminlte/lib/_main_sidebar.html:49
+#: ictsc_prep_school/pstate/templates/user_pages/problem/index.html:5
+msgid "Problems"
+msgstr "問題"
+
+#: ictsc_prep_school/pstate/templates/adminlte/lib/_main_sidebar.html:18
+#: ictsc_prep_school/pstate/templates/adminlte/lib/_main_sidebar.html:54
+msgid "ProblemEnvironments"
+msgstr "問題環境"
+
+#: ictsc_prep_school/pstate/templates/adminlte/lib/_main_sidebar.html:23
+msgid "Teams"
+msgstr "チーム"
+
+#: ictsc_prep_school/pstate/templates/adminlte/lib/_main_sidebar.html:30
+msgid "Participants"
+msgstr ""
+
+#: ictsc_prep_school/pstate/templates/adminlte/lib/_main_sidebar.html:35
+msgid "Settings"
+msgstr "設定"
+
+#: ictsc_prep_school/pstate/templates/adminlte/lib/_main_sidebar.html:37
+msgid "Provider"
+msgstr ""
+
+#: ictsc_prep_school/pstate/templates/adminlte/lib/_main_sidebar.html:38
+msgid "Attribute"
+msgstr ""
+
+#: ictsc_prep_school/pstate/templates/adminlte/lib/_main_sidebar.html:59
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:21
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/index.html:11
+msgid "Team"
+msgstr "チーム"
+
+#: ictsc_prep_school/pstate/templates/user_pages/common/register_participant.html:24
+#: ictsc_prep_school/pstate/templates/user_pages/common/register_team.html:24
+msgid "ICTSC PREP SCHOOL"
+msgstr ""
+
+#: ictsc_prep_school/pstate/templates/user_pages/common/register_participant.html:27
+msgid "Register a new participant"
+msgstr ""
+
+#: ictsc_prep_school/pstate/templates/user_pages/common/register_participant.html:31
+#: ictsc_prep_school/pstate/templates/user_pages/common/register_team.html:31
+msgid "Register"
+msgstr ""
+
+#: ictsc_prep_school/pstate/templates/user_pages/common/register_team.html:27
+msgid "Register a new team"
+msgstr ""
+
+#: ictsc_prep_school/pstate/templates/user_pages/problem/detail.html:7
+msgid "Start"
+msgstr "問題開始"
+
+#: ictsc_prep_school/pstate/templates/user_pages/problem/detail.html:12
+msgid "Problem sentence"
+msgstr "問題文"
+
+#: ictsc_prep_school/pstate/templates/user_pages/problem/index.html:9
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:19
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/index.html:9
+#: ictsc_prep_school/pstate/templates/user_pages/team/detail.html:18
+msgid "ID"
+msgstr ""
+
+#: ictsc_prep_school/pstate/templates/user_pages/problem/index.html:10
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:22
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/index.html:12
+msgid "Problem name"
+msgstr "問題名"
+
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:7
+msgid "Finish"
+msgstr "問題終了"
+
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:11
+#: ictsc_prep_school/pstate/templates/user_pages/team/detail.html:12
+msgid "Info"
+msgstr "情報"
+
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:12
+msgid "Connection info"
+msgstr "接続情報"
+
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:13
+msgid "Log"
+msgstr "ログ"
+
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:20
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/index.html:10
+msgid "State"
+msgstr "状態"
+
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:23
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/index.html:13
+msgid "Created At"
+msgstr "作成日時"
+
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:24
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/index.html:14
+msgid "Updated At"
+msgstr "更新日時"
+
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:32
+msgid "VNC IP address"
+msgstr "VNC IPアドレス"
+
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:39
+msgid "VNC port"
+msgstr "VNC ポート番号"
+
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:40
+msgid "VNC user"
+msgstr "VNC 接続ユーザ名"
+
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:41
+msgid "VNC password"
+msgstr "VNC 接続パスワード"
+
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/index.html:5
+msgid "Problem Environments"
+msgstr "問題環境"
+
+#: ictsc_prep_school/pstate/templates/user_pages/team/detail.html:7
+msgid "Edit"
+msgstr "編集"
+
+#: ictsc_prep_school/pstate/templates/user_pages/team/detail.html:19
+msgid "TeamName"
+msgstr "チーム名"
+
+#: ictsc_prep_school/pstate/templates/user_pages/team/detail.html:20
+msgid "UserName(Login ID)"
+msgstr "ログインID"
+
+#: ictsc_prep_school/pstate/templates/user_pages/team/detail.html:21
+msgid "Email"
+msgstr ""
+
+#: ictsc_prep_school/pstate/templates/user_pages/team/detail.html:22
+msgid "Join Date"
+msgstr "参加日時"
+
+#: ictsc_prep_school/pstate/templates/user_pages/team/detail.html:23
+msgid "Last Login"
+msgstr "最終ログイン日時"
+
+#: ictsc_prep_school/pstate/templates/user_pages/team/edit.html:8
+msgid "Password:"
+msgstr "パスワード:"
+
+#: ictsc_prep_school/pstate/templates/user_pages/team/edit.html:11
+msgid "Update"
+msgstr "更新"

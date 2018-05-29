@@ -1,61 +1,63 @@
 {% extends 'adminlte/lib/_main_sidebar.html' %}
-{% block nav_links %}
-{% if request.user.is_staff %}
-    <li>
-        <a href="{% url 'pstate-manage:dashboard' %}">
-            <i class="fa fa-home"></i> <span>Home</span>
-        </a>
-    </li>
-    <li>
-        <a href="{% url 'pstate-manage:problem-list' %}">
-            <i class="fa fa-question"></i> <span>Problems</span>
-        </a>
-    </li>
-    <li>
-        <a href="{% url 'pstate-manage:problemenvironment-list' %}">
-            <i class="fa fa-clone"></i> <span>ProblemEnvironments</span>
-        </a>
-    </li>
-    <li>
-        <a href="{% url 'pstate-manage:team-list' %}">
-            <i class="fa fa-users"></i> <span>Teams</span>
-        </a>
-    </li>
-{% comment "Hidden participant" %}
-リリース当初はチーム単位の参加となるため、参加者を管理する機能は提供しない
-    <li>
-        <a href="{% url 'pstate-manage:participant-list' %}">
-            <i class="fa fa-user"></i> <span>Participants</span>
-        </a>
-    </li>
-{% endcomment %}
-    <li class="treeview">
-        <a href=""><i class="fa fa-gear"></i>Settings<i class="fa fa-angle-left pull-right"></i></a>
-        <ul class="treeview-menu">
-            <li><a href="{% url 'pstate-manage:provider-list' %}"><i class="fa fa-cloud"></i>Provider</a></li>
-            <li><a href="{% url 'pstate-manage:attribute-list' %}"><i class="fa fa-tags"></i>Attribute</a></li>
-        </ul>
-    </li>
+{% if request.user.is_authenticated %}
+    {% block nav_links %}
+    {% if request.user.is_staff %}
+        <li>
+            <a href="{% url 'pstate-manage:dashboard' %}">
+                <i class="fa fa-home"></i> <span>Home</span>
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'pstate-manage:problem-list' %}">
+                <i class="fa fa-question"></i> <span>Problems</span>
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'pstate-manage:problemenvironment-list' %}">
+                <i class="fa fa-clone"></i> <span>ProblemEnvironments</span>
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'pstate-manage:team-list' %}">
+                <i class="fa fa-users"></i> <span>Teams</span>
+            </a>
+        </li>
+    {% comment "Hidden participant" %}
+    リリース当初はチーム単位の参加となるため、参加者を管理する機能は提供しない
+        <li>
+            <a href="{% url 'pstate-manage:participant-list' %}">
+                <i class="fa fa-user"></i> <span>Participants</span>
+            </a>
+        </li>
+    {% endcomment %}
+        <li class="treeview">
+            <a href=""><i class="fa fa-gear"></i>Settings<i class="fa fa-angle-left pull-right"></i></a>
+            <ul class="treeview-menu">
+                <li><a href="{% url 'pstate-manage:provider-list' %}"><i class="fa fa-cloud"></i>Provider</a></li>
+                <li><a href="{% url 'pstate-manage:attribute-list' %}"><i class="fa fa-tags"></i>Attribute</a></li>
+            </ul>
+        </li>
+    {% else %}
+        <li>
+            <a href="{% url 'pstate-user:dashboard' %}">
+                <i class="fa fa-home"></i> <span>Home</span>
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'pstate-user:problem-list' %}">
+                <i class="fa fa-question"></i> <span>Problems</span>
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'pstate-user:problemenvironment-list' %}">
+                <i class="fa fa-clone"></i> <span>ProblemEnvironments</span>
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'pstate-user:team-detail' %}">
+                <i class="fa fa-users"></i> <span>Team</span>
+            </a>
+        </li>
+    {% endif %}
 {% else %}
-    <li>
-        <a href="{% url 'pstate-user:dashboard' %}">
-            <i class="fa fa-home"></i> <span>Home</span>
-        </a>
-    </li>
-    <li>
-        <a href="{% url 'pstate-user:problem-list' %}">
-            <i class="fa fa-question"></i> <span>Problems</span>
-        </a>
-    </li>
-    <li>
-        <a href="{% url 'pstate-user:problemenvironment-list' %}">
-            <i class="fa fa-clone"></i> <span>ProblemEnvironments</span>
-        </a>
-    </li>
-    <li>
-        <a href="{% url 'pstate-user:team-detail' %}">
-            <i class="fa fa-users"></i> <span>Team</span>
-        </a>
-    </li>
-{% endif %}
 {% endblock nav_links %}

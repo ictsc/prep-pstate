@@ -67,7 +67,7 @@ msgstr ""
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/delete.html:7
 #: ictsc_prep_school/pstate/templates/admin_pages/team/delete.html:7
 msgid "Confirm"
-msgstr ""
+msgstr "確認"
 
 #: ictsc_prep_school/pstate/templates/admin_pages/common/edit.html:7
 #: ictsc_prep_school/pstate/templates/admin_pages/common/edit_code.html:13
@@ -206,10 +206,8 @@ msgid "E-mail"
 msgstr ""
 
 #: ictsc_prep_school/pstate/templates/admin_pages/problem/add.html:5
-#, fuzzy
-#| msgid "Problems"
 msgid "Add Problem"
-msgstr "問題"
+msgstr "問題の追加"
 
 #: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:11
 msgid "Preview"
@@ -268,18 +266,16 @@ msgid "Updated At"
 msgstr "更新日時"
 
 #: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:46
-#, fuzzy
-#| msgid "Start"
 msgid "Start date"
-msgstr "問題開始"
+msgstr "開始日"
 
 #: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:47
 msgid "End date"
-msgstr ""
+msgstr "終了日"
 
 #: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:48
 msgid "Published"
-msgstr ""
+msgstr "公開状態"
 
 #: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:78
 #: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:91
@@ -322,7 +318,7 @@ msgstr "問題"
 #: ictsc_prep_school/pstate/templates/admin_pages/problem/problem_environment_create_execute.html:8
 #: ictsc_prep_school/pstate/templates/admin_pages/problem/problem_environment_destroy_execute.html:8
 msgid "Execute"
-msgstr ""
+msgstr "実行"
 
 #: ictsc_prep_school/pstate/templates/admin_pages/problem/problem_environment_destroy_execute.html:5
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:9
@@ -387,36 +383,32 @@ msgid "VNC password"
 msgstr "VNC 接続パスワード"
 
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:50
-#, fuzzy
-#| msgid "Join Date"
 msgid "Date"
-msgstr "参加日時"
+msgstr "日時"
 
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:51
 msgid "Message"
-msgstr ""
+msgstr "メッセージ"
 
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:52
 msgid "Before state"
-msgstr ""
+msgstr "前の状態"
 
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:53
 msgid "After state"
-msgstr ""
+msgstr "後の状態"
 
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:73
 msgid "Return code"
-msgstr ""
+msgstr "終了ステータス"
 
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:74
-#, fuzzy
-#| msgid "Sign out"
 msgid "Std out"
-msgstr "サインアウト"
+msgstr "標準出力"
 
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:75
 msgid "Std err"
-msgstr ""
+msgstr "標準エラー出力"
 
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/index.html:6
 #: ictsc_prep_school/pstate/templates/user_pages/problem_environment/index.html:5

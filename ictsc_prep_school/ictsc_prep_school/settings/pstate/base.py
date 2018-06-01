@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -108,7 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ja'
 
 TIME_ZONE = 'Asia/Tokyo'
 
@@ -131,10 +132,15 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 
 # 静的ファイル以外にもファイルを配信するファイルが存在しているディレクトリパス
-STATICFILES_DIRS = (
-    [os.path.join(PROJECT_ROOT, 'static')]
-)
+# STATICFILES_DIRS = (
+#     [os.path.join(PROJECT_ROOT, 'static')]
+# )
 
 LOGIN_URL = '/auth/login'
 LOGOUT_URL = '/auth/logout'
 LOGIN_REDIRECT_URL = '/'
+
+# locale
+LOCALE_PATHS = (
+    os.path.join(PROJECT_ROOT, '../../../locale'),
+)

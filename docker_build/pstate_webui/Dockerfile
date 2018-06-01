@@ -14,4 +14,5 @@ ADD ./ictsc_prep_school /root/
 ENV DJANGO_SETTINGS_MODULE ictsc_prep_school.settings.pstate.develop
 ADD ./libs /root/ictsc_prep_school/settings/pstate/static
 RUN python3 manage.py collectstatic --noinput
+RUN django-admin.py makemessages -l ja
 CMD ["uwsgi","--http",":80","--file","/root/ictsc_prep_school/wsgis/pstate.py"]

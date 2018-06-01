@@ -8,8 +8,13 @@
 <h1>{{ problem.display_name }}</h1>
 <div align="right">
     <button class="btn btn-info" onClick="location.href=''">Preview</button>
+    {% if problem.has_terraform_file %}
     <button class="btn btn-info" onClick="location.href='{% url 'pstate-manage:problems-problemenvironment-test_run' pk=problem.id %}'">Test run</button>
     <button class="btn btn-info" onClick="location.href='{% url 'pstate-manage:problems-problemenvironment-create' pk=problem.id %}'">Create problem environment</button>
+    {% else %}
+    <button class="btn btn-info" disabled onClick="location.href='{% url 'pstate-manage:problems-problemenvironment-test_run' pk=problem.id %}'">Test run</button>
+    <button class="btn btn-info" disabled onClick="location.href='{% url 'pstate-manage:problems-problemenvironment-create' pk=problem.id %}'">Create problem environment</button>
+    {% endif %}
 </div>
 <div align="right">
     <button class="btn btn-danger" onClick="location.href='{% url 'pstate-manage:problem-delete' pk=problem.id %}'">Delete</button>

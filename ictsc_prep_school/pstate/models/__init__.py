@@ -25,6 +25,9 @@ class Problem(TemplateModel):
     def __str__(self):
         return '{} : {}'.format(self.name, self.display_name)
 
+    def has_terraform_file(self):
+        return self.terraform_file_id is not None
+
 
 class ProblemEnvironment(TemplateModel):
     STATE_CHOICES = (

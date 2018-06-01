@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: relate-documentation-service
+spec:
+  type: ClusterIP
+  ports:
+  - name: relate-doc
+    port: 80
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: relate-doc
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: relate-doc
+  labels:
+    app: relate-doc
+spec:
+  #volumes:
+  #  - name: test
+  #    persistentVolumeClaim:
+  #      claimName: test
+  containers:
+  - name: relate-doc
+    image: relate-documentation-server:20180528
+    ports:
+    - name: relate-doc
+      containerPort: 80
+      protocol: TCP
+#    volumeMounts:
+#      - mountPath: "/etc/kong"
+#        name: kong-pv-storage

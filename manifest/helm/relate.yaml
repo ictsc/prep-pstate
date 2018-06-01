@@ -1,0 +1,103 @@
+---
+# Source: relate/templates/relate-deployment.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: relate-service
+spec:
+  type: ClusterIP
+  ports:
+  - name: relate
+    port: 80
+    targetPort: 7777
+    protocol: TCP
+  selector:
+    app: relate
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: relate
+  labels:
+    app: relate
+spec:
+  containers:
+  - name: relate
+    image: relate-webui:20180524
+    ports:
+    - name: relate
+      containerPort: 7777
+      protocol: TCP
+
+---
+# Source: relate/templates/relate-documentation-deployment.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: relate-documentation-service
+spec:
+  type: ClusterIP
+  ports:
+  - name: relate-doc
+    port: 80
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: relate-doc
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: relate-doc
+  labels:
+    app: relate-doc
+spec:
+  #volumes:
+  #  - name: test
+  #    persistentVolumeClaim:
+  #      claimName: test
+  containers:
+  - name: relate-doc
+    image: relate-documentation-server:20180528
+    ports:
+    - name: relate-doc
+      containerPort: 80
+      protocol: TCP
+#    volumeMounts:
+#      - mountPath: "/etc/kong"
+#        name: kong-pv-storage
+
+---
+# Source: relate/templates/relate-staticfiles-webserver-deployment.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: relate-staticfile-service
+spec:
+  type: ClusterIP
+  ports:
+  - name: relate-static
+    port: 80
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: relate-static
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: relate-static
+  labels:
+    app: relate-static
+spec:
+  containers:
+  - name: relate-static
+    image: relate-staticfiles-webserver:20180524
+    ports:
+    - name: relate-static
+      containerPort: 80
+      protocol: TCP
+

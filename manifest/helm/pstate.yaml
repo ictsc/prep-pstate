@@ -1,0 +1,33 @@
+---
+# Source: pstate/templates/pstate-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: pstate-service
+spec:
+  type: ClusterIP
+  ports:
+  - name: pstate
+    port: 80
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: pstate
+
+---
+# Source: pstate/templates/pstate-deployment.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pstate
+  labels:
+    app: pstate
+spec:
+  containers:
+  - name: pstate
+    image: pstate_webui:20180410
+    ports:
+    - name: pstate
+      containerPort: 80
+      protocol: TCP
+

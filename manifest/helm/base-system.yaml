@@ -1,0 +1,186 @@
+---
+# Source: base-system/templates/namespace.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: base-system
+
+---
+# Source: base-system/templates/kong-pv.yaml
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: kong-pv-volume
+  labels:
+    volume: kong-pv
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/root/volume/kong"
+
+---
+# Source: base-system/templates/kong-pvc.yaml
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: kong-pv-claim
+  namespace: base-system
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  selector:
+    matchLabels:
+      volume: kong-pv
+
+---
+# Source: base-system/templates/kong-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: kong-proxy-ssl
+  namespace: base-system
+spec:
+  type: NodePort
+  ports:
+  - name: kong-proxy-ssl
+    port: 443
+    targetPort: 443
+    protocol: TCP
+  selector:
+    app: kong
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kong-admin-ssl
+  namespace: base-system
+spec:
+  type: ClusterIP
+  ports:
+  - name: kong-admin-ssl
+    port: 8444
+    targetPort: 8444
+    protocol: TCP
+  selector:
+    app: kong
+
+---
+# Source: base-system/templates/postgresql-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+  namespace: base-system
+spec:
+  ports:
+  - name: pgql
+    port: 5432
+    targetPort: 5432
+    protocol: TCP
+  selector:
+    app: postgres
+
+---
+# Source: base-system/templates/kong-deployment.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kong-pod
+  namespace: base-system
+  labels:
+    app: kong
+spec:
+  volumes:
+    - name: kong-pv-storage
+      persistentVolumeClaim:
+        claimName: kong-pv-claim
+  containers:
+  - name: kong
+    image: kong:0.13.1
+    env:
+      - name: KONG_ADMIN_LISTEN
+        value: "0.0.0.0:443 ssl"
+      - name: KONG_ADMIN_LISTEN
+        value: "0.0.0.0:8444 ssl"
+      - name: KONG_PG_PASSWORD
+        value: kong
+      - name: KONG_PG_HOST
+        value: postgres
+      - name: KONG_PROXY_ACCESS_LOG
+        value: "/dev/stdout"
+      - name: KONG_ADMIN_ACCESS_LOG
+        value: "/dev/stdout"
+      - name: KONG_PROXY_ERROR_LOG
+        value: "/dev/stderr"
+      - name: KONG_ADMIN_ERROR_LOG
+        value: "/dev/stderr"
+    ports:
+    - name: proxy-ssl
+      containerPort: 443
+      protocol: TCP
+      hostPort: 443
+    - name: admin-ssl
+      containerPort: 8444
+      protocol: TCP
+    volumeMounts:
+      - mountPath: "/etc/kong"
+        name: kong-pv-storage
+  initContainers:
+  - name: init-kong
+    image: kong:0.13.1
+    env:
+      - name: KONG_NGINX_DAEMON
+        value: 'off'
+      - name: KONG_PG_PASSWORD
+        value: kong
+      - name: KONG_PG_HOST
+        value: postgres.base-system.svc.cluster.local
+    command: [ "/bin/sh", "-c", "kong migrations up" ]
+    volumeMounts:
+      - mountPath: "/etc/kong"
+        name: kong-pv-storage
+
+---
+# Source: base-system/templates/postgresql-deployment.yaml
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: postgres
+  namespace: base-system
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:9.6
+          env:
+            - name: POSTGRES_USER
+              value: kong
+            - name: POSTGRES_PASSWORD
+              value: kong
+            - name: POSTGRES_DB
+              value: kong
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: pg-data
+      volumes:
+        - name: pg-data
+          emptyDir: {}
+

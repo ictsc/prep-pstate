@@ -6,12 +6,12 @@ DATABASES = {
         'NAME': 'pstate',
         'USER': 'pstate',
         'PASSWORD': '',
-        'HOST': 'db.prep.icttoracon.net',
+        'HOST': 'db.prep-stg.icttoracon.net',
         'PORT': '5432',
     }
 }
 
-BROKER_URL = 'redis://redis.prep.icttoracon.net:6379/0'
-CELERY_RESULT_BACKEND = 'redis://redis.prep.icttoracon.net:6379/0'
+BROKER_URL = 'redis://redis.prep-stg.icttoracon.net:6379/0'
+CELERY_RESULT_BACKEND = 'redis://redis.prep-stg.icttoracon.net:6379/0'
 
-DEBUG = False
+DEBUG = True

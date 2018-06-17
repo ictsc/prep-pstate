@@ -2,7 +2,6 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: kong-pv-claim
-  namespace: base-system
 spec:
   storageClassName: manual
   accessModes:

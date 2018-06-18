@@ -1,12 +1,13 @@
 {% extends 'adminlte/base.html' %}
+{% load i18n %}
 {% block title %}{% endblock %}
 {% block content %}{% load tz %}
-<h1>Problems</h1>
+<h1>{% trans 'Problems' %}</h1>
 <table class="table table-striped table-bordered">
     <thead>
     <tr>
-        <th>ID</th>
-        <th>Problem name</th>
+        <th>{% trans 'ID' %}</th>
+        <th>{% trans 'Problem name' %}</th>
     </tr>
     </thead>
     <tbody>

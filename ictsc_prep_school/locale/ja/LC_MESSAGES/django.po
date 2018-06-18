@@ -1,0 +1,569 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-06-01 17:57+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: pstate/templates/403.html:4 pstate/templates/403.html:9
+#: pstate/templates/404.html:4 pstate/templates/404.html:9
+msgid "404"
+msgstr ""
+
+#: pstate/templates/403.html:12 pstate/templates/404.html:12
+msgid "Oops! Page not found."
+msgstr ""
+
+#: pstate/templates/403.html:16 pstate/templates/404.html:16
+msgid "return to dashboard"
+msgstr ""
+
+#: pstate/templates/403.html:16 pstate/templates/404.html:16
+msgid " or try using the search form."
+msgstr ""
+
+#: pstate/templates/admin_pages/common/add.html:8
+#: pstate/templates/admin_pages/common/add_code.html:13
+#: pstate/templates/admin_pages/participant/add.html:10
+#: pstate/templates/admin_pages/participant/index.html:8
+#: pstate/templates/admin_pages/problem/add.html:8
+#: pstate/templates/admin_pages/problem/detail.html:59
+#: pstate/templates/admin_pages/problem/detail.html:119
+#: pstate/templates/admin_pages/problem/detail.html:155
+#: pstate/templates/admin_pages/problem/index.html:8
+#: pstate/templates/admin_pages/problem_environment/add.html:9
+#: pstate/templates/admin_pages/setting/attribute/add.html:9
+#: pstate/templates/admin_pages/setting/attribute/index.html:8
+#: pstate/templates/admin_pages/setting/provider/add.html:9
+#: pstate/templates/admin_pages/setting/provider/index.html:8
+#: pstate/templates/admin_pages/team/add.html:10
+#: pstate/templates/admin_pages/team/index.html:8
+#: pstate/templates/admin_pages/terraform_file/add.html:13
+msgid "Add"
+msgstr "追加"
+
+#: pstate/templates/admin_pages/common/change_password.html:8
+msgid "Save changes"
+msgstr ""
+
+#: pstate/templates/admin_pages/common/delete.html:7
+#: pstate/templates/admin_pages/participant/delete.html:7
+#: pstate/templates/admin_pages/problem/delete.html:7
+#: pstate/templates/admin_pages/problem_environment/delete.html:7
+#: pstate/templates/admin_pages/setting/attribute/delete.html:7
+#: pstate/templates/admin_pages/setting/provider/delete.html:7
+#: pstate/templates/admin_pages/team/delete.html:7
+msgid "Confirm"
+msgstr "確認"
+
+#: pstate/templates/admin_pages/common/edit.html:7
+#: pstate/templates/admin_pages/common/edit_code.html:13
+#: pstate/templates/admin_pages/participant/edit.html:11
+#: pstate/templates/admin_pages/problem/edit.html:7
+#: pstate/templates/admin_pages/team/edit.html:11
+#: pstate/templates/admin_pages/terraform_file/edit.html:13
+#: pstate/templates/user_pages/team/edit.html:11
+msgid "Update"
+msgstr "更新"
+
+#: pstate/templates/admin_pages/participant/add.html:6
+msgid "Add Participant"
+msgstr ""
+
+#: pstate/templates/admin_pages/participant/delete.html:6
+#: pstate/templates/admin_pages/problem/delete.html:6
+#: pstate/templates/admin_pages/problem_environment/delete.html:6
+#: pstate/templates/admin_pages/setting/attribute/delete.html:6
+#: pstate/templates/admin_pages/setting/provider/delete.html:6
+#: pstate/templates/admin_pages/team/delete.html:6
+msgid "Are you sure you want to delete "
+msgstr "消去してもよろしいですか "
+
+#: pstate/templates/admin_pages/participant/detail.html:7
+#: pstate/templates/admin_pages/problem/detail.html:29
+#: pstate/templates/admin_pages/problem/detail.html:37
+#: pstate/templates/admin_pages/problem/detail.html:72
+#: pstate/templates/admin_pages/problem/detail.html:125
+#: pstate/templates/admin_pages/problem/detail.html:177
+#: pstate/templates/admin_pages/problem_environment/detail.html:8
+#: pstate/templates/admin_pages/setting/attribute/index.html:28
+#: pstate/templates/admin_pages/setting/provider/detail.html:8
+#: pstate/templates/admin_pages/setting/provider/index.html:28
+#: pstate/templates/admin_pages/team/detail.html:7
+#: pstate/templates/user_pages/team/detail.html:7
+msgid "Edit"
+msgstr "編集"
+
+#: pstate/templates/admin_pages/participant/detail.html:8
+#: pstate/templates/admin_pages/problem/detail.html:16
+#: pstate/templates/admin_pages/problem/detail.html:126
+#: pstate/templates/admin_pages/problem/detail.html:180
+#: pstate/templates/admin_pages/problem/index.html:31
+#: pstate/templates/admin_pages/problem_environment/detail.html:10
+#: pstate/templates/admin_pages/setting/attribute/index.html:29
+#: pstate/templates/admin_pages/setting/provider/detail.html:9
+#: pstate/templates/admin_pages/setting/provider/index.html:29
+#: pstate/templates/admin_pages/team/detail.html:8
+msgid "Delete"
+msgstr "削除"
+
+#: pstate/templates/admin_pages/participant/detail.html:19
+#: pstate/templates/admin_pages/participant/index.html:13
+#: pstate/templates/admin_pages/problem/detail.html:41
+#: pstate/templates/admin_pages/problem/detail.html:90
+#: pstate/templates/admin_pages/problem/index.html:13
+#: pstate/templates/admin_pages/problem_environment/detail.html:24
+#: pstate/templates/admin_pages/problem_environment/detail.html:72
+#: pstate/templates/admin_pages/problem_environment/index.html:10
+#: pstate/templates/admin_pages/setting/provider/detail.html:20
+#: pstate/templates/admin_pages/setting/provider/index.html:13
+#: pstate/templates/admin_pages/team/detail.html:20
+#: pstate/templates/admin_pages/team/detail.html:35
+#: pstate/templates/admin_pages/team/index.html:13
+#: pstate/templates/user_pages/problem/index.html:9
+#: pstate/templates/user_pages/problem_environment/detail.html:19
+#: pstate/templates/user_pages/problem_environment/index.html:9
+#: pstate/templates/user_pages/team/detail.html:18
+msgid "ID"
+msgstr ""
+
+#: pstate/templates/admin_pages/participant/detail.html:20
+msgid "First Name<"
+msgstr ""
+
+#: pstate/templates/admin_pages/participant/detail.html:21
+#: pstate/templates/admin_pages/participant/index.html:16
+#: pstate/templates/admin_pages/team/detail.html:38
+msgid "Last Name"
+msgstr "苗字(姓)"
+
+#: pstate/templates/admin_pages/participant/detail.html:22
+#, fuzzy
+#| msgid "UserName(Login ID)"
+msgid "Username(Login ID)"
+msgstr "ログインID"
+
+#: pstate/templates/admin_pages/participant/detail.html:23
+#: pstate/templates/admin_pages/participant/index.html:17
+#: pstate/templates/admin_pages/problem_environment/detail.html:27
+#: pstate/templates/admin_pages/problem_environment/index.html:12
+#: pstate/templates/adminlte/lib/_main_sidebar.html:59
+#: pstate/templates/user_pages/problem_environment/detail.html:21
+#: pstate/templates/user_pages/problem_environment/index.html:11
+msgid "Team"
+msgstr "チーム"
+
+#: pstate/templates/admin_pages/participant/detail.html:24
+#: pstate/templates/admin_pages/team/detail.html:23
+#: pstate/templates/admin_pages/team/detail.html:39
+#: pstate/templates/user_pages/team/detail.html:21
+msgid "Email"
+msgstr ""
+
+#: pstate/templates/admin_pages/participant/detail.html:25
+#: pstate/templates/admin_pages/team/detail.html:26
+#: pstate/templates/user_pages/team/detail.html:22
+msgid "Join Date"
+msgstr "参加日時"
+
+#: pstate/templates/admin_pages/participant/detail.html:26
+#: pstate/templates/admin_pages/team/detail.html:27
+#: pstate/templates/user_pages/team/detail.html:23
+msgid "Last Login"
+msgstr "最終ログイン日時"
+
+#: pstate/templates/admin_pages/participant/edit.html:9
+#: pstate/templates/admin_pages/team/edit.html:9
+#: pstate/templates/adminlte/lib/_main_header.html:16
+#: pstate/templates/user_pages/team/edit.html:9
+msgid "Change password"
+msgstr "パスワードを変更"
+
+#: pstate/templates/admin_pages/participant/index.html:6
+#: pstate/templates/adminlte/lib/_main_sidebar.html:30
+msgid "Participants"
+msgstr ""
+
+#: pstate/templates/admin_pages/participant/index.html:14
+#: pstate/templates/admin_pages/team/detail.html:36
+msgid "Username"
+msgstr "ユーザ名"
+
+#: pstate/templates/admin_pages/participant/index.html:15
+#: pstate/templates/admin_pages/team/detail.html:37
+msgid "First Name"
+msgstr "名前(名)"
+
+#: pstate/templates/admin_pages/participant/index.html:18
+#: pstate/templates/admin_pages/team/index.html:15
+msgid "E-mail"
+msgstr "メールアドレス"
+
+#: pstate/templates/admin_pages/problem/add.html:5
+msgid "Add Problem"
+msgstr "問題の追加"
+
+#: pstate/templates/admin_pages/problem/detail.html:11
+msgid "Preview"
+msgstr "プレビュー"
+
+#: pstate/templates/admin_pages/problem/detail.html:12
+#: pstate/templates/admin_pages/problem/problem_environment_create_execute.html:5
+msgid "Test run"
+msgstr "テスト実行"
+
+#: pstate/templates/admin_pages/problem/detail.html:13
+msgid "Create problem environment"
+msgstr "問題環境の作成"
+
+#: pstate/templates/admin_pages/problem/detail.html:21
+#: pstate/templates/user_pages/problem/detail.html:12
+msgid "Problem sentence"
+msgstr "問題文"
+
+#: pstate/templates/admin_pages/problem/detail.html:24
+msgid "Problem info"
+msgstr "問題情報"
+
+#: pstate/templates/admin_pages/problem/detail.html:42
+#: pstate/templates/admin_pages/problem/index.html:14
+#: pstate/templates/admin_pages/problem_environment/detail.html:28
+#: pstate/templates/admin_pages/problem_environment/index.html:13
+#: pstate/templates/user_pages/problem/index.html:10
+#: pstate/templates/user_pages/problem_environment/detail.html:22
+#: pstate/templates/user_pages/problem_environment/index.html:12
+msgid "Problem name"
+msgstr "問題名"
+
+#: pstate/templates/admin_pages/problem/detail.html:43
+#: pstate/templates/admin_pages/problem/index.html:15
+#: pstate/templates/admin_pages/problem_environment/detail.html:29
+#: pstate/templates/admin_pages/problem_environment/index.html:14
+msgid "Problem name(For management)"
+msgstr "問題名(管理用)"
+
+#: pstate/templates/admin_pages/problem/detail.html:44
+#: pstate/templates/admin_pages/problem_environment/detail.html:30
+#: pstate/templates/admin_pages/problem_environment/detail.html:76
+#: pstate/templates/admin_pages/problem_environment/index.html:15
+#: pstate/templates/user_pages/problem_environment/detail.html:23
+#: pstate/templates/user_pages/problem_environment/index.html:13
+msgid "Created At"
+msgstr "作成日時"
+
+#: pstate/templates/admin_pages/problem/detail.html:45
+#: pstate/templates/admin_pages/problem_environment/detail.html:31
+#: pstate/templates/admin_pages/problem_environment/index.html:16
+#: pstate/templates/user_pages/problem_environment/detail.html:24
+#: pstate/templates/user_pages/problem_environment/index.html:14
+msgid "Updated At"
+msgstr "更新日時"
+
+#: pstate/templates/admin_pages/problem/detail.html:46
+msgid "Start date"
+msgstr "開始日"
+
+#: pstate/templates/admin_pages/problem/detail.html:47
+msgid "End date"
+msgstr "終了日"
+
+#: pstate/templates/admin_pages/problem/detail.html:48
+msgid "Published"
+msgstr "公開状態"
+
+#: pstate/templates/admin_pages/problem/detail.html:78
+#: pstate/templates/admin_pages/problem/detail.html:91
+#: pstate/templates/admin_pages/setting/provider/detail.html:21
+#, fuzzy
+#| msgid "TeamName"
+msgid "Name"
+msgstr "チーム名"
+
+#: pstate/templates/admin_pages/problem/detail.html:79
+#, fuzzy
+#| msgid "TeamName"
+msgid "FileName"
+msgstr "チーム名"
+
+#: pstate/templates/admin_pages/problem/detail.html:92
+#: pstate/templates/admin_pages/setting/provider/detail.html:22
+msgid "ProviderName"
+msgstr ""
+
+#: pstate/templates/admin_pages/problem/detail.html:99
+#: pstate/templates/admin_pages/problem/detail.html:161
+#: pstate/templates/admin_pages/setting/attribute/index.html:13
+#: pstate/templates/admin_pages/setting/provider/detail.html:30
+msgid "Key"
+msgstr ""
+
+#: pstate/templates/admin_pages/problem/detail.html:100
+#: pstate/templates/admin_pages/problem/detail.html:162
+#: pstate/templates/admin_pages/setting/attribute/index.html:14
+#: pstate/templates/admin_pages/setting/provider/detail.html:31
+msgid "Value"
+msgstr ""
+
+#: pstate/templates/admin_pages/problem/detail.html:157
+msgid "Variables"
+msgstr ""
+
+#: pstate/templates/admin_pages/problem/index.html:6
+#: pstate/templates/adminlte/lib/_main_sidebar.html:13
+#: pstate/templates/adminlte/lib/_main_sidebar.html:49
+#: pstate/templates/user_pages/problem/index.html:5
+msgid "Problems"
+msgstr "問題"
+
+#: pstate/templates/admin_pages/problem/problem_environment_create_execute.html:8
+#: pstate/templates/admin_pages/problem/problem_environment_destroy_execute.html:8
+msgid "Execute"
+msgstr "実行"
+
+#: pstate/templates/admin_pages/problem/problem_environment_destroy_execute.html:5
+#: pstate/templates/admin_pages/problem_environment/detail.html:9
+msgid "Destroy(Terraform)"
+msgstr ""
+
+#: pstate/templates/admin_pages/problem_environment/add.html:6
+#, fuzzy
+#| msgid "ProblemEnvironments"
+msgid "Add ProblemEnvironment"
+msgstr "問題環境"
+
+#: pstate/templates/admin_pages/problem_environment/detail.html:15
+#: pstate/templates/admin_pages/setting/provider/detail.html:13
+#: pstate/templates/admin_pages/team/detail.html:13
+#: pstate/templates/user_pages/problem_environment/detail.html:11
+#: pstate/templates/user_pages/team/detail.html:12
+msgid "Info"
+msgstr "情報"
+
+#: pstate/templates/admin_pages/problem_environment/detail.html:16
+#: pstate/templates/user_pages/problem_environment/detail.html:12
+msgid "Connection info"
+msgstr "接続情報"
+
+#: pstate/templates/admin_pages/problem_environment/detail.html:17
+msgid "Log(ICTSC)"
+msgstr "ログ(ICTSC運営)"
+
+#: pstate/templates/admin_pages/problem_environment/detail.html:18
+msgid "Log(terraform)"
+msgstr "ログ(terraform)"
+
+#: pstate/templates/admin_pages/problem_environment/detail.html:25
+#: pstate/templates/admin_pages/problem_environment/index.html:11
+#: pstate/templates/user_pages/problem_environment/detail.html:20
+#: pstate/templates/user_pages/problem_environment/index.html:10
+msgid "State"
+msgstr "状態"
+
+#: pstate/templates/admin_pages/problem_environment/detail.html:26
+msgid "State(Terraform)"
+msgstr "状態(Terraform)"
+
+#: pstate/templates/admin_pages/problem_environment/detail.html:39
+#: pstate/templates/user_pages/problem_environment/detail.html:32
+msgid "VNC IP address"
+msgstr "VNC IPアドレス"
+
+#: pstate/templates/admin_pages/problem_environment/detail.html:40
+#: pstate/templates/user_pages/problem_environment/detail.html:39
+msgid "VNC port"
+msgstr "VNC ポート番号"
+
+#: pstate/templates/admin_pages/problem_environment/detail.html:41
+#: pstate/templates/user_pages/problem_environment/detail.html:40
+msgid "VNC user"
+msgstr "VNC 接続ユーザ名"
+
+#: pstate/templates/admin_pages/problem_environment/detail.html:42
+#: pstate/templates/user_pages/problem_environment/detail.html:41
+msgid "VNC password"
+msgstr "VNC 接続パスワード"
+
+#: pstate/templates/admin_pages/problem_environment/detail.html:50
+msgid "Date"
+msgstr "日時"
+
+#: pstate/templates/admin_pages/problem_environment/detail.html:51
+msgid "Message"
+msgstr "メッセージ"
+
+#: pstate/templates/admin_pages/problem_environment/detail.html:52
+msgid "Before state"
+msgstr "前の状態"
+
+#: pstate/templates/admin_pages/problem_environment/detail.html:53
+msgid "After state"
+msgstr "後の状態"
+
+#: pstate/templates/admin_pages/problem_environment/detail.html:73
+msgid "Return code"
+msgstr "終了ステータス"
+
+#: pstate/templates/admin_pages/problem_environment/detail.html:74
+msgid "Std out"
+msgstr "標準出力"
+
+#: pstate/templates/admin_pages/problem_environment/detail.html:75
+msgid "Std err"
+msgstr "標準エラー出力"
+
+#: pstate/templates/admin_pages/problem_environment/index.html:6
+#: pstate/templates/user_pages/problem_environment/index.html:5
+msgid "Problem Environments"
+msgstr "問題環境"
+
+#: pstate/templates/admin_pages/problem_environment/index.html:53
+#: pstate/templates/admin_pages/problem_environment/index.html:59
+msgid "Previous"
+msgstr ""
+
+#: pstate/templates/admin_pages/problem_environment/index.html:73
+#: pstate/templates/admin_pages/problem_environment/index.html:79
+msgid "Next"
+msgstr ""
+
+#: pstate/templates/admin_pages/setting/attribute/add.html:4
+#: pstate/templates/admin_pages/setting/attribute/add.html:6
+msgid "Add Attribute"
+msgstr "アトリビュートの追加"
+
+#: pstate/templates/admin_pages/setting/attribute/index.html:6
+msgid "Attributes"
+msgstr ""
+
+#: pstate/templates/admin_pages/setting/provider/add.html:4
+#: pstate/templates/admin_pages/setting/provider/add.html:6
+#, fuzzy
+#| msgid "Add Problem"
+msgid "Add Provider"
+msgstr "問題の追加"
+
+#: pstate/templates/admin_pages/setting/provider/index.html:6
+msgid "Providers"
+msgstr ""
+
+#: pstate/templates/admin_pages/setting/provider/index.html:14
+#, fuzzy
+#| msgid "Problem name"
+msgid "Provider name"
+msgstr "問題名"
+
+#: pstate/templates/admin_pages/team/add.html:6
+msgid "Add team"
+msgstr "チームの追加"
+
+#: pstate/templates/admin_pages/team/detail.html:14
+msgid "Member"
+msgstr "メンバー"
+
+#: pstate/templates/admin_pages/team/detail.html:21
+#: pstate/templates/admin_pages/team/index.html:14
+#: pstate/templates/user_pages/team/detail.html:19
+msgid "TeamName"
+msgstr "チーム名"
+
+#: pstate/templates/admin_pages/team/detail.html:22
+#: pstate/templates/user_pages/team/detail.html:20
+msgid "UserName(Login ID)"
+msgstr "ログインID"
+
+#: pstate/templates/admin_pages/team/detail.html:24
+msgid "Description"
+msgstr "説明"
+
+#: pstate/templates/admin_pages/team/detail.html:25
+msgid "Remarks"
+msgstr "備考"
+
+#: pstate/templates/admin_pages/team/edit.html:8
+#: pstate/templates/user_pages/team/edit.html:8
+msgid "Password:"
+msgstr "パスワード:"
+
+#: pstate/templates/admin_pages/team/index.html:6
+#: pstate/templates/adminlte/lib/_main_sidebar.html:23
+msgid "Teams"
+msgstr "チーム"
+
+#: pstate/templates/adminlte/lib/_main_header.html:19
+msgid "Sign out"
+msgstr "サインアウト"
+
+#: pstate/templates/adminlte/lib/_main_sidebar.html:8
+#: pstate/templates/adminlte/lib/_main_sidebar.html:44
+msgid "Home"
+msgstr ""
+
+#: pstate/templates/adminlte/lib/_main_sidebar.html:18
+#: pstate/templates/adminlte/lib/_main_sidebar.html:54
+msgid "ProblemEnvironments"
+msgstr "問題環境"
+
+#: pstate/templates/adminlte/lib/_main_sidebar.html:35
+msgid "Settings"
+msgstr "設定"
+
+#: pstate/templates/adminlte/lib/_main_sidebar.html:37
+msgid "Provider"
+msgstr ""
+
+#: pstate/templates/adminlte/lib/_main_sidebar.html:38
+msgid "Attribute"
+msgstr ""
+
+#: pstate/templates/user_pages/common/register_participant.html:24
+#: pstate/templates/user_pages/common/register_team.html:24
+msgid "ICTSC PREP SCHOOL"
+msgstr ""
+
+#: pstate/templates/user_pages/common/register_participant.html:27
+msgid "Register a new participant"
+msgstr ""
+
+#: pstate/templates/user_pages/common/register_participant.html:31
+#: pstate/templates/user_pages/common/register_team.html:31
+msgid "Register"
+msgstr ""
+
+#: pstate/templates/user_pages/common/register_team.html:27
+msgid "Register a new team"
+msgstr ""
+
+#: pstate/templates/user_pages/problem/detail.html:7
+msgid "Start"
+msgstr "問題開始"
+
+#: pstate/templates/user_pages/problem_environment/detail.html:7
+msgid "Finish"
+msgstr "問題終了"
+
+#: pstate/templates/user_pages/problem_environment/detail.html:13
+msgid "Log"
+msgstr "ログ"
+
+#, fuzzy
+#~| msgid "Created At"
+#~ msgid "Created at"
+#~ msgstr "作成日時"
+
+#, fuzzy
+#~| msgid "Updated At"
+#~ msgid "Updated at"
+#~ msgstr "更新日時"

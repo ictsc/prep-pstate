@@ -1,16 +1,17 @@
 {% extends 'adminlte/base.html' %}
+{% load i18n %}
 
 {% block title %}{% endblock %}
 {% block content %}{% load tz %}
-<h1>Attributes</h1>
+<h1>{% trans 'Attributes' %}</h1>
 <div align="right">
-    <button class="btn btn-primary" onClick="location.href='{% url 'pstate-manage:attribute-create' %}'" >Add</button>
+    <button class="btn btn-primary" onClick="location.href='{% url 'pstate-manage:attribute-create' %}'" >{% trans 'Add' %}</button>
 </div>
 <table class="table table-striped table-bordered">
     <thead>
     <tr>
-        <th>Key</th>
-        <th>Value</th>
+        <th>{% trans 'Key' %}</th>
+        <th>{% trans 'Value' %}</th>
         <th></th>
         <th></th>
     </tr>
@@ -24,8 +25,8 @@
         <td>
             {{ attribute.value }}
         </td>
-        <td><button class="btn btn-info" onClick="location.href='{% url 'pstate-manage:attribute-edit' pk=attribute.id %}'">Edit</button></td>
-        <td><button class="btn btn-danger" onClick="location.href='{% url 'pstate-manage:attribute-delete' pk=attribute.id %}'">Delete</button></td>
+        <td><button class="btn btn-info" onClick="location.href='{% url 'pstate-manage:attribute-edit' pk=attribute.id %}'">{% trans 'Edit' %}</button></td>
+        <td><button class="btn btn-danger" onClick="location.href='{% url 'pstate-manage:attribute-delete' pk=attribute.id %}'">{% trans 'Delete' %}</button></td>
     </tr>
     {% endfor %}
     </tbody>

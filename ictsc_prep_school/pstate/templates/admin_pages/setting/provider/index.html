@@ -1,16 +1,17 @@
 {% extends 'adminlte/base.html' %}
+{% load i18n %}
 
 {% block title %}{% endblock %}
 {% block content %}{% load tz %}
-<h1>Providers</h1>
+<h1>{% trans 'Providers' %}</h1>
 <div align="right">
-    <button class="btn btn-primary" onClick="location.href='{% url 'pstate-manage:provider-create' %}'" >Add</button>
+    <button class="btn btn-primary" onClick="location.href='{% url 'pstate-manage:provider-create' %}'" >{% trans 'Add' %}</button>
 </div>
 <table class="table table-striped table-bordered">
     <thead>
     <tr>
-        <th>ID</th>
-        <th>Provider name</th>
+        <th>{% trans 'ID' %}</th>
+        <th>{% trans 'Provider name' %}</th>
         <th></th>
         <th></th>
     </tr>
@@ -24,8 +25,8 @@
         <td>
             <a href="{% url 'pstate-manage:provider-detail' pk=provider.id %}">{{ provider.name }}</a>
         </td>
-        <td><button class="btn btn-info" onClick="location.href='{% url 'pstate-manage:provider-edit' pk=provider.id %}'">Edit</button></td>
-        <td><button class="btn btn-danger" onClick="location.href='{% url 'pstate-manage:provider-delete' pk=provider.id %}'">Delete</button></td>
+        <td><button class="btn btn-info" onClick="location.href='{% url 'pstate-manage:provider-edit' pk=provider.id %}'">{% trans 'Edit' %}</button></td>
+        <td><button class="btn btn-danger" onClick="location.href='{% url 'pstate-manage:provider-delete' pk=provider.id %}'">{% trans 'Delete' %}</button></td>
     </tr>
     {% endfor %}
     </tbody>

@@ -1,9 +1,10 @@
 {% extends 'adminlte/base.html' %}
+{% load i18n %}
 {% block title %}{% endblock %}
 {% block content %}{% load tz %}
-<h1>Destroy(Terraform)</h1>
+<h1>{% trans 'Destroy(Terraform)' %}</h1>
 <form action="" method="post">{% csrf_token %}
     {{ form.as_p }}
-    <input class="btn btn-danger" type="submit" value="Execute" />
+    <input class="btn btn-danger" type="submit" value="{% trans 'Execute' %}" />
 </form>
 {% endblock %}

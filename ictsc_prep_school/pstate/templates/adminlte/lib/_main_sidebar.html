@@ -1,64 +1,64 @@
 {% extends 'adminlte/lib/_main_sidebar.html' %}
+{% load i18n %}
 {% if request.user.is_authenticated %}
     {% block nav_links %}
     {% if request.user.is_staff %}
         <li>
             <a href="{% url 'pstate-manage:dashboard' %}">
-                <i class="fa fa-home"></i> <span>Home</span>
+                <i class="fa fa-home"></i> <span>{% trans 'Home' %}</span>
             </a>
         </li>
         <li>
             <a href="{% url 'pstate-manage:problem-list' %}">
-                <i class="fa fa-question"></i> <span>Problems</span>
+                <i class="fa fa-question"></i> <span>{% trans 'Problems' %}</span>
             </a>
         </li>
         <li>
             <a href="{% url 'pstate-manage:problemenvironment-list' %}">
-                <i class="fa fa-clone"></i> <span>ProblemEnvironments</span>
+                <i class="fa fa-clone"></i> <span>{% trans 'ProblemEnvironments' %}</span>
             </a>
         </li>
         <li>
             <a href="{% url 'pstate-manage:team-list' %}">
-                <i class="fa fa-users"></i> <span>Teams</span>
+                <i class="fa fa-users"></i> <span>{% trans 'Teams' %}</span>
             </a>
         </li>
     {% comment "Hidden participant" %}
     リリース当初はチーム単位の参加となるため、参加者を管理する機能は提供しない
         <li>
             <a href="{% url 'pstate-manage:participant-list' %}">
-                <i class="fa fa-user"></i> <span>Participants</span>
+                <i class="fa fa-user"></i> <span>{% trans 'Participants' %}</span>
             </a>
         </li>
     {% endcomment %}
         <li class="treeview">
-            <a href=""><i class="fa fa-gear"></i>Settings<i class="fa fa-angle-left pull-right"></i></a>
+            <a href=""><i class="fa fa-gear"></i>{% trans 'Settings' %}<i class="fa fa-angle-left pull-right"></i></a>
             <ul class="treeview-menu">
-                <li><a href="{% url 'pstate-manage:provider-list' %}"><i class="fa fa-cloud"></i>Provider</a></li>
-                <li><a href="{% url 'pstate-manage:attribute-list' %}"><i class="fa fa-tags"></i>Attribute</a></li>
+                <li><a href="{% url 'pstate-manage:provider-list' %}"><i class="fa fa-cloud"></i>{% trans 'Provider' %}</a></li>
+                <li><a href="{% url 'pstate-manage:attribute-list' %}"><i class="fa fa-tags"></i>{% trans 'Attribute' %}</a></li>
             </ul>
         </li>
     {% else %}
         <li>
             <a href="{% url 'pstate-user:dashboard' %}">
-                <i class="fa fa-home"></i> <span>Home</span>
+                <i class="fa fa-home"></i> <span>{% trans 'Home' %}</span>
             </a>
         </li>
         <li>
             <a href="{% url 'pstate-user:problem-list' %}">
-                <i class="fa fa-question"></i> <span>Problems</span>
+                <i class="fa fa-question"></i> <span>{% trans 'Problems' %}</span>
             </a>
         </li>
         <li>
             <a href="{% url 'pstate-user:problemenvironment-list' %}">
-                <i class="fa fa-clone"></i> <span>ProblemEnvironments</span>
+                <i class="fa fa-clone"></i> <span>{% trans 'ProblemEnvironments' %}</span>
             </a>
         </li>
         <li>
             <a href="{% url 'pstate-user:team-detail' %}">
-                <i class="fa fa-users"></i> <span>Team</span>
+                <i class="fa fa-users"></i> <span>{% trans 'Team' %}</span>
             </a>
         </li>
     {% endif %}
     {% endblock nav_links %}
-{% else %}
 {% endif %}

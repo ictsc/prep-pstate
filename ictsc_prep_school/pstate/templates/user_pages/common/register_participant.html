@@ -21,14 +21,14 @@
 <body class="hold-transition register-page">
 <div class="register-box">
     <div class="register-logo">
-        <a href="">ICTSC PREP SCHOOL</a>
+        <a href="">{% trans 'ICTSC PREP SCHOOL' %}</a>
     </div>
     <div class="register-box-body">
-        <p class="login-box-msg">Register a new participant</p>
+        <p class="login-box-msg">{% trans 'Register a new participant' %}</p>
         <form action="" method="post">{% csrf_token %}
             {{ form.as_p }}
             <div align="right">
-                <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+                <button type="submit" class="btn btn-primary btn-block btn-flat">{% trans 'Register' %}</button>
             </div>
         </form>
         <!--<a href="login.html" class="text-center">I already have a membership</a>-->

@@ -21,7 +21,7 @@
             <a href="{% url 'pstate-user:problemenvironment-detail' pk=problemenvironment.id %}">{{ problemenvironment.id }}</a>
         </td>
         <td>
-            {{ problemenvironment.state }}
+            {% trans problemenvironment.state %}
         </td>
         {% if request.user.is_team %}
         <td>

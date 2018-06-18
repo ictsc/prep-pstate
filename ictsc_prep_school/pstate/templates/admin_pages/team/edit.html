@@ -5,9 +5,9 @@
 <form action="" method="post">{% csrf_token %}
     {{ form.as_p }}
     <p>
-        <label for="id_password">Password:</label>
-        <a href="javascript:window.open('{% url 'pstate-manage:team-change_password' pk=team.id %}', 'yourWindowName', 'width=800,height=400');">Change password</a>
+        <label for="id_password">{% trans 'Password:' %}</label>
+        <a href="javascript:window.open('{% url 'pstate-manage:team-change_password' pk=team.id %}', 'yourWindowName', 'width=800,height=400');">{% trans 'Change password' %}</a>
     </p>
-    <input type="submit" class="btn btn-info" value="Update" />
+    <input type="submit" class="btn btn-info" value="{% trans 'Update' %}" />
 </form>
 {% endblock %}

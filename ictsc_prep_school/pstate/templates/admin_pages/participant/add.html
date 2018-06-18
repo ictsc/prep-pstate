@@ -3,11 +3,11 @@
 
 {% block title %}{% endblock %}
 {% block content %}{% load tz %}
-<h1>Add Participant</h1>
+<h1>{% trans 'Add Participant' %}</h1>
 <form action="" method="post">{% csrf_token %}
     {{ form.as_p }}
     <div align="right">
-        <input type="submit" class="btn btn-primary" value="Add" />
+        <input type="submit" class="btn btn-primary" value="{% trans 'Add' %}" />
     </div>
 </form>
 {% endblock %}

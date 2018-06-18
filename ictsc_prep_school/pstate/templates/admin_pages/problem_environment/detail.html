@@ -22,8 +22,8 @@
             <table class="table table-striped table-bordered">
                 <tbody>
                     <tr><th>{% trans 'ID' %}</th><td>{{ problemenvironment.id }}</td></tr>
-                    <tr><th>{% trans 'State' %}</th><td>{{ problemenvironment.state }}</td></tr>
-                    <tr><th>{% trans 'State(Terraform)' %}</th><td>{{ problemenvironment.environment.state }}</td></tr>
+                    <tr><th>{% trans 'State' %}</th><td>{% trans problemenvironment.state %}</td></tr>
+                    <tr><th>{% trans 'State(Terraform)' %}</th><td>{% trans problemenvironment.environment.state %}</td></tr>
                     <tr><th>{% trans 'Team' %}</th><td>{{ problemenvironment.team }}</td></tr>
                     <tr><th>{% trans 'Problem name' %}</th><td>{{ problemenvironment.problem.name }}</td></tr>
                     <tr><th>{% trans 'Problem name(For management)' %}</th><td>{{ problemenvironment.problem.display_name }}</td></tr>
@@ -58,8 +58,16 @@
                 <tr>
                     <td>{{ log.created_at | localtime }}</td>
                     <td>{{ log.message }}</td>
-                    <td>{{ log.before_state }}</td>
-                    <td>{{ log.after_state }}</td>
+                    {% if log.before_state is None %}
+                    <td></td>
+                    {% else %}
+                    <td>{% trans log.before_state %}</td>
+                    {% endif %}
+                    {% if log.after_state is None %}
+                    <td></td>
+                    {% else %}
+                    <td>{% trans log.after_state %}</td>
+                    {% endif %}
                 </tr>
                 {% endfor %}
                 </tbody>

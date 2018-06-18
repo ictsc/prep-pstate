@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-01 17:57+0900\n"
+"POT-Creation-Date: 2018-06-19 00:02+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,38 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+#: pstate/models/__init__.py:35
+msgid "IN_PREPARATION"
+msgstr "準備中"
+
+#: pstate/models/__init__.py:36
+msgid "READY"
+msgstr "準備完了"
+
+#: pstate/models/__init__.py:37
+msgid "IN_PROGRESS"
+msgstr "問題進行中"
+
+#: pstate/models/__init__.py:38
+msgid "FINISH"
+msgstr "終了"
+
+#: pstate/models/__init__.py:39
+msgid "WAITING_FOR_SCORING"
+msgstr "採点待ち"
+
+#: pstate/models/__init__.py:40
+msgid "SCORING_HAS_ENDED"
+msgstr "採点終了"
+
+#: pstate/models/__init__.py:41
+msgid "WAITING_FOR_DELETE"
+msgstr "削除待ち"
+
+#: pstate/models/__init__.py:42
+msgid "DELETED"
+msgstr "削除完了"
 
 #: pstate/templates/403.html:4 pstate/templates/403.html:9
 #: pstate/templates/404.html:4 pstate/templates/404.html:9
@@ -40,9 +72,9 @@ msgstr ""
 #: pstate/templates/admin_pages/participant/add.html:10
 #: pstate/templates/admin_pages/participant/index.html:8
 #: pstate/templates/admin_pages/problem/add.html:8
-#: pstate/templates/admin_pages/problem/detail.html:59
-#: pstate/templates/admin_pages/problem/detail.html:119
-#: pstate/templates/admin_pages/problem/detail.html:155
+#: pstate/templates/admin_pages/problem/detail.html:64
+#: pstate/templates/admin_pages/problem/detail.html:124
+#: pstate/templates/admin_pages/problem/detail.html:160
 #: pstate/templates/admin_pages/problem/index.html:8
 #: pstate/templates/admin_pages/problem_environment/add.html:9
 #: pstate/templates/admin_pages/setting/attribute/add.html:9
@@ -93,11 +125,11 @@ msgid "Are you sure you want to delete "
 msgstr "消去してもよろしいですか "
 
 #: pstate/templates/admin_pages/participant/detail.html:7
-#: pstate/templates/admin_pages/problem/detail.html:29
-#: pstate/templates/admin_pages/problem/detail.html:37
-#: pstate/templates/admin_pages/problem/detail.html:72
-#: pstate/templates/admin_pages/problem/detail.html:125
-#: pstate/templates/admin_pages/problem/detail.html:177
+#: pstate/templates/admin_pages/problem/detail.html:34
+#: pstate/templates/admin_pages/problem/detail.html:42
+#: pstate/templates/admin_pages/problem/detail.html:77
+#: pstate/templates/admin_pages/problem/detail.html:130
+#: pstate/templates/admin_pages/problem/detail.html:182
 #: pstate/templates/admin_pages/problem_environment/detail.html:8
 #: pstate/templates/admin_pages/setting/attribute/index.html:28
 #: pstate/templates/admin_pages/setting/provider/detail.html:8
@@ -108,9 +140,9 @@ msgid "Edit"
 msgstr "編集"
 
 #: pstate/templates/admin_pages/participant/detail.html:8
-#: pstate/templates/admin_pages/problem/detail.html:16
-#: pstate/templates/admin_pages/problem/detail.html:126
-#: pstate/templates/admin_pages/problem/detail.html:180
+#: pstate/templates/admin_pages/problem/detail.html:21
+#: pstate/templates/admin_pages/problem/detail.html:131
+#: pstate/templates/admin_pages/problem/detail.html:185
 #: pstate/templates/admin_pages/problem/index.html:31
 #: pstate/templates/admin_pages/problem_environment/detail.html:10
 #: pstate/templates/admin_pages/setting/attribute/index.html:29
@@ -122,11 +154,11 @@ msgstr "削除"
 
 #: pstate/templates/admin_pages/participant/detail.html:19
 #: pstate/templates/admin_pages/participant/index.html:13
-#: pstate/templates/admin_pages/problem/detail.html:41
-#: pstate/templates/admin_pages/problem/detail.html:90
+#: pstate/templates/admin_pages/problem/detail.html:46
+#: pstate/templates/admin_pages/problem/detail.html:95
 #: pstate/templates/admin_pages/problem/index.html:13
 #: pstate/templates/admin_pages/problem_environment/detail.html:24
-#: pstate/templates/admin_pages/problem_environment/detail.html:72
+#: pstate/templates/admin_pages/problem_environment/detail.html:80
 #: pstate/templates/admin_pages/problem_environment/index.html:10
 #: pstate/templates/admin_pages/setting/provider/detail.html:20
 #: pstate/templates/admin_pages/setting/provider/index.html:13
@@ -220,25 +252,27 @@ msgstr "問題の追加"
 msgid "Preview"
 msgstr "プレビュー"
 
-#: pstate/templates/admin_pages/problem/detail.html:12
+#: pstate/templates/admin_pages/problem/detail.html:13
+#: pstate/templates/admin_pages/problem/detail.html:16
 #: pstate/templates/admin_pages/problem/problem_environment_create_execute.html:5
 msgid "Test run"
 msgstr "テスト実行"
 
-#: pstate/templates/admin_pages/problem/detail.html:13
+#: pstate/templates/admin_pages/problem/detail.html:14
+#: pstate/templates/admin_pages/problem/detail.html:17
 msgid "Create problem environment"
 msgstr "問題環境の作成"
 
-#: pstate/templates/admin_pages/problem/detail.html:21
+#: pstate/templates/admin_pages/problem/detail.html:26
 #: pstate/templates/user_pages/problem/detail.html:12
 msgid "Problem sentence"
 msgstr "問題文"
 
-#: pstate/templates/admin_pages/problem/detail.html:24
+#: pstate/templates/admin_pages/problem/detail.html:29
 msgid "Problem info"
 msgstr "問題情報"
 
-#: pstate/templates/admin_pages/problem/detail.html:42
+#: pstate/templates/admin_pages/problem/detail.html:47
 #: pstate/templates/admin_pages/problem/index.html:14
 #: pstate/templates/admin_pages/problem_environment/detail.html:28
 #: pstate/templates/admin_pages/problem_environment/index.html:13
@@ -248,23 +282,23 @@ msgstr "問題情報"
 msgid "Problem name"
 msgstr "問題名"
 
-#: pstate/templates/admin_pages/problem/detail.html:43
+#: pstate/templates/admin_pages/problem/detail.html:48
 #: pstate/templates/admin_pages/problem/index.html:15
 #: pstate/templates/admin_pages/problem_environment/detail.html:29
 #: pstate/templates/admin_pages/problem_environment/index.html:14
 msgid "Problem name(For management)"
 msgstr "問題名(管理用)"
 
-#: pstate/templates/admin_pages/problem/detail.html:44
+#: pstate/templates/admin_pages/problem/detail.html:49
 #: pstate/templates/admin_pages/problem_environment/detail.html:30
-#: pstate/templates/admin_pages/problem_environment/detail.html:76
+#: pstate/templates/admin_pages/problem_environment/detail.html:84
 #: pstate/templates/admin_pages/problem_environment/index.html:15
 #: pstate/templates/user_pages/problem_environment/detail.html:23
 #: pstate/templates/user_pages/problem_environment/index.html:13
 msgid "Created At"
 msgstr "作成日時"
 
-#: pstate/templates/admin_pages/problem/detail.html:45
+#: pstate/templates/admin_pages/problem/detail.html:50
 #: pstate/templates/admin_pages/problem_environment/detail.html:31
 #: pstate/templates/admin_pages/problem_environment/index.html:16
 #: pstate/templates/user_pages/problem_environment/detail.html:24
@@ -272,52 +306,52 @@ msgstr "作成日時"
 msgid "Updated At"
 msgstr "更新日時"
 
-#: pstate/templates/admin_pages/problem/detail.html:46
+#: pstate/templates/admin_pages/problem/detail.html:51
 msgid "Start date"
 msgstr "開始日"
 
-#: pstate/templates/admin_pages/problem/detail.html:47
+#: pstate/templates/admin_pages/problem/detail.html:52
 msgid "End date"
 msgstr "終了日"
 
-#: pstate/templates/admin_pages/problem/detail.html:48
+#: pstate/templates/admin_pages/problem/detail.html:53
 msgid "Published"
 msgstr "公開状態"
 
-#: pstate/templates/admin_pages/problem/detail.html:78
-#: pstate/templates/admin_pages/problem/detail.html:91
+#: pstate/templates/admin_pages/problem/detail.html:83
+#: pstate/templates/admin_pages/problem/detail.html:96
 #: pstate/templates/admin_pages/setting/provider/detail.html:21
 #, fuzzy
 #| msgid "TeamName"
 msgid "Name"
 msgstr "チーム名"
 
-#: pstate/templates/admin_pages/problem/detail.html:79
+#: pstate/templates/admin_pages/problem/detail.html:84
 #, fuzzy
 #| msgid "TeamName"
 msgid "FileName"
 msgstr "チーム名"
 
-#: pstate/templates/admin_pages/problem/detail.html:92
+#: pstate/templates/admin_pages/problem/detail.html:97
 #: pstate/templates/admin_pages/setting/provider/detail.html:22
 msgid "ProviderName"
 msgstr ""
 
-#: pstate/templates/admin_pages/problem/detail.html:99
-#: pstate/templates/admin_pages/problem/detail.html:161
+#: pstate/templates/admin_pages/problem/detail.html:104
+#: pstate/templates/admin_pages/problem/detail.html:166
 #: pstate/templates/admin_pages/setting/attribute/index.html:13
 #: pstate/templates/admin_pages/setting/provider/detail.html:30
 msgid "Key"
 msgstr ""
 
-#: pstate/templates/admin_pages/problem/detail.html:100
-#: pstate/templates/admin_pages/problem/detail.html:162
+#: pstate/templates/admin_pages/problem/detail.html:105
+#: pstate/templates/admin_pages/problem/detail.html:167
 #: pstate/templates/admin_pages/setting/attribute/index.html:14
 #: pstate/templates/admin_pages/setting/provider/detail.html:31
 msgid "Value"
 msgstr ""
 
-#: pstate/templates/admin_pages/problem/detail.html:157
+#: pstate/templates/admin_pages/problem/detail.html:162
 msgid "Variables"
 msgstr ""
 
@@ -412,15 +446,15 @@ msgstr "前の状態"
 msgid "After state"
 msgstr "後の状態"
 
-#: pstate/templates/admin_pages/problem_environment/detail.html:73
+#: pstate/templates/admin_pages/problem_environment/detail.html:81
 msgid "Return code"
 msgstr "終了ステータス"
 
-#: pstate/templates/admin_pages/problem_environment/detail.html:74
+#: pstate/templates/admin_pages/problem_environment/detail.html:82
 msgid "Std out"
 msgstr "標準出力"
 
-#: pstate/templates/admin_pages/problem_environment/detail.html:75
+#: pstate/templates/admin_pages/problem_environment/detail.html:83
 msgid "Std err"
 msgstr "標準エラー出力"
 
@@ -557,6 +591,50 @@ msgstr "問題終了"
 #: pstate/templates/user_pages/problem_environment/detail.html:13
 msgid "Log"
 msgstr "ログ"
+
+#: terraform_manager/models.py:13 terraform_manager/models.py:27
+msgid "IN_WAITING_FOR_START"
+msgstr "問題環境作成開始待ち"
+
+#: terraform_manager/models.py:14
+msgid "IN_FILE_COPYING"
+msgstr "ファイルコピー中"
+
+#: terraform_manager/models.py:15
+msgid "IN_INITIALIZE"
+msgstr "コマンド実行中(terraform init)"
+
+#: terraform_manager/models.py:16
+msgid "INITIALIZED"
+msgstr "コマンド実行完了(terraform init)"
+
+#: terraform_manager/models.py:17
+msgid "IN_PLANNING"
+msgstr "コマンド実行中(terraform plan)"
+
+#: terraform_manager/models.py:18
+msgid "PLANNED"
+msgstr "コマンド完了(terraform plan)"
+
+#: terraform_manager/models.py:19
+msgid "IN_APPLYING"
+msgstr "コマンド実行中(terraform apply)"
+
+#: terraform_manager/models.py:20
+msgid "APPLIED"
+msgstr "コマンド実行完了(terraform apply)"
+
+#: terraform_manager/models.py:21
+msgid "IN_DESTROYING"
+msgstr "コマンド実行中(terraform destroy)"
+
+#: terraform_manager/models.py:22
+msgid "DESTROYED"
+msgstr "コマンド完了(terraform destroy)"
+
+#: terraform_manager/models.py:23
+msgid "FAILED"
+msgstr "失敗"
 
 #, fuzzy
 #~| msgid "Created At"

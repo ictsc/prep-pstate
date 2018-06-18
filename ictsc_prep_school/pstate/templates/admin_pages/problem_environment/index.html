@@ -23,7 +23,7 @@
             <a href="{% url 'pstate-manage:problemenvironment-detail' pk=problemenvironment.id %}">{{ problemenvironment.id }}</a>
         </td>
         <td>
-            {{ problemenvironment.state }}
+            {% trans problemenvironment.state %}
         </td>
         <td>
             {{ problemenvironment.team }}

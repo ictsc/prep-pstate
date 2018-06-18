@@ -1,6 +1,7 @@
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 from terraform_manager.models import TerraformFile, Environment
 
@@ -31,14 +32,14 @@ class Problem(TemplateModel):
 
 class ProblemEnvironment(TemplateModel):
     STATE_CHOICES = (
-        ('IN_PREPARATION', 'IN_PREPARATION'),
-        ('READY', 'READY'),
-        ('IN_PROGRESS', 'IN_PROGRESS'),
-        ('FINISH', 'FINISH'),
-        ('WAITING_FOR_SCORING', 'WAITING_FOR_SCORING'),
-        ('SCORING_HAS_ENDED', 'SCORING_HAS_ENDED'),
-        ('WAITING_FOR_DELETE', 'WAITING_FOR_DELETE'),
-        ('DELETED', 'DELETED'),
+        ('IN_PREPARATION', _('IN_PREPARATION')),
+        ('READY', _('READY')),
+        ('IN_PROGRESS', _('IN_PROGRESS')),
+        ('FINISH', _('FINISH')),
+        ('WAITING_FOR_SCORING', _('WAITING_FOR_SCORING')),
+        ('SCORING_HAS_ENDED', _('SCORING_HAS_ENDED')),
+        ('WAITING_FOR_DELETE', _('WAITING_FOR_DELETE')),
+        ('DELETED', _('DELETED')),
 
     )
 

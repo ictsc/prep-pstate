@@ -1,6 +1,7 @@
 import uuid
 
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class Environment(models.Model):
@@ -9,21 +10,21 @@ class Environment(models.Model):
     """
 
     STATE_CHOICES = (
-        ('IN_WAITING_FOR_START', 'IN_WAITING_FOR_START'),
-        ('IN_FILE_COPYING', 'IN_FILE_COPYING'),
-        ('IN_INITIALIZE', 'IN_INITIALIZE'),
-        ('INITIALIZED', 'INITIALIZED'),
-        ('IN_PLANNING', 'IN_PLANNING'),
-        ('PLANNED', 'PLANNED'),
-        ('IN_APPLYING', 'IN_APPLYING'),
-        ('APPLIED', 'APPLIED'),
-        ('IN_DESTROYING', 'IN_DESTROYING'),
-        ('DESTROYED', 'DESTROYED'),
-        ('FAILED', 'FAILED'),
+        ('IN_WAITING_FOR_START', _('IN_WAITING_FOR_START')),
+        ('IN_FILE_COPYING', _('IN_FILE_COPYING')),
+        ('IN_INITIALIZE', _('IN_INITIALIZE')),
+        ('INITIALIZED', _('INITIALIZED')),
+        ('IN_PLANNING', _('IN_PLANNING')),
+        ('PLANNED', _('PLANNED')),
+        ('IN_APPLYING', _('IN_APPLYING')),
+        ('APPLIED', _('APPLIED')),
+        ('IN_DESTROYING', _('IN_DESTROYING')),
+        ('DESTROYED', _('DESTROYED')),
+        ('FAILED', _('FAILED')),
     )
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     terraform_file = models.ForeignKey('TerraformFile', unique=False, on_delete=False)
-    state = models.CharField(max_length=20, choices=STATE_CHOICES, default='IN_WAITING_FOR_START')
+    state = models.CharField(max_length=20, choices=STATE_CHOICES, default=_('IN_WAITING_FOR_START'))
     is_locked = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

@@ -21,7 +21,7 @@ class Problem(TemplateModel):
     start_date = models.DateTimeField("問題公開日時", blank=True, null=True)
     end_date = models.DateTimeField("問題公開終了日時", blank=True, null=True)
     is_enabled = models.BooleanField("公開フラグ", default=False)
-    terraform_file_id = models.ForeignKey(TerraformFile, on_delete=False, null=True)
+    terraform_file_id = models.ForeignKey(TerraformFile, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return '{} : {}'.format(self.name, self.display_name)
@@ -66,10 +66,10 @@ class ProblemEnvironment(TemplateModel):
     vnc_server_password = models.CharField(max_length=50, blank=True, null=True, default=generate_vnc_server_password)
     is_enabled = models.BooleanField("有効フラグ", default=False)
     state = models.CharField(choices=STATE_CHOICES, default='IN_PREPARATION', max_length=100)
-    team = models.ForeignKey("Team", on_delete=False, blank=True, null=True)
-    participant = models.ForeignKey("Participant", on_delete=False, blank=True, null=True)
+    team = models.ForeignKey("Team", on_delete=models.PROTECT, blank=True, null=True)
+    participant = models.ForeignKey("Participant", on_delete=models.PROTECT, blank=True, null=True)
     environment = models.ForeignKey(Environment, on_delete=models.CASCADE, null=True)
-    problem = models.ForeignKey(Problem, on_delete=False)
+    problem = models.ForeignKey(Problem, on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):
         problem_environment = ProblemEnvironment.objects.filter(id=self.id)
@@ -108,7 +108,7 @@ class Team(User):
 
 class Participant(User):
     assign_team = models.ForeignKey("Team", verbose_name="所属チーム", related_name="participant",
-                                    help_text="所属するチームを選択してください", blank=True, null=True, on_delete=False)
+                                    help_text="所属するチームを選択してください", blank=True, null=True, on_delete=models.SET_NULL)
 
     class Meta:
         verbose_name = 'Participant'
@@ -117,6 +117,6 @@ class Participant(User):
 
 class Grade(TemplateModel):
     score = models.FloatField()
-    team = models.ForeignKey("Team", blank=True, null=True, on_delete=False)
-    participant = models.ForeignKey(Participant, blank=True, null=True, on_delete=False)
-    problem = models.ForeignKey(Problem, on_delete=False)
+    team = models.ForeignKey("Team", blank=True, null=True, on_delete=models.CASCADE)
+    participant = models.ForeignKey(Participant, blank=True, null=True, on_delete=models.CASCADE)
+    problem = models.ForeignKey(Problem, on_delete=models.CASCADE)

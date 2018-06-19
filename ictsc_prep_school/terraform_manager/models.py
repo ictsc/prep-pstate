@@ -23,7 +23,7 @@ class Environment(models.Model):
         ('FAILED', _('FAILED')),
     )
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    terraform_file = models.ForeignKey('TerraformFile', unique=False, on_delete=False)
+    terraform_file = models.ForeignKey('TerraformFile', unique=False, on_delete=models.SET_NULL, null=True)
     state = models.CharField(max_length=20, choices=STATE_CHOICES, default=_('IN_WAITING_FOR_START'))
     is_locked = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -114,7 +114,7 @@ class TerraformFile(models.Model):
     body = models.TextField()
     file_name = models.CharField(max_length=200)
     variables = models.ManyToManyField('Variable', blank=True)
-    provider = models.ForeignKey('Provider', on_delete=False)
+    provider = models.ForeignKey('Provider', on_delete=models.PROTECT)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

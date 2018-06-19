@@ -278,7 +278,7 @@ def prepare_environment(environment_id, terraform_file_id):
     # ShellScriptのコピー
     if tf.has_shell_script():
         for script in tf.shell_script.all():
-            f = open(environment_dir + "/" + '{}.sh'.format(script.file_name), 'wb')
+            f = open(environment_dir + "/" + '{}'.format(script.file_name), 'wb')
             f.write(script.body.encode('utf-8'))
             f.close()
 

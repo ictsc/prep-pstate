@@ -68,7 +68,7 @@ class ProblemEnvironment(TemplateModel):
     state = models.CharField(choices=STATE_CHOICES, default='IN_PREPARATION', max_length=100)
     team = models.ForeignKey("Team", on_delete=models.PROTECT, blank=True, null=True)
     participant = models.ForeignKey("Participant", on_delete=models.PROTECT, blank=True, null=True)
-    environment = models.ForeignKey(Environment, on_delete=models.CASCADE, null=True)
+    environment = models.ForeignKey(Environment, on_delete=models.CASCADE, null=True, related_name='problem_environment')
     problem = models.ForeignKey(Problem, on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):

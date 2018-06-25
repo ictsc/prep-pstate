@@ -45,6 +45,7 @@ def change_team_password(request, pk):
         user = Team.objects.get(id=pk)
         form = NoOlbPasswordCheckPasswordChangeForm(user, request.POST)
         if form.is_valid():
+            form.save()
             messages.success(request, 'Your password was successfully updated!')
             return redirect('pstate-manage:team-change_password', pk=pk)
         else:

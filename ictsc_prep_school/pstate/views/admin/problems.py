@@ -55,3 +55,8 @@ class ProblemDeleteView(LoginRequiredAndPermissionRequiredMixin, DeleteView):
     model = Problem
     template_name = 'admin_pages/common/delete.html'
     success_url = '/manage/problems/'
+
+
+class ProblemPreviewView(LoginRequiredAndPermissionRequiredMixin, DetailView):
+    model = Problem
+    template_name = 'admin_pages/problem/preview.html'

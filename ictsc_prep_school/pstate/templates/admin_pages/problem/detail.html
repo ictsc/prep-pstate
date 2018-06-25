@@ -8,7 +8,7 @@
 <script src="{% static "ace/src/cobalt.js" %}" type="text/javascript" charset="utf-8"></script>
 <h1>{{ problem.display_name }}</h1>
 <div align="right">
-    <button class="btn btn-info" onClick="location.href=''">{% trans 'Preview' %}</button>
+    <button class="btn btn-info" onClick="location.href='{% url 'pstate-manage:problem-preview' pk=problem.id %}'">{% trans 'Preview' %}</button>
     {% if problem.has_terraform_file %}
     <button class="btn btn-info" onClick="location.href='{% url 'pstate-manage:problems-problemenvironment-test_run' pk=problem.id %}'">{% trans 'Test run' %}</button>
     <button class="btn btn-info" onClick="location.href='{% url 'pstate-manage:problems-problemenvironment-create' pk=problem.id %}'">{% trans 'Create problem environment' %}</button>

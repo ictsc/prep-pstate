@@ -1,0 +1,18 @@
+{% extends 'adminlte/base.html' %}
+{% load i18n %}
+{% block title %}{% endblock %}
+{% block content %}{% load tz %}
+<h1>{{ problem.display_name }}</h1>
+<div class="problem-body">
+    <div class="nav-tabs-custom">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab_1" data-toggle="tab">{% trans 'Problem sentence' %}</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="tab_1">
+                {{ problem.description|linebreaks }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

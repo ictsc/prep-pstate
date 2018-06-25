@@ -19,6 +19,9 @@ class ProblemListView(LoginRequiredAndPermissionRequiredMixin, ListView):
     permission_required = 'user.is_staff'
     raise_exception = True
 
+    def get_queryset(self):
+        return super().get_queryset().order_by('id')
+
 
 class ProblemDetailView(LoginRequiredAndPermissionRequiredMixin, DetailView):
     model = Problem

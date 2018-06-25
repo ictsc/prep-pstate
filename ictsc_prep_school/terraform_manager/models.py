@@ -29,6 +29,10 @@ class Environment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    @property
+    def sorted_log_set(self):
+        return self.logs.order_by('-created_at')
+
 
 class Log(models.Model):
     """

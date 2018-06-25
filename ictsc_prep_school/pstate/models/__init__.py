@@ -80,6 +80,10 @@ class ProblemEnvironment(TemplateModel):
                                   problem_environment=self).save()
         super(ProblemEnvironment, self).save(*args, **kwargs)
 
+    @property
+    def sorted_log_set(self):
+        return self.logs.order_by('-created_at')
+
 
 class ProblemEnvironmentLog(TemplateModel):
     message = models.TextField(blank=True, null=True)

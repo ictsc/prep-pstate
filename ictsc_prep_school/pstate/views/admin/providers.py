@@ -16,6 +16,9 @@ class ProviderListView(LoginRequiredAndPermissionRequiredMixin, ListView):
     paginate_by = 100
     template_name = 'admin_pages/setting/provider/index.html'
 
+    def get_queryset(self):
+        return super().get_queryset().order_by('id')
+
 
 class ProviderDetailView(LoginRequiredAndPermissionRequiredMixin, DetailView):
     model = Provider
@@ -47,6 +50,9 @@ class AttributeListView(LoginRequiredAndPermissionRequiredMixin, ListView):
     model = Attribute
     paginate_by = 100
     template_name = 'admin_pages/setting/attribute/index.html'
+
+    def get_queryset(self):
+        return super().get_queryset().order_by('id')
 
 
 class AttributeUpdateView(LoginRequiredAndPermissionRequiredMixin, UpdateView):

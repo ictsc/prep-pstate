@@ -7,4 +7,5 @@ def index(request):
         else:
             return render(request, 'user_pages/index.html')
     from django.http import HttpResponseRedirect
-    return HttpResponseRedirect('/auth/login/')
+    from django.conf import settings
+    return HttpResponseRedirect(settings.LOGIN_URL)

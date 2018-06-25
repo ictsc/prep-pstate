@@ -46,6 +46,9 @@ class ProblemEnvironmentListView(LoginRequiredAndPermissionRequiredMixin, ListVi
     paginate_by = 15
     template_name = 'admin_pages/problem_environment/index.html'
 
+    def get_queryset(self):
+        return super().get_queryset().order_by('id')
+
 
 class ProblemEnvironmentDetailView(LoginRequiredAndPermissionRequiredMixin, DetailView):
     model = ProblemEnvironment

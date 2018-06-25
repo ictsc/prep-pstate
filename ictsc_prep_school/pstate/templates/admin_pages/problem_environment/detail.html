@@ -54,7 +54,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for log in problemenvironment.logs.all %}
+                {% for log in problemenvironment.sorted_log_set.all %}
                 <tr>
                     <td>{{ log.created_at | localtime }}</td>
                     <td>{{ log.message }}</td>
@@ -85,7 +85,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for log in problemenvironment.environment.logs.all %}
+                {% for log in problemenvironment.environment.sorted_log_set.all %}
                 <tr>
                     <td>{{ log.id }}</td>
                     <td>{{ log.return_code }}</td>

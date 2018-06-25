@@ -16,6 +16,9 @@ class TeamListView(LoginRequiredAndPermissionRequiredMixin, ListView):
     paginate_by = 100
     template_name = 'admin_pages/team/index.html'
 
+    def get_queryset(self):
+        return super().get_queryset().order_by('id')
+
 
 class TeamDetailView(LoginRequiredAndPermissionRequiredMixin, DetailView):
     model = Team

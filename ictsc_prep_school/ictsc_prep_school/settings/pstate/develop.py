@@ -5,8 +5,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'terraform_manager2',
         'USER': 'terraform',
-        'PASSWORD': '',
-        'HOST': 'db.prep-dev.icttoracon.net',
+        'PASSWORD': 'terraform',
+        'HOST': '163.43.30.30',
         'PORT': '5432',
     }
 }

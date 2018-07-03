@@ -11,4 +11,4 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/root/volume/kong"
+    path: "/root/volume/kong/ssl"

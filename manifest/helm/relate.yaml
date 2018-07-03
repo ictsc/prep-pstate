@@ -29,6 +29,16 @@ spec:
     - name: relate
       containerPort: 7777
       protocol: TCP
+    volumeMounts:
+    - mountPath: "/var"
+      name: pvc-relate
+    #- mountPath: "/relate-for-ictsc"
+    #  name: pvc-relate
+  volumes:
+    - name: pvc-relate
+      persistentVolumeClaim:
+       claimName: pvc-relate
+
 
 ---
 # Source: relate/templates/relate-documentation-deployment.yaml
@@ -100,4 +110,37 @@ spec:
     - name: relate-static
       containerPort: 80
       protocol: TCP
+---
+# relate PV
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-relate
+  labels:
+    volume: relate
+spec:
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: manual
+  hostPath:
+    path: "/var/opt/relate"
 
+---
+# relate PVC
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-relate
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: manual
+  selector:
+    matchLabels:
+      volume: relate

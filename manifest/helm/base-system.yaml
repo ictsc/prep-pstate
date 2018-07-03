@@ -1,4 +1,18 @@
 ---
+# Source: base-system/templates/kong-configMap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kong-config
+data:
+  kong.conf: |-
+    proxy_listen = 0.0.0.0:80, 0.0.0.0:443 ssl
+    admin_listen = 0.0.0.0:8001, 0.0.0.0:8444 ssl
+    ssl_cert = /var/ssl/cert.pem                     # The absolute path to the SSL certificate for
+    ssl_cert_key = /var/ssl/privkey.pem                # The absolute path to the SSL key for
+    
+
+---
 # Source: base-system/templates/kong-pv.yaml
 kind: PersistentVolume
 apiVersion: v1
@@ -13,7 +27,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/root/volume/kong"
+    path: "/root/volume/kong/ssl"
 
 ---
 # Source: base-system/templates/postgresql-pv.yaml
@@ -128,6 +142,9 @@ spec:
     - name: kong-pv-storage
       persistentVolumeClaim:
         claimName: kong-pv-claim
+    - name: kong-config
+      configMap:
+        name: kong-config
   containers:
   - name: kong
     image: kong:0.13.1
@@ -158,6 +175,8 @@ spec:
       protocol: TCP
     volumeMounts:
       - mountPath: "/etc/kong"
+        name: kong-config
+      - mountPath: "/var/ssl"
         name: kong-pv-storage
   initContainers:
   - name: init-kong
@@ -172,6 +191,8 @@ spec:
     command: [ "/bin/sh", "-c", "sleep 15 && kong migrations up" ]
     volumeMounts:
       - mountPath: "/etc/kong"
+        name: kong-config
+      - mountPath: "/var/ssl"
         name: kong-pv-storage
 
 ---

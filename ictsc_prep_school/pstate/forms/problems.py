@@ -44,3 +44,11 @@ class ProblemDescriptionUpdateForm(forms.ModelForm):
         widgets = {
             'description': forms.Textarea(attrs={'class': "form-control"}),
         }
+
+
+class ProblemStartForm(forms.Form):
+    pass
+
+
+class ProblemEndForm(forms.Form):
+    pass

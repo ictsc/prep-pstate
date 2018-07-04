@@ -11,7 +11,11 @@
     <button class="btn btn-info" onClick="location.href='{% url 'pstate-manage:problem-preview' pk=problem.id %}'">{% trans 'Preview' %}</button>
     {% if problem.has_terraform_file %}
     <button class="btn btn-info" onClick="location.href='{% url 'pstate-manage:problems-problemenvironment-test_run' pk=problem.id %}'">{% trans 'Test run' %}</button>
+    {% if problem.is_enabled %}
     <button class="btn btn-info" onClick="location.href='{% url 'pstate-manage:problems-problemenvironment-create' pk=problem.id %}'">{% trans 'Create problem environment' %}</button>
+    {% else %}
+    <button class="btn btn-info" disabled onClick="location.href='{% url 'pstate-manage:problems-problemenvironment-create' pk=problem.id %}'">{% trans 'Create problem environment' %}</button>
+    {% endif %}
     {% else %}
     <button class="btn btn-info" disabled onClick="location.href='{% url 'pstate-manage:problems-problemenvironment-test_run' pk=problem.id %}'">{% trans 'Test run' %}</button>
     <button class="btn btn-info" disabled onClick="location.href='{% url 'pstate-manage:problems-problemenvironment-create' pk=problem.id %}'">{% trans 'Create problem environment' %}</button>

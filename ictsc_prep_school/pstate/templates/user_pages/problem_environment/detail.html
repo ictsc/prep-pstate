@@ -4,7 +4,11 @@
 {% block content %}{% load tz %}
 <h1>{{ problemenvironment.id }}</h1>
 <div align="right">
-    <button class="btn btn-danger" onClick="" >{% trans 'Finish' %}</button>
+    {% if problemenvironment.state == "READY" %}
+    <button class="btn btn-danger" onClick="location.href='{% url 'pstate-user:problemenvironment-start' pk=problemenvironment.id %}'" >{% trans 'Start' %}</button>
+    {% elif problemenvironment.state == "IN_PROGRESS" %}
+    <button class="btn btn-danger" onClick="location.href='{% url 'pstate-user:problemenvironment-end' pk=problemenvironment.id %}'" >{% trans 'ProblemEnd' %}</button>
+    {% endif %}
 </div>
 <div class="nav-tabs-custom">
     <ul class="nav nav-tabs">

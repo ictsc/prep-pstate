@@ -1,0 +1,11 @@
+{% extends 'adminlte/base.html' %}
+{% load i18n %}
+{% block title %}{% endblock %}
+{% block content %}{% load tz %}
+<h1></h1>
+問題を開始する場合は、問題開始ボタンをクリックしてください。
+<form action="" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input class="btn btn-danger" type="submit" value="{% trans 'Start' %}" />
+</form>
+{% endblock %}

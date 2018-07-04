@@ -97,8 +97,18 @@ class ProblemStartView(LoginRequiredMixin, FormView):
     success_url = "/user/problem_environments/"
 
     def form_valid(self, form):
-        # TODO: ログインしているユーザでpostしているかを確認する.
         problem_environment = ProblemEnvironment.objects.get(id=self.kwargs['pk'])
+        if self.request.user.is_team:
+            from pstate.models import Team
+            team = Team.objects.get(id=self.request.user.id)
+            if problem_environment.team != team:
+                return HttpResponseRedirect(self.success_url + str(self.kwargs['pk']))
+        else:
+            from pstate.models import Participant
+            participant = Participant.objects.get(id=self.request.user.id)
+            if problem_environment.participant != participant:
+                return HttpResponseRedirect(self.success_url + str(self.kwargs['pk']))
+
         problem_environment.state = "IN_PROGRESS"
         problem_environment.save(message="To start solving problems")
         return HttpResponseRedirect(self.success_url + str(self.kwargs['pk']))
@@ -110,8 +120,18 @@ class ProblemEndView(LoginRequiredMixin, FormView):
     success_url = "/user/problem_environments/"
 
     def form_valid(self, form):
-        # TODO: ログインしているユーザでpostしているかを確認する.
         problem_environment = ProblemEnvironment.objects.get(id=self.kwargs['pk'])
+        if self.request.user.is_team:
+            from pstate.models import Team
+            team = Team.objects.get(id=self.request.user.id)
+            if problem_environment.team != team:
+                return HttpResponseRedirect(self.success_url + str(self.kwargs['pk']))
+        else:
+            from pstate.models import Participant
+            participant = Participant.objects.get(id=self.request.user.id)
+            if problem_environment.participant != participant:
+                return HttpResponseRedirect(self.success_url + str(self.kwargs['pk']))
+
         problem_environment.state = "FINISH"
         problem_environment.save(message="Finish solving the problem")
         return HttpResponseRedirect(self.success_url + str(self.kwargs['pk']))

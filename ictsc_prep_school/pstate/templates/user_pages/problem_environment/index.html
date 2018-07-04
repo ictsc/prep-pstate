@@ -8,7 +8,6 @@
     <tr>
         <th>{% trans 'ID' %}</th>
         <th>{% trans 'State' %}</th>
-        <th>{% trans 'Team' %}</th>
         <th>{% trans 'Problem name' %}</th>
         <th>{% trans 'Created At' %}</th>
         <th>{% trans 'Updated At' %}</th>
@@ -23,17 +22,8 @@
         <td>
             {% trans problemenvironment.state %}
         </td>
-        {% if request.user.is_team %}
         <td>
-            {{ problemenvironment.team }}
-        </td>
-        {% else %}
-        <td>
-            {{ problemenvironment.participant }}
-        </td>
-        {% endif %}
-        <td>
-            {{ problemenvironment.problem.display_name }}
+            <a href="{% url 'pstate-user:problem-detail' pk=problemenvironment.problem.id %}">{{ problemenvironment.problem.display_name }}</a>
         </td>
         <td>
             {{ problemenvironment.created_at | localtime }}

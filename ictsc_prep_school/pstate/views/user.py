@@ -67,10 +67,16 @@ class ProblemEnvironmentListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         if self.request.user.is_team:
             from pstate.models import Team
-            return ProblemEnvironment.objects.filter(team=Team.objects.get(id=self.request.user.id))
+            return ProblemEnvironment.objects.filter(team=Team.objects.get(id=self.request.user.id),
+                                                     is_enabled=True,
+                                                     state='READY',
+                                                     problem__is_enabled=True)
         else:
             from pstate.models import Participant
-            return ProblemEnvironment.objects.filter(participant=Participant.objects.get(id=self.request.user.id))
+            return ProblemEnvironment.objects.filter(participant=Participant.objects.get(id=self.request.user.id),
+                                                     is_enabled=True,
+                                                     state='READY',
+                                                     problem__is_enabled=True)
 
 
 class ProblemEnvironmentDetailView(LoginRequiredMixin, DetailView):

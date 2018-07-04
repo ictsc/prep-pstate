@@ -18,8 +18,7 @@
                 <tbody>
                     <tr><th>{% trans 'ID' %}</th><td>{{ problemenvironment.id }}</td></tr>
                     <tr><th>{% trans 'State' %}</th><td>{% trans problemenvironment.state %}</td></tr>
-                    <tr><th>{% trans 'Team' %}</th><td>{{ problemenvironment.team }}</td></tr>
-                    <tr><th>{% trans 'Problem name' %}</th><td>{{ problemenvironment.problem.display_name }}</td></tr>
+                    <tr><th>{% trans 'Problem name' %}</th><td><a href="{% url 'pstate-user:problem-detail' pk=problemenvironment.problem.id %}">{{ problemenvironment.problem.display_name }}</a></td></tr>
                     <tr><th>{% trans 'Created At' %}</th><td>{{ problemenvironment.created_at | localtime }}</td></tr>
                     <tr><th>{% trans 'Updated At' %}</th><td>{{ problemenvironment.updated_at | localtime }}</td></tr>
                 </tbody>

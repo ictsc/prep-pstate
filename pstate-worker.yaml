@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pstate-worker
+  labels:
+    app: pstate-worker
+spec:
+  containers:
+  - name: pstate-worker
+    image: terraform-manager-worker:20180705

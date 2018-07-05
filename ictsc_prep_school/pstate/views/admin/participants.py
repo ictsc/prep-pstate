@@ -8,7 +8,7 @@ from pstate.views.admin import LoginRequiredAndPermissionRequiredMixin
 class ParticipantCreateView(LoginRequiredAndPermissionRequiredMixin, CreateView):
     form_class = ParticipantForm
     template_name = 'admin_pages/participant/add.html'
-    success_url = '/manage/participants/'
+    success_url = '/pstate/manage/participants/'
 
 
 class ParticipantListView(LoginRequiredAndPermissionRequiredMixin, ListView):
@@ -26,10 +26,10 @@ class ParticipantUpdateView(LoginRequiredAndPermissionRequiredMixin, UpdateView)
     model = Participant
     form_class = ParticipantUpdateForm
     template_name = 'admin_pages/participant/edit.html'
-    success_url = '/manage/participants/'
+    success_url = '/pstate/manage/participants/'
 
 
 class ParticipantDeleteView(LoginRequiredAndPermissionRequiredMixin, DeleteView):
     model = Participant
     template_name = 'admin_pages/common/delete.html'
-    success_url = '/manage/participants/'
+    success_url = '/pstate/manage/participants/'

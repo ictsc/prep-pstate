@@ -10,7 +10,7 @@ from pstate.views.admin import LoginRequiredAndPermissionRequiredMixin
 class ProblemEnvironmentCreateView(LoginRequiredAndPermissionRequiredMixin, CreateView):
     form_class = ProblemEnvironmentForm
     template_name = 'admin_pages/common/add.html'
-    success_url = "/manage/problem_environments/"
+    success_url = "/pstate/manage/problem_environments/"
 
     def form_valid(self, form):
         problem = Problem.objects.get(id=self.kwargs['pk'])
@@ -60,7 +60,7 @@ class ProblemEnvironmentUpdateView(LoginRequiredAndPermissionRequiredMixin, Upda
     model = ProblemEnvironment
     form_class = ProblemEnvironmentUpdateForm
     template_name = 'admin_pages/common/edit.html'
-    success_url = '/manage/problem_environments/'
+    success_url = '/pstate/manage/problem_environments/'
 
     def get_success_url(self, **kwargs):
         return self.success_url + str(self.object.id)
@@ -69,13 +69,13 @@ class ProblemEnvironmentUpdateView(LoginRequiredAndPermissionRequiredMixin, Upda
 class ProblemEnvironmentDeleteView(LoginRequiredAndPermissionRequiredMixin, DeleteView):
     model = ProblemEnvironment
     template_name = 'admin_pages/common/delete.html'
-    success_url = '/manage/problem_environments/'
+    success_url = '/pstate/manage/problem_environments/'
 
 
 class ProblemEnvironmentTestRunExecuteView(LoginRequiredAndPermissionRequiredMixin, FormView):
     template_name = 'admin_pages/problem/problem_environment_create_execute.html'
     form_class = ProblemEnvironmentCreateExecuteForm
-    success_url = "/manage/problem_environments/"
+    success_url = "/pstate/manage/problem_environments/"
 
     def form_valid(self, form):
         problem = Problem.objects.get(id=self.kwargs['pk'])
@@ -109,7 +109,7 @@ class ProblemEnvironmentTestRunExecuteView(LoginRequiredAndPermissionRequiredMix
 class ProblemEnvironmentCreateExecuteView(LoginRequiredAndPermissionRequiredMixin, FormView):
     template_name = 'admin_pages/problem/problem_environment_create_execute.html'
     form_class = ProblemEnvironmentCreateExecuteForm
-    success_url = "/manage/problems/"
+    success_url = "/pstate/manage/problems/"
 
     def form_valid(self, form):
         problem = Problem.objects.get(id=self.kwargs['pk'])
@@ -138,7 +138,7 @@ class ProblemEnvironmentCreateExecuteView(LoginRequiredAndPermissionRequiredMixi
 class ProblemEnvironmentDestroyView(LoginRequiredAndPermissionRequiredMixin, FormView):
     template_name = 'admin_pages/problem/problem_environment_destroy_execute.html'
     form_class = ProblemEnvironmentDestroyExecuteForm
-    success_url = "/manage/problem_environments/"
+    success_url = "/pstate/manage/problem_environments/"
 
     def form_valid(self, form):
         problem_environment = ProblemEnvironment.objects.get(id=self.kwargs['pk'])

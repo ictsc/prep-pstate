@@ -10,17 +10,18 @@ from pstate.views.admin.registers import ParticipantRegisterView, TeamRegisterVi
 
 urlpatterns = [
     path('', index, name='index'),
+    path('pstate/', index, name='index'),
     # Django admin
-    path('admin/', admin.site.urls),
+    path('pstate/admin/', admin.site.urls),
     # 管理者ページ
-    path('manage/', include('pstate.urls.admin')),
+    path('pstate/manage/', include('pstate.urls.admin')),
     # 参加者向けページ
-    path('user/', include('pstate.urls.user')),
+    path('pstate/user/', include('pstate.urls.user')),
     # 登録フォーム
-    url('register/team/$', TeamRegisterView.as_view(), name='team-register'),
-    url('register/participant/$', ParticipantRegisterView.as_view(), name='participant-register'),
+    url('pstate/register/team/$', TeamRegisterView.as_view(), name='team-register'),
+    url('pstate/register/participant/$', ParticipantRegisterView.as_view(), name='participant-register'),
     # auth
-    url(r'^auth/login/$', auth_views.login, {'template_name': 'admin_pages/auth/login.html'}, name='login'),
-    url(r'^auth/logout/$', auth_views.logout, {'next_page': '/auth/login'}, name='logout'),
+    url(r'^pstate/auth/login/$', auth_views.login, {'template_name': 'admin_pages/auth/login.html'}, name='login'),
+    url(r'^pstate/auth/logout/$', auth_views.logout, {'next_page': '/pstate/auth/login'}, name='logout'),
     # url(r'^password/$', views.change_password, name='change_password'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

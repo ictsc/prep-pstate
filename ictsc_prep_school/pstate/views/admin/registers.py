@@ -7,10 +7,10 @@ from pstate.forms.teams import TeamRegisterForm
 class TeamRegisterView(CreateView):
     form_class = TeamRegisterForm
     template_name = 'user_pages/common/register_team.html'
-    success_url = '/user'
+    success_url = '/pstate/user'
 
 
 class ParticipantRegisterView(CreateView):
     form_class = ParticipantRegisterForm
     template_name = 'user_pages/common/register_participant.html'
-    success_url = '/user'
+    success_url = '/pstate/user'

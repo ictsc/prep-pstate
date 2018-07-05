@@ -12,7 +12,7 @@ from terraform_manager.models import TerraformFile, ShellScript, Variable
 class TerraformFileCreateView(LoginRequiredAndPermissionRequiredMixin, CreateView):
     form_class = TerraformFileForm
     template_name = 'admin_pages/terraform_file/add.html'
-    success_url = '/manage/problems/'
+    success_url = '/pstate/manage/problems/'
 
     def form_valid(self, form):
         start_sh_body = """
@@ -59,7 +59,7 @@ class TerraformFileUpdateView(LoginRequiredAndPermissionRequiredMixin, UpdateVie
 class ShellScriptCreateView(LoginRequiredAndPermissionRequiredMixin, CreateView):
     form_class = ShellScriptForm
     template_name = 'admin_pages/terraform_file/add.html'
-    success_url = '/manage/problems/'
+    success_url = '/pstate/manage/problems/'
 
     def form_valid(self, form):
         shell_script = form.save(commit=False)
@@ -84,13 +84,13 @@ class ShellScriptUpdateView(LoginRequiredAndPermissionRequiredMixin, UpdateView)
 class ShellScriptDeleteView(LoginRequiredAndPermissionRequiredMixin, DeleteView):
     model = ShellScript
     template_name = 'admin_pages/common/delete.html'
-    success_url = '/manage/close_window/'
+    success_url = '/pstate/manage/close_window/'
 
 
 class VariableCreateView(LoginRequiredAndPermissionRequiredMixin, CreateView):
     form_class = VariableForm
     template_name = 'admin_pages/common/add.html'
-    success_url = '/manage/problems/'
+    success_url = '/pstate/manage/problems/'
 
     def form_valid(self, form):
         variable = form.save(commit=True)
@@ -113,4 +113,4 @@ class VariableUpdateView(LoginRequiredAndPermissionRequiredMixin, UpdateView):
 class VariableDeleteView(LoginRequiredAndPermissionRequiredMixin, DeleteView):
     model = Variable
     template_name = 'admin_pages/common/delete.html'
-    success_url = '/manage/close_window/'
+    success_url = '/pstate/manage/close_window/'

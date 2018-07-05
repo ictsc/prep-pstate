@@ -154,7 +154,7 @@ class TeamUpdateView(LoginRequiredMixin, UpdateView):
     model = Team
     form_class = TeamUserUpdateForm
     template_name = 'user_pages/team/edit.html'
-    success_url = '/user/team/'
+    success_url = '/pstate/user/team/'
 
     def get_object(self):
         if self.request.user.is_team:

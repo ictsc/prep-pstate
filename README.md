@@ -75,3 +75,17 @@ Run
 ```
 docker run -p 80:80 -it pstate_webui:20180410
 ```
+
+### 5. Creating and starting a pstate static server container
+Execute the following command in the project root directory.
+
+Create
+```
+docker build -t pstate-static-server:20180705 -f docker_build/pstate_webui_staticfiles_webserver/Dockerfile .
+```
+
+Run
+```
+docker run -p 80:80 -it pstate-static-server:20180705
+```
+

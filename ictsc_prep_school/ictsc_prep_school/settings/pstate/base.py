@@ -138,7 +138,7 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 
 LOGIN_URL = '/pstate/auth/login'
 LOGOUT_URL = '/pstate/auth/logout'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/pstate'
 
 # locale
 LOCALE_PATHS = (

@@ -14,4 +14,8 @@ DATABASES = {
 BROKER_URL = 'redis://redis.prep-stg.icttoracon.net:6379/0'
 CELERY_RESULT_BACKEND = 'redis://redis.prep-stg.icttoracon.net:6379/0'
 
+CSRF_TRUSTED_ORIGINS = [
+        ".prep-stg.icttoracon.net",
+]
+
 DEBUG = True

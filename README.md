@@ -55,12 +55,12 @@ Execute the following command in the project root directory.
 
 Create
 ```
-docker build -t terraform-manager-worker  -f docker_build/terraform_manager_worker/Dockerfile .
+docker build -t terraform-manager-worker:20180705  -f docker_build/terraform_manager_worker/Dockerfile .
 ```
 
 Run
 ```
-docker run -it terraform-manager-worker
+docker run -it terraform-manager-worker:20180705
 ```
 
 ### 4. Creating and starting a pstate webui container

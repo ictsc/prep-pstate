@@ -75,7 +75,7 @@ class ProblemEnvironment(TemplateModel):
         problem_environment = ProblemEnvironment.objects.filter(id=self.id)
         if problem_environment.exists():
             message = "Change state"
-            if kwargs['message']:
+            if "message" in kwargs and kwargs['message']:
                 message = kwargs['message']
                 del kwargs['message']
             ProblemEnvironmentLog(message=message,

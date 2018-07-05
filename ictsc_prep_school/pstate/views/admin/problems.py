@@ -9,7 +9,7 @@ from pstate.views.admin import LoginRequiredAndPermissionRequiredMixin
 class ProblemCreateView(LoginRequiredAndPermissionRequiredMixin, CreateView):
     form_class = ProblemForm
     template_name = 'admin_pages/problem/add.html'
-    success_url = "/manage/problems/"
+    success_url = "/pstate/manage/problems/"
 
 
 class ProblemListView(LoginRequiredAndPermissionRequiredMixin, ListView):
@@ -33,7 +33,7 @@ class ProblemUpdateView(LoginRequiredAndPermissionRequiredMixin, UpdateView):
     model = Problem
     form_class = ProblemUpdateForm
     template_name = 'admin_pages/common/edit.html'
-    success_url = '/manage/problems/'
+    success_url = '/pstate/manage/problems/'
 
     def form_valid(self, form):
         form.save(commit=True)
@@ -44,7 +44,7 @@ class ProblemDescriptionUpdateView(LoginRequiredAndPermissionRequiredMixin, Upda
     model = Problem
     form_class = ProblemDescriptionUpdateForm
     template_name = 'admin_pages/common/edit.html'
-    success_url = '/manage/problems/'
+    success_url = '/pstate/manage/problems/'
 
     def form_valid(self, form):
         form.save(commit=True)
@@ -54,7 +54,7 @@ class ProblemDescriptionUpdateView(LoginRequiredAndPermissionRequiredMixin, Upda
 class ProblemDeleteView(LoginRequiredAndPermissionRequiredMixin, DeleteView):
     model = Problem
     template_name = 'admin_pages/common/delete.html'
-    success_url = '/manage/problems/'
+    success_url = '/pstate/manage/problems/'
 
 
 class ProblemPreviewView(LoginRequiredAndPermissionRequiredMixin, DetailView):

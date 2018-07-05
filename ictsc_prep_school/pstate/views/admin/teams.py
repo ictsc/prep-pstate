@@ -8,7 +8,7 @@ from pstate.views.admin import LoginRequiredAndPermissionRequiredMixin
 class TeamCreateView(LoginRequiredAndPermissionRequiredMixin, CreateView):
     form_class = TeamForm
     template_name = 'admin_pages/team/add.html'
-    success_url = '/manage/teams/'
+    success_url = '/pstate/manage/teams/'
 
 
 class TeamListView(LoginRequiredAndPermissionRequiredMixin, ListView):
@@ -29,10 +29,10 @@ class TeamUpdateView(LoginRequiredAndPermissionRequiredMixin, UpdateView):
     model = Team
     form_class = TeamUpdateForm
     template_name = 'admin_pages/team/edit.html'
-    success_url = '/manage/teams/'
+    success_url = '/pstate/manage/teams/'
 
 
 class TeamDeleteView(LoginRequiredAndPermissionRequiredMixin, DeleteView):
     model = Team
     template_name = 'admin_pages/common/delete.html'
-    success_url = '/manage/teams/'
+    success_url = '/pstate/manage/teams/'

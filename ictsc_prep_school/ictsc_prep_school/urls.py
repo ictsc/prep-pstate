@@ -22,6 +22,6 @@ urlpatterns = [
     url('pstate/register/participant/$', ParticipantRegisterView.as_view(), name='participant-register'),
     # auth
     url(r'^pstate/auth/login/$', auth_views.login, {'template_name': 'admin_pages/auth/login.html'}, name='login'),
-    url(r'^pstate/auth/logout/$', auth_views.logout, {'next_page': '/auth/login'}, name='logout'),
+    url(r'^pstate/auth/logout/$', auth_views.logout, {'next_page': '/pstate/auth/login'}, name='logout'),
     # url(r'^password/$', views.change_password, name='change_password'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

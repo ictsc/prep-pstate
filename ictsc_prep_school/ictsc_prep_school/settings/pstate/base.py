@@ -124,7 +124,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 # 静的ファイルのディレクトリ名とURLパス
-STATIC_URL = '/static/'
+STATIC_URL = '/pstate-static/'
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 

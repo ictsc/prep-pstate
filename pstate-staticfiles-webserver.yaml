@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pstate-staticfile-service
+spec:
+  type: ClusterIP
+  ports:
+  - name: pstate-static
+    port: 80
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: pstate-static
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pstate-static
+  labels:
+    app: pstate-static
+spec:
+  containers:
+  - name: pstate-static
+    image: pstate-static-server:20180705
+    ports:
+    - name: pstate-static
+      containerPort: 80
+      protocol: TCP

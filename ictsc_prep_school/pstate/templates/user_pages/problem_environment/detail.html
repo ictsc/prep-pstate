@@ -16,14 +16,18 @@
     <ul class="nav nav-tabs">
         <li class="active"><a href="#tab_1" data-toggle="tab">{% trans 'Info' %}</a></li>
         <li><a href="#tab_2" data-toggle="tab">{% trans 'Connection info' %}</a></li>
+        {% comment "予選では使用しないため無効化" %}
         <li><a href="#tab_3" data-toggle="tab">{% trans 'Log' %}</a></li>
+        {% endcomment %}
     </ul>
     <div class="tab-content">
         <div class="tab-pane active" id="tab_1">
             <table class="table table-striped table-bordered">
                 <tbody>
                     <tr><th>{% trans 'ID' %}</th><td>{{ problemenvironment.id }}</td></tr>
+                    {% comment "予選では使用しないため無効化" %}
                     <tr><th>{% trans 'State' %}</th><td>{% trans problemenvironment.state %}</td></tr>
+                    {% endcomment %}
                     <tr><th>{% trans 'Problem name' %}</th><td><a href="{% url 'pstate-user:problem-detail' pk=problemenvironment.problem.id %}">{{ problemenvironment.problem.display_name }}</a></td></tr>
                     <tr><th>{% trans 'Created At' %}</th><td>{{ problemenvironment.created_at | localtime }}</td></tr>
                     <tr><th>{% trans 'Updated At' %}</th><td>{{ problemenvironment.updated_at | localtime }}</td></tr>
@@ -47,6 +51,7 @@
                 </tbody>
             </table>
         </div>
+        {% comment "予選では使用しないため無効化" %}
         <div class="tab-pane" id="tab_3">
             <table class="table table-striped table-bordered">
                 <thead>
@@ -78,5 +83,6 @@
             </table>
         </div>
     </div>
+    {% endcomment %}
 </div>
 {% endblock %}

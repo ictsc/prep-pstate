@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-04 21:00+0900\n"
+"POT-Creation-Date: 2018-07-20 12:32+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -171,7 +171,7 @@ msgstr "削除"
 #: ictsc_prep_school/pstate/templates/admin_pages/team/detail.html:35
 #: ictsc_prep_school/pstate/templates/admin_pages/team/index.html:13
 #: ictsc_prep_school/pstate/templates/user_pages/problem/index.html:9
-#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:23
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:27
 #: ictsc_prep_school/pstate/templates/user_pages/problem_environment/index.html:9
 #: ictsc_prep_school/pstate/templates/user_pages/team/detail.html:18
 msgid "ID"
@@ -282,7 +282,7 @@ msgstr "問題情報"
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:28
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/index.html:13
 #: ictsc_prep_school/pstate/templates/user_pages/problem/index.html:10
-#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:25
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:31
 #: ictsc_prep_school/pstate/templates/user_pages/problem_environment/index.html:11
 msgid "Problem name"
 msgstr "問題名"
@@ -298,7 +298,7 @@ msgstr "問題名(管理用)"
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:30
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:84
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/index.html:15
-#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:26
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:32
 #: ictsc_prep_school/pstate/templates/user_pages/problem_environment/index.html:12
 msgid "Created At"
 msgstr "作成日時"
@@ -306,7 +306,7 @@ msgstr "作成日時"
 #: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:54
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:31
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/index.html:16
-#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:27
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:33
 #: ictsc_prep_school/pstate/templates/user_pages/problem_environment/index.html:13
 msgid "Updated At"
 msgstr "更新日時"
@@ -386,13 +386,13 @@ msgstr "問題環境"
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:15
 #: ictsc_prep_school/pstate/templates/admin_pages/setting/provider/detail.html:13
 #: ictsc_prep_school/pstate/templates/admin_pages/team/detail.html:13
-#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:15
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:17
 #: ictsc_prep_school/pstate/templates/user_pages/team/detail.html:12
 msgid "Info"
 msgstr "情報"
 
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:16
-#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:16
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:18
 msgid "Connection info"
 msgstr "接続情報"
 
@@ -406,7 +406,7 @@ msgstr "ログ(terraform)"
 
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:25
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/index.html:11
-#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:24
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:29
 #: ictsc_prep_school/pstate/templates/user_pages/problem_environment/index.html:10
 msgid "State"
 msgstr "状態"
@@ -416,42 +416,38 @@ msgid "State(Terraform)"
 msgstr "状態(Terraform)"
 
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:39
-#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:35
 msgid "VNC IP address"
 msgstr "VNC IPアドレス"
 
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:40
-#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:42
 msgid "VNC port"
 msgstr "VNC ポート番号"
 
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:41
-#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:43
 msgid "VNC user"
 msgstr "VNC 接続ユーザ名"
 
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:42
-#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:44
 msgid "VNC password"
 msgstr "VNC 接続パスワード"
 
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:50
-#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:52
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:60
 msgid "Date"
 msgstr "日時"
 
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:51
-#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:53
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:61
 msgid "Message"
 msgstr "メッセージ"
 
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:52
-#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:54
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:62
 msgid "Before state"
 msgstr "前の状態"
 
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:53
-#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:55
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:63
 msgid "After state"
 msgstr "後の状態"
 
@@ -590,18 +586,42 @@ msgid "Register a new team"
 msgstr ""
 
 #: ictsc_prep_school/pstate/templates/user_pages/problem/end.html:9
-#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:10
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:11
 msgid "ProblemEnd"
 msgstr "問題終了"
 
 #: ictsc_prep_school/pstate/templates/user_pages/problem/start.html:9
-#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:8
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:9
 msgid "Start"
 msgstr "問題開始"
 
-#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:17
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:20
 msgid "Log"
 msgstr "ログ"
+
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:38
+msgid "FUMIDAI Server Connection Information"
+msgstr "SSH / VNC 認証情報"
+
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:41
+msgid "FUMIDAI IP address"
+msgstr "IPアドレス"
+
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:48
+msgid "FUMIDAI VNC port"
+msgstr "VNC ポート番号"
+
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:49
+msgid "FUMIDAI SSH port"
+msgstr "SSH ポート番号"
+
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:50
+msgid "FUMIDAI user"
+msgstr "ユーザ名"
+
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:51
+msgid "FUMIDAI password"
+msgstr "パスワード"
 
 #: ictsc_prep_school/terraform_manager/models.py:13
 #: ictsc_prep_school/terraform_manager/models.py:27

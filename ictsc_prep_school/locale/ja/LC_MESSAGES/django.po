@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-20 12:32+0900\n"
+"POT-Creation-Date: 2018-07-20 13:15+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -163,7 +163,7 @@ msgstr "削除"
 #: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:99
 #: ictsc_prep_school/pstate/templates/admin_pages/problem/index.html:13
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:24
-#: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:80
+#: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:87
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/index.html:10
 #: ictsc_prep_school/pstate/templates/admin_pages/setting/provider/detail.html:20
 #: ictsc_prep_school/pstate/templates/admin_pages/setting/provider/index.html:13
@@ -296,7 +296,7 @@ msgstr "問題名(管理用)"
 
 #: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:53
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:30
-#: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:84
+#: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:91
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/index.html:15
 #: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:32
 #: ictsc_prep_school/pstate/templates/user_pages/problem_environment/index.html:12
@@ -415,51 +415,65 @@ msgstr "状態"
 msgid "State(Terraform)"
 msgstr "状態(Terraform)"
 
-#: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:39
-msgid "VNC IP address"
-msgstr "VNC IPアドレス"
+#: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:36
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:38
+msgid "FUMIDAI Server Connection Information"
+msgstr "SSH / VNC 認証情報"
 
-#: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:40
-msgid "VNC port"
+#: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:39
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:41
+msgid "FUMIDAI IP address"
+msgstr "IPアドレス"
+
+#: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:46
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:48
+msgid "FUMIDAI VNC port"
 msgstr "VNC ポート番号"
 
-#: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:41
-msgid "VNC user"
-msgstr "VNC 接続ユーザ名"
+#: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:47
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:49
+msgid "FUMIDAI SSH port"
+msgstr "SSH ポート番号"
 
-#: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:42
-msgid "VNC password"
-msgstr "VNC 接続パスワード"
+#: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:48
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:50
+msgid "FUMIDAI user"
+msgstr "ユーザ名"
 
-#: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:50
+#: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:49
+#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:51
+msgid "FUMIDAI password"
+msgstr "パスワード"
+
+#: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:57
 #: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:60
 msgid "Date"
 msgstr "日時"
 
-#: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:51
+#: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:58
 #: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:61
 msgid "Message"
 msgstr "メッセージ"
 
-#: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:52
+#: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:59
 #: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:62
 msgid "Before state"
 msgstr "前の状態"
 
-#: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:53
+#: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:60
 #: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:63
 msgid "After state"
 msgstr "後の状態"
 
-#: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:81
+#: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:88
 msgid "Return code"
 msgstr "終了ステータス"
 
-#: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:82
+#: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:89
 msgid "Std out"
 msgstr "標準出力"
 
-#: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:83
+#: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:90
 msgid "Std err"
 msgstr "標準エラー出力"
 
@@ -599,30 +613,6 @@ msgstr "問題開始"
 msgid "Log"
 msgstr "ログ"
 
-#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:38
-msgid "FUMIDAI Server Connection Information"
-msgstr "SSH / VNC 認証情報"
-
-#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:41
-msgid "FUMIDAI IP address"
-msgstr "IPアドレス"
-
-#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:48
-msgid "FUMIDAI VNC port"
-msgstr "VNC ポート番号"
-
-#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:49
-msgid "FUMIDAI SSH port"
-msgstr "SSH ポート番号"
-
-#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:50
-msgid "FUMIDAI user"
-msgstr "ユーザ名"
-
-#: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:51
-msgid "FUMIDAI password"
-msgstr "パスワード"
-
 #: ictsc_prep_school/terraform_manager/models.py:13
 #: ictsc_prep_school/terraform_manager/models.py:27
 msgid "IN_WAITING_FOR_START"
@@ -667,6 +657,18 @@ msgstr "コマンド完了(terraform destroy)"
 #: ictsc_prep_school/terraform_manager/models.py:23
 msgid "FAILED"
 msgstr "失敗"
+
+#~ msgid "VNC IP address"
+#~ msgstr "VNC IPアドレス"
+
+#~ msgid "VNC port"
+#~ msgstr "VNC ポート番号"
+
+#~ msgid "VNC user"
+#~ msgstr "VNC 接続ユーザ名"
+
+#~ msgid "VNC password"
+#~ msgstr "VNC 接続パスワード"
 
 #~ msgid "Finish"
 #~ msgstr "問題終了"

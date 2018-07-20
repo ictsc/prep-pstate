@@ -33,13 +33,20 @@
             </table>
         </div>
         <div class="tab-pane" id="tab_2">
-            <h3>VNC</h3>
+            <h3>{% trans 'FUMIDAI Server Connection Information' %}</h3>
             <table class="table table-striped table-bordered">
                 <tbody>
-                    <tr><th>{% trans 'VNC IP address' %}</th><td>{{ problemenvironment.vnc_server_ipv4_address }}</td></tr>
-                    <tr><th>{% trans 'VNC port' %}</th><td>{{ problemenvironment.vnc_server_port }}</td></tr>
-                    <tr><th>{% trans 'VNC user' %}</th><td>{{ problemenvironment.vnc_server_username }}</td></tr>
-                    <tr><th>{% trans 'VNC password' %}</th><td>{{ problemenvironment.vnc_server_password }}</td></tr>
+                    <tr><th>{% trans 'FUMIDAI IP address' %}</th><td>
+                        {% if problemenvironment.vnc_server_ipv4_address != None %}
+                        {{ problemenvironment.vnc_server_ipv4_address }}
+                        {% else %}
+                        ※VNCサーバを作成中です※
+                        {% endif %}
+                    </td></tr>
+                    <tr><th>{% trans 'FUMIDAI VNC port' %}</th><td>{{ problemenvironment.vnc_server_port }}</td></tr>
+                    <tr><th>{% trans 'FUMIDAI SSH port' %}</th><td>22</td></tr>
+                    <tr><th>{% trans 'FUMIDAI user' %}</th><td>{{ problemenvironment.vnc_server_username }}</td></tr>
+                    <tr><th>{% trans 'FUMIDAI password' %}</th><td>{{ problemenvironment.vnc_server_password }}</td></tr>
                 </tbody>
             </table>
         </div>

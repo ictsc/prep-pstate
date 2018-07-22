@@ -19,12 +19,17 @@ class TerraformFileCreateView(LoginRequiredAndPermissionRequiredMixin, CreateVie
 ## Change the password for ubuntu user
 echo "ubuntu:@@VNC_SERVER_PASSWORD@@" | chpasswd
 
+## disable fail2ban & network-manager
+service fail2ban stop
+chkconfig fail2ban off
+service network-manager stop
+chkconfig network-manager off
+
 ## Interface setting
-echo 'auto eth1' >> /etc/network/interfaces
-echo 'iface eth1 inet static' >> /etc/network/interfaces
-echo 'address 192.168.0.254' >> /etc/network/interfaces
-echo 'netmask 255.255.255.0' >> /etc/network/interfaces
-service networking restart
+echo auto eth1 >> /etc/network/interfaces
+echo iface eth1 inet static >> /etc/network/interfaces
+echo address 192.168.0.254 >> /etc/network/interfaces
+echo netmask 255.255.255.0 >> /etc/network/interfaces
 
 ## VNC server settings
 echo @@VNC_SERVER_PASSWORD@@ | vncpasswd -f > "/home/ubuntu/.vnc/passwd"
@@ -33,7 +38,18 @@ chown ubuntu:ubuntu /home/ubuntu/.vnc/passwd
 
 systemctl daemon-reload
 systemctl start vncserver@\:1.service
-systemctl enable vncserver@\:1.service"""
+systemctl enable vncserver@\:1.service
+
+## NAPT
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+iptables -A FORWARD -i eth1 -o eth0 -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -A FORWARD -i eth1 -o eth0 -j ACCEPT
+
+## NAPT permanent
+iptables-save > iptables.dat
+echo 'iptables-restore < /root/iptables.dat' >> /etc/rc.local
+
+service networking restart"""
         terraform_file = form.save(commit=True)
         shell_script = ShellScript(name='VNCサーバ初期化用', file_name='start.sh', terraform_file=terraform_file, body=start_sh_body)
         shell_script.save()

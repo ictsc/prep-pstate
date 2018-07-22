@@ -69,7 +69,7 @@ class ProblemEnvironment(TemplateModel):
     team = models.ForeignKey("Team", on_delete=models.PROTECT, blank=True, null=True)
     participant = models.ForeignKey("Participant", on_delete=models.PROTECT, blank=True, null=True)
     environment = models.ForeignKey(Environment, on_delete=models.CASCADE, null=True, related_name='problem_environment')
-    problem = models.ForeignKey(Problem, on_delete=models.CASCADE)
+    problem = models.ForeignKey(Problem, related_name='problem_environment', on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):
         problem_environment = ProblemEnvironment.objects.filter(id=self.id)

@@ -56,6 +56,18 @@ class ProblemDetailView(LoginRequiredMixin, DetailView):
     model = Problem
     template_name = 'user_pages/problem/detail.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        try:
+            problem_environment = ProblemEnvironment.objects.filter(team=Team.objects.get(id=self.request.user.id),
+                                                                    problem=kwargs['object'].id,
+                                                                    is_enabled=True,
+                                                                    problem__is_enabled=True).latest('created_at')
+        except:
+            problem_environment = None
+        context['problem_environment'] = problem_environment
+        return context
+
     def get_queryset(self):
         return Problem.objects.filter(is_enabled=True)
 

@@ -1,7 +1,10 @@
+from celery.app.routes import Router
 from django.conf.urls import url
-from django.urls import path
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
 
 from pstate.views.admin import index, dashboard, change_team_password, change_participant_password, close_window
+from pstate.views.admin.api import ProblemEnvironmentViewSet
 from pstate.views.admin.participants import ParticipantListView, ParticipantDetailView, ParticipantCreateView, \
     ParticipantUpdateView, ParticipantDeleteView
 from pstate.views.admin.problem_environments import ProblemEnvironmentCreateView, ProblemEnvironmentTestRunExecuteView, \
@@ -14,6 +17,9 @@ from pstate.views.admin.providers import ProviderListView, ProviderDetailView, P
 from pstate.views.admin.teams import TeamListView, TeamDetailView, TeamCreateView, TeamUpdateView, TeamDeleteView
 from pstate.views.admin.terraform_files import TerraformFileCreateView, TerraformFileUpdateView, VariableCreateView, \
     VariableUpdateView, VariableDeleteView, ShellScriptCreateView, ShellScriptUpdateView, ShellScriptDeleteView
+
+router = DefaultRouter()
+router.register(r'problem_environments', ProblemEnvironmentViewSet)
 
 app_name = 'pstate-manage'
 urlpatterns = [
@@ -75,4 +81,6 @@ urlpatterns = [
     url(r'^setting/attributes/(?P<pk>[0-9]+)/delete/$', AttributeDeleteView.as_view(), name='attribute-delete'),
     # util
     url(r'^close_window/$', close_window, name='window-close'),
+    # API
+    url(r'^api/', include(router.urls))
 ]

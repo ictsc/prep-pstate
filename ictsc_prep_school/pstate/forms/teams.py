@@ -18,6 +18,10 @@ class TeamForm(forms.ModelForm):
             'remarks': forms.Textarea(attrs={'class': "form-control"}),
         }
 
+    def __init__(self, *args, **kwargs):
+        super(TeamForm, self).__init__(*args, **kwargs)
+        self.fields['username'].label = "ログインID"
+
     def save(self, commit=True):
         # Save the provided password in hashed format
         team = super(TeamForm, self).save(commit=False)
@@ -55,6 +59,10 @@ class TeamUpdateForm(forms.ModelForm):
             'description': forms.Textarea(attrs={'class': "form-control"}),
             'remarks': forms.Textarea(attrs={'class': "form-control"}),
         }
+
+    def __init__(self, *args, **kwargs):
+        super(TeamUpdateForm, self).__init__(*args, **kwargs)
+        self.fields['username'].label = "ログインID"
 
     def save(self, commit=True):
         # Save the provided password in hashed format

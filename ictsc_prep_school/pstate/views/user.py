@@ -169,8 +169,8 @@ class TeamUpdateView(LoginRequiredMixin, UpdateView):
     success_url = '/pstate/user/team/'
 
     def get_object(self):
+        from pstate.models import Team
         if self.request.user.is_team:
-            from pstate.models import Team
             return Team.objects.get(id=self.request.user.id)
         else:
             return Team.objects.none()

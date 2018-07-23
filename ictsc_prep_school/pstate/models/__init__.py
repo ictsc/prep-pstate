@@ -1,6 +1,7 @@
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.db.models import Q
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 
@@ -15,12 +16,22 @@ class TemplateModel(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 
+class ProblemManager(models.Manager):
+
+    def get_open_problem(self):
+        # modeがOPEN状態で公開時間内の問題を抽出.
+        queryset = self.filter(Q(mode='OPEN') | Q(mode='TIMER', start_date__lt=now(), end_date__gt=now()))
+        return queryset
+
+
 class Problem(TemplateModel):
     MODE_CHOICES = (
         ('OPEN', _('OPEN')),
         ('CLOSE', _('CLOSE')),
         ('TIMER', _('TIMER')),
     )
+
+    objects = ProblemManager()
 
     name = models.CharField("問題名(管理用)", max_length=200)
     display_name = models.CharField("問題名(参加者向け)", max_length=200)

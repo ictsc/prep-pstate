@@ -50,7 +50,7 @@
                         <tr><th>{% trans 'Updated At' %}</th><td>{{ problem.updated_at | localtime }}</td></tr>
                         <tr><th>{% trans 'Start date' %}</th><td>{{ problem.start_date }}</td></tr>
                         <tr><th>{% trans 'End date' %}</th><td>{{ problem.end_date }}</td></tr>
-                        <tr><th>{% trans 'Published' %}</th><td>{{ problem.is_enabled }}</td></tr>
+                        <tr><th>{% trans 'Published' %}</th><td>{% trans problem.mode %}</td></tr>
                     </tbody>
                 </table>
             </div>

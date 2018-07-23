@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-23 13:30+0900\n"
+"POT-Creation-Date: 2018-07-23 19:22+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,35 +18,47 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ictsc_prep_school/pstate/models/__init__.py:35
+#: ictsc_prep_school/pstate/models/__init__.py:29
+msgid "OPEN"
+msgstr "公開"
+
+#: ictsc_prep_school/pstate/models/__init__.py:30
+msgid "CLOSE"
+msgstr "非公開"
+
+#: ictsc_prep_school/pstate/models/__init__.py:31
+msgid "TIMER"
+msgstr "時間指定公開"
+
+#: ictsc_prep_school/pstate/models/__init__.py:54
 msgid "IN_PREPARATION"
 msgstr "準備中"
 
-#: ictsc_prep_school/pstate/models/__init__.py:36
+#: ictsc_prep_school/pstate/models/__init__.py:55
 msgid "READY"
 msgstr "準備完了"
 
-#: ictsc_prep_school/pstate/models/__init__.py:37
+#: ictsc_prep_school/pstate/models/__init__.py:56
 msgid "IN_PROGRESS"
 msgstr "問題進行中"
 
-#: ictsc_prep_school/pstate/models/__init__.py:38
+#: ictsc_prep_school/pstate/models/__init__.py:57
 msgid "FINISH"
 msgstr "終了"
 
-#: ictsc_prep_school/pstate/models/__init__.py:39
+#: ictsc_prep_school/pstate/models/__init__.py:58
 msgid "WAITING_FOR_SCORING"
 msgstr "採点待ち"
 
-#: ictsc_prep_school/pstate/models/__init__.py:40
+#: ictsc_prep_school/pstate/models/__init__.py:59
 msgid "SCORING_HAS_ENDED"
 msgstr "採点終了"
 
-#: ictsc_prep_school/pstate/models/__init__.py:41
+#: ictsc_prep_school/pstate/models/__init__.py:60
 msgid "WAITING_FOR_DELETE"
 msgstr "削除待ち"
 
-#: ictsc_prep_school/pstate/models/__init__.py:42
+#: ictsc_prep_school/pstate/models/__init__.py:61
 msgid "DELETED"
 msgstr "削除完了"
 
@@ -77,9 +89,9 @@ msgstr ""
 #: ictsc_prep_school/pstate/templates/admin_pages/participant/add.html:10
 #: ictsc_prep_school/pstate/templates/admin_pages/participant/index.html:8
 #: ictsc_prep_school/pstate/templates/admin_pages/problem/add.html:8
-#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:68
-#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:128
-#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:164
+#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:64
+#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:124
+#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:160
 #: ictsc_prep_school/pstate/templates/admin_pages/problem/index.html:8
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/add.html:9
 #: ictsc_prep_school/pstate/templates/admin_pages/setting/attribute/add.html:9
@@ -130,11 +142,11 @@ msgid "Are you sure you want to delete "
 msgstr "消去してもよろしいですか "
 
 #: ictsc_prep_school/pstate/templates/admin_pages/participant/detail.html:7
-#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:38
-#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:46
-#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:81
-#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:134
-#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:186
+#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:34
+#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:42
+#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:77
+#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:130
+#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:182
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:8
 #: ictsc_prep_school/pstate/templates/admin_pages/setting/attribute/index.html:28
 #: ictsc_prep_school/pstate/templates/admin_pages/setting/provider/detail.html:8
@@ -145,9 +157,9 @@ msgid "Edit"
 msgstr "編集"
 
 #: ictsc_prep_school/pstate/templates/admin_pages/participant/detail.html:8
-#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:25
-#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:135
-#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:189
+#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:21
+#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:131
+#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:185
 #: ictsc_prep_school/pstate/templates/admin_pages/problem/index.html:31
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:11
 #: ictsc_prep_school/pstate/templates/admin_pages/setting/attribute/index.html:29
@@ -159,8 +171,8 @@ msgstr "削除"
 
 #: ictsc_prep_school/pstate/templates/admin_pages/participant/detail.html:19
 #: ictsc_prep_school/pstate/templates/admin_pages/participant/index.html:13
-#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:50
-#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:99
+#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:46
+#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:95
 #: ictsc_prep_school/pstate/templates/admin_pages/problem/index.html:13
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:25
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:88
@@ -197,7 +209,7 @@ msgstr "ログインID"
 #: ictsc_prep_school/pstate/templates/admin_pages/participant/index.html:17
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:28
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/index.html:12
-#: ictsc_prep_school/pstate/templates/adminlte/lib/_main_sidebar.html:59
+#: ictsc_prep_school/pstate/templates/adminlte/lib/_main_sidebar.html:54
 msgid "Team"
 msgstr "チーム"
 
@@ -256,28 +268,27 @@ msgid "Preview"
 msgstr "プレビュー"
 
 #: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:13
-#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:20
+#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:16
 #: ictsc_prep_school/pstate/templates/admin_pages/problem/problem_environment_create_execute.html:5
 msgid "Test run"
 msgstr "テスト実行"
 
-#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:15
+#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:14
 #: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:17
-#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:21
 msgid "Create problem environment"
 msgstr "問題環境の作成"
 
-#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:30
+#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:26
 #: ictsc_prep_school/pstate/templates/admin_pages/problem/preview.html:9
 #: ictsc_prep_school/pstate/templates/user_pages/problem/detail.html:9
 msgid "Problem sentence"
 msgstr "問題文"
 
-#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:33
+#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:29
 msgid "Problem info"
 msgstr "問題情報"
 
-#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:51
+#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:47
 #: ictsc_prep_school/pstate/templates/admin_pages/problem/index.html:14
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:29
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/index.html:13
@@ -287,14 +298,14 @@ msgstr "問題情報"
 msgid "Problem name"
 msgstr "問題名"
 
-#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:52
+#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:48
 #: ictsc_prep_school/pstate/templates/admin_pages/problem/index.html:15
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:30
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/index.html:14
 msgid "Problem name(For management)"
 msgstr "問題名(管理用)"
 
-#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:53
+#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:49
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:31
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:92
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/index.html:15
@@ -303,7 +314,7 @@ msgstr "問題名(管理用)"
 msgid "Created At"
 msgstr "作成日時"
 
-#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:54
+#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:50
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/detail.html:32
 #: ictsc_prep_school/pstate/templates/admin_pages/problem_environment/index.html:16
 #: ictsc_prep_school/pstate/templates/user_pages/problem_environment/detail.html:33
@@ -311,52 +322,52 @@ msgstr "作成日時"
 msgid "Updated At"
 msgstr "更新日時"
 
-#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:55
+#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:51
 msgid "Start date"
 msgstr "開始日"
 
-#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:56
+#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:52
 msgid "End date"
 msgstr "終了日"
 
-#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:57
+#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:53
 msgid "Published"
-msgstr "公開状態"
+msgstr "公開モード"
 
-#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:87
-#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:100
+#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:83
+#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:96
 #: ictsc_prep_school/pstate/templates/admin_pages/setting/provider/detail.html:21
 #, fuzzy
 #| msgid "TeamName"
 msgid "Name"
 msgstr "チーム名"
 
-#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:88
+#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:84
 #, fuzzy
 #| msgid "TeamName"
 msgid "FileName"
 msgstr "チーム名"
 
-#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:101
+#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:97
 #: ictsc_prep_school/pstate/templates/admin_pages/setting/provider/detail.html:22
 msgid "ProviderName"
 msgstr ""
 
-#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:108
-#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:170
+#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:104
+#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:166
 #: ictsc_prep_school/pstate/templates/admin_pages/setting/attribute/index.html:13
 #: ictsc_prep_school/pstate/templates/admin_pages/setting/provider/detail.html:30
 msgid "Key"
 msgstr ""
 
-#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:109
-#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:171
+#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:105
+#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:167
 #: ictsc_prep_school/pstate/templates/admin_pages/setting/attribute/index.html:14
 #: ictsc_prep_school/pstate/templates/admin_pages/setting/provider/detail.html:31
 msgid "Value"
 msgstr ""
 
-#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:166
+#: ictsc_prep_school/pstate/templates/admin_pages/problem/detail.html:162
 msgid "Variables"
 msgstr ""
 
@@ -578,7 +589,6 @@ msgid "Home"
 msgstr ""
 
 #: ictsc_prep_school/pstate/templates/adminlte/lib/_main_sidebar.html:18
-#: ictsc_prep_school/pstate/templates/adminlte/lib/_main_sidebar.html:54
 msgid "ProblemEnvironments"
 msgstr "問題環境"
 

@@ -15,11 +15,18 @@ class TemplateModel(models.Model):
 
 
 class Problem(TemplateModel):
+    MODE_CHOICES = (
+        ('OPEN', _('OPEN')),
+        ('CLOSE', _('CLOSE')),
+        ('TIMER', _('TIMER')),
+    )
+
     name = models.CharField("問題名(管理用)", max_length=200)
     display_name = models.CharField("問題名(参加者向け)", max_length=200)
     description = models.TextField("問題文", blank=True, null=True)
     start_date = models.DateTimeField("問題公開日時", blank=True, null=True)
     end_date = models.DateTimeField("問題公開終了日時", blank=True, null=True)
+    mode = models.CharField("公開モード", max_length=100, choices=MODE_CHOICES, default='CLOSE')
     is_enabled = models.BooleanField("公開フラグ", default=False)
     terraform_file_id = models.ForeignKey(TerraformFile, on_delete=models.SET_NULL, null=True)
 

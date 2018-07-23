@@ -1,6 +1,7 @@
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 
 from terraform_manager.models import TerraformFile, Environment
@@ -24,8 +25,8 @@ class Problem(TemplateModel):
     name = models.CharField("問題名(管理用)", max_length=200)
     display_name = models.CharField("問題名(参加者向け)", max_length=200)
     description = models.TextField("問題文", blank=True, null=True)
-    start_date = models.DateTimeField("問題公開日時", blank=True, null=True)
-    end_date = models.DateTimeField("問題公開終了日時", blank=True, null=True)
+    start_date = models.DateTimeField("問題公開日時", blank=True, null=True, default=now())
+    end_date = models.DateTimeField("問題公開終了日時", blank=True, null=True, default=now())
     mode = models.CharField("公開モード", max_length=100, choices=MODE_CHOICES, default='CLOSE')
     is_enabled = models.BooleanField("公開フラグ", default=False)
     terraform_file_id = models.ForeignKey(TerraformFile, on_delete=models.SET_NULL, null=True)

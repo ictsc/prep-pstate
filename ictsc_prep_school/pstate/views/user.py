@@ -49,7 +49,7 @@ class ProblemListView(LoginRequiredMixin, ListView):
     template_name = 'user_pages/problem/index.html'
 
     def get_queryset(self):
-        return Problem.objects.filter(is_enabled=True)
+        return Problem.objects.get_open_problem()
 
 
 class ProblemDetailView(LoginRequiredMixin, DetailView):
@@ -69,7 +69,7 @@ class ProblemDetailView(LoginRequiredMixin, DetailView):
         return context
 
     def get_queryset(self):
-        return Problem.objects.filter(is_enabled=True)
+        return Problem.objects.get_open_problem()
 
 
 class ProblemEnvironmentListView(LoginRequiredMixin, ListView):

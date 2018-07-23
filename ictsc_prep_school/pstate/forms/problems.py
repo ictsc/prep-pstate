@@ -7,12 +7,14 @@ class ProblemForm(forms.ModelForm):
 
     class Meta:
         model = Problem
-        fields = ('name', 'display_name', 'description', 'is_enabled', )
+        fields = ('name', 'display_name', 'description', 'mode', 'start_date', 'end_date', )
         # fields = ('name', 'display_name', 'description', 'start_date', 'end_date', 'is_enabled', )
         widgets = {
             'name': forms.TextInput(attrs={'class': "form-control"}),
             'display_name': forms.TextInput(attrs={'class': "form-control"}),
             'description': forms.Textarea(attrs={'class': "form-control"}),
+            'start_date': forms.TextInput(attrs={'class': "form-control datetime"}),
+            'end_date': forms.TextInput(attrs={'class': "form-control datetime"}),
         }
 
 
@@ -20,7 +22,7 @@ class ProblemUpdateForm(forms.ModelForm):
 
     class Meta:
         model = Problem
-        fields = ('name', 'display_name', 'is_enabled', )
+        fields = ('name', 'display_name', 'mode', 'start_date', 'end_date', )
         # fields = ('name', 'display_name', 'description', 'start_date', 'end_date', 'is_enabled', )
         widgets = {
             'name': forms.TextInput(attrs={'class': "form-control"}),

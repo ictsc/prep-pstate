@@ -1,9 +1,10 @@
 from django.http import HttpResponseRedirect
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView, FormView
 
-from pstate.forms.problems import ProblemEnvironmentCreateExecuteForm, ProblemEnvironmentDestroyExecuteForm
+from pstate.forms.problems import ProblemEnvironmentCreateExecuteForm, ProblemEnvironmentDestroyExecuteForm, \
+    ProblemEnvironmentRecreateExecuteForm
 from pstate.forms.problem_environments import ProblemEnvironmentForm, ProblemEnvironmentUpdateForm
-from pstate.models import Problem, ProblemEnvironment, ProblemEnvironmentLog
+from pstate.models import Problem, ProblemEnvironment, ProblemEnvironmentLog, Team
 from pstate.views.admin import LoginRequiredAndPermissionRequiredMixin
 
 
@@ -152,3 +153,48 @@ class ProblemEnvironmentDestroyView(LoginRequiredAndPermissionRequiredMixin, For
                               after_state="WAITING_FOR_DELETE",
                               problem_environment=problem_environment).save()
         return HttpResponseRedirect(self.success_url + str(problem_environment.id))
+
+
+class ProblemEnvironmentRecreateView(LoginRequiredAndPermissionRequiredMixin, FormView):
+    template_name = 'admin_pages/problem_environment/recreate.html'
+    form_class = ProblemEnvironmentRecreateExecuteForm
+    success_url = "/pstate/manage/problem_environments/"
+
+    def form_valid(self, form):
+        destroy_problem_environment = ProblemEnvironment.objects.get(id=self.kwargs['pk'])
+        recreate_problem = destroy_problem_environment.problem
+        target_team = destroy_problem_environment.team
+
+        # 破棄処理.
+        from terraform_manager.terraform_manager_tasks import destroy
+        var = []
+        destroy.delay(destroy_problem_environment.environment.id, var)
+
+        ProblemEnvironmentLog(message="Problem environment destroying started",
+                              before_state=destroy_problem_environment.state,
+                              after_state="WAITING_FOR_DELETE",
+                              problem_environment=destroy_problem_environment).save()
+
+        # 再作成処理.
+        from terraform_manager.models import Environment
+        recreate_environment = Environment(terraform_file=recreate_problem.terraform_file_id, is_locked=False)
+        recreate_environment.save()
+
+        recreate_problem_environment = ProblemEnvironment(vnc_server_ipv4_address=None,
+                                                          is_enabled=True,
+                                                          team=target_team,
+                                                          participant=None,
+                                                          environment=recreate_environment,
+                                                          problem=recreate_problem)
+        recreate_problem_environment.save()
+
+        # VNCサーバのパスワードを参照しworkerに対して処理の実行命令する際に転送する.
+        var = {"VNC_SERVER_PASSWORD": recreate_problem_environment.vnc_server_password}
+
+        from terraform_manager.terraform_manager_tasks import direct_apply
+        direct_apply.delay(recreate_environment.id, recreate_problem.terraform_file_id.id, var)
+        ProblemEnvironmentLog(message="Creating problem environment started",
+                              before_state=None,
+                              after_state="IN_PREPARATION",
+                              problem_environment=recreate_problem_environment).save()
+        return HttpResponseRedirect(self.success_url + str(recreate_problem_environment.id))

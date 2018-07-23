@@ -1,0 +1,11 @@
+{% extends 'adminlte/base.html' %}
+{% load i18n %}
+{% block title %}{% endblock %}
+{% block content %}{% load tz %}
+<h1>{% trans 'Recreate Environment' %}</h1>
+<form action="" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <p>このチームの問題環境の既存の問題環境が破棄し、問題環境を再作成します。</p>
+    <input class="btn btn-danger" type="submit" value="{% trans 'Execute' %}" />
+</form>
+{% endblock %}

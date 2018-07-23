@@ -36,6 +36,10 @@ class ProblemEnvironmentDestroyExecuteForm(forms.Form):
     pass
 
 
+class ProblemEnvironmentRecreateExecuteForm(forms.Form):
+    pass
+
+
 class ProblemDescriptionUpdateForm(forms.ModelForm):
 
     class Meta:

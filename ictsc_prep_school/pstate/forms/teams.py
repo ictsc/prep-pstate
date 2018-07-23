@@ -68,9 +68,8 @@ class TeamUserUpdateForm(forms.ModelForm):
 
     class Meta:
         model = Team
-        fields = ['username', 'email']
-        exclude = ['team_name', 'description', 'remarks', 'password', 'last_login', 'first_name', 'last_name', 'date_joined', 'is_superuser', 'groups', 'user_permissions', 'is_staff']
+        fields = [ 'email']
+        exclude = ['team_name', 'username', 'description', 'remarks', 'password', 'last_login', 'first_name', 'last_name', 'date_joined', 'is_superuser', 'groups', 'user_permissions', 'is_staff']
         widgets = {
-            'username': forms.TextInput(attrs={'class': "form-control"}),
             'email': forms.EmailInput(attrs={'class': "form-control"}),
         }

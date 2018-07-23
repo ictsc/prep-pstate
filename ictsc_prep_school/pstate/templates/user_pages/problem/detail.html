@@ -15,4 +15,29 @@
         </div>
     </div>
 </div>
+<div class="nav-tabs-custom">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#tab_1" data-toggle="tab">{% trans 'Connection info' %}</a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active" id="tab_1">
+            <h3>{% trans 'FUMIDAI Server Connection Information' %}</h3>
+            <table class="table table-striped table-bordered">
+                <tbody>
+                    <tr><th>{% trans 'FUMIDAI IP address' %}</th><td>
+                        {% if problem_environment.vnc_server_ipv4_address != None %}
+                        {{ problem_environment.vnc_server_ipv4_address }}
+                        {% else %}
+                        ※問題環境を作成中です※
+                        {% endif %}
+                        </td></tr>
+                    <tr><th>{% trans 'FUMIDAI VNC port' %}</th><td>{{ problem_environment.vnc_server_port }}</td></tr>
+                    <tr><th>{% trans 'FUMIDAI SSH port' %}</th><td>22</td></tr>
+                    <tr><th>{% trans 'FUMIDAI user' %}</th><td>{{ problem_environment.vnc_server_username }}</td></tr>
+                    <tr><th>{% trans 'FUMIDAI password' %}</th><td>{{ problem_environment.vnc_server_password }}</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -19,7 +19,7 @@ from pstate.views.admin.terraform_files import TerraformFileCreateView, Terrafor
     VariableUpdateView, VariableDeleteView, ShellScriptCreateView, ShellScriptUpdateView, ShellScriptDeleteView
 
 router = DefaultRouter()
-router.register(r'problem_environments', ProblemEnvironmentViewSet)
+router.register(r'problem_environments', ProblemEnvironmentViewSet, base_name='api')
 
 app_name = 'pstate-manage'
 urlpatterns = [

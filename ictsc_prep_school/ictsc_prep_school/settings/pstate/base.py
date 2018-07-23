@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'terraform_manager',
     'django_adminlte',
     'django_adminlte_theme',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -144,3 +145,9 @@ LOGIN_REDIRECT_URL = '/pstate'
 LOCALE_PATHS = (
     os.path.join(PROJECT_ROOT, '../../../locale'),
 )
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+    )
+}

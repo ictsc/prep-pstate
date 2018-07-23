@@ -11,11 +11,11 @@ urlpatterns = [
     # problems
     url(r'^problems/$', ProblemListView.as_view(), name='problem-list'),
     url(r'^problems/(?P<pk>[0-9]+)/$', ProblemDetailView.as_view(), name='problem-detail'),
-    # problem_environments
-    url(r'^problem_environments/$', ProblemEnvironmentListView.as_view(), name='problemenvironment-list'),
-    url(r'^problem_environments/(?P<pk>[0-9]+)/$', ProblemEnvironmentDetailView.as_view(), name='problemenvironment-detail'),
-    url(r'^problem_environments/(?P<pk>[0-9]+)/start/$', ProblemStartView.as_view(), name='problemenvironment-start'),
-    url(r'^problem_environments/(?P<pk>[0-9]+)/end/$', ProblemEndView.as_view(), name='problemenvironment-end'),
+    # problem_environments(参加者側には問題環境単体で表示させないため、コメントアウト)
+    # url(r'^problem_environments/$', ProblemEnvironmentListView.as_view(), name='problemenvironment-list'),
+    # url(r'^problem_environments/(?P<pk>[0-9]+)/$', ProblemEnvironmentDetailView.as_view(), name='problemenvironment-detail'),
+    # url(r'^problem_environments/(?P<pk>[0-9]+)/start/$', ProblemStartView.as_view(), name='problemenvironment-start'),
+    # url(r'^problem_environments/(?P<pk>[0-9]+)/end/$', ProblemEndView.as_view(), name='problemenvironment-end'),
 
     # team
     url(r'^team/$', TeamDetailView.as_view(), name='team-detail'),

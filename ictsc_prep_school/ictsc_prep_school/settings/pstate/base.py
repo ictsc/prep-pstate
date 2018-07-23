@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'terraform_manager',
     'django_adminlte',
     'django_adminlte_theme',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

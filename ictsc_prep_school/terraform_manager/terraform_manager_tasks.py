@@ -185,6 +185,7 @@ def direct_apply(environment_id, terraform_file_id, var):
     :param terraform_file_id:   terraformファイルID
     :param var: terraformコマンド実行時に引数に渡す変数
     """
+    FAILED_STATUS_CODE = [1, ]
     prepare_environment(environment_id, terraform_file_id)
 
     from terraform_manager.models import Environment
@@ -200,6 +201,8 @@ def direct_apply(environment_id, terraform_file_id, var):
         save_log(environment_id, return_code, stdout, stderr)
         environment.state = 'INITIALIZED'
         environment.save()
+        if return_code in FAILED_STATUS_CODE:
+            raise Exception("terraformが異常終了したためtaskを停止します")
 
         #   terraform plan
         environment.state = 'IN_PLANNING'
@@ -209,6 +212,8 @@ def direct_apply(environment_id, terraform_file_id, var):
         save_log(environment_id, return_code, stdout, stderr)
         environment.state = 'PLANNED'
         environment.save()
+        if return_code in FAILED_STATUS_CODE:
+            raise Exception("terraformが異常終了したためtaskを停止します")
 
         #   terraform apply
         environment.state = 'IN_APPLYING'
@@ -228,12 +233,15 @@ def direct_apply(environment_id, terraform_file_id, var):
         from pstate.models import ProblemEnvironment
         problem_environment = ProblemEnvironment.objects.get(environment=environment)
         problem_environment.vnc_server_ipv4_address = stdout.strip()
-        # TODO: 問題環境のstateが準備完了になるタイミングが一律同じでないためREADYに変更するタイミングの修正の可能性あり.
-        problem_environment.state = 'READY'
-        problem_environment.save()
         save_log(environment_id, return_code, stdout, stderr)
         environment.state = 'APPLIED'
         environment.save()
+        if return_code in FAILED_STATUS_CODE:
+            raise Exception("terraformが異常終了したためtaskを停止します")
+        # TODO: 問題環境のstateが準備完了になるタイミングが一律同じでないためREADYに変更するタイミングの修正の可能性あり.
+        problem_environment.state = 'READY'
+        problem_environment.save()
+
     except:
         import traceback
         save_log(environment_id, 999, '', traceback.format_exc())

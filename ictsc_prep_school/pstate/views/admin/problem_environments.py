@@ -15,31 +15,32 @@ class ProblemEnvironmentCreateView(LoginRequiredAndPermissionRequiredMixin, Crea
 
     def form_valid(self, form):
         problem = Problem.objects.get(id=self.kwargs['pk'])
-        # workerに対して処理の実行命令.
-        from terraform_manager.models import Environment
-        environment = Environment(terraform_file=problem.terraform_file_id,
-                                  is_locked=False)
-        environment.save()
+        for team in form.cleaned_data['teams']:
+            # workerに対して処理の実行命令.
+            from terraform_manager.models import Environment
+            environment = Environment(terraform_file=problem.terraform_file_id,
+                                      is_locked=False)
+            environment.save()
 
-        # データの作成.
-        problem_environment = ProblemEnvironment(vnc_server_ipv4_address=None,
-                                                 is_enabled=True,
-                                                 team=form.cleaned_data['team'],
-                                                 participant=None,
-                                                 environment=environment,
-                                                 problem=problem)
-        problem_environment.save()
+            # データの作成.
+            problem_environment = ProblemEnvironment(vnc_server_ipv4_address=None,
+                                                     is_enabled=True,
+                                                     team=team,
+                                                     participant=None,
+                                                     environment=environment,
+                                                     problem=problem)
+            problem_environment.save()
 
-        # VNCサーバのパスワードを参照しworkerに対して処理の実行命令する際に転送する.
-        var = {"VNC_SERVER_PASSWORD": problem_environment.vnc_server_password}
-        # workerに対して実行命令を発行.
-        from terraform_manager.terraform_manager_tasks import direct_apply
-        direct_apply.delay(environment.id, problem.terraform_file_id.id, var)
-        ProblemEnvironmentLog(message="Creating problem environment started",
-                              before_state=None,
-                              after_state="IN_PREPARATION",
-                              problem_environment=problem_environment).save()
-        return HttpResponseRedirect(self.success_url + str(problem_environment.id))
+            # VNCサーバのパスワードを参照しworkerに対して処理の実行命令する際に転送する.
+            var = {"VNC_SERVER_PASSWORD": problem_environment.vnc_server_password}
+            # workerに対して実行命令を発行.
+            from terraform_manager.terraform_manager_tasks import direct_apply
+            direct_apply.delay(environment.id, problem.terraform_file_id.id, var)
+            ProblemEnvironmentLog(message="Creating problem environment started",
+                                  before_state=None,
+                                  after_state="IN_PREPARATION",
+                                  problem_environment=problem_environment).save()
+        return HttpResponseRedirect(self.success_url)
 
 
 class ProblemEnvironmentListView(LoginRequiredAndPermissionRequiredMixin, ListView):

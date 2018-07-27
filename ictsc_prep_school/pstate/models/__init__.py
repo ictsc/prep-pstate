@@ -20,7 +20,7 @@ class ProblemManager(models.Manager):
 
     def get_open_problem(self):
         # modeがOPEN状態で公開時間内の問題を抽出.
-        queryset = self.filter(Q(mode='OPEN') | Q(mode='TIMER', start_date__lt=now(), end_date__gt=now()))
+        queryset = self.filter(Q(mode='OPEN') | Q(mode='TIMER', start_date__lt=now(), end_date__gt=now())).order_by('id')
         return queryset
 
 

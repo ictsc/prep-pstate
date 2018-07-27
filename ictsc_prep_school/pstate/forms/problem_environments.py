@@ -1,13 +1,20 @@
 from django import forms
 
-from pstate.models import ProblemEnvironment
+from pstate.models import ProblemEnvironment, Team
 
 
 class ProblemEnvironmentForm(forms.ModelForm):
 
+    teams = forms.ModelMultipleChoiceField(
+        label='問題環境を作成するチーム',
+        queryset=Team.objects.all(),
+        required=True,
+        widget=forms.CheckboxSelectMultiple()
+    )
+
     class Meta:
         model = ProblemEnvironment
-        fields = ['team', ]
+        fields = []
 
 
 class ProblemEnvironmentUpdateForm(forms.ModelForm):

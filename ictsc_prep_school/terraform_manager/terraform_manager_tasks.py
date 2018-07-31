@@ -234,10 +234,16 @@ def direct_apply(environment_id, terraform_file_id, var):
         problem_environment = ProblemEnvironment.objects.get(environment=environment)
         problem_environment.vnc_server_ipv4_address = stdout.strip()
         save_log(environment_id, return_code, stdout, stderr)
-        environment.state = 'APPLIED'
-        environment.save()
         if return_code in FAILED_STATUS_CODE:
             raise Exception("terraformが異常終了したためtaskを停止します")
+
+        # tfstateを保存.
+        cmd_cat = ['cat', 'terraform.tfstate']
+        result = subprocess.run(cmd_cat, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        return_code, stdout, stderr = result.returncode, result.stdout.decode('utf-8'), result.stderr.decode('utf-8')
+        environment.state = 'APPLIED'
+        environment.tfstate = stdout
+        environment.save()
         # TODO: 問題環境のstateが準備完了になるタイミングが一律同じでないためREADYに変更するタイミングの修正の可能性あり.
         problem_environment.state = 'READY'
         problem_environment.save()

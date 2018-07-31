@@ -151,6 +151,10 @@ def destroy(environment_id, var):
     import os
     if not os.path.isdir(TERRAFORM_ENVIRONMENT_ROOT_PATH + environment_id):
         prepare_environment(environment_id, environment.terraform_file.id)
+        environment_dir = TERRAFORM_ENVIRONMENT_ROOT_PATH + str(environment_id)
+        f = open(environment_dir + "/" + 'terraform.tfstate', 'wb')
+        f.write(environment.tfstate.encode('utf-8'))
+        f.close()
         init(environment_id)
     if environment.is_locked:
         # ロックしているときはコマンドを実行しない.

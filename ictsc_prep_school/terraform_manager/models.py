@@ -25,6 +25,7 @@ class Environment(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     terraform_file = models.ForeignKey('TerraformFile', unique=False, on_delete=models.SET_NULL, null=True, related_name='environment')
     state = models.CharField(max_length=20, choices=STATE_CHOICES, default=_('IN_WAITING_FOR_START'))
+    tfstate = models.TextField(blank=True)
     is_locked = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

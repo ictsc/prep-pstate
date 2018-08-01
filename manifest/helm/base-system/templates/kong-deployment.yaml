@@ -36,7 +36,6 @@ spec:
     - name: proxy-ssl
       containerPort: 443
       protocol: TCP
-      hostPort: 443
     - name: admin-ssl
       containerPort: 8444
       protocol: TCP

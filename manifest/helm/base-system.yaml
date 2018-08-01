@@ -94,6 +94,7 @@ spec:
   - name: kong-proxy-ssl
     port: 443
     targetPort: 443
+    nodePort: 443
     protocol: TCP
   selector:
     app: kong
@@ -169,7 +170,6 @@ spec:
     - name: proxy-ssl
       containerPort: 443
       protocol: TCP
-      hostPort: 443
     - name: admin-ssl
       containerPort: 8444
       protocol: TCP

@@ -17,11 +17,14 @@ urlpatterns = [
     path('pstate/manage/', include('pstate.urls.admin')),
     # 参加者向けページ
     path('pstate/user/', include('pstate.urls.user')),
-    # 登録フォーム
-    url('pstate/register/team/$', TeamRegisterView.as_view(), name='team-register'),
-    url('pstate/register/participant/$', ParticipantRegisterView.as_view(), name='participant-register'),
     # auth
     url(r'^pstate/auth/login/$', auth_views.login, {'template_name': 'admin_pages/auth/login.html'}, name='login'),
     url(r'^pstate/auth/logout/$', auth_views.logout, {'next_page': '/pstate/auth/login'}, name='logout'),
     # url(r'^password/$', views.change_password, name='change_password'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+# 登録フォームの制御.
+if settings.IS_TEAM_REGISTER_FORM_ENABLED:
+    urlpatterns.append(url('pstate/register/team/$', TeamRegisterView.as_view(), name='team-register'))
+if settings.IS_USER_REGISTER_FORM_ENABLED:
+    urlpatterns.append(url('pstate/register/participant/$', ParticipantRegisterView.as_view(), name='participant-register'))

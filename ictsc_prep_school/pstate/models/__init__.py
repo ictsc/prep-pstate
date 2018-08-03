@@ -132,6 +132,9 @@ class Team(User):
         self.is_team = True
         super(Team, self).save(*args, **kwargs)
 
+    def __str__(self):
+        return self.username + " - " + self.team_name
+
 
 class Participant(User):
     assign_team = models.ForeignKey("Team", verbose_name="所属チーム", related_name="participant",

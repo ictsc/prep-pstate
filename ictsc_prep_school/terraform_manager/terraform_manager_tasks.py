@@ -160,14 +160,15 @@ def apply(environment_id, var):
         save_log(environment_id, 999, '', traceback.format_exc())
         environment.state = 'FAILED'
         environment.save()
-    finally:
-        environment.is_locked = False
+    else:
         environment.state = 'APPLIED'
-        environment.save()
         from pstate.models import ProblemEnvironment
         problem_environment = ProblemEnvironment.objects.get(environment=environment)
         problem_environment.state = 'READY'
         problem_environment.save()
+    finally:
+        environment.is_locked = False
+        environment.save()
 
 
 @app.task
@@ -212,14 +213,15 @@ def destroy(environment_id, var):
         save_log(environment_id, 999, '', traceback.format_exc())
         environment.state = 'FAILED'
         environment.save()
-    finally:
-        environment.is_locked = False
+    else:
         environment.state = 'DESTROYED'
-        environment.save()
         from pstate.models import ProblemEnvironment
         problem_environment = ProblemEnvironment.objects.get(environment=environment)
         problem_environment.state = 'DELETED'
         problem_environment.save()
+    finally:
+        environment.is_locked = False
+        environment.save()
 
 
 @app.task

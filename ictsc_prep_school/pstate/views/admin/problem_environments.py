@@ -137,6 +137,26 @@ class ProblemEnvironmentCreateExecuteView(LoginRequiredAndPermissionRequiredMixi
         return HttpResponseRedirect(self.success_url)
 
 
+class ProblemEnvironmentApplyView(LoginRequiredAndPermissionRequiredMixin, FormView):
+    template_name = 'admin_pages/problem/problem_environment_apply_execute.html'
+    form_class = ProblemEnvironmentDestroyExecuteForm
+    success_url = "/pstate/manage/problem_environments/"
+
+    def form_valid(self, form):
+        problem_environment = ProblemEnvironment.objects.get(id=self.kwargs['pk'])
+        environment = problem_environment.environment
+        # workerに対して処理の実行命令.
+        from terraform_manager.terraform_manager_tasks import apply
+        var = []
+        apply.delay(environment.id, var)
+
+        ProblemEnvironmentLog(message="Problem environment reapplying started",
+                              before_state=problem_environment.state,
+                              after_state="IN_PREPARATION",
+                              problem_environment=problem_environment).save()
+        return HttpResponseRedirect(self.success_url + str(problem_environment.id))
+
+
 class ProblemEnvironmentDestroyView(LoginRequiredAndPermissionRequiredMixin, FormView):
     template_name = 'admin_pages/problem/problem_environment_destroy_execute.html'
     form_class = ProblemEnvironmentDestroyExecuteForm

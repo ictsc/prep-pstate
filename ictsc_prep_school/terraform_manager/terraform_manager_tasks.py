@@ -132,8 +132,29 @@ def apply(environment_id, var):
         return_code, stdout, stderr = tf.apply(var=var)
         os.environ.pop("TF_CLI_ARGS")
         save_log(environment_id, return_code, stdout, stderr)
+        #   terraform output vnc_global_ip
+        cmd = ['terraform', 'output', 'vnc_global_ip']
+        import subprocess
+        os.chdir(TERRAFORM_ENVIRONMENT_ROOT_PATH + str(environment_id))
+        result = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        return_code, stdout, stderr = result.returncode, result.stdout.decode('utf-8'), result.stderr.decode('utf-8')
+        from pstate.models import ProblemEnvironment
+        problem_environment = ProblemEnvironment.objects.get(environment=environment)
+        problem_environment.vnc_server_ipv4_address = stdout.strip()
+        save_log(environment_id, return_code, stdout, stderr)
         if return_code in FAILED_STATUS_CODE:
             raise Exception("terraformが異常終了したためtaskを停止します")
+
+        # tfstateを保存.
+        cmd_cat = ['cat', 'terraform.tfstate']
+        result = subprocess.run(cmd_cat, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        return_code, stdout, stderr = result.returncode, result.stdout.decode('utf-8'), result.stderr.decode('utf-8')
+        environment.state = 'APPLIED'
+        environment.tfstate = stdout
+        environment.save()
+        # TODO: 問題環境のstateが準備完了になるタイミングが一律同じでないためREADYに変更するタイミングの修正の可能性あり.
+        problem_environment.state = 'READY'
+        problem_environment.save()
     except:
         import traceback
         save_log(environment_id, 999, '', traceback.format_exc())

@@ -151,3 +151,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
     )
 }
+
+# 登録フォームの制御.
+IS_TEAM_REGISTER_FORM_ENABLED = False
+IS_USER_REGISTER_FORM_ENABLED = False

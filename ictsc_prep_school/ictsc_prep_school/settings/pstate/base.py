@@ -155,3 +155,9 @@ REST_FRAMEWORK = {
 # 登録フォームの制御.
 IS_TEAM_REGISTER_FORM_ENABLED = False
 IS_USER_REGISTER_FORM_ENABLED = False
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    )
+}

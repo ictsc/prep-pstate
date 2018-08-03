@@ -14,4 +14,4 @@ DATABASES = {
 BROKER_URL = 'redis://redis.prep-stg.icttoracon.net:6379/0'
 CELERY_RESULT_BACKEND = 'redis://redis.prep-stg.icttoracon.net:6379/0'
 
-DEBUG = True
+DEBUG = False

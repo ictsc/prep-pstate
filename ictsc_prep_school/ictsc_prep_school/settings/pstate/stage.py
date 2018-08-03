@@ -18,4 +18,4 @@ CSRF_TRUSTED_ORIGINS = [
         ".prep-stg.icttoracon.net",
 ]
 
-DEBUG = True
+DEBUG = False

@@ -105,12 +105,18 @@ def apply(environment_id, var):
     :param environment_id:  環境ID
     :param var: terraformコマンド実行時に引数に渡す変数
     """
+    FAILED_STATUS_CODE = [1, ]
+
     from terraform_manager.models import Environment
     environment = Environment.objects.get(id=environment_id)
 
     import os
     if not os.path.isdir(TERRAFORM_ENVIRONMENT_ROOT_PATH + environment_id):
         prepare_environment(environment_id, environment.terraform_file.id)
+        environment_dir = TERRAFORM_ENVIRONMENT_ROOT_PATH + str(environment_id)
+        f = open(environment_dir + "/" + 'terraform.tfstate', 'wb')
+        f.write(environment.tfstate.encode('utf-8'))
+        f.close()
         init(environment_id)
     if environment.is_locked:
         # ロックしているときはコマンドを実行しない.
@@ -126,6 +132,8 @@ def apply(environment_id, var):
         return_code, stdout, stderr = tf.apply(var=var)
         os.environ.pop("TF_CLI_ARGS")
         save_log(environment_id, return_code, stdout, stderr)
+        if return_code in FAILED_STATUS_CODE:
+            raise Exception("terraformが異常終了したためtaskを停止します")
     except:
         import traceback
         save_log(environment_id, 999, '', traceback.format_exc())
@@ -135,6 +143,10 @@ def apply(environment_id, var):
         environment.is_locked = False
         environment.state = 'APPLIED'
         environment.save()
+        from pstate.models import ProblemEnvironment
+        problem_environment = ProblemEnvironment.objects.get(environment=environment)
+        problem_environment.state = 'READY'
+        problem_environment.save()
 
 
 @app.task
@@ -144,6 +156,8 @@ def destroy(environment_id, var):
     :param environment_id:  環境ID
     :param var: terraformコマンド実行時に引数に渡す変数
     """
+    FAILED_STATUS_CODE = [1, ]
+
     #   TODO    :   マルチノードの場合、正常に処理が実行されないので、backendを指定してステータスを管理する.
     from terraform_manager.models import Environment
     environment = Environment.objects.get(id=environment_id)
@@ -170,6 +184,8 @@ def destroy(environment_id, var):
         return_code, stdout, stderr = tf.destroy(var=var)
         os.environ.pop("TF_CLI_ARGS")
         save_log(environment_id, return_code, stdout, stderr)
+        if return_code in FAILED_STATUS_CODE:
+            raise Exception("terraformが異常終了したためtaskを停止します")
     except:
         import traceback
         save_log(environment_id, 999, '', traceback.format_exc())
@@ -179,6 +195,10 @@ def destroy(environment_id, var):
         environment.is_locked = False
         environment.state = 'DESTROYED'
         environment.save()
+        from pstate.models import ProblemEnvironment
+        problem_environment = ProblemEnvironment.objects.get(environment=environment)
+        problem_environment.state = 'DELETED'
+        problem_environment.save()
 
 
 @app.task

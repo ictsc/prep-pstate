@@ -7,6 +7,7 @@
 <div align="right">
     <button class="btn btn-info" onClick="location.href='{% url 'pstate-manage:problemenvironment-edit' pk=problemenvironment.id %}'" >{% trans 'Edit' %}</button>
     <button class="btn btn-danger" onClick="location.href='{% url 'pstate-manage:problemenvironment-recreate' pk=problemenvironment.id %}'" >{% trans 'Recreate Environment' %}</button>
+    <button class="btn btn-danger" onClick="location.href='{% url 'pstate-manage:problemenvironment-apply' pk=problemenvironment.id %}'" >{% trans 'Apply(Terraform)' %}</button>
     <button class="btn btn-danger" onClick="location.href='{% url 'pstate-manage:problemenvironment-destroy' pk=problemenvironment.id %}'" >{% trans 'Destroy(Terraform)' %}</button>
     <button class="btn btn-danger" onClick="location.href='{% url 'pstate-manage:problemenvironment-delete' pk=problemenvironment.id %}'" >{% trans 'Delete' %}</button>
 </div>

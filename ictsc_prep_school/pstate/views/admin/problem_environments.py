@@ -32,7 +32,8 @@ class ProblemEnvironmentCreateView(LoginRequiredAndPermissionRequiredMixin, Crea
             problem_environment.save()
 
             # VNCサーバのパスワードを参照しworkerに対して処理の実行命令する際に転送する.
-            var = {"VNC_SERVER_PASSWORD": problem_environment.vnc_server_password}
+            var = {"VNC_SERVER_PASSWORD": problem_environment.vnc_server_password,
+                   "TEAM_LOGIN_ID": team.username}
             # workerに対して実行命令を発行.
             from terraform_manager.terraform_manager_tasks import direct_apply
             direct_apply.delay(environment.id, problem.terraform_file_id.id, var)
@@ -97,7 +98,8 @@ class ProblemEnvironmentTestRunExecuteView(LoginRequiredAndPermissionRequiredMix
         problem_environment.save()
 
         # VNCサーバのパスワードを参照しworkerに対して処理の実行命令する際に転送する.
-        var = {"VNC_SERVER_PASSWORD": problem_environment.vnc_server_password}
+        var = {"VNC_SERVER_PASSWORD": problem_environment.vnc_server_password,
+               "TEAM_LOGIN_ID": "ICTSC-ADMIN"}
         # workerに対して実行命令を発行.
         from terraform_manager.terraform_manager_tasks import direct_apply
         direct_apply.delay(environment.id, problem.terraform_file_id.id, var)
@@ -147,7 +149,9 @@ class ProblemEnvironmentApplyView(LoginRequiredAndPermissionRequiredMixin, FormV
         environment = problem_environment.environment
         # workerに対して処理の実行命令.
         from terraform_manager.terraform_manager_tasks import apply
-        var = []
+
+        var = {"VNC_SERVER_PASSWORD": problem_environment.vnc_server_password,
+               "TEAM_LOGIN_ID": problem_environment.team.username}
         apply.delay(environment.id, var)
 
         ProblemEnvironmentLog(message="Problem environment reapplying started",
@@ -210,7 +214,8 @@ class ProblemEnvironmentRecreateView(LoginRequiredAndPermissionRequiredMixin, Fo
         recreate_problem_environment.save()
 
         # VNCサーバのパスワードを参照しworkerに対して処理の実行命令する際に転送する.
-        var = {"VNC_SERVER_PASSWORD": recreate_problem_environment.vnc_server_password}
+        var = {"VNC_SERVER_PASSWORD": recreate_problem_environment.vnc_server_password,
+               "TEAM_LOGIN_ID": target_team.username}
 
         from terraform_manager.terraform_manager_tasks import direct_apply
         direct_apply.delay(recreate_environment.id, recreate_problem.terraform_file_id.id, var)

@@ -149,12 +149,7 @@ def apply(environment_id, var):
         if return_code in FAILED_STATUS_CODE:
             raise Exception("terraformが異常終了したためtaskを停止します")
 
-        # tfstateを保存.
-        cmd_cat = ['cat', 'terraform.tfstate']
-        result = subprocess.run(cmd_cat, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        return_code, stdout, stderr = result.returncode, result.stdout.decode('utf-8'), result.stderr.decode('utf-8')
         environment.state = 'APPLIED'
-        environment.tfstate = stdout
         environment.save()
         # TODO: 問題環境のstateが準備完了になるタイミングが一律同じでないためREADYに変更するタイミングの修正の可能性あり.
         problem_environment.state = 'READY'
@@ -172,6 +167,13 @@ def apply(environment_id, var):
         problem_environment.save()
     finally:
         environment.is_locked = False
+        environment.save()
+        import subprocess
+        # tfstateを保存.
+        cmd_cat = ['cat', 'terraform.tfstate']
+        result = subprocess.run(cmd_cat, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        return_code, stdout, stderr = result.returncode, result.stdout.decode('utf-8'), result.stderr.decode('utf-8')
+        environment.tfstate = stdout
         environment.save()
 
 
@@ -291,12 +293,7 @@ def direct_apply(environment_id, terraform_file_id, var):
         if return_code in FAILED_STATUS_CODE:
             raise Exception("terraformが異常終了したためtaskを停止します")
 
-        # tfstateを保存.
-        cmd_cat = ['cat', 'terraform.tfstate']
-        result = subprocess.run(cmd_cat, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        return_code, stdout, stderr = result.returncode, result.stdout.decode('utf-8'), result.stderr.decode('utf-8')
         environment.state = 'APPLIED'
-        environment.tfstate = stdout
         environment.save()
         # TODO: 問題環境のstateが準備完了になるタイミングが一律同じでないためREADYに変更するタイミングの修正の可能性あり.
         problem_environment.state = 'READY'
@@ -309,6 +306,13 @@ def direct_apply(environment_id, terraform_file_id, var):
         environment.save()
     finally:
         environment.is_locked = False
+        environment.save()
+        import subprocess
+        # tfstateを保存.
+        cmd_cat = ['cat', 'terraform.tfstate']
+        result = subprocess.run(cmd_cat, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        return_code, stdout, stderr = result.returncode, result.stdout.decode('utf-8'), result.stderr.decode('utf-8')
+        environment.tfstate = stdout
         environment.save()
 
 

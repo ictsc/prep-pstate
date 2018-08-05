@@ -60,9 +60,7 @@ class ProblemDetailView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         try:
             problem_environment = ProblemEnvironment.objects.filter(team=Team.objects.get(id=self.request.user.id),
-                                                                    problem=kwargs['object'].id,
-                                                                    is_enabled=True,
-                                                                    problem__is_enabled=True).latest('created_at')
+                                                                    problem=kwargs['object'].id).latest('created_at')
         except:
             problem_environment = None
         context['problem_environment'] = problem_environment

@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
   - name: pstate-worker
-    image: terraform-manager-worker:20180808010
+    image: terraform-manager-worker:20180816011
     env:
     - name: DJANGO_SETTINGS_MODULE
       value: ictsc_prep_school.settings.terraform_manager.develop

@@ -6,7 +6,7 @@ RUN yum install -y curl unzip python3-devel
 RUN yum groupinstall -y "Development Tools"
 RUN curl -sL https://releases.hashicorp.com/terraform/0.11.7/terraform_0.11.7_linux_amd64.zip > terraform.zip
 RUN unzip terraform.zip
-RUN curl -sL https://github.com/sacloud/terraform-provider-sakuracloud/releases/download/v1.0.5/terraform-provider-sakuracloud_1.0.5_linux-amd64.zip > terraform_sackuracloud.zip
+RUN curl -sL https://github.com/sacloud/terraform-provider-sakuracloud/releases/download/v1.3.4/terraform-provider-sakuracloud_1.3.4_linux-amd64.zip > terraform_sackuracloud.zip
 RUN unzip terraform_sackuracloud.zip
 
 # ライブラリのインストール.

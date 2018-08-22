@@ -50,7 +50,7 @@ class ProblemEnvironmentListView(LoginRequiredAndPermissionRequiredMixin, ListVi
     template_name = 'admin_pages/problem_environment/index.html'
 
     def get_queryset(self):
-        return super().get_queryset().order_by('id')
+        return super().get_queryset().filter(is_enabled=True).order_by('id')
 
 
 class ProblemEnvironmentDetailView(LoginRequiredAndPermissionRequiredMixin, DetailView):
@@ -199,6 +199,10 @@ class ProblemEnvironmentRecreateView(LoginRequiredAndPermissionRequiredMixin, Fo
                               before_state=destroy_problem_environment.state,
                               after_state="WAITING_FOR_DELETE",
                               problem_environment=destroy_problem_environment).save()
+
+        # 破棄した問題環境の有効状態を無効にする.
+        destroy_problem_environment.is_enabled = False
+        destroy_problem_environment.save()
 
         # 再作成処理.
         from terraform_manager.models import Environment

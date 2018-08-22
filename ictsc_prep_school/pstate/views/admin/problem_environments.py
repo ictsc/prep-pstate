@@ -50,7 +50,27 @@ class ProblemEnvironmentListView(LoginRequiredAndPermissionRequiredMixin, ListVi
     template_name = 'admin_pages/problem_environment/index.html'
 
     def get_queryset(self):
-        return super().get_queryset().filter(is_enabled=True).order_by('id')
+        queryset = super().get_queryset()
+        if self.request.GET.get("ip_address") or self.request.GET.getlist("team") or self.request.GET.getlist("problem"):
+            # 絞り込みした件数を全数表示.
+            self.paginate_by = 1000
+        teams = self.request.GET.getlist("team")
+        problems = self.request.GET.getlist("problem")
+        ipv4_address = self.request.GET.get("ip_address")
+        if len(teams) != 0:
+            queryset = queryset.filter(team__in=teams, is_enabled=True).order_by('id')
+        if len(problems) != 0:
+            queryset = queryset.filter(problem__in=problems, is_enabled=True).order_by('id')
+        if self.request.GET.get("ip_address") is not None and not self.request.GET.get("ip_address") == "":
+            queryset = queryset.filter(vnc_server_ipv4_address=ipv4_address)
+        queryset = queryset.filter(is_enabled=True).order_by('id')
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['problems'] = Problem.objects.all()
+        context['teams'] = Team.objects.all()
+        return context
 
 
 class ProblemEnvironmentDetailView(LoginRequiredAndPermissionRequiredMixin, DetailView):

@@ -9,7 +9,7 @@
 
     {% block footer_left %}
     {% block legal %}
-    <strong>Copyright &copy; {% now "Y" %}{% if not site %}.{% endif %}
+    <strong>Copyright &copy; {% now "Y" %}{% if not site %} ICTSC.{% endif %}
         {% if site %}
             <a href="http://{{ site.domain }}">{{ site.name }}</a>
         {% endif %}

@@ -18,6 +18,7 @@ ADD ./libs /root/ictsc_prep_school/settings/pstate/static
 RUN python3 manage.py collectstatic --noinput
 
 ADD docker_build/pstate_webui_staticfiles_webserver/server.conf /etc/nginx/conf.d/default.conf
+ADD docker_build/pstate_webui_staticfiles_webserver/nginx.conf /etc/nginx/nginx.conf
 
 RUN mkdir /root/logs
 RUN mkdir -p /root/public/pstate-static/

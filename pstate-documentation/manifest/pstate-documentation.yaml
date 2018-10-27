@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pstate-documentation-service
+spec:
+  type: ClusterIP
+  ports:
+  - name: pstate-doc
+    port: 80
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: pstate-doc
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pstate-doc
+  labels:
+    app: pstate-doc
+spec:
+  containers:
+  - name: pstate-doc
+    image: pstate-documentation-server:20180704
+    ports:
+    - name: pstate-doc
+      containerPort: 80
+      protocol: TCP

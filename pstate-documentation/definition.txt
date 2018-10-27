@@ -1,0 +1,12 @@
+.. |PSTATE_DJANGO_ADMIN_URL| replace:: https://prep-dev.icttoracon.net/pstate/admin
+.. |PSTATE_TOP_URL_DEVELOPMENT| replace:: https://prep-dev.icttoracon.net/pstate
+.. |PSTATE_REGISTER_TEAM_URL_DEVELOPMENT| replace:: https://prep-dev.icttoracon.net/pstate/register/team
+
+.. |PSTATE_DJANGO_ADMIN_URL_STAGING| replace:: https://prep-stg.icttoracon.net/pstate/admin
+.. |PSTATE_TOP_URL_STAGING| replace:: https://prep-stg.icttoracon.net/pstate
+.. |PSTATE_REGISTER_TEAM_URL_STAGING| replace:: https://prep-stg.icttoracon.net/pstate/register/team
+
+
+.. |PSTATE_DJANGO_ADMIN_URL_PRODUCTION| replace:: https://prep.icttoracon.net/pstate/admin
+.. |PSTATE_TOP_URL_PRODUCTION| replace:: https://prep.icttoracon.net/pstate
+.. |PSTATE_REGISTER_TEAM_URL_PRODUCTION| replace:: https://prep.icttoracon.net/pstate/register/team

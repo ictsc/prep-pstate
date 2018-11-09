@@ -11,7 +11,7 @@ DATABASES = {
     }
 }
 
-BROKER_URL = 'redis://59.106.211.157:6379/0'
-CELERY_RESULT_BACKEND = 'redis://59.106.211.157:6379/0'
+BROKER_URL = 'redis://redis.prep-dev.icttoracon.net:6379/0'
+CELERY_RESULT_BACKEND = 'redis://redis.prep-dev.icttoracon.net:6379/0'
 
 DEBUG = True

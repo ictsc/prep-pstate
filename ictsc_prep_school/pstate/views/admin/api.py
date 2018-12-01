@@ -21,5 +21,8 @@ class ProblemEnvironmentViewSet(mixins.ListModelMixin,
 
     authentication_classes = (BasicAuthentication, )
     permission_classes = (IsAuthenticated, IsStaff)
-    queryset = ProblemEnvironment.objects.all()
+    queryset = ProblemEnvironment.objects.none()
     serializer_class = ProblemEnvironmentSerializer
+
+    def get_queryset(self):
+        return ProblemEnvironment.objects.filter(is_enabled=True)

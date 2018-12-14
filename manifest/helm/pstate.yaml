@@ -25,7 +25,7 @@ metadata:
 spec:
   containers:
   - name: pstate
-    image: pstate_webui:20180824015
+    image: pstate_webui:20181214016
     ports:
     - name: pstate
       containerPort: 80

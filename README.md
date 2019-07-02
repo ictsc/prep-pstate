@@ -1,4 +1,17 @@
 # pstate
+## docker-composeでの起動方法
+```bash
+git clone https://github.com/ictsc/prep-pstate.git
+cd prep-pstate
+docker-compose build
+docker-compose up -d
+```
+
+ブラウザにて http://127.0.0.1:8088/pstate にアクセス
+
+管理者ユーザ / パスワード: pstate / pstate
+
+
 ## Deployment
 ### 0. Preparation of MQ (Redis) and DB(postgres)
 Please prepare MQ (Redis) and DB (postgres).

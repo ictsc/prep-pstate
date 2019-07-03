@@ -48,6 +48,7 @@ class ProblemEnvironmentListView(LoginRequiredAndPermissionRequiredMixin, ListVi
     model = ProblemEnvironment
     paginate_by = 15
     template_name = 'admin_pages/problem_environment/index.html'
+    success_url = '/pstate/manage/problem_environments/'
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -72,6 +73,16 @@ class ProblemEnvironmentListView(LoginRequiredAndPermissionRequiredMixin, ListVi
         context['teams'] = Team.objects.all()
         return context
 
+    def post(self, request):
+        post_pks = request.POST.getlist('problem_id')
+        if "destroy" in request.POST:
+            for problem_environment in ProblemEnvironment.objects.filter(pk__in=post_pks):
+                environment = problem_environment.environment
+                ProblemEnvironmentDestroyView.terraform_destroy(problem_environment, environment)
+            return HttpResponseRedirect(self.success_url)
+        elif "delete" in request.POST:
+            ProblemEnvironment.objects.filter(pk__in=post_pks).delete()
+            return HttpResponseRedirect(self.success_url)
 
 class ProblemEnvironmentDetailView(LoginRequiredAndPermissionRequiredMixin, DetailView):
     model = ProblemEnvironment

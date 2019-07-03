@@ -3,10 +3,10 @@ from ictsc_prep_school.settings.terraform_manager.base import *
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'terraform_manager2',
-        'USER': 'terraform',
-        'PASSWORD': 'terraform',
-        'HOST': '163.43.30.30',
+        'NAME': 'pstate',
+        'USER': 'pstate',
+        'PASSWORD': 't0FPoJaZ',
+        'HOST': 'db.prep-dev.icttoracon.net',
         'PORT': '5432',
     }
 }

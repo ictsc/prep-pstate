@@ -75,14 +75,12 @@ class ProblemEnvironmentListView(LoginRequiredAndPermissionRequiredMixin, ListVi
 
     def post(self, request):
         post_pks = request.POST.getlist('problem_id')
-        if "destroy" in request.POST:
-            for problem_environment in ProblemEnvironment.objects.filter(pk__in=post_pks):
-                environment = problem_environment.environment
-                ProblemEnvironmentDestroyView.terraform_destroy(problem_environment, environment)
-            return HttpResponseRedirect(self.success_url)
-        elif "delete" in request.POST:
+        for problem_environment in ProblemEnvironment.objects.filter(pk__in=post_pks):
+            environment = problem_environment.environment
+            ProblemEnvironmentDestroyView.terraform_destroy(problem_environment, environment)
+        if "delete" in request.POST:
             ProblemEnvironment.objects.filter(pk__in=post_pks).delete()
-            return HttpResponseRedirect(self.success_url)
+        return HttpResponseRedirect(self.success_url)
 
 class ProblemEnvironmentDetailView(LoginRequiredAndPermissionRequiredMixin, DetailView):
     model = ProblemEnvironment

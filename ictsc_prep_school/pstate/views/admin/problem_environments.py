@@ -200,7 +200,12 @@ class ProblemEnvironmentDestroyView(LoginRequiredAndPermissionRequiredMixin, For
     def form_valid(self, form):
         problem_environment = ProblemEnvironment.objects.get(id=self.kwargs['pk'])
         environment = problem_environment.environment
-        # workerに対して処理の実行命令.
+        # workerに投げる    
+        self.terraform_destroy(problem_environment, environment)
+        return HttpResponseRedirect(self.success_url + str(problem_environment.id))
+
+    # workerに対して処理の実行命令.
+    def terraform_destroy(problem_environment, environment):
         from terraform_manager.terraform_manager_tasks import destroy
         var = []
         destroy.delay(environment.id, var)
@@ -208,7 +213,7 @@ class ProblemEnvironmentDestroyView(LoginRequiredAndPermissionRequiredMixin, For
                               before_state=problem_environment.state,
                               after_state="WAITING_FOR_DELETE",
                               problem_environment=problem_environment).save()
-        return HttpResponseRedirect(self.success_url + str(problem_environment.id))
+
 
 
 class ProblemEnvironmentRecreateView(LoginRequiredAndPermissionRequiredMixin, FormView):

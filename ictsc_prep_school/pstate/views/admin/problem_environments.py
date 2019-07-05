@@ -203,7 +203,7 @@ class ProblemEnvironmentDestroyView(LoginRequiredAndPermissionRequiredMixin, For
         return HttpResponseRedirect(self.success_url + str(problem_environment.id))
 
     # workerに対して処理の実行命令.
-    def terraform_destroy(problem_environment, environment):
+    def terraform_destroy(self, problem_environment, environment):
         from terraform_manager.terraform_manager_tasks import destroy
         var = []
         destroy.delay(environment.id, var)

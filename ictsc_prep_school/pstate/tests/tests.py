@@ -46,9 +46,11 @@ class ProblemEnvironmentListViewTests(TestCase):
         test_environment =  create_test_environment(test_tf_file)
         test_problem = create_test_problem(test_tf_file)
         test_problem_environment = create_test_problem_environment(test_environment, test_problem)
+        test_problem_environment_count = ProblemEnvironment.objects.count()
         response = self.client.post("/pstate/manage/problem_environments/", {"problem_id": "1", "destroy": "destroy"})
         self.assertEqual(response.status_code, 302)
-        
+        self.assertEqual(test_problem_environment_count, ProblemEnvironment.objects.count())
+
     def test_no_data_bulk_destroy_post(self):
         pass
 
@@ -57,9 +59,11 @@ class ProblemEnvironmentListViewTests(TestCase):
         test_environment =  create_test_environment(test_tf_file)
         test_problem = create_test_problem(test_tf_file)
         test_problem_environment = create_test_problem_environment(test_environment, test_problem)
+        test_problem_environment_count = ProblemEnvironment.objects.count()
         response = self.client.post("/pstate/manage/problem_environments/", {"problem_id": "1", "delete": "delete"})
         self.assertEqual(response.status_code, 302)
-
+        self.assertEqual(test_problem_environment_count - 1, ProblemEnvironment.objects.count())
+  
     def test_no_data__bulk_delete_post(self):
         pass
 

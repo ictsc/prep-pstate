@@ -7,7 +7,7 @@ class TeamForm(forms.ModelForm):
 
     class Meta:
         model = Team
-        fields = ['team_name', 'username', 'password', 'email', 'description', 'remarks']
+        fields = ['team_name', 'username', 'team_number', 'password', 'email', 'description', 'remarks']
         exclude = ['last_login', 'first_name', 'last_name', 'date_joined', 'is_superuser', 'groups', 'user_permissions', 'is_staff']
         widgets = {
             'team_name': forms.TextInput(attrs={'class': "form-control"}),

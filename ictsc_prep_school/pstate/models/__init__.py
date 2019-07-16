@@ -123,7 +123,7 @@ class Team(User):
     team_name = models.CharField("チーム名", max_length=100)
     description = models.TextField(blank=True, null=True)
     remarks = models.TextField(blank=True, null=True)
-    team_number = models.IntegerField(default=0)
+    team_number = models.IntegerField(default=0, unique=True)
 
     class Meta:
         verbose_name = 'Team'

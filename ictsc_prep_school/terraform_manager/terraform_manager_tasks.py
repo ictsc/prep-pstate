@@ -3,7 +3,6 @@ import os
 from celery import Celery
 from python_terraform import Terraform
 
-
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ictsc_prep_school.settings.terraform_manager.develop')
 
 app = Celery('terraform_manager')
@@ -39,6 +38,7 @@ def init(environment_id):
     terraform initを実行します.
     :param environment_id:  環境ID
     """
+    from pstate.models import NotificationQueue
     from terraform_manager.models import Environment
     environment = Environment.objects.get(id=environment_id)
 
@@ -47,6 +47,7 @@ def init(environment_id):
     environment.is_locked = True
     environment.state = 'IN_INITIALIZE'
     environment.save()
+    NotificationQueue.objects.create(environment=environment)
     try:
         tf = Terraform(working_dir=TERRAFORM_ENVIRONMENT_ROOT_PATH + str(environment_id))
         return_code, stdout, stderr = tf.init()
@@ -56,10 +57,12 @@ def init(environment_id):
         save_log(environment_id, 999, '', traceback.format_exc())
         environment.state = 'FAILED'
         environment.save()
+        NotificationQueue.objects.create(environment=environment)
     finally:
         environment.is_locked = False
         environment.state = 'INITIALIZED'
         environment.save()
+        NotificationQueue.objects.create(environment=environment)
 
 
 @app.task
@@ -69,6 +72,7 @@ def plan(environment_id, var):
     :param environment_id:  環境ID
     :param var: terraformコマンド実行時に引数に渡す変数
     """
+    from pstate.models import NotificationQueue
     from terraform_manager.models import Environment
     environment = Environment.objects.get(id=environment_id)
 
@@ -83,6 +87,7 @@ def plan(environment_id, var):
     environment.is_locked = True
     environment.state = 'IN_PLANNING'
     environment.save()
+    NotificationQueue.objects.create(environment=environment)
     try:
         tf = Terraform(working_dir=TERRAFORM_ENVIRONMENT_ROOT_PATH + str(environment_id))
         return_code, stdout, stderr = tf.plan(var=var)
@@ -92,10 +97,12 @@ def plan(environment_id, var):
         save_log(environment_id, 999, '', traceback.format_exc())
         environment.state = 'FAILED'
         environment.save()
+        NotificationQueue.objects.create(environment=environment)
     finally:
         environment.is_locked = False
         environment.state = 'PLANNED'
         environment.save()
+        NotificationQueue.objects.create(environment=environment)
 
 
 @app.task
@@ -106,7 +113,7 @@ def apply(environment_id, var):
     :param var: terraformコマンド実行時に引数に渡す変数
     """
     FAILED_STATUS_CODE = [1, ]
-
+    from pstate.models import NotificationQueue
     from terraform_manager.models import Environment
     environment = Environment.objects.get(id=environment_id)
 
@@ -125,6 +132,7 @@ def apply(environment_id, var):
     environment.is_locked = True
     environment.state = 'IN_APPLYING'
     environment.save()
+    NotificationQueue.objects.create(environment=environment)
     try:
         import os
         os.environ["TF_CLI_ARGS"] = "-auto-approve=true"
@@ -154,11 +162,13 @@ def apply(environment_id, var):
         # TODO: 問題環境のstateが準備完了になるタイミングが一律同じでないためREADYに変更するタイミングの修正の可能性あり.
         problem_environment.state = 'READY'
         problem_environment.save()
+        NotificationQueue.objects.create(environment=environment)
     except:
         import traceback
         save_log(environment_id, 999, '', traceback.format_exc())
         environment.state = 'FAILED'
         environment.save()
+        NotificationQueue.objects.create(environment=environment)
     else:
         environment.state = 'APPLIED'
         from pstate.models import ProblemEnvironment
@@ -168,6 +178,7 @@ def apply(environment_id, var):
     finally:
         environment.is_locked = False
         environment.save()
+        NotificationQueue.objects.create(environment=environment)
         import subprocess
         # tfstateを保存.
         cmd_cat = ['cat', 'terraform.tfstate']
@@ -189,6 +200,7 @@ def destroy(environment_id, var):
     #   TODO    :   マルチノードの場合、正常に処理が実行されないので、backendを指定してステータスを管理する.
     from terraform_manager.models import Environment
     environment = Environment.objects.get(id=environment_id)
+    from pstate.models import NotificationQueue
 
     import os
     if not os.path.isdir(TERRAFORM_ENVIRONMENT_ROOT_PATH + environment_id):
@@ -205,6 +217,7 @@ def destroy(environment_id, var):
     environment.is_locked = True
     environment.state = 'IN_DESTROYING'
     environment.save()
+    NotificationQueue.objects.create(environment=environment)
     try:
         import os
         os.environ["TF_CLI_ARGS"] = "-auto-approve=true"
@@ -219,6 +232,7 @@ def destroy(environment_id, var):
         save_log(environment_id, 999, '', traceback.format_exc())
         environment.state = 'FAILED'
         environment.save()
+        NotificationQueue.objects.create(environment=environment)
     else:
         environment.state = 'DESTROYED'
         from pstate.models import ProblemEnvironment
@@ -228,6 +242,7 @@ def destroy(environment_id, var):
     finally:
         environment.is_locked = False
         environment.save()
+        NotificationQueue.objects.create(environment=environment)
 
 
 @app.task
@@ -240,6 +255,7 @@ def direct_apply(environment_id, terraform_file_id, var):
     """
     FAILED_STATUS_CODE = [1, ]
     prepare_environment(environment_id, terraform_file_id)
+    from pstate.models import NotificationQueue
 
     from terraform_manager.models import Environment
     environment = Environment.objects.get(id=environment_id)
@@ -249,28 +265,33 @@ def direct_apply(environment_id, terraform_file_id, var):
         #   terraform init
         environment.state = 'IN_INITIALIZE'
         environment.save()
+        NotificationQueue.objects.create(environment=environment)
         tf = Terraform(working_dir=TERRAFORM_ENVIRONMENT_ROOT_PATH + str(environment_id))
         return_code, stdout, stderr = tf.init()
         save_log(environment_id, return_code, stdout, stderr)
         environment.state = 'INITIALIZED'
         environment.save()
+        NotificationQueue.objects.create(environment=environment)
         if return_code in FAILED_STATUS_CODE:
             raise Exception("terraformが異常終了したためtaskを停止します")
 
         #   terraform plan
         environment.state = 'IN_PLANNING'
         environment.save()
+        NotificationQueue.objects.create(environment=environment)
         tf = Terraform(working_dir=TERRAFORM_ENVIRONMENT_ROOT_PATH + str(environment_id))
         return_code, stdout, stderr = tf.plan(var=var)
         save_log(environment_id, return_code, stdout, stderr)
         environment.state = 'PLANNED'
         environment.save()
+        NotificationQueue.objects.create(environment=environment)
         if return_code in FAILED_STATUS_CODE:
             raise Exception("terraformが異常終了したためtaskを停止します")
 
         #   terraform apply
         environment.state = 'IN_APPLYING'
         environment.save()
+        NotificationQueue.objects.create(environment=environment)
         import os
         os.environ["TF_CLI_ARGS"] = "-auto-approve=true"
         tf = Terraform(working_dir=TERRAFORM_ENVIRONMENT_ROOT_PATH + str(environment_id))
@@ -298,12 +319,13 @@ def direct_apply(environment_id, terraform_file_id, var):
         # TODO: 問題環境のstateが準備完了になるタイミングが一律同じでないためREADYに変更するタイミングの修正の可能性あり.
         problem_environment.state = 'READY'
         problem_environment.save()
-
+        NotificationQueue.objects.create(environment=environment)
     except:
         import traceback
         save_log(environment_id, 999, '', traceback.format_exc())
         environment.state = 'FAILED'
         environment.save()
+        NotificationQueue.objects.create(environment=environment)
     finally:
         environment.is_locked = False
         environment.save()
@@ -355,7 +377,8 @@ def prepare_environment(environment_id, terraform_file_id):
         environment = Environment.objects.get(id=environment_id)
         for script in tf.shell_script.all():
             f = open(environment_dir + "/" + '{}'.format(script.file_name), 'wb')
-            script.body = script.body.replace('@@VNC_SERVER_PASSWORD@@', environment.problem_environment.all()[0].vnc_server_password)
+            script.body = script.body.replace('@@VNC_SERVER_PASSWORD@@',
+                                              environment.problem_environment.all()[0].vnc_server_password)
             f.write(script.body.encode('utf-8'))
             f.close()
 

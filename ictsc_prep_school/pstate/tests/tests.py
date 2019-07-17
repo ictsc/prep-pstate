@@ -48,6 +48,7 @@ class ProblemEnvironmentListViewTests(TestCase):
         test_problem_environment = create_test_problem_environment(test_environment, test_problem)
         test_problem_environment_count = ProblemEnvironment.objects.count()
         response = self.client.post("/pstate/manage/problem_environments/", {"problem_id": "1", "destroy": "destroy"})
+        response = self.client.post(response.url)
         self.assertEqual(response.status_code, 302)
         self.assertEqual(test_problem_environment_count, ProblemEnvironment.objects.count())
 
@@ -61,6 +62,7 @@ class ProblemEnvironmentListViewTests(TestCase):
         test_problem_environment = create_test_problem_environment(test_environment, test_problem)
         test_problem_environment_count = ProblemEnvironment.objects.count()
         response = self.client.post("/pstate/manage/problem_environments/", {"problem_id": "1", "delete": "delete"})
+        response = self.client.post(response.url)
         self.assertEqual(response.status_code, 302)
         self.assertEqual(test_problem_environment_count - 1, ProblemEnvironment.objects.count())
   

@@ -76,8 +76,8 @@ class ProblemEnvironmentListView(LoginRequiredAndPermissionRequiredMixin, ListVi
     def post(self, request):
         template_name = '/pstate/manage/problem_environments/group_destroy_delete/'
         response = HttpResponseRedirect(template_name)
-        get_params = request.POST.urlencode()
-        response['location'] += '?'+ get_params
+        post_params = request.POST.urlencode()
+        response['location'] += '?'+ post_params
         return response
 
 class ProblemEnvironmentDetailView(LoginRequiredAndPermissionRequiredMixin, DetailView):

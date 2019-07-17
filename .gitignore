@@ -16,3 +16,4 @@ tests/report/
 db.sqlite3
 .vscode
 .python-version
+static/

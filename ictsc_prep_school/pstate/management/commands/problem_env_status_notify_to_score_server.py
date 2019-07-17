@@ -21,14 +21,16 @@ class Command(BaseCommand):
         self.session = requests.Session()
 
     def handle(self, *args, **options):
-        self.__login_score_server()
+        if len(NotificationQueue.objects.all()) != 0:
+            self.__login_score_server()
         for notification in NotificationQueue.objects.all():
             try:
                 if self.__request_to_score_server(notification.payload):
                     notification.delete()
             except:
                 pass
-        self.__logout_score_server()
+        if len(NotificationQueue.objects.all()) != 0:
+            self.__logout_score_server()
 
     def __login_score_server(self):
         data = {"name": self.user_name, "password": self.password}
@@ -41,6 +43,7 @@ class Command(BaseCommand):
 
     def __request_to_score_server(self, mutation):
         data = {"query": mutation}
+        self.logger.info("Request to score server {}".format(mutation))
         response = self.session.post(url=self.graphql_url, data=data, timeout=5)
         response.raise_for_status()
         if 'errors' in response.json() and response.json()['errors'] != []:

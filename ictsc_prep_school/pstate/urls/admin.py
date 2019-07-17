@@ -10,7 +10,7 @@ from pstate.views.admin.participants import ParticipantListView, ParticipantDeta
 from pstate.views.admin.problem_environments import ProblemEnvironmentCreateView, ProblemEnvironmentTestRunExecuteView, \
     ProblemEnvironmentListView, ProblemEnvironmentDetailView, ProblemEnvironmentUpdateView, \
     ProblemEnvironmentDeleteView, ProblemEnvironmentDestroyView, ProblemEnvironmentRecreateView, \
-    ProblemEnvironmentApplyView
+    ProblemEnvironmentApplyView, ProblemEnvironmentGroupDestroyDeleteView
 from pstate.views.admin.problems import ProblemListView, ProblemDetailView, ProblemCreateView, ProblemUpdateView, \
     ProblemDescriptionUpdateView, ProblemDeleteView, ProblemPreviewView
 from pstate.views.admin.providers import ProviderListView, ProviderDetailView, ProviderCreateView, ProviderUpdateView, \
@@ -70,6 +70,8 @@ urlpatterns = [
     url(r'^problem_environments/(?P<pk>[0-9]+)/apply/$', ProblemEnvironmentApplyView.as_view(), name='problemenvironment-apply'),
     url(r'^problem_environments/(?P<pk>[0-9]+)/destroy/$', ProblemEnvironmentDestroyView.as_view(), name='problemenvironment-destroy'),
     url(r'^problem_environments/(?P<pk>[0-9]+)/recreate/$', ProblemEnvironmentRecreateView.as_view(), name='problemenvironment-recreate'),
+     url(r'^problem_environments/group_destroy_delete/$', ProblemEnvironmentGroupDestroyDeleteView.as_view(), name='problemenvironment-group-destroy'),
+
     # setting/providers
     url(r'^setting/providers/$', ProviderListView.as_view(), name='provider-list'),
     url(r'^setting/providers/(?P<pk>[0-9]+)/$', ProviderDetailView.as_view(), name='provider-detail'),

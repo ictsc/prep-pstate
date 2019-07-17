@@ -2,11 +2,11 @@ from django.http import HttpResponseRedirect
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView, FormView
 
 from pstate.forms.problems import ProblemEnvironmentCreateExecuteForm, ProblemEnvironmentDestroyExecuteForm, \
-    ProblemEnvironmentRecreateExecuteForm
+    ProblemEnvironmentRecreateExecuteForm, ProblemEnvironmentGroupDestroyDeleteExecuteForm
 from pstate.forms.problem_environments import ProblemEnvironmentForm, ProblemEnvironmentUpdateForm
 from pstate.models import Problem, ProblemEnvironment, ProblemEnvironmentLog, Team
 from pstate.views.admin import LoginRequiredAndPermissionRequiredMixin
-
+from django.shortcuts import render
 
 class ProblemEnvironmentCreateView(LoginRequiredAndPermissionRequiredMixin, CreateView):
     form_class = ProblemEnvironmentForm
@@ -74,13 +74,11 @@ class ProblemEnvironmentListView(LoginRequiredAndPermissionRequiredMixin, ListVi
         return context
 
     def post(self, request):
-        post_pks = request.POST.getlist('problem_id')
-        for problem_environment in ProblemEnvironment.objects.filter(pk__in=post_pks):
-            environment = problem_environment.environment
-            ProblemEnvironmentDestroyView().terraform_destroy(problem_environment, environment)
-        if "delete" in request.POST:
-            ProblemEnvironment.objects.filter(pk__in=post_pks).delete()
-        return HttpResponseRedirect(self.success_url)
+        template_name = '/pstate/manage/problem_environments/group_destroy_delete/'
+        response = HttpResponseRedirect(template_name)
+        get_params = request.POST.urlencode()
+        response['location'] += '?'+ get_params
+        return response
 
 class ProblemEnvironmentDetailView(LoginRequiredAndPermissionRequiredMixin, DetailView):
     model = ProblemEnvironment
@@ -262,3 +260,18 @@ class ProblemEnvironmentRecreateView(LoginRequiredAndPermissionRequiredMixin, Fo
                               after_state="IN_PREPARATION",
                               problem_environment=recreate_problem_environment).save()
         return HttpResponseRedirect(self.success_url + str(recreate_problem_environment.id))
+
+class ProblemEnvironmentGroupDestroyDeleteView(LoginRequiredAndPermissionRequiredMixin, FormView):
+    template_name = 'admin_pages/problem/problem_environment_group_destroy_execute.html'
+    form_class = ProblemEnvironmentGroupDestroyDeleteExecuteForm
+    success_url = "/pstate/manage/problem_environments/"
+
+    def form_valid(self, form):
+
+        post_pks = self.request.GET.getlist('problem_id')
+        for problem_environment in ProblemEnvironment.objects.filter(pk__in=post_pks):
+            environment = problem_environment.environment
+            ProblemEnvironmentDestroyView().terraform_destroy(problem_environment, environment)
+        if "delete" in self.request.GET:
+            ProblemEnvironment.objects.filter(pk__in=post_pks).delete()
+        return HttpResponseRedirect(self.success_url)

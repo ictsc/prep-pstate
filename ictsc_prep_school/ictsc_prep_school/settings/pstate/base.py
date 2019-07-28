@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django_adminlte',
     'django_adminlte_theme',
     'rest_framework',
+    'social_django'
 ]
 
 MIDDLEWARE = [

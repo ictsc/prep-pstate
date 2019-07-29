@@ -1,10 +1,11 @@
 {% extends 'adminlte/base.html' %}
 {% load i18n %}
+{% load tag %}
 {% block title %}{% endblock %}
 {% block content %}{% load tz %}
 <h1>{% trans 'Destroy(Terraform)' %}</h1>
 
-{% for problem_id in request.GET.problem_id %}
+{% for problem_id in request.GET|get_item:'problem_id' %}
 <p> {{ problem_id }}</p>
 {% endfor %}
 

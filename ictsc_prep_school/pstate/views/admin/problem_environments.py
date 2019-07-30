@@ -2,7 +2,7 @@ from django.http import HttpResponseRedirect
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView, FormView
 
 from pstate.forms.problems import ProblemEnvironmentCreateExecuteForm, ProblemEnvironmentDestroyExecuteForm, \
-    ProblemEnvironmentRecreateExecuteForm, ProblemEnvironmentGroupDestroyDeleteExecuteForm
+    ProblemEnvironmentRecreateExecuteForm, ProblemEnvironmentBulkDestroyDeleteExecuteForm
 from pstate.forms.problem_environments import ProblemEnvironmentForm, ProblemEnvironmentUpdateForm
 from pstate.models import Problem, ProblemEnvironment, ProblemEnvironmentLog, Team
 from pstate.views.admin import LoginRequiredAndPermissionRequiredMixin
@@ -74,7 +74,7 @@ class ProblemEnvironmentListView(LoginRequiredAndPermissionRequiredMixin, ListVi
         return context
 
     def post(self, request):
-        template_name = '/pstate/manage/problem_environments/group_destroy_delete/'
+        template_name = '/pstate/manage/problem_environments/bulk_destroy_delete/'
         response = HttpResponseRedirect(template_name)
         post_params = request.POST.urlencode()
         response['location'] += '?'+ post_params
@@ -261,9 +261,9 @@ class ProblemEnvironmentRecreateView(LoginRequiredAndPermissionRequiredMixin, Fo
                               problem_environment=recreate_problem_environment).save()
         return HttpResponseRedirect(self.success_url + str(recreate_problem_environment.id))
 
-class ProblemEnvironmentGroupDestroyDeleteView(LoginRequiredAndPermissionRequiredMixin, FormView):
-    template_name = 'admin_pages/problem/problem_environment_group_destroy_execute.html'
-    form_class = ProblemEnvironmentGroupDestroyDeleteExecuteForm
+class ProblemEnvironmentBulkDestroyDeleteView(LoginRequiredAndPermissionRequiredMixin, FormView):
+    template_name = 'admin_pages/problem/problem_environment_bulk_destroy_execute.html'
+    form_class = ProblemEnvironmentBulkDestroyDeleteExecuteForm
     success_url = "/pstate/manage/problem_environments/"
 
     def form_valid(self, form):

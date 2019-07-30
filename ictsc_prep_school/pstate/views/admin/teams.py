@@ -1,6 +1,6 @@
-from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
+from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView, FormView
 
-from pstate.forms.teams import TeamForm, TeamUpdateForm
+from pstate.forms.teams import TeamForm, TeamUpdateForm, TeamBulkCreateForm
 from pstate.models import Team
 from pstate.views.admin import LoginRequiredAndPermissionRequiredMixin
 
@@ -35,4 +35,9 @@ class TeamUpdateView(LoginRequiredAndPermissionRequiredMixin, UpdateView):
 class TeamDeleteView(LoginRequiredAndPermissionRequiredMixin, DeleteView):
     model = Team
     template_name = 'admin_pages/common/delete.html'
+    success_url = '/pstate/manage/teams/'
+
+class TeamBulkCreateView(LoginRequiredAndPermissionRequiredMixin, FormView):
+    form_class = TeamBulkCreateForm
+    template_name = 'admin_pages/team/bulk-add.html'
     success_url = '/pstate/manage/teams/'

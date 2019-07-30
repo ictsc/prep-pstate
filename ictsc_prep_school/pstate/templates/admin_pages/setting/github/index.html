@@ -1,0 +1,30 @@
+{% extends 'adminlte/base.html' %}
+{% load i18n %}
+
+{% block title %}{% endblock %}
+{% block content %}{% load tz %}
+<h1>{% trans 'Attributes' %}</h1>
+<div align="right">
+    <button class="btn btn-primary" onClick="location.href='{% url 'pstate-manage:github-create' %}'" >{% trans 'Add' %}</button>
+</div>
+<table class="table table-striped table-bordered">
+    <thead>
+    <tr>
+        <th>{% trans 'Secret Key' %}</th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for github in object_list %}
+    <tr>
+        <td>
+            {{ github.secret_key }}
+        </td>
+        <td><button class="btn btn-info" onClick="location.href='{% url 'pstate-manage:github-edit' pk=github.id %}'">{% trans 'Edit' %}</button></td>
+        <td><button class="btn btn-danger" onClick="location.href='{% url 'pstate-manage:github-delete' pk=github.id %}'">{% trans 'Delete' %}</button></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

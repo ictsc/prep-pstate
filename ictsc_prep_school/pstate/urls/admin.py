@@ -18,6 +18,9 @@ from pstate.views.admin.providers import ProviderListView, ProviderDetailView, P
 from pstate.views.admin.teams import TeamListView, TeamDetailView, TeamCreateView, TeamUpdateView, TeamDeleteView
 from pstate.views.admin.terraform_files import TerraformFileCreateView, TerraformFileUpdateView, VariableCreateView, \
     VariableUpdateView, VariableDeleteView, ShellScriptCreateView, ShellScriptUpdateView, ShellScriptDeleteView
+from pstate.views.admin.github import GithubListView, GithubDetailView, GithubCreateView, \
+    GithubUpdateView, GithubDeleteView
+
 
 router = DefaultRouter()
 router.register(r'problem_environments', ProblemEnvironmentViewSet, base_name='api')
@@ -81,6 +84,11 @@ urlpatterns = [
     url(r'^setting/attributes/add/$', AttributeCreateView.as_view(), name='attribute-create'),
     url(r'^setting/attributes/(?P<pk>[0-9]+)/edit/$', AttributeUpdateView.as_view(), name='attribute-edit'),
     url(r'^setting/attributes/(?P<pk>[0-9]+)/delete/$', AttributeDeleteView.as_view(), name='attribute-delete'),
+    # setting/github
+    url(r'^setting/github/$', GithubListView.as_view(), name='github-list'),
+    url(r'^setting/github/add/$', GithubCreateView.as_view(), name='github-create'),
+    url(r'^setting/github/(?P<pk>[0-9]+)/edit/$', GithubUpdateView.as_view(), name='github-edit'),
+    url(r'^setting/github/(?P<pk>[0-9]+)/delete/$', GithubDeleteView.as_view(), name='github-delete'),
     # util
     url(r'^close_window/$', close_window, name='window-close'),
     # API

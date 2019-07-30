@@ -19,7 +19,7 @@
     {% for github in object_list %}
     <tr>
         <td>
-            {{ github.secret_key }}
+            {{ github.git_source }}
         </td>
         <td><button class="btn btn-info" onClick="location.href='{% url 'pstate-manage:github-edit' pk=github.id %}'">{% trans 'Edit' %}</button></td>
         <td><button class="btn btn-danger" onClick="location.href='{% url 'pstate-manage:github-delete' pk=github.id %}'">{% trans 'Delete' %}</button></td>

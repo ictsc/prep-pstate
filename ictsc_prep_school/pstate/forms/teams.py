@@ -81,3 +81,6 @@ class TeamUserUpdateForm(forms.ModelForm):
         widgets = {
             'email': forms.EmailInput(attrs={'class': "form-control"}),
         }
+
+class TeamBulkCreateForm(forms.Form):
+    pass

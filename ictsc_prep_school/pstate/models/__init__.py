@@ -151,3 +151,6 @@ class Grade(TemplateModel):
     team = models.ForeignKey("Team", blank=True, null=True, on_delete=models.CASCADE)
     participant = models.ForeignKey(Participant, blank=True, null=True, on_delete=models.CASCADE)
     problem = models.ForeignKey(Problem, on_delete=models.CASCADE)
+
+class Github(TemplateModel):
+    secret_key = models.TextField(blank=True, null=True)

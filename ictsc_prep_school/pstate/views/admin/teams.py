@@ -3,7 +3,7 @@ from django.views.generic import CreateView, ListView, DetailView, UpdateView, D
 from pstate.forms.teams import TeamForm, TeamUpdateForm, TeamBulkCreateForm
 from pstate.models import Team, Github
 from pstate.views.admin import LoginRequiredAndPermissionRequiredMixin
-
+from django.http import HttpResponseRedirect
 
 class TeamCreateView(LoginRequiredAndPermissionRequiredMixin, CreateView):
     form_class = TeamForm
@@ -56,21 +56,31 @@ class TeamBulkCreateView(LoginRequiredAndPermissionRequiredMixin, FormView):
         import os
         os.chmod("key_file", 0o600)
 
-        #リポジトリからClone
+        #初回はリポジトリからClone、それ以降pullする
         from git import Repo
         ssh_cmd = 'ssh -i key_file'
-        Repo.clone_from("git@github.com:ictsc/ictsc-sandbox.git", "./github_clone", env={'GIT_SSH_COMMAND': ssh_cmd})
+
+        if os.path.isdir("./github_clone"):
+            os.chdir("./github_clone")
+            repo = Repo("./")
+            origin = repo.remotes.origin
+            with repo.git.custom_environment(GIT_SSH_COMMAND=ssh_cmd):
+                origin.pull()
+            os.chdir("../")
+        else:
+            Repo.clone_from(git_source, "./github_clone", env={'GIT_SSH_COMMAND': ssh_cmd})
+
         project_path = "./github_clone/%s" % project_root_path
 
         #teamのymlを読み込む
         import yaml
-        with open( project_path + teams_file, mode="r") as f:
+        with open( project_path + "/" + teams_file, mode="r") as f:
             teams_file = f.read()
         teams = yaml.load(teams_file)
 
         #チームの作成
         for team in teams:
-            team = Team(team_name=team["name"], team_number=team["number"])
+            team = Team(team_name=team["name"], team_number=team["number"],username="team%i" % team["number"])
             team.save()
 
         return HttpResponseRedirect(self.success_url)

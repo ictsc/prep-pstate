@@ -62,5 +62,11 @@ class TeamBulkCreateView(LoginRequiredAndPermissionRequiredMixin, FormView):
         ssh_cmd = 'ssh -i key_file'
         Repo.clone_from("git@github.com:ictsc/ictsc-sandbox.git", "./github_clone", env={'GIT_SSH_COMMAND': ssh_cmd})
 
+        #teamのymlを読み込む
+
+        #チームの作成
+        for team in teams:
+            team = Team(team_name="", team_number="")
+            team.save()
 
         return HttpResponseRedirect(self.success_url)

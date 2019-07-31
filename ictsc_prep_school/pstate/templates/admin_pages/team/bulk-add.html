@@ -1,0 +1,9 @@
+{% extends 'adminlte/base.html' %}
+{% load i18n %}
+{% block title %}pstate - Problem Environment delete{% endblock %}
+{% block content %}{% load tz %}
+<form action="" method="post">{% csrf_token %}
+    <p>{% trans 'Are you sure you want to create from github source?' %}"{{ object }}"?</p>
+    <input type="submit" value="{% trans 'Confirm' %}" />
+</form>
+{% endblock %}

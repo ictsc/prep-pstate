@@ -53,7 +53,6 @@ class TeamBulkCreateView(LoginRequiredAndPermissionRequiredMixin, FormView):
         
         with open("key_file", mode="w") as f:
             f.write(ssh_private_key)
-
         import os
         os.chmod("key_file", 0o600)
 
@@ -61,12 +60,17 @@ class TeamBulkCreateView(LoginRequiredAndPermissionRequiredMixin, FormView):
         from git import Repo
         ssh_cmd = 'ssh -i key_file'
         Repo.clone_from("git@github.com:ictsc/ictsc-sandbox.git", "./github_clone", env={'GIT_SSH_COMMAND': ssh_cmd})
+        project_path = "./github_clone/%s" % project_root_path
 
         #teamのymlを読み込む
+        import yaml
+        with open( project_path + teams_file, mode="r") as f:
+            teams_file = f.read()
+        teams = yaml.load(teams_file)
 
         #チームの作成
         for team in teams:
-            team = Team(team_name="", team_number="")
+            team = Team(team_name=team["name"], team_number=team["number"])
             team.save()
 
         return HttpResponseRedirect(self.success_url)

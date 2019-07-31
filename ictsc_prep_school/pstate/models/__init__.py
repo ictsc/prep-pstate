@@ -158,8 +158,8 @@ class Github(TemplateModel):
         verbose_name=_('git source'))
     ssh_private_key = models.TextField(blank=True,
         verbose_name=_('SSH private key'))
-    project_root_path = models.CharField(max_length=200, blank=True, default ="/ictsc2019", 
-        help_text=_("/ictscXXXX"))
+    project_root_path = models.CharField(max_length=200, blank=True, default ="ictsc2019", 
+        help_text=_("ictscXXXX"))
     teams_file = models.CharField(max_length=200, default="teams.yml")
 
 

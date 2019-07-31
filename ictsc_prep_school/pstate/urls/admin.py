@@ -88,6 +88,7 @@ urlpatterns = [
     url(r'^setting/attributes/(?P<pk>[0-9]+)/delete/$', AttributeDeleteView.as_view(), name='attribute-delete'),
     # setting/github
     url(r'^setting/github/$', GithubListView.as_view(), name='github-list'),
+    url(r'^setting/github/(?P<pk>[0-9]+)/$', GithubDetailView.as_view(), name='github-detail'),
     url(r'^setting/github/add/$', GithubCreateView.as_view(), name='github-create'),
     url(r'^setting/github/(?P<pk>[0-9]+)/edit/$', GithubUpdateView.as_view(), name='github-edit'),
     url(r'^setting/github/(?P<pk>[0-9]+)/delete/$', GithubDeleteView.as_view(), name='github-delete'),

@@ -17,3 +17,5 @@ db.sqlite3
 .python-version
 static/
 .vscode/
+key_file
+github_clone/

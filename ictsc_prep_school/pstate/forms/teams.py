@@ -1,6 +1,6 @@
 from django import forms
 
-from pstate.models import Team
+from pstate.models import Team, Github
 
 
 class TeamForm(forms.ModelForm):
@@ -83,4 +83,4 @@ class TeamUserUpdateForm(forms.ModelForm):
         }
 
 class TeamBulkCreateForm(forms.Form):
-    pass
+    github = forms.ModelChoiceField(label="github", queryset=Github.objects.all())

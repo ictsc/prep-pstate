@@ -56,6 +56,7 @@ def GithubRepoPullExecute(github):
     #初回はリポジトリからClone、それ以降Pullする
     
     if os.path.isdir("./github_clone"):
+        ssh_cmd = 'ssh -i ../key_file'
         os.chdir("./github_clone")
         repo = Repo("./")
         origin = repo.remotes.origin
@@ -63,6 +64,7 @@ def GithubRepoPullExecute(github):
             origin.pull()
         os.chdir("../")
     else:
+        ssh_cmd = 'ssh -i key_file'
         Repo.clone_from(git_source, "./github_clone", env={'GIT_SSH_COMMAND': ssh_cmd})
 
     return True

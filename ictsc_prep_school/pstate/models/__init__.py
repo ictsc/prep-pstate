@@ -153,6 +153,7 @@ class Grade(TemplateModel):
     problem = models.ForeignKey(Problem, on_delete=models.CASCADE)
 
 class Github(TemplateModel):
+    name = models.CharField(max_length=100, default="ictsc-problems")
     git_source = models.CharField(max_length=200, blank=False,
         help_text=_("git://github.com:sample/sample.git"),
         verbose_name=_('git source'))
@@ -164,3 +165,5 @@ class Github(TemplateModel):
     problem_path = models.CharField(max_length=200, blank=True, default ="q1", 
         help_text=_("問題コードのディレクトリが保存されている場所。予選1ならq1"))
 
+    def __str__(self):
+        return self.name

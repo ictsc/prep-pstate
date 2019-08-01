@@ -82,5 +82,9 @@ class TeamUserUpdateForm(forms.ModelForm):
             'email': forms.EmailInput(attrs={'class': "form-control"}),
         }
 
+class TeamAllDeleteForm(forms.Form):
+    pass
+
 class TeamBulkCreateForm(forms.Form):
     github = forms.ModelChoiceField(label="github", queryset=Github.objects.all())
+

@@ -1,6 +1,6 @@
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView, FormView
 
-from pstate.forms.teams import TeamForm, TeamUpdateForm, TeamBulkCreateForm
+from pstate.forms.teams import TeamForm, TeamUpdateForm, TeamAllDeleteForm, TeamBulkCreateForm
 from pstate.models import Team, Github
 from pstate.views.admin import LoginRequiredAndPermissionRequiredMixin
 from django.http import HttpResponseRedirect
@@ -37,6 +37,16 @@ class TeamDeleteView(LoginRequiredAndPermissionRequiredMixin, DeleteView):
     model = Team
     template_name = 'admin_pages/common/delete.html'
     success_url = '/pstate/manage/teams/'
+
+class TeamAllDeleteView(LoginRequiredAndPermissionRequiredMixin, FormView):
+    form_class = TeamAllDeleteForm
+    template_name = 'admin_pages/team/all-team-delete.html'
+    success_url = '/pstate/manage/teams/'
+
+    def form_valid(self, form):
+        Team.objects.all().delete()
+
+        return HttpResponseRedirect(self.success_url)
 
 class TeamBulkCreateView(LoginRequiredAndPermissionRequiredMixin, FormView):
     form_class = TeamBulkCreateForm

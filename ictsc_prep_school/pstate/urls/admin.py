@@ -16,7 +16,7 @@ from pstate.views.admin.problems import ProblemListView, ProblemDetailView, Prob
 from pstate.views.admin.providers import ProviderListView, ProviderDetailView, ProviderCreateView, ProviderUpdateView, \
     ProviderDeleteView, AttributeListView, AttributeCreateView, AttributeUpdateView, AttributeDeleteView
 from pstate.views.admin.teams import TeamListView, TeamDetailView, TeamCreateView, TeamUpdateView, TeamDeleteView, \
-    TeamBulkCreateView
+    TeamBulkCreateView, TeamAllDeleteView
 from pstate.views.admin.terraform_files import TerraformFileCreateView, TerraformFileUpdateView, VariableCreateView, \
     VariableUpdateView, VariableDeleteView, ShellScriptCreateView, ShellScriptUpdateView, ShellScriptDeleteView
 from pstate.views.admin.github import GithubListView, GithubDetailView, GithubCreateView, \
@@ -35,6 +35,7 @@ urlpatterns = [
     url(r'^teams/(?P<pk>[0-9]+)/$', TeamDetailView.as_view(), name='team-detail'),
     url(r'^teams/add/$', TeamCreateView.as_view(), name='team-add'),
     url(r'^teams/bulk-add/$', TeamBulkCreateView.as_view(), name='bulk-team-add'),
+    url(r'^teams/all-team-delete/$', TeamAllDeleteView.as_view(), name='all-team-delete'),
     url(r'^teams/(?P<pk>[0-9]+)/edit/$', TeamUpdateView.as_view(), name='team-edit'),
     url(r'^teams/(?P<pk>[0-9]+)/delete/$', TeamDeleteView.as_view(), name='team-delete'),
     url(r'^teams/(?P<pk>[0-9]+)/change_password/$', change_team_password, name='team-change_password'),

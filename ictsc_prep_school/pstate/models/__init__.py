@@ -144,10 +144,3 @@ class Participant(User):
     class Meta:
         verbose_name = 'Participant'
         verbose_name_plural = 'Participants'
-
-
-class Grade(TemplateModel):
-    score = models.FloatField()
-    team = models.ForeignKey("Team", blank=True, null=True, on_delete=models.CASCADE)
-    participant = models.ForeignKey(Participant, blank=True, null=True, on_delete=models.CASCADE)
-    problem = models.ForeignKey(Problem, on_delete=models.CASCADE)

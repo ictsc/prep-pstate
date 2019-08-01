@@ -9,6 +9,8 @@ ADD ./ictsc_prep_school /root/
 ADD ./libs /root/ictsc_prep_school/settings/pstate/static
 RUN python3 manage.py collectstatic --noinput
 RUN python3 manage.py compilemessages
+RUN mkdir ~/.ssh/
+RUN ssh-keygen -F github.com || ssh-keyscan github.com >> ~/.ssh/known_hosts
 COPY ./docker_build/pstate_webui/docker-entrypoint.sh /root/entrypoint.sh
 RUN chmod 755 /root/entrypoint.sh
 ENTRYPOINT ["/root/entrypoint.sh"]

@@ -1,9 +1,8 @@
-from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
-
+from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView, FormView
 from pstate.forms.github import GithubForm
 from pstate.views.admin import LoginRequiredAndPermissionRequiredMixin
 from pstate.models import Github
-
+from django.http import HttpResponseRedirect
 
 class GithubCreateView(LoginRequiredAndPermissionRequiredMixin, CreateView):
     form_class = GithubForm
@@ -38,3 +37,32 @@ class GithubDeleteView(LoginRequiredAndPermissionRequiredMixin, DeleteView):
     template_name = 'admin_pages/setting/github/delete.html'
     success_url = '/pstate/manage/setting/github/'
 
+def GithubRepoPullExecute(github):
+
+    # Githubの情報を読み込む
+    git_source = github.git_source
+    ssh_private_key = github.ssh_private_key
+    project_root_path = github.project_root_path
+    teams_file = github.teams_file
+
+    with open("key_file", mode="w") as f:
+        f.write(ssh_private_key)
+
+    import os
+    os.chmod("key_file", 0o600)
+    
+    from git import Repo
+    ssh_cmd = 'ssh -i key_file'
+    #初回はリポジトリからClone、それ以降Pullする
+    
+    if os.path.isdir("./github_clone"):
+        os.chdir("./github_clone")
+        repo = Repo("./")
+        origin = repo.remotes.origin
+        with repo.git.custom_environment(GIT_SSH_COMMAND=ssh_cmd):
+            origin.pull()
+        os.chdir("../")
+    else:
+        Repo.clone_from(git_source, "./github_clone", env={'GIT_SSH_COMMAND': ssh_cmd})
+
+    return True

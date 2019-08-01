@@ -161,5 +161,6 @@ class Github(TemplateModel):
     project_root_path = models.CharField(max_length=200, blank=True, default ="ictsc2019", 
         help_text=_("ictscXXXX"))
     teams_file = models.CharField(max_length=200, default="teams.yml")
-
+    problem_path = models.CharField(max_length=200, blank=True, default ="q1", 
+        help_text=_("問題コードのディレクトリが保存されている場所。予選1ならq1"))
 

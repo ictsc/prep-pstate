@@ -74,7 +74,7 @@ class TeamBulkCreateView(LoginRequiredAndPermissionRequiredMixin, FormView):
 
         #teamのymlを読み込む
         import yaml
-        with open( project_path + "/" + teams_file, mode="r") as f:
+        with open( project_path + "/" + teams_file, mode="r", encoding="utf-8") as f:
             teams_file = f.read()
         teams = yaml.load(teams_file)
 

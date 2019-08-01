@@ -4,6 +4,7 @@ from pstate.forms.teams import TeamForm, TeamUpdateForm, TeamBulkCreateForm
 from pstate.models import Team, Github
 from pstate.views.admin import LoginRequiredAndPermissionRequiredMixin
 from django.http import HttpResponseRedirect
+from pstate.views.admin.github import GithubRepoPullExecute
 
 class TeamCreateView(LoginRequiredAndPermissionRequiredMixin, CreateView):
     form_class = TeamForm
@@ -43,35 +44,14 @@ class TeamBulkCreateView(LoginRequiredAndPermissionRequiredMixin, FormView):
     success_url = '/pstate/manage/teams/'
 
     def form_valid(self, form):
+        github = form.cleaned_data["github"]
+        res = GithubRepoPullExecute(github)
 
-        # Githubの情報を読み込む
-        github = Github.objects.get(id=1)
-        git_source = github.git_source
-        ssh_private_key = github.ssh_private_key
-        project_root_path = github.project_root_path
+#        github = Github.objects.get(id=1)
         teams_file = github.teams_file
-        
-        with open("key_file", mode="w") as f:
-            f.write(ssh_private_key)
-        import os
-        os.chmod("key_file", 0o600)
-
-        #初回はリポジトリからClone、それ以降pullする
-        from git import Repo
-        ssh_cmd = 'ssh -i key_file'
-
-        if os.path.isdir("./github_clone"):
-            os.chdir("./github_clone")
-            repo = Repo("./")
-            origin = repo.remotes.origin
-            with repo.git.custom_environment(GIT_SSH_COMMAND=ssh_cmd):
-                origin.pull()
-            os.chdir("../")
-        else:
-            Repo.clone_from(git_source, "./github_clone", env={'GIT_SSH_COMMAND': ssh_cmd})
-
+        project_root_path = github.project_root_path
         project_path = "./github_clone/%s" % project_root_path
-
+    
         #teamのymlを読み込む
         import yaml
         with open( project_path + "/" + teams_file, mode="r", encoding="utf-8") as f:

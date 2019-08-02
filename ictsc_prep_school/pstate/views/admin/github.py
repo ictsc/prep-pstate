@@ -1,5 +1,5 @@
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView, FormView
-from pstate.forms.github import GithubForm
+from pstate.forms.github import GithubForm, GithubUpdateForm
 from pstate.views.admin import LoginRequiredAndPermissionRequiredMixin
 from pstate.models import Github
 from django.http import HttpResponseRedirect
@@ -27,10 +27,12 @@ class GithubDetailView(LoginRequiredAndPermissionRequiredMixin, DetailView):
 
 class GithubUpdateView(LoginRequiredAndPermissionRequiredMixin, UpdateView):
     model = Github
-    fields = '__all__'
+    form_class = GithubUpdateForm
     template_name = 'admin_pages/common/edit.html'
     success_url = '/pstate/manage/setting/github/'
 
+    def get_success_url(self, **kwargs):
+        return self.success_url + str(self.object.id)
 
 class GithubDeleteView(LoginRequiredAndPermissionRequiredMixin, DeleteView):
     model = Github

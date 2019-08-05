@@ -23,7 +23,8 @@ class Environment(models.Model):
         ('FAILED', _('FAILED')),
     )
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    terraform_file = models.ForeignKey('TerraformFile', unique=False, on_delete=models.SET_NULL, null=True, related_name='environment')
+    terraform_file = models.ForeignKey('TerraformFile', unique=False, on_delete=models.SET_NULL, null=True,
+                                       related_name='environment')
     state = models.CharField(max_length=20, choices=STATE_CHOICES, default=_('IN_WAITING_FOR_START'))
     tfstate = models.TextField(blank=True)
     is_locked = models.BooleanField(default=False)
@@ -105,7 +106,8 @@ class ShellScript(models.Model):
     body = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    terraform_file = models.ForeignKey('TerraformFile', related_name='shell_script', unique=False, on_delete=models.CASCADE)
+    terraform_file = models.ForeignKey('TerraformFile', related_name='shell_script', unique=False,
+                                       on_delete=models.CASCADE)
 
 
 class TerraformFile(models.Model):
@@ -131,3 +133,14 @@ class TerraformFile(models.Model):
 
     def has_variable(self):
         return 0 < self.variables.count()
+
+
+class FileTemplate(models.Model):
+    """
+    ファイルのテンプレートを格納するモデル.
+    """
+    name = models.CharField(max_length=100)
+    file_name = models.CharField(max_length=100)
+    body = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)

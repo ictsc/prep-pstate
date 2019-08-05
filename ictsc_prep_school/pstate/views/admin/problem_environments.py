@@ -10,7 +10,7 @@ from django.shortcuts import render
 
 class ProblemEnvironmentCreateView(LoginRequiredAndPermissionRequiredMixin, CreateView):
     form_class = ProblemEnvironmentForm
-    template_name = 'admin_pages/common/add.html'
+    template_name = 'admin_pages/problem_environment/add.html'
     success_url = "/pstate/manage/problem_environments/"
 
     def form_valid(self, form):

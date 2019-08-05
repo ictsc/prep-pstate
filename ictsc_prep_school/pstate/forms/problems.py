@@ -1,7 +1,7 @@
 from django import forms
 
-from pstate.models import Problem
-
+from pstate.models import Problem, Github
+from terraform_manager.models import Provider
 
 class ProblemForm(forms.ModelForm):
 
@@ -60,3 +60,10 @@ class ProblemStartForm(forms.Form):
 
 class ProblemEndForm(forms.Form):
     pass
+
+class ProblemAllDeleteForm(forms.Form):
+    pass
+
+class ProblemBulkCreateForm(forms.Form):
+    github = forms.ModelChoiceField(label="github", queryset=Github.objects.all())
+    provider = forms.ModelChoiceField(label="provider", queryset=Provider.objects.all())

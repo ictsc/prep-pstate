@@ -6,6 +6,8 @@
 <h1>{% trans 'Problems' %}</h1>
 <div align="right">
     <button class="btn btn-primary" onClick="location.href='{% url 'pstate-manage:problem-create' %}'" >{% trans 'Add' %}</button>
+    <button class="btn btn-primary" onClick="location.href='{% url 'pstate-manage:bulk-problem-add' %}'" >{% trans 'Bulk Add' %}</button>
+    <button class="btn btn-danger" onClick="location.href='{% url 'pstate-manage:all-problem-delete' %}'" >{% trans 'All Problem Delete' %}</button>
 </div>
 <table class="table table-striped table-bordered">
     <thead>

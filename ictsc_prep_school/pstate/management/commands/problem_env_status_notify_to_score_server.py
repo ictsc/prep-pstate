@@ -23,7 +23,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         if len(NotificationQueue.objects.all()) != 0:
             self.__login_score_server()
-        for notification in NotificationQueue.objects.all():
+        for notification in NotificationQueue.objects.all().order_by('created_at'):
             try:
                 if self.__request_to_score_server(notification.payload):
                     notification.delete()

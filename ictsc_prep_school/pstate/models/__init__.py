@@ -172,7 +172,7 @@ class NotificationQueue(TemplateModel):
             status: "STATUS", host: "HOST",
             user: "USER", password: "PASSWORD" }
         ) {
-        errors
+          problemEnvironment { id  }
       }
     }
     '''

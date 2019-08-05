@@ -1,0 +1,27 @@
+template:
+  prep1:
+    subject: "ICTSC2018 一次予選 本番情報"
+    message: |
+      ICTSC2018 応募チーム代表の皆様
+
+      本日13時開始のICTSC2018一次予選の情報をお伝えします。
+
+      ユーザー名: {name}
+      パスワード: {password}
+
+      文章問題環境URL
+      https://prep.icttoracon.net/relate/
+
+      実技問題環境URL
+      https://prep.icttoracon.net/pstate/
+
+      ---------------------------------
+      ICTSC2018 一次予選運営
+      yosen@icttoracon.net
+      ---------------------------------
+
+teams:
+  prep1:
+    - name: team99
+      email: yosen@icttoracon.net
+      password: password

@@ -4,15 +4,13 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
-from django.views.generic import ListView, DetailView, CreateView, FormView, UpdateView
-
-from pstate.forms.problems import ProblemStartForm
-from pstate.models import Problem, ProblemEnvironment, ProblemEnvironmentLog
+from django.views.generic import ListView, DetailView, FormView, UpdateView
 
 from pstate.forms.change_password import NoOlbPasswordCheckPasswordChangeForm
-from pstate.models import Team
-
+from pstate.forms.problems import ProblemStartForm
 from pstate.forms.teams import TeamUserUpdateForm
+from pstate.models import Problem, ProblemEnvironment
+from pstate.models import Team
 
 
 @login_required

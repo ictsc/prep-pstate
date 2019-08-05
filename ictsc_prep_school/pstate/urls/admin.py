@@ -15,9 +15,13 @@ from pstate.views.admin.problems import ProblemListView, ProblemDetailView, Prob
     ProblemDescriptionUpdateView, ProblemDeleteView, ProblemPreviewView
 from pstate.views.admin.providers import ProviderListView, ProviderDetailView, ProviderCreateView, ProviderUpdateView, \
     ProviderDeleteView, AttributeListView, AttributeCreateView, AttributeUpdateView, AttributeDeleteView
-from pstate.views.admin.teams import TeamListView, TeamDetailView, TeamCreateView, TeamUpdateView, TeamDeleteView
+from pstate.views.admin.teams import TeamListView, TeamDetailView, TeamCreateView, TeamUpdateView, TeamDeleteView, \
+    TeamBulkCreateView, TeamAllDeleteView
 from pstate.views.admin.terraform_files import TerraformFileCreateView, TerraformFileUpdateView, VariableCreateView, \
     VariableUpdateView, VariableDeleteView, ShellScriptCreateView, ShellScriptUpdateView, ShellScriptDeleteView
+from pstate.views.admin.github import GithubListView, GithubDetailView, GithubCreateView, \
+    GithubUpdateView, GithubDeleteView
+
 
 router = DefaultRouter()
 router.register(r'problem_environments', ProblemEnvironmentViewSet, base_name='api')
@@ -30,6 +34,8 @@ urlpatterns = [
     url(r'^teams/$', TeamListView.as_view(), name='team-list'),
     url(r'^teams/(?P<pk>[0-9]+)/$', TeamDetailView.as_view(), name='team-detail'),
     url(r'^teams/add/$', TeamCreateView.as_view(), name='team-add'),
+    url(r'^teams/bulk-add/$', TeamBulkCreateView.as_view(), name='bulk-team-add'),
+    url(r'^teams/all-team-delete/$', TeamAllDeleteView.as_view(), name='all-team-delete'),
     url(r'^teams/(?P<pk>[0-9]+)/edit/$', TeamUpdateView.as_view(), name='team-edit'),
     url(r'^teams/(?P<pk>[0-9]+)/delete/$', TeamDeleteView.as_view(), name='team-delete'),
     url(r'^teams/(?P<pk>[0-9]+)/change_password/$', change_team_password, name='team-change_password'),
@@ -81,6 +87,12 @@ urlpatterns = [
     url(r'^setting/attributes/add/$', AttributeCreateView.as_view(), name='attribute-create'),
     url(r'^setting/attributes/(?P<pk>[0-9]+)/edit/$', AttributeUpdateView.as_view(), name='attribute-edit'),
     url(r'^setting/attributes/(?P<pk>[0-9]+)/delete/$', AttributeDeleteView.as_view(), name='attribute-delete'),
+    # setting/github
+    url(r'^setting/github/$', GithubListView.as_view(), name='github-list'),
+    url(r'^setting/github/(?P<pk>[0-9]+)/$', GithubDetailView.as_view(), name='github-detail'),
+    url(r'^setting/github/add/$', GithubCreateView.as_view(), name='github-create'),
+    url(r'^setting/github/(?P<pk>[0-9]+)/edit/$', GithubUpdateView.as_view(), name='github-edit'),
+    url(r'^setting/github/(?P<pk>[0-9]+)/delete/$', GithubDeleteView.as_view(), name='github-delete'),
     # util
     url(r'^close_window/$', close_window, name='window-close'),
     # API

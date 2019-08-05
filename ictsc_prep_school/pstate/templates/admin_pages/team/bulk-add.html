@@ -1,0 +1,10 @@
+{% extends 'adminlte/base.html' %}
+{% load i18n %}
+{% block title %}pstate - Team Bulk Add{% endblock %}
+{% block content %}{% load tz %}
+<form action="" method="post">{% csrf_token %}
+    <p>{% trans 'Are you sure you want to create from github source?' %} </p>
+    {{ form.as_p }}
+    <input type="submit" class="btn btn-primary" value="{% trans 'Confirm' %}" />
+</form>
+{% endblock %}

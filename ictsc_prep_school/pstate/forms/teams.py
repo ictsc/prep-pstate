@@ -1,6 +1,6 @@
 from django import forms
 
-from pstate.models import Team
+from pstate.models import Team, Github
 
 
 class TeamForm(forms.ModelForm):
@@ -81,3 +81,10 @@ class TeamUserUpdateForm(forms.ModelForm):
         widgets = {
             'email': forms.EmailInput(attrs={'class': "form-control"}),
         }
+
+class TeamAllDeleteForm(forms.Form):
+    pass
+
+class TeamBulkCreateForm(forms.Form):
+    github = forms.ModelChoiceField(label="github", queryset=Github.objects.all())
+

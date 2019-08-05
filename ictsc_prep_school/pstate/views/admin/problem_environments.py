@@ -2,11 +2,11 @@ from django.http import HttpResponseRedirect
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView, FormView
 
 from pstate.forms.problems import ProblemEnvironmentCreateExecuteForm, ProblemEnvironmentDestroyExecuteForm, \
-    ProblemEnvironmentRecreateExecuteForm
+    ProblemEnvironmentRecreateExecuteForm, ProblemEnvironmentBulkDestroyDeleteExecuteForm
 from pstate.forms.problem_environments import ProblemEnvironmentForm, ProblemEnvironmentUpdateForm
 from pstate.models import Problem, ProblemEnvironment, ProblemEnvironmentLog, Team
 from pstate.views.admin import LoginRequiredAndPermissionRequiredMixin
-
+from django.shortcuts import render
 
 class ProblemEnvironmentCreateView(LoginRequiredAndPermissionRequiredMixin, CreateView):
     form_class = ProblemEnvironmentForm
@@ -48,6 +48,7 @@ class ProblemEnvironmentListView(LoginRequiredAndPermissionRequiredMixin, ListVi
     model = ProblemEnvironment
     paginate_by = 15
     template_name = 'admin_pages/problem_environment/index.html'
+    success_url = '/pstate/manage/problem_environments/'
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -72,6 +73,12 @@ class ProblemEnvironmentListView(LoginRequiredAndPermissionRequiredMixin, ListVi
         context['teams'] = Team.objects.all()
         return context
 
+    def post(self, request):
+        template_name = '/pstate/manage/problem_environments/bulk_destroy_delete/'
+        response = HttpResponseRedirect(template_name)
+        post_params = request.POST.urlencode()
+        response['location'] += '?'+ post_params
+        return response
 
 class ProblemEnvironmentDetailView(LoginRequiredAndPermissionRequiredMixin, DetailView):
     model = ProblemEnvironment
@@ -189,7 +196,12 @@ class ProblemEnvironmentDestroyView(LoginRequiredAndPermissionRequiredMixin, For
     def form_valid(self, form):
         problem_environment = ProblemEnvironment.objects.get(id=self.kwargs['pk'])
         environment = problem_environment.environment
-        # workerに対して処理の実行命令.
+        # workerに投げる    
+        self.terraform_destroy(problem_environment, environment)
+        return HttpResponseRedirect(self.success_url + str(problem_environment.id))
+
+    # workerに対して処理の実行命令.
+    def terraform_destroy(self, problem_environment, environment):
         from terraform_manager.terraform_manager_tasks import destroy
         var = []
         destroy.delay(environment.id, var)
@@ -197,7 +209,7 @@ class ProblemEnvironmentDestroyView(LoginRequiredAndPermissionRequiredMixin, For
                               before_state=problem_environment.state,
                               after_state="WAITING_FOR_DELETE",
                               problem_environment=problem_environment).save()
-        return HttpResponseRedirect(self.success_url + str(problem_environment.id))
+
 
 
 class ProblemEnvironmentRecreateView(LoginRequiredAndPermissionRequiredMixin, FormView):
@@ -248,3 +260,18 @@ class ProblemEnvironmentRecreateView(LoginRequiredAndPermissionRequiredMixin, Fo
                               after_state="IN_PREPARATION",
                               problem_environment=recreate_problem_environment).save()
         return HttpResponseRedirect(self.success_url + str(recreate_problem_environment.id))
+
+class ProblemEnvironmentBulkDestroyDeleteView(LoginRequiredAndPermissionRequiredMixin, FormView):
+    template_name = 'admin_pages/problem/problem_environment_bulk_destroy_execute.html'
+    form_class = ProblemEnvironmentBulkDestroyDeleteExecuteForm
+    success_url = "/pstate/manage/problem_environments/"
+
+    def form_valid(self, form):
+
+        post_pks = self.request.GET.getlist('problem_id')
+        for problem_environment in ProblemEnvironment.objects.filter(pk__in=post_pks):
+            environment = problem_environment.environment
+            ProblemEnvironmentDestroyView().terraform_destroy(problem_environment, environment)
+        if "delete" in self.request.GET:
+            ProblemEnvironment.objects.filter(pk__in=post_pks).delete()
+        return HttpResponseRedirect(self.success_url)

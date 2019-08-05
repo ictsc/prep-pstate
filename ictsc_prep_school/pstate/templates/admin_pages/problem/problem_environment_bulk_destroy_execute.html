@@ -1,0 +1,22 @@
+{% extends 'adminlte/base.html' %}
+{% load i18n %}
+{% load tag %}
+{% block title %}{% endblock %}
+{% block content %}{% load tz %}
+<h1>{% trans 'Destroy(Terraform)' %}</h1>
+
+{% for problem_id in request.GET|get_item:'problem_id' %}
+<p> {{ problem_id }}</p>
+{% endfor %}
+
+{% if 'destroy' in request.GET %}
+    <p>以上の問題環境のIDにDestroyを行います。よろしいですか</p>
+{% endif %}
+{% if 'delete' in request.GET %}
+    <p>以上の問題環境のIDにDestroyを行いDeleteを行います。よろしいですか</p>
+{% endif %}
+<form action="" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input class="btn btn-danger" type="submit" value="{% trans 'Execute' %}" />
+</form>
+{% endblock %}

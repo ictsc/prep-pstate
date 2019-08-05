@@ -37,6 +37,8 @@ class ProblemEnvironmentCreateExecuteForm(forms.Form):
 class ProblemEnvironmentDestroyExecuteForm(forms.Form):
     pass
 
+class ProblemEnvironmentBulkDestroyDeleteExecuteForm(forms.Form):
+    pass
 
 class ProblemEnvironmentRecreateExecuteForm(forms.Form):
     pass

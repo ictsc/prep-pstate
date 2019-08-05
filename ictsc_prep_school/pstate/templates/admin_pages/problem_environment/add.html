@@ -13,8 +13,8 @@
   </script>
 <h1>{% trans 'Add ProblemEnvironment' %}</h1>
 <form action="" method="post", name="teams">{% csrf_token %}
-        <th><input type="button" class="btn btn-primary" name="all" onClick="AllChecked(true)" value="{% trans 'All Checked' %}" /></th>
-        <th><input type="button" class="btn btn-primary" name="all" onClick="AllChecked(false)" value="{% trans 'All Unchecked' %}" /></th>
+        <th><input type="button" class="btn btn-primary" name="all" onClick="AllChecked(true)" value="{% trans 'All Check' %}" /></th>
+        <th><input type="button" class="btn btn-primary" name="all" onClick="AllChecked(false)" value="{% trans 'All Uncheck' %}" /></th>
         {{ form.as_p }}
     <input type="submit" value="{% trans 'Add' %}" />
 </form>

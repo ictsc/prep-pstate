@@ -119,13 +119,15 @@ service networking restart"""
         provider = form.cleaned_data["provider"]
         res = GithubRepoPullExecute(github)
 
-        #ex) ./github_clone/ictsc2019/q1
+        #ex) problem_list_path = "./github_clone/ictsc2019/q1"
         problem_list_path = "./github_clone/%s/%s" % (github.project_root_path, github.problem_path) 
 
         import glob, os        
         problems = glob.glob(problem_list_path + "/**/")
 
+        #問題コードのディレクトリを中身を見ていく
         for problem in problems:
+            #main.tfが存在していたら問題の追加を行う
             if os.path.exists(problem + "/main.tf") == True:
                 with open(problem + "/main.tf", mode="r", encoding="utf-8") as f:
                     body = f.read()

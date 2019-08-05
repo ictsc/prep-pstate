@@ -6,6 +6,8 @@ from pstate.forms.problems import ProblemForm, ProblemUpdateForm, ProblemDescrip
 from pstate.models import Problem
 from pstate.views.admin import LoginRequiredAndPermissionRequiredMixin
 from django.http import HttpResponseRedirect
+from pstate.views.admin.github import GithubRepoPullExecute
+from terraform_manager.models import TerraformFile, Provider
 
 class ProblemCreateView(LoginRequiredAndPermissionRequiredMixin, CreateView):
     form_class = ProblemForm
@@ -77,5 +79,27 @@ class ProblemBulkCreateView(LoginRequiredAndPermissionRequiredMixin, FormView):
     success_url = '/pstate/manage/problems/'
 
     def form_valid(self, form):
+        github = form.cleaned_data["github"]
+        provider = form.cleaned_data["provider"]
+        res = GithubRepoPullExecute(github)
+
+        #ex) ./github_clone/ictsc2019/q1
+        problem_list_path = "./github_clone/%s/%s" % (github.project_root_path, github.problem_path) 
+
+        import glob, os
+        
+        problems = glob.glob(problem_list_path + "/**/")
+
+        for problem in problems:
+            if os.path.exists(problem + "/main.tf") == True:
+                with open(problem + "/main.tf", mode="r", encoding="utf-8") as f:
+                    body = f.read()
+                problem_name = problem.split("/")[-2]
+                tf_file = TerraformFile(name="main", body=body, file_name="main.tf", provider=provider)
+                tf_file.save()
+
+                problem = Problem(name=problem_name, display_name="test_display_name", terraform_file_id=tf_file)
+                problem.save()
+
         return HttpResponseRedirect(self.success_url)
 

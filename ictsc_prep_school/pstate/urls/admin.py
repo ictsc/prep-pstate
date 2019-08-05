@@ -12,7 +12,7 @@ from pstate.views.admin.problem_environments import ProblemEnvironmentCreateView
     ProblemEnvironmentDeleteView, ProblemEnvironmentDestroyView, ProblemEnvironmentRecreateView, \
     ProblemEnvironmentApplyView, ProblemEnvironmentBulkDestroyDeleteView
 from pstate.views.admin.problems import ProblemListView, ProblemDetailView, ProblemCreateView, ProblemUpdateView, \
-    ProblemDescriptionUpdateView, ProblemDeleteView, ProblemPreviewView
+    ProblemDescriptionUpdateView, ProblemDeleteView, ProblemPreviewView, ProblemBulkCreateView, ProblemAllDeleteView
 from pstate.views.admin.providers import ProviderListView, ProviderDetailView, ProviderCreateView, ProviderUpdateView, \
     ProviderDeleteView, AttributeListView, AttributeCreateView, AttributeUpdateView, AttributeDeleteView
 from pstate.views.admin.teams import TeamListView, TeamDetailView, TeamCreateView, TeamUpdateView, TeamDeleteView, \
@@ -51,6 +51,8 @@ urlpatterns = [
     url(r'^problems/(?P<pk>[0-9]+)/$', ProblemDetailView.as_view(), name='problem-detail'),
     url(r'^problems/(?P<pk>[0-9]+)/preview/$', ProblemPreviewView.as_view(), name='problem-preview'),
     url(r'^problems/add/$', ProblemCreateView.as_view(), name='problem-create'),
+    url(r'^problems/bulk-add/$', ProblemBulkCreateView.as_view(), name='bulk-problem-add'),
+    url(r'^problems/all-team-delete/$', ProblemAllDeleteView.as_view(), name='all-problem-delete'),
     url(r'^problems/(?P<pk>[0-9]+)/edit/$', ProblemUpdateView.as_view(), name='problem-edit'),
     url(r'^problems/(?P<pk>[0-9]+)/body/edit/$', ProblemDescriptionUpdateView.as_view(), name='problem-body-edit'),
     url(r'^problems/(?P<pk>[0-9]+)/delete/$', ProblemDeleteView.as_view(), name='problem-delete'),
@@ -77,7 +79,6 @@ urlpatterns = [
     url(r'^problem_environments/(?P<pk>[0-9]+)/destroy/$', ProblemEnvironmentDestroyView.as_view(), name='problemenvironment-destroy'),
     url(r'^problem_environments/(?P<pk>[0-9]+)/recreate/$', ProblemEnvironmentRecreateView.as_view(), name='problemenvironment-recreate'),
      url(r'^problem_environments/bulk_destroy_delete/$', ProblemEnvironmentBulkDestroyDeleteView.as_view(), name='problemenvironment-bulk-destroy'),
-
     # setting/providers
     url(r'^setting/providers/$', ProviderListView.as_view(), name='provider-list'),
     url(r'^setting/providers/(?P<pk>[0-9]+)/$', ProviderDetailView.as_view(), name='provider-detail'),

@@ -1,6 +1,6 @@
 from django import forms
 
-from pstate.models import Problem
+from pstate.models import Problem, Github
 
 
 class ProblemForm(forms.ModelForm):

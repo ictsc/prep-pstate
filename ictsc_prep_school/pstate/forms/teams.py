@@ -1,13 +1,13 @@
 from django import forms
 
-from pstate.models import Team
+from pstate.models import Team, Github
 
 
 class TeamForm(forms.ModelForm):
 
     class Meta:
         model = Team
-        fields = ['team_name', 'username', 'password', 'email', 'description', 'remarks']
+        fields = ['team_name', 'username', 'team_number', 'password', 'email', 'description', 'remarks']
         exclude = ['last_login', 'first_name', 'last_name', 'date_joined', 'is_superuser', 'groups', 'user_permissions', 'is_staff']
         widgets = {
             'team_name': forms.TextInput(attrs={'class': "form-control"}),
@@ -81,3 +81,10 @@ class TeamUserUpdateForm(forms.ModelForm):
         widgets = {
             'email': forms.EmailInput(attrs={'class': "form-control"}),
         }
+
+class TeamAllDeleteForm(forms.Form):
+    pass
+
+class TeamBulkCreateForm(forms.Form):
+    github = forms.ModelChoiceField(label="github", queryset=Github.objects.all())
+

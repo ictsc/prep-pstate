@@ -1,4 +1,4 @@
-from django.contrib.auth.base_user import AbstractBaseUser
+import django
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.db.models import Q
@@ -36,8 +36,8 @@ class Problem(TemplateModel):
     name = models.CharField("問題名(管理用)", max_length=200)
     display_name = models.CharField("問題名(参加者向け)", max_length=200)
     description = models.TextField("問題文", blank=True, null=True)
-    start_date = models.DateTimeField("問題公開日時", blank=True, null=True, default=now())
-    end_date = models.DateTimeField("問題公開終了日時", blank=True, null=True, default=now())
+    start_date = models.DateTimeField("問題公開日時", blank=True, null=True, default=django.utils.timezone.now)
+    end_date = models.DateTimeField("問題公開終了日時", blank=True, null=True, default=django.utils.timezone.now)
     mode = models.CharField("公開モード", max_length=100, choices=MODE_CHOICES, default='CLOSE')
     is_enabled = models.BooleanField("公開フラグ", default=False)
     terraform_file_id = models.ForeignKey(TerraformFile, on_delete=models.SET_NULL, null=True)
@@ -123,6 +123,7 @@ class Team(User):
     team_name = models.CharField("チーム名", max_length=100)
     description = models.TextField(blank=True, null=True)
     remarks = models.TextField(blank=True, null=True)
+    team_number = models.IntegerField(default=0, unique=True)
 
     class Meta:
         verbose_name = 'Team'
@@ -144,9 +145,18 @@ class Participant(User):
         verbose_name = 'Participant'
         verbose_name_plural = 'Participants'
 
+class Github(TemplateModel):
+    name = models.CharField(max_length=100, default="ictsc-problems")
+    git_source = models.CharField(max_length=200, blank=False,
+        help_text=_("git://github.com:sample/sample.git"),
+        verbose_name=_('git source'))
+    ssh_private_key = models.TextField(blank=True,
+        verbose_name=_('SSH private key'))
+    project_root_path = models.CharField(max_length=200, blank=True, default ="ictsc2019", 
+        help_text=_("ictscXXXX"))
+    teams_file = models.CharField(max_length=200, default="teams.yml")
+    problem_path = models.CharField(max_length=200, blank=True, default ="q1", 
+        help_text=_("問題コードのディレクトリが保存されている場所。予選1ならq1"))
 
-class Grade(TemplateModel):
-    score = models.FloatField()
-    team = models.ForeignKey("Team", blank=True, null=True, on_delete=models.CASCADE)
-    participant = models.ForeignKey(Participant, blank=True, null=True, on_delete=models.CASCADE)
-    problem = models.ForeignKey(Problem, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.name

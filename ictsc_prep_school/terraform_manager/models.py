@@ -174,3 +174,6 @@ class Setting(models.Model):
             return dict(self.value)
         elif self.type == 'list':
             return list(self.value)
+
+    def __str__(self):
+        return self.name

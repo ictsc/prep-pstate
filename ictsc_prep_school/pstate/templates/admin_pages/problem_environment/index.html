@@ -1,6 +1,6 @@
 {% extends 'adminlte/base.html' %}
 {% load i18n %}
-
+{% load tag %}
 {% block title %}pstate - Problem Environments{% endblock %}
 {% block content %}{% load tz %}
 <script type="text/javascript">
@@ -85,8 +85,14 @@
     {% endfor %}
     </tbody>
 </table>
-<input class="btn btn-danger" type="submit" name="destroy" value="destroy">
+{% get_setting 'webui_admin_problem_env_bulk_destroy_is_enable' as webui_admin_problem_env_bulk_destroy_is_enable %}
+{% if webui_admin_problem_env_bulk_destroy_is_enable.value == 'True' %}
+    <input class="btn btn-danger" type="submit" name="destroy" value="destroy">
+{% endif %}
+{% get_setting 'webui_admin_problem_env_bulk_delete_is_enable' as webui_admin_problem_env_bulk_delete_is_enable %}
+{% if webui_admin_problem_env_bulk_delete_is_enable.value == 'True' %}
 <input class="btn btn-danger" type="submit" name="delete" value="delete" >
+{% endif %}
 </form>
 {% if is_paginated %}
   <nav>

@@ -1,13 +1,16 @@
 {% extends 'adminlte/base.html' %}
 {% load i18n %}
-
+{% load tag %}
 {% block title %}pstate - Teams{% endblock %}
 {% block content %}{% load tz %}
 <h1>{% trans 'Teams' %}</h1>
 <div align="right">
     <button class="btn btn-primary" onClick="location.href='{% url 'pstate-manage:team-add' %}'" >{% trans 'Add' %}</button>
     <button class="btn btn-primary" onClick="location.href='{% url 'pstate-manage:bulk-team-add' %}'" >{% trans 'Bulk Add' %}</button>
+    {% get_setting 'webui_admin_team_all_delete_is_enable' as webui_admin_team_all_delete_is_enable %}
+    {% if webui_admin_team_all_delete_is_enable.value == 'True' %}
     <button class="btn btn-danger" onClick="location.href='{% url 'pstate-manage:all-team-delete' %}'" >{% trans 'All Team Delete' %}</button>
+    {% endif %}
 
 </div>
 <table class="table table-striped table-bordered">

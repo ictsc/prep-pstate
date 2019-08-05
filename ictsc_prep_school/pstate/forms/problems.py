@@ -60,3 +60,9 @@ class ProblemStartForm(forms.Form):
 
 class ProblemEndForm(forms.Form):
     pass
+
+class ProblemAllDeleteForm(forms.Form):
+    pass
+
+class ProblemBulkCreateForm(forms.Form):
+    github = forms.ModelChoiceField(label="github", queryset=Github.objects.all())

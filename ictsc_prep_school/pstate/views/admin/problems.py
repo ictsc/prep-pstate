@@ -1,10 +1,11 @@
 from django.http import HttpResponse
-from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
+from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView, FormView
 
-from pstate.forms.problems import ProblemForm, ProblemUpdateForm, ProblemDescriptionUpdateForm
+from pstate.forms.problems import ProblemForm, ProblemUpdateForm, ProblemDescriptionUpdateForm, \
+    ProblemAllDeleteForm, ProblemBulkCreateForm
 from pstate.models import Problem
 from pstate.views.admin import LoginRequiredAndPermissionRequiredMixin
-
+from django.http import HttpResponseRedirect
 
 class ProblemCreateView(LoginRequiredAndPermissionRequiredMixin, CreateView):
     form_class = ProblemForm
@@ -60,3 +61,21 @@ class ProblemDeleteView(LoginRequiredAndPermissionRequiredMixin, DeleteView):
 class ProblemPreviewView(LoginRequiredAndPermissionRequiredMixin, DetailView):
     model = Problem
     template_name = 'admin_pages/problem/preview.html'
+
+class ProblemAllDeleteView(LoginRequiredAndPermissionRequiredMixin, FormView):
+    form_class = ProblemAllDeleteForm
+    template_name = 'admin_pages/problem/all-problem-delete.html'
+    success_url = '/pstate/manage/problems/'
+
+    def form_valid(self, form):
+        Problem.objects.all().delete()
+        return HttpResponseRedirect(self.success_url)
+
+class ProblemBulkCreateView(LoginRequiredAndPermissionRequiredMixin, FormView):
+    form_class = ProblemBulkCreateForm
+    template_name = 'admin_pages/problem/bulk-add.html'
+    success_url = '/pstate/manage/problems/'
+
+    def form_valid(self, form):
+        return HttpResponseRedirect(self.success_url)
+

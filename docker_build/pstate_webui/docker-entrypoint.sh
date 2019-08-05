@@ -10,6 +10,8 @@ elif [ "$MODE" = "init" ]; then
     python3 manage.py loaddata fixtures/terraform_manager/attribute.json
     python3 manage.py loaddata fixtures/terraform_manager/provider.json
     python3 manage.py loaddata fixtures/terraform_manager/filetemplate.json
+elif [ "$MODE" = "notify" ]; then
+    python3 cron.py
 else
     echo "error"
 fi

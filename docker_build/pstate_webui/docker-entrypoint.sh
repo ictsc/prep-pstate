@@ -10,6 +10,7 @@ elif [ "$MODE" = "init" ]; then
     python3 manage.py loaddata fixtures/terraform_manager/attribute.json
     python3 manage.py loaddata fixtures/terraform_manager/provider.json
     python3 manage.py loaddata fixtures/terraform_manager/filetemplate.json
+    python3 manage.py loaddata fixtures/terraform_manager/setting.json
 elif [ "$MODE" = "notify" ]; then
     python3 cron.py
 else

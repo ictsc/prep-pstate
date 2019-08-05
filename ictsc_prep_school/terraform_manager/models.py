@@ -144,3 +144,33 @@ class FileTemplate(models.Model):
     body = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+
+class Setting(models.Model):
+
+    SETTING_TYPE_CHOICES = [
+        ('int', 'int'),
+        ('float', 'float'),
+        ('str', 'str'),
+        ('bool', 'bool'),
+        ('dict', 'dict'),
+        ('list', 'list'),
+    ]
+
+    name = models.CharField(max_length=50)
+    type = models.CharField(max_length=50, choices=SETTING_TYPE_CHOICES)
+    value = models.TextField()
+
+    def get_value(self):
+        if self.type == 'int':
+            return int(self.value)
+        elif self.type == 'float':
+            return float(self.value)
+        elif self.type == 'str':
+            return self.value
+        elif self.type == 'bool':
+            return bool(self.value)
+        elif self.type == 'dict':
+            return dict(self.value)
+        elif self.type == 'list':
+            return list(self.value)

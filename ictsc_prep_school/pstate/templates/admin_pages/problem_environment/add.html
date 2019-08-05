@@ -16,6 +16,6 @@
         <th><input type="button" class="btn btn-primary" name="all" onClick="AllChecked(true)" value="{% trans 'All Check' %}" /></th>
         <th><input type="button" class="btn btn-primary" name="all" onClick="AllChecked(false)" value="{% trans 'All Uncheck' %}" /></th>
         {{ form.as_p }}
-    <input type="submit" value="{% trans 'Add' %}" />
+  <input type="submit" class="btn btn-primary" value="{% trans 'Add' %}" />
 </form>
 {% endblock %}

@@ -20,7 +20,8 @@ class ProblemManager(models.Manager):
 
     def get_open_problem(self):
         # modeがOPEN状態で公開時間内の問題を抽出.
-        queryset = self.filter(Q(mode='OPEN') | Q(mode='TIMER', start_date__lt=now(), end_date__gt=now())).order_by('id')
+        queryset = self.filter(Q(mode='OPEN') | Q(mode='TIMER', start_date__lt=now(), end_date__gt=now())).order_by(
+            'id')
         return queryset
 
 
@@ -87,7 +88,8 @@ class ProblemEnvironment(TemplateModel):
     state = models.CharField(choices=STATE_CHOICES, default='IN_PREPARATION', max_length=100)
     team = models.ForeignKey("Team", on_delete=models.PROTECT, blank=True, null=True)
     participant = models.ForeignKey("Participant", on_delete=models.PROTECT, blank=True, null=True)
-    environment = models.ForeignKey(Environment, on_delete=models.CASCADE, null=True, related_name='problem_environment')
+    environment = models.ForeignKey(Environment, on_delete=models.CASCADE, null=True,
+                                    related_name='problem_environment')
     problem = models.ForeignKey(Problem, related_name='problem_environment', on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):
@@ -160,3 +162,67 @@ class Github(TemplateModel):
 
     def __str__(self):
         return self.name
+
+
+class NotificationQueue(TemplateModel):
+    MUTATION_TEMPLATE_ADD_PROBLEM_ENV = '''
+    mutation {
+        applyProblemEnvironment(input: {
+            problemCode: "PROBLEM_CODE", teamNumber: TEAM_NUMBER,
+            status: "STATUS", host: "HOST",
+            user: "USER", password: "PASSWORD" }
+        ) {
+          problemEnvironment { id  }
+      }
+    }
+    '''
+    environment = models.ForeignKey(Environment, related_name="notification_queue", on_delete=models.CASCADE)
+    payload = models.TextField()
+
+    def save(self, *args, **kwargs):
+        if len(self.environment.problem_environment.all()) != 1:
+            raise Exception("InvalidData")
+        problem_environment = self.environment.problem_environment.all().first()
+        problem_name = problem_environment.problem.name
+        try:
+            team_number = problem_environment.team.team_number
+        except:
+            team_number = -1
+        ipv4_address = problem_environment.vnc_server_ipv4_address
+        username = problem_environment.vnc_server_username
+        password = problem_environment.vnc_server_password
+        status = str(self.environment.state)
+
+        payload = self.MUTATION_TEMPLATE_ADD_PROBLEM_ENV
+
+        if problem_name:
+            payload = payload.replace("PROBLEM_CODE", problem_name)
+        else:
+            payload = payload.replace("PROBLEM_CODE", "")
+
+        if team_number:
+            payload = payload.replace("TEAM_NUMBER", str(team_number))
+        else:
+            payload = payload.replace("TEAM_NUMBER", "")
+
+        if status:
+            payload = payload.replace("STATUS", status)
+        else:
+            payload = payload.replace("STATUS", "")
+
+        if ipv4_address:
+            payload = payload.replace("HOST", ipv4_address)
+        else:
+            payload = payload.replace("HOST", "")
+
+        if username:
+            payload = payload.replace("USER", username)
+        else:
+            payload = payload.replace("USER", "")
+
+        if password:
+            payload = payload.replace("PASSWORD", password)
+        else:
+            payload = payload.replace("PASSWORD", "")
+        self.payload = payload
+        super(NotificationQueue, self).save(*args, **kwargs)

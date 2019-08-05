@@ -20,7 +20,7 @@ services:
     volumes:
       - postgres:/var/lib/postgresql/data
 
-  pstate-webui:
+  webui:
     build:
       context: ./
       dockerfile: docker_build/pstate_webui/Dockerfile
@@ -41,7 +41,7 @@ services:
     ports:
       - 8088:80
 
-  pstate-worker:
+  worker:
     build:
       context: ./
       dockerfile: docker_build/terraform_manager_worker/Dockerfile
@@ -56,10 +56,30 @@ services:
       REDIS_HOST: redis
       REDIS_PORT: 6379
     depends_on:
+      - postgres
+      - redis
+
+  notify-worker:
+    build:
+      context: ./
+      dockerfile: docker_build/pstate_webui/Dockerfile
+    restart: unless-stopped
+    environment:
+      DJANGO_SETTINGS_MODULE: ictsc_prep_school.settings.pstate.local
+      POSTGRES_DB: pstate
+      POSTGRES_USER: pstate
+      POSTGRES_PASSWORD: pstate
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      MODE: notify
+    depends_on:
+      - postgres
       - redis
 
   # DBの初期化を行うservice.
-  pstate-init:
+  init:
     build:
       context: ./
       dockerfile: docker_build/pstate_webui/Dockerfile

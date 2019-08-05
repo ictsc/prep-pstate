@@ -4,7 +4,7 @@ from django.views.generic import CreateView, ListView, DetailView, UpdateView, D
 from pstate.forms.problems import ProblemEnvironmentCreateExecuteForm, ProblemEnvironmentDestroyExecuteForm, \
     ProblemEnvironmentRecreateExecuteForm, ProblemEnvironmentBulkDestroyDeleteExecuteForm
 from pstate.forms.problem_environments import ProblemEnvironmentForm, ProblemEnvironmentUpdateForm
-from pstate.models import Problem, ProblemEnvironment, ProblemEnvironmentLog, Team
+from pstate.models import Problem, ProblemEnvironment, ProblemEnvironmentLog, Team, NotificationQueue
 from pstate.views.admin import LoginRequiredAndPermissionRequiredMixin
 from django.shortcuts import render
 
@@ -30,6 +30,7 @@ class ProblemEnvironmentCreateView(LoginRequiredAndPermissionRequiredMixin, Crea
                                                      environment=environment,
                                                      problem=problem)
             problem_environment.save()
+            NotificationQueue.objects.create(environment=environment)
 
             # VNCサーバのパスワードを参照しworkerに対して処理の実行命令する際に転送する.
             var = {"VNC_SERVER_PASSWORD": problem_environment.vnc_server_password,
@@ -123,6 +124,7 @@ class ProblemEnvironmentTestRunExecuteView(LoginRequiredAndPermissionRequiredMix
                                                  environment=environment,
                                                  problem=problem)
         problem_environment.save()
+        NotificationQueue.objects.create(environment=environment)
 
         # VNCサーバのパスワードを参照しworkerに対して処理の実行命令する際に転送する.
         var = {"VNC_SERVER_PASSWORD": problem_environment.vnc_server_password,
@@ -150,10 +152,6 @@ class ProblemEnvironmentCreateExecuteView(LoginRequiredAndPermissionRequiredMixi
                                   is_locked=False)
         environment.save()
 
-        from terraform_manager.terraform_manager_tasks import direct_apply
-        var = []
-        direct_apply.delay(environment.id, problem.terraform_file_id.id, var)
-
         # データの作成.
         problem_environment = ProblemEnvironment(vnc_server_ipv4_address=None,
                                                  is_enabled=True,
@@ -163,6 +161,11 @@ class ProblemEnvironmentCreateExecuteView(LoginRequiredAndPermissionRequiredMixi
                                                  environment=environment,
                                                  problem=problem)
         problem_environment.save()
+        NotificationQueue.objects.create(environment=environment)
+
+        from terraform_manager.terraform_manager_tasks import direct_apply
+        var = []
+        direct_apply.delay(environment.id, problem.terraform_file_id.id, var)
         return HttpResponseRedirect(self.success_url)
 
 
@@ -248,6 +251,7 @@ class ProblemEnvironmentRecreateView(LoginRequiredAndPermissionRequiredMixin, Fo
                                                           environment=recreate_environment,
                                                           problem=recreate_problem)
         recreate_problem_environment.save()
+        NotificationQueue.objects.create(environment=recreate_environment)
 
         # VNCサーバのパスワードを参照しworkerに対して処理の実行命令する際に転送する.
         var = {"VNC_SERVER_PASSWORD": recreate_problem_environment.vnc_server_password,

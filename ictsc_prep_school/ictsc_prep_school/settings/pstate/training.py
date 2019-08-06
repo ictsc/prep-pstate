@@ -1,3 +1,4 @@
+from ictsc_prep_school.settings import get_env_variable
 from ictsc_prep_school.settings.pstate.base import *
 
 DATABASES = {

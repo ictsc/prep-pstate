@@ -1,5 +1,6 @@
+from ictsc_prep_school.settings import get_env_variable
 from ictsc_prep_school.settings.terraform_manager.base import *
-from ictsc_prep_school.settings.terraform_manager.local import get_env_variable
+
 
 DATABASES = {
     'default': {

@@ -60,12 +60,12 @@ class ProblemEnvironmentListView(LoginRequiredAndPermissionRequiredMixin, ListVi
         problems = self.request.GET.getlist("problem")
         ipv4_address = self.request.GET.get("ip_address")
         if len(teams) != 0:
-            queryset = queryset.filter(team__in=teams, is_enabled=True).order_by('id')
+            queryset = queryset.filter(team__in=teams).order_by('id')
         if len(problems) != 0:
-            queryset = queryset.filter(problem__in=problems, is_enabled=True).order_by('id')
+            queryset = queryset.filter(problem__in=problems).order_by('id')
         if self.request.GET.get("ip_address") is not None and not self.request.GET.get("ip_address") == "":
             queryset = queryset.filter(vnc_server_ipv4_address=ipv4_address)
-        queryset = queryset.filter(is_enabled=True).order_by('id')
+        queryset = queryset.filter().order_by('id')
         return queryset
 
     def get_context_data(self, **kwargs):

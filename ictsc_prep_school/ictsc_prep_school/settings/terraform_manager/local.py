@@ -12,7 +12,9 @@ def get_env_variable(var_name, default=None):
         else:
             error_msg = 'The environment variable {} was missing, abort...' \
                 .format(var_name)
-            raise EnvironmentError(error_msg)
+            #   FIX ME  :   docker-composeやk8s manifestに書いてあるenvを環境変数にセットできるようにする.
+            # raise EnvironmentError(error_msg)
+            return ''
 
 
 DATABASES = {

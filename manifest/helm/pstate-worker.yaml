@@ -19,3 +19,9 @@ spec:
       value: t0FPoJaZ
     - name: MODE
       value: notify
+    - name: SCORE_SERVER_API_URL
+      value: http://localhost:8900
+    - name: SCORE_SERVER_AUTH_USER_NAME
+      value: staff
+    - name: SCORE_SERVER_AUTH_PASSWORD
+      value: staff

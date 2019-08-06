@@ -17,8 +17,6 @@ spec:
       value: pstate
     - name: POSTGRES_PASSWORD # This is the password for the development environment.
       value: t0FPoJaZ
-    - name: MODE
-      value: notify
     - name: SCORE_SERVER_API_URL
       value: http://localhost:8900
     - name: SCORE_SERVER_AUTH_USER_NAME

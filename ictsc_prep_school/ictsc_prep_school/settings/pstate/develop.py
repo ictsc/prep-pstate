@@ -1,11 +1,12 @@
 from ictsc_prep_school.settings.pstate.base import *
+from ictsc_prep_school.settings.pstate.local import get_env_variable
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'pstate',
-        'USER': 'pstate',
-        'PASSWORD': 't0FPoJaZ',
+        'NAME': '{}'.format(get_env_variable('POSTGRES_DB')),
+        'USER': '{}'.format(get_env_variable('POSTGRES_USER')),
+        'PASSWORD': '{}'.format(get_env_variable('POSTGRES_PASSWORD')),
         'HOST': 'db.prep-dev.icttoracon.net',
         'PORT': '5432',
     }

@@ -1,22 +1,24 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: pstate-worker
+  name: pstate-notify-worker
   labels:
-    app: pstate-worker
+    app: pstate-notify-worker
 spec:
   containers:
-  - name: pstate-worker
-    image: terraform-manager-worker:20180816011
+  - name: pstate-notify-worker
+    image: pstate_webui:20181214016
     env:
     - name: DJANGO_SETTINGS_MODULE
-      value: ictsc_prep_school.settings.terraform_manager.develop
+      value: ictsc_prep_school.settings.pstate.develop
     - name: POSTGRES_DB
       value: pstate
     - name: POSTGRES_USER
       value: pstate
     - name: POSTGRES_PASSWORD # This is the password for the development environment.
       value: t0FPoJaZ
+    - name: MODE
+      value: notify
     - name: SCORE_SERVER_API_URL
       value: http://localhost:8900
     - name: SCORE_SERVER_AUTH_USER_NAME

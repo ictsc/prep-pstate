@@ -1,11 +1,12 @@
+from ictsc_prep_school.settings import get_env_variable
 from ictsc_prep_school.settings.terraform_manager.base import *
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'pstate',
-        'USER': 'pstate',
-        'PASSWORD': '',
+        'NAME': '{}'.format(get_env_variable('POSTGRES_DB')),
+        'USER': '{}'.format(get_env_variable('POSTGRES_USER')),
+        'PASSWORD': '{}'.format(get_env_variable('POSTGRES_PASSWORD')),
         'HOST': 'db.prep-stg.icttoracon.net',
         'PORT': '5432',
     }

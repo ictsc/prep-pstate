@@ -20,6 +20,7 @@ services:
     volumes:
       - postgres:/var/lib/postgresql/data
 
+  # pstate web ui
   webui:
     build:
       context: ./
@@ -35,12 +36,16 @@ services:
       REDIS_HOST: redis
       REDIS_PORT: 6379
       MODE: web
+      SCORE_SERVER_API_URL: http://localhost:8900
+      SCORE_SERVER_AUTH_USER_NAME: staff
+      SCORE_SERVER_AUTH_PASSWORD: staff
     depends_on:
       - postgres
       - redis
     ports:
       - 8088:80
 
+  # terraformコマンドが実行するservice.
   worker:
     build:
       context: ./
@@ -55,10 +60,14 @@ services:
       POSTGRES_PORT: 5432
       REDIS_HOST: redis
       REDIS_PORT: 6379
+      SCORE_SERVER_API_URL: http://localhost:8900
+      SCORE_SERVER_AUTH_USER_NAME: staff
+      SCORE_SERVER_AUTH_PASSWORD: staff
     depends_on:
       - postgres
       - redis
 
+  # スコアサーバへ通知を行うservice.
   notify-worker:
     build:
       context: ./
@@ -74,6 +83,9 @@ services:
       REDIS_HOST: redis
       REDIS_PORT: 6379
       MODE: notify
+      SCORE_SERVER_API_URL: http://localhost:8900
+      SCORE_SERVER_AUTH_USER_NAME: staff
+      SCORE_SERVER_AUTH_PASSWORD: staff
     depends_on:
       - postgres
       - redis

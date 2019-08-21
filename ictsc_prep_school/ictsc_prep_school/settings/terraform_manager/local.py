@@ -1,18 +1,5 @@
+from ictsc_prep_school.settings import get_env_variable
 from ictsc_prep_school.settings.terraform_manager.base import *
-import os
-
-
-def get_env_variable(var_name, default=None):
-    """Get the environment variable or raise exception."""
-    try:
-        return os.environ[var_name]
-    except KeyError:
-        if default is not None:
-            return default
-        else:
-            error_msg = 'The environment variable {} was missing, abort...' \
-                .format(var_name)
-            raise EnvironmentError(error_msg)
 
 
 DATABASES = {

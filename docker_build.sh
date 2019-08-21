@@ -24,3 +24,5 @@ sedi -e "s/PSTATE_IMAGE/${PSTATE_WEB_VERSION}/g" ./manifest/helm/pstate.yaml
 sedi -e "s/TERRAFORM_MANAGER_WORKER_IMAGE/${TERRAFORM_MANAGER_VERSION}/g" ./manifest/helm/pstate-worker.yaml
 sedi -e "s/PSTATE_IMAGE/${PSTATE_WEB_VERSION}/g" ./manifest/helm/pstate-notify-worker.yaml
 sedi -e "s/PSTATE_STATIC_SERVER_IMAGE/${PSTATE_STATIC_SERVER_VERSION}/g" ./manifest/helm/pstate-staticfiles-webserver.yaml
+
+sedi -e "s/PSTATE_VERSION/${VERSION}/g" ./ictsc_prep_school/pstate/templates/adminlte/lib/_main_footer.html

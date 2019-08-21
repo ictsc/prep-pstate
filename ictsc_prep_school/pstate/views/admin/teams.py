@@ -5,6 +5,8 @@ from pstate.models import Team, Github
 from pstate.views.admin import LoginRequiredAndPermissionRequiredMixin
 from django.http import HttpResponseRedirect
 from pstate.views.admin.github import GithubRepoPullExecute
+from django.db import models
+from django.shortcuts import render
 
 class TeamCreateView(LoginRequiredAndPermissionRequiredMixin, CreateView):
     form_class = TeamForm
@@ -38,15 +40,23 @@ class TeamDeleteView(LoginRequiredAndPermissionRequiredMixin, DeleteView):
     template_name = 'admin_pages/common/delete.html'
     success_url = '/pstate/manage/teams/'
 
+    def delete(self, request, *args, **kwargs):
+        try:
+            return(super().delete(request, *args, **kwargs))
+        except models.ProtectedError as e:
+            return render(request, 'admin_pages/team/del_team_error.html')
+
 class TeamAllDeleteView(LoginRequiredAndPermissionRequiredMixin, FormView):
     form_class = TeamAllDeleteForm
     template_name = 'admin_pages/team/all-team-delete.html'
     success_url = '/pstate/manage/teams/'
 
     def form_valid(self, form):
-        Team.objects.all().delete()
-
-        return HttpResponseRedirect(self.success_url)
+        try:
+            Team.objects.all().delete()
+            return HttpResponseRedirect(self.success_url)
+        except models.ProtectedError as e:
+            return render(self.request, 'admin_pages/team/del_team_error.html')
 
 class TeamBulkCreateView(LoginRequiredAndPermissionRequiredMixin, FormView):
     form_class = TeamBulkCreateForm

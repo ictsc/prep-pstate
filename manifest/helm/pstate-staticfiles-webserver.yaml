@@ -22,7 +22,7 @@ metadata:
 spec:
   containers:
   - name: pstate-static
-    image: pstate-static-server:20180705
+    image: PSTATE_STATIC_SERVER_IMAGE
     ports:
     - name: pstate-static
       containerPort: 80

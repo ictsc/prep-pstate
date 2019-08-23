@@ -1,5 +1,5 @@
 from django.http import HttpResponseRedirect
-from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView, FormView
+from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView, FormView, TemplateView
 
 from pstate.forms.problems import ProblemEnvironmentCreateExecuteForm, ProblemEnvironmentDestroyExecuteForm, \
     ProblemEnvironmentRecreateExecuteForm, ProblemEnvironmentBulkDestroyDeleteExecuteForm
@@ -80,6 +80,17 @@ class ProblemEnvironmentListView(LoginRequiredAndPermissionRequiredMixin, ListVi
         post_params = request.POST.urlencode()
         response['location'] += '?'+ post_params
         return response
+
+class ProblemEnvironmentStatisticsView(LoginRequiredAndPermissionRequiredMixin, TemplateView):
+    template_name = 'admin_pages/problem_environment/statistics.html'
+
+    def get(self, request, **kwargs):
+        context = {
+            "problem_objects_list": Problem.objects.all(),
+            "team_objects_list": Team.objects.all(),
+            "problem_environment_objects_list": ProblemEnvironment
+        }
+        return self.render_to_response(context)
 
 class ProblemEnvironmentDetailView(LoginRequiredAndPermissionRequiredMixin, DetailView):
     model = ProblemEnvironment

@@ -10,7 +10,7 @@ from pstate.views.admin.participants import ParticipantListView, ParticipantDeta
 from pstate.views.admin.problem_environments import ProblemEnvironmentCreateView, ProblemEnvironmentTestRunExecuteView, \
     ProblemEnvironmentListView, ProblemEnvironmentDetailView, ProblemEnvironmentUpdateView, \
     ProblemEnvironmentDeleteView, ProblemEnvironmentDestroyView, ProblemEnvironmentRecreateView, \
-    ProblemEnvironmentApplyView, ProblemEnvironmentBulkDestroyDeleteView
+    ProblemEnvironmentApplyView, ProblemEnvironmentBulkDestroyDeleteView, ProblemEnvironmentStatisticsView
 from pstate.views.admin.problems import ProblemListView, ProblemDetailView, ProblemCreateView, ProblemUpdateView, \
     ProblemDescriptionUpdateView, ProblemDeleteView, ProblemPreviewView, ProblemBulkCreateView, ProblemAllDeleteView
 from pstate.views.admin.providers import ProviderListView, ProviderDetailView, ProviderCreateView, ProviderUpdateView, \
@@ -71,6 +71,7 @@ urlpatterns = [
     url(r'^shell_scripts/(?P<pk>[0-9]+)/delete/$', ShellScriptDeleteView.as_view(), name='shell_script-delete'),
     # problem_environments
     url(r'^problem_environments/$', ProblemEnvironmentListView.as_view(), name='problemenvironment-list'),
+    url(r'^problem_environments/statistics/$', ProblemEnvironmentStatisticsView.as_view(), name='problemenvironment-statistics'),
     url(r'^problem_environments/(?P<pk>[0-9]+)/$', ProblemEnvironmentDetailView.as_view(), name='problemenvironment-detail'),
     url(r'^problem_environments/add/$', ProblemEnvironmentCreateView.as_view(), name='problemenvironment-create'),
     url(r'^problem_environments/(?P<pk>[0-9]+)/edit/$', ProblemEnvironmentUpdateView.as_view(), name='problemenvironment-edit'),

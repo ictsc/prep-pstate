@@ -1,4 +1,5 @@
 import logging
+from traceback import format_exc
 
 import requests
 from django.conf import settings
@@ -28,7 +29,7 @@ class Command(BaseCommand):
                 if self.__request_to_score_server(notification.payload):
                     notification.delete()
             except:
-                pass
+                logging.error(format_exc())
         if len(NotificationQueue.objects.all()) != 0:
             self.__logout_score_server()
 
@@ -43,10 +44,10 @@ class Command(BaseCommand):
 
     def __request_to_score_server(self, mutation):
         data = {"query": mutation}
-        self.logger.info("Request to score server {}".format(mutation))
+        self.logger.info("Request to score server Mutation: {}".format(mutation))
         response = self.session.post(url=self.graphql_url, data=data, timeout=5)
         response.raise_for_status()
         if 'errors' in response.json() and response.json()['errors'] != []:
-            self.logger.error("API Error {}, {}".format(response.content, mutation))
+            self.logger.error("API Error Content: {}, Mutation: {}".format(response.content, mutation))
             raise Exception("API Error")
         return True

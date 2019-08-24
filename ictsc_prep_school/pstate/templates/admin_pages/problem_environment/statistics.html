@@ -20,7 +20,7 @@
         <tr>
             <th> {{ team.team_name }}</th>
             {% for problem in problem_objects_list %}
-                <td>{{ problem.name }}</td>
+                <td>{{ call_lateste(teamid, probdecode) }}</td>
             {% endfor %}
         </tr>
         {% endfor %}

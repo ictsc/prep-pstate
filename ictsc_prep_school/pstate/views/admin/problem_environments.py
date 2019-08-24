@@ -85,12 +85,17 @@ class ProblemEnvironmentStatisticsView(LoginRequiredAndPermissionRequiredMixin, 
     template_name = 'admin_pages/problem_environment/statistics.html'
 
     def get(self, request, **kwargs):
+        teams = Team.objects.all()
+        problems = Problem.objects.all()
+        status = []
+
         context = {
             "problem_objects_list": Problem.objects.all(),
             "team_objects_list": Team.objects.all(),
-            "problem_environment_objects_list": ProblemEnvironment
+            "status": status
         }
         return self.render_to_response(context)
+
 
 class ProblemEnvironmentDetailView(LoginRequiredAndPermissionRequiredMixin, DetailView):
     model = ProblemEnvironment

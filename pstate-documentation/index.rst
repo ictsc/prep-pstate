@@ -53,6 +53,11 @@ Welcome to pstate's documentation!
 
    /page/create_vnc_image
 
+.. toctree::
+   :maxdepth: 2
+
+   /page/admin/git.rst
+
 参加者ガイド
 ----------------------------
 

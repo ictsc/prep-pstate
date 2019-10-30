@@ -8,10 +8,6 @@ PSTATE_WEB_VERSION="pstate_webui:${VERSION}"
 PSTATE_STATIC_SERVER_VERSION="pstate-static-server:${VERSION}"
 TERRAFORM_MANAGER_VERSION="terraform-manager-worker:${VERSION}"
 
-docker build -t ${PSTATE_WEB_VERSION} -f docker_build/pstate_webui/Dockerfile .
-docker build -t ${PSTATE_STATIC_SERVER_VERSION} -f docker_build/pstate_webui_staticfiles_webserver/Dockerfile .
-docker build -t ${TERRAFORM_MANAGER_VERSION} -f docker_build/terraform_manager_worker/Dockerfile .
-
 shopt -s expand_aliases
 
 if sed --version 2>/dev/null | grep -q GNU; then
@@ -26,3 +22,6 @@ sedi -e "s/PSTATE_IMAGE/${PSTATE_WEB_VERSION}/g" ./manifest/helm/pstate-notify-w
 sedi -e "s/PSTATE_STATIC_SERVER_IMAGE/${PSTATE_STATIC_SERVER_VERSION}/g" ./manifest/helm/pstate-staticfiles-webserver.yaml
 
 sedi -e "s/PSTATE_VERSION/${VERSION}/g" ./ictsc_prep_school/pstate/templates/adminlte/lib/_main_footer.html
+docker build -t ${PSTATE_WEB_VERSION} -f docker_build/pstate_webui/Dockerfile .
+docker build -t ${PSTATE_STATIC_SERVER_VERSION} -f docker_build/pstate_webui_staticfiles_webserver/Dockerfile .
+docker build -t ${TERRAFORM_MANAGER_VERSION} -f docker_build/terraform_manager_worker/Dockerfile .

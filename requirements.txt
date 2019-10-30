@@ -17,8 +17,7 @@ idna==2.7
 kombu==4.6.3
 Markdown==2.6.11
 pathtools==0.1.2
-psycopg2==2.7.4
-psycopg2-binary==2.7.4
+psycopg2-binary==2.8.4
 python-terraform==0.9.1
 pytz==2019.1
 PyYAML==3.13

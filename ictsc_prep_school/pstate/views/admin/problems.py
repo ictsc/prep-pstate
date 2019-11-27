@@ -99,11 +99,21 @@ class ProblemBulkCreateView(LoginRequiredAndPermissionRequiredMixin, FormView):
                 problem_name = problem.split("/")[-2]
                 tf_file = TerraformFile(name="main", body=body, file_name="main.tf", provider=provider)
                 tf_file.save()
-                file_template = FileTemplate.objects.get(file_name='start.sh')
-                shell_script = ShellScript(name=file_template.name,
-                                            file_name=file_template.file_name,
-                                            terraform_file=tf_file,
-                                            body=file_template.body)
+
+                # start.shがgitに存在している場合はそれを使う
+                if os.path.exists(problem + "/start.sh"):
+                    with open(problem + "/start.sh", mode="r", encoding="utf-8") as f:
+                        body = f.read()
+                        shell_script = ShellScript(name="VNCサーバ初期化用",
+                                                   file_name="start.sh",
+                                                   terraform_file=tf_file,
+                                                   body=body)
+                else:   # 存在していない場合はテンプレートを使う
+                    file_template = FileTemplate.objects.get(file_name='start.sh')
+                    shell_script = ShellScript(name=file_template.name,
+                                               file_name=file_template.file_name,
+                                               terraform_file=tf_file,
+                                               body=file_template.body)
                 shell_script.save()
                 problem = Problem(name=problem_name, display_name="test_display_name", terraform_file_id=tf_file)
                 problem.save()

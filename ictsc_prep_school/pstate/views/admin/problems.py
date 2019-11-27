@@ -102,7 +102,7 @@ class ProblemBulkCreateView(LoginRequiredAndPermissionRequiredMixin, FormView):
 
                 # start.shがgitに存在している場合はそれを使う
                 if os.path.exists(problem + "/start.sh"):
-                    with open(problem + "/start.tf", mode="r", encoding="utf-8") as f:
+                    with open(problem + "/start.sh", mode="r", encoding="utf-8") as f:
                         body = f.read()
                         shell_script = ShellScript(name="VNCサーバ初期化用",
                                                    file_name="start.sh",

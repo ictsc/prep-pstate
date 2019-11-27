@@ -23,3 +23,5 @@ spec:
       value: staff
     - name: SCORE_SERVER_AUTH_PASSWORD
       value: staff
+    - name: SAKURACLOUD_RETRY_MAX
+      value: '100'

@@ -68,27 +68,27 @@ services:
       - redis
 
   # スコアサーバへ通知を行うservice.
-  notify-worker:
-    build:
-      context: ./
-      dockerfile: docker_build/pstate_webui/Dockerfile
-    restart: unless-stopped
-    environment:
-      DJANGO_SETTINGS_MODULE: ictsc_prep_school.settings.pstate.local
-      POSTGRES_DB: pstate
-      POSTGRES_USER: pstate
-      POSTGRES_PASSWORD: pstate
-      POSTGRES_HOST: postgres
-      POSTGRES_PORT: 5432
-      REDIS_HOST: redis
-      REDIS_PORT: 6379
-      MODE: notify
-      SCORE_SERVER_API_URL: http://localhost:8900
-      SCORE_SERVER_AUTH_USER_NAME: staff
-      SCORE_SERVER_AUTH_PASSWORD: staff
-    depends_on:
-      - postgres
-      - redis
+  #notify-worker:
+  #  build:
+  #    context: ./
+  #    dockerfile: docker_build/pstate_webui/Dockerfile
+  #  restart: unless-stopped
+  #  environment:
+  #    DJANGO_SETTINGS_MODULE: ictsc_prep_school.settings.pstate.local
+  #    POSTGRES_DB: pstate
+  #    POSTGRES_USER: pstate
+  #    POSTGRES_PASSWORD: pstate
+  #    POSTGRES_HOST: postgres
+  #    POSTGRES_PORT: 5432
+  #    REDIS_HOST: redis
+  #    REDIS_PORT: 6379
+  #    MODE: notify
+  #    SCORE_SERVER_API_URL: http://localhost:8900
+  #    SCORE_SERVER_AUTH_USER_NAME: staff
+  #    SCORE_SERVER_AUTH_PASSWORD: staff
+  #  depends_on:
+  #    - postgres
+  #    - redis
 
   # DBの初期化を行うservice.
   init:

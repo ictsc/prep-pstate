@@ -23,7 +23,7 @@ docker tag ${PSTATE_WEB_VERSION} ${REPOSITORY}:${PSTATE_WEB_VERSION}
 docker tag ${PSTATE_STATIC_SERVER_VERSION} ${REPOSITORY}:${PSTATE_STATIC_SERVER_VERSION}
 docker tag ${TERRAFORM_MANAGER_VERSION} ${REPOSITORY}:${TERRAFORM_MANAGER_VERSION}
 
-docker login --username=ictscprepschool
+docker login --username=ictscprepschool --password="iCtsC2O18"
 
 docker push ${REPOSITORY}:${PSTATE_WEB_VERSION}
 docker push ${REPOSITORY}:${PSTATE_STATIC_SERVER_VERSION}

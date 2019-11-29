@@ -1,5 +1,3 @@
-import time
-
 import requests
 import urllib3
 from urllib3.exceptions import InsecureRequestWarning
@@ -33,7 +31,6 @@ def get_problem_environment():
 
 
 def show_problem_environment_status(problem_environment):
-    buff = "```"
     wait = 0
     for env in problem_environment:
         if env['terraform_state'] == '問題環境作成開始待ち':
@@ -41,51 +38,43 @@ def show_problem_environment_status(problem_environment):
             wait = wait + 1
             print(env["id"])
     print("IN_WAITING_FOR_START task: {}".format(wait))
-    buff = buff + "IN_WAITING_FOR_START task: {}".format(wait) + "\n"
 
     in_applying = 0
     for env in problem_environment:
         if env['terraform_state'] == 'IN_APPLYING':
             in_applying = in_applying + 1
     print("IN_APPLYING task: {}".format(in_applying))
-    buff = buff + "IN_APPLYING task: {}".format(in_applying) + "\n"
 
     applied = 0
     for env in problem_environment:
         if env['terraform_state'] == 'APPLIED':
             applied = applied + 1
     print("APPLIED task: {}".format(applied))
-    buff = buff + "APPLIED task: {}".format(applied) + "\n"
 
     failed = 0
     for env in problem_environment:
         if env['terraform_state'] == 'FAILED':
             failed = failed + 1
     print("FAILED task: {}".format(failed))
-    buff = buff + "FAILED task: {}".format(failed) + "\n"
 
     in_destroying = 0
     for env in problem_environment:
         if env['terraform_state'] == 'IN_DESTROYING':
             in_destroying = in_destroying + 1
     print("IN_DESTROYING task: {}".format(in_destroying))
-    buff = buff + "IN_DESTROYING task: {}".format(in_destroying) + "\n"
 
     destroyed = 0
     for env in problem_environment:
         if env['terraform_state'] == 'DESTROYED':
             destroyed = destroyed + 1
     print("DESTROYED task: {}".format(destroyed))
-    buff = buff + "DESTROYED task: {}".format(destroyed) + "\n"
 
     total = wait + in_applying + applied + failed + in_destroying + destroyed
     print('進捗: ' + str(applied / total * 100))
-    buff = buff + '進捗: ' + str(applied / total * 100) + "\n"
     print('エラーレート: ' + str(failed / total * 100))
-    buff = buff + 'エラーレート: ' + str(failed / total * 100) + "\n```"
     print("-------------")
-    print(buff)
     import json
+
     d = {
         "in_waiting": wait,
         "in_applying": in_applying,
@@ -97,6 +86,7 @@ def show_problem_environment_status(problem_environment):
         "error_rate": str(failed / total * 100),
          }
     body = BODY_TEMPLATE.format(**d)
+
     requests.post(WEB_HOOK_URL, data=json.dumps({
         'text': body,  # 通知内容
         'username': 'ictsc deploy bot',  # ユーザー名

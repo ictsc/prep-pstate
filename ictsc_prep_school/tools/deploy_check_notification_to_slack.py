@@ -9,6 +9,7 @@ PSTATE_API_USERNAME = ''
 PSTATE_API_PASSWORD = ''
 
 WEB_HOOK_URL = ""
+STATUS_FILE_PATH = './status.json'
 
 BODY_TEMPLATE = """
 ```実行待ち: {in_waiting}
@@ -87,12 +88,22 @@ def show_problem_environment_status(problem_environment):
          }
     body = BODY_TEMPLATE.format(**d)
 
+    f = open(STATUS_FILE_PATH, 'r')
+    jsonData = json.load(f)
+    if d == jsonData:
+        return 0
+    f.close()
+
     requests.post(WEB_HOOK_URL, data=json.dumps({
         'text': body,  # 通知内容
         'username': 'ictsc deploy bot',  # ユーザー名
         'icon_emoji': ':smile_cat:',  # アイコン
         'link_names': 1,  # 名前をリンク化
     }))
+
+    with open(STATUS_FILE_PATH, 'w') as f:
+        print("write")
+        json.dump(d, f, ensure_ascii=False, sort_keys=True)
 
 
 if __name__ == "__main__":

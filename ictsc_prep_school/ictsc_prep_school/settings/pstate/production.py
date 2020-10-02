@@ -7,16 +7,16 @@ DATABASES = {
         'NAME': '{}'.format(get_env_variable('POSTGRES_DB')),
         'USER': '{}'.format(get_env_variable('POSTGRES_USER')),
         'PASSWORD': '{}'.format(get_env_variable('POSTGRES_PASSWORD')),
-        'HOST': 'db.prep.icttoracon.net',
-        'PORT': '5432',
+        'HOST': '{}'.format(get_env_variable('POSTGRES_HOST')),
+        'PORT': '{}'.format(get_env_variable('POSTGRES_PORT')),
     }
 }
 
-BROKER_URL = 'redis://redis.prep.icttoracon.net:6379/0'
-CELERY_RESULT_BACKEND = 'redis://redis.prep.icttoracon.net:6379/0'
+BROKER_URL = 'redis://{}:{}/0'.format(get_env_variable('REDIS_HOST'), get_env_variable('REDIS_PORT'))
+CELERY_RESULT_BACKEND = 'redis://{}:{}/0'.format(get_env_variable('REDIS_HOST'), get_env_variable('REDIS_PORT'))
 
 CSRF_TRUSTED_ORIGINS = [
-        ".prep.icttoracon.net",
+        ".{}".format(get_env_variable('CSRF_TRUSTED_ORIGIN')),
 ]
 
 DEBUG = False

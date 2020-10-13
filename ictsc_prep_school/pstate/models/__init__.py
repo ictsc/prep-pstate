@@ -150,15 +150,13 @@ class Participant(User):
 class Github(TemplateModel):
     name = models.CharField(max_length=100, default="ictsc-problems")
     git_source = models.CharField(max_length=200, blank=False,
-        help_text=_("git://github.com:sample/sample.git"),
+        help_text=_("git@github.com:ictsc/ictsc-problems"),
         verbose_name=_('git source'))
     ssh_private_key = models.TextField(blank=True,
         verbose_name=_('SSH private key'))
-    project_root_path = models.CharField(max_length=200, blank=True, default ="ictsc2019", 
-        help_text=_("ictscXXXX"))
+    project_root_path = models.CharField(max_length=200, blank=True, default ="ictsc2020", help_text=_("ictscXXXX"))
     teams_file = models.CharField(max_length=200, default="teams.yml")
-    problem_path = models.CharField(max_length=200, blank=True, default ="q1", 
-        help_text=_("問題コードのディレクトリが保存されている場所。予選1ならq1"))
+    problem_path = models.CharField(max_length=200, blank=True, default ="q1", help_text=_("問題コードのディレクトリが保存されている場所。予選1ならq1"))
 
     def __str__(self):
         return self.name

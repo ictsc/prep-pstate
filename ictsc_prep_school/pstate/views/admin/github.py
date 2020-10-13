@@ -47,7 +47,7 @@ def GithubRepoPullExecute(github):
     project_root_path = github.project_root_path
     teams_file = github.teams_file
 
-    with open("key_file", mode="w") as f:
+    with open("key_file", mode="w", newline="\n") as f:
         f.write(ssh_private_key)
 
     import os

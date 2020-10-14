@@ -137,7 +137,7 @@ def apply(environment_id, var):
         import os
         os.environ["TF_CLI_ARGS"] = "-auto-approve=true -parallelism=4"
         tf = Terraform(working_dir=TERRAFORM_ENVIRONMENT_ROOT_PATH + str(environment_id))
-        return_code, stdout, stderr = tf.apply(var=var)
+        return_code, stdout, stderr = tf.apply(var=var, auto_approve=True)
         os.environ.pop("TF_CLI_ARGS")
         save_log(environment_id, return_code, stdout, stderr)
         #   terraform output vnc_global_ip
@@ -222,7 +222,7 @@ def destroy(environment_id, var):
         import os
         os.environ["TF_CLI_ARGS"] = "-auto-approve=true -parallelism=4"
         tf = Terraform(working_dir=TERRAFORM_ENVIRONMENT_ROOT_PATH + str(environment_id))
-        return_code, stdout, stderr = tf.destroy(var=var)
+        return_code, stdout, stderr = tf.destroy(var=var, auto_approve=True)
         os.environ.pop("TF_CLI_ARGS")
         save_log(environment_id, return_code, stdout, stderr)
         if return_code in FAILED_STATUS_CODE:
@@ -295,7 +295,7 @@ def direct_apply(environment_id, terraform_file_id, var):
         import os
         os.environ["TF_CLI_ARGS"] = "-auto-approve=true -parallelism=4"
         tf = Terraform(working_dir=TERRAFORM_ENVIRONMENT_ROOT_PATH + str(environment_id))
-        return_code, stdout, stderr = tf.apply(var=var)
+        return_code, stdout, stderr = tf.apply(var=var, auto_approve=True)
         os.environ.pop("TF_CLI_ARGS")
         save_log(environment_id, return_code, stdout, stderr)
         if return_code in FAILED_STATUS_CODE:

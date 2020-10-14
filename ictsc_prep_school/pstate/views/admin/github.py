@@ -49,7 +49,7 @@ def GithubRepoPullExecute(github):
 
     # private keyは改行コードが \n でなければならない
     with open("key_file", mode="wb") as f:
-        f.write(ssh_private_key.replace('\r', ''))
+        f.write(ssh_private_key.replace('\r', '').encode('utf-8'))
 
     import os
     os.chmod("key_file", 0o600)

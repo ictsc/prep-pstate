@@ -47,16 +47,17 @@ def GithubRepoPullExecute(github):
     project_root_path = github.project_root_path
     teams_file = github.teams_file
 
-    with open("key_file", mode="w", newline="\n") as f:
-        f.write(ssh_private_key)
+    # private keyは改行コードが \n でなければならない
+    with open("key_file", mode="wb") as f:
+        f.write(ssh_private_key.replace('\r', ''))
 
     import os
     os.chmod("key_file", 0o600)
-    
+
     from git import Repo
     ssh_cmd = 'ssh -i key_file'
     #初回はリポジトリからClone、それ以降Pullする
-    
+
     if os.path.isdir("./github_clone"):
         ssh_cmd = 'ssh -i ../key_file'
         os.chdir("./github_clone")

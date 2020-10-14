@@ -43,13 +43,13 @@ def GithubRepoPullExecute(github):
 
     # Githubの情報を読み込む
     git_source = github.git_source
-    ssh_private_key = github.ssh_private_key
+    ssh_private_key = github.ssh_private_key.replace('\r', '') + "\n"
     project_root_path = github.project_root_path
     teams_file = github.teams_file
 
     # private keyは改行コードが \n でなければならない
     with open("key_file", mode="wb") as f:
-        f.write(ssh_private_key.replace('\r', '').encode('utf-8'))
+        f.write(ssh_private_key.encode('utf-8'))
 
     import os
     os.chmod("key_file", 0o600)

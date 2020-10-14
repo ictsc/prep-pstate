@@ -3,7 +3,7 @@
 set -ex
 
 # pstate全体のバージョン
-VERSION="20201014029"
+VERSION="20201014030"
 
 REPOSITORY="ictsc.sakuracr.jp"
 

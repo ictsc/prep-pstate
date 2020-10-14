@@ -135,10 +135,9 @@ def apply(environment_id, var):
     NotificationQueue.objects.create(environment=environment)
     try:
         import os
-        os.environ["TF_CLI_ARGS"] = "-parallelism=4"
+        os.environ["TF_CLI_ARGS"] = "-parallelism=4 -auto-approve=true"
         tf = Terraform(working_dir=TERRAFORM_ENVIRONMENT_ROOT_PATH + str(environment_id))
         return_code, stdout, stderr = tf.apply(var=var, skip_plan=True)
-        os.environ.pop("TF_CLI_ARGS")
         save_log(environment_id, return_code, stdout, stderr)
         #   terraform output vnc_global_ip
         cmd = ['terraform', 'output', 'vnc_global_ip']
@@ -223,7 +222,6 @@ def destroy(environment_id, var):
         os.environ["TF_CLI_ARGS"] = "-parallelism=4 -auto-approve=true"
         tf = Terraform(working_dir=TERRAFORM_ENVIRONMENT_ROOT_PATH + str(environment_id))
         return_code, stdout, stderr = tf.destroy(var=var, force=True)
-        os.environ.pop("TF_CLI_ARGS")
         save_log(environment_id, return_code, stdout, stderr)
         if return_code in FAILED_STATUS_CODE:
             raise Exception("terraformが異常終了したためtaskを停止します")
@@ -293,10 +291,9 @@ def direct_apply(environment_id, terraform_file_id, var):
         environment.save()
         NotificationQueue.objects.create(environment=environment)
         import os
-        os.environ["TF_CLI_ARGS"] = "-parallelism=4"
+        os.environ["TF_CLI_ARGS"] = "-parallelism=4 -auto-approve=true"
         tf = Terraform(working_dir=TERRAFORM_ENVIRONMENT_ROOT_PATH + str(environment_id))
         return_code, stdout, stderr = tf.apply(var=var, skip_plan=True)
-        os.environ.pop("TF_CLI_ARGS")
         save_log(environment_id, return_code, stdout, stderr)
         if return_code in FAILED_STATUS_CODE:
             raise Exception("terraformが異常終了したためtaskを停止します")

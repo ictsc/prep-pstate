@@ -22,18 +22,17 @@ else
 fi
 
 # pstateのwebuiにバージョンを入れるためビルド前に置換する
-sedi -e "s/PSTATE_VERSION/${VERSION}/g" ./ictsc_prep_school/pstate/templates/adminlte/lib/_main_footer.html
+PSTATE_WEB_FOOTER_PATH="./ictsc_prep_school/pstate/templates/adminlte/lib/_main_footer.html"
+sedi -e "s/PSTATE_VERSION/${VERSION}/g" ${PSTATE_WEB_FOOTER_PATH}
 
-docker build -t ${PSTATE_WEB}:${VERSION} -f docker_build/pstate_webui/Dockerfile .
-docker build -t ${PSTATE_STATIC_SERVER}:${VERSION} -f docker_build/pstate_webui_staticfiles_webserver/Dockerfile .
-docker build -t ${TERRAFORM_MANAGER}:${VERSION} -f docker_build/terraform_manager_worker/Dockerfile .
-
-docker tag ${PSTATE_WEB}:${VERSION} ${REPOSITORY}/${PSTATE_WEB}:${VERSION}
-docker tag ${PSTATE_STATIC_SERVER}:${VERSION} ${REPOSITORY}/${PSTATE_STATIC_SERVER}:${VERSION}
-docker tag ${TERRAFORM_MANAGER}:${VERSION} ${REPOSITORY}/${TERRAFORM_MANAGER}:${VERSION}
+docker build -t ${REPOSITORY}/${PSTATE_WEB}:${VERSION}           -f docker_build/pstate_webui/Dockerfile .
+docker build -t ${REPOSITORY}/${PSTATE_STATIC_SERVER}:${VERSION} -f docker_build/pstate_webui_staticfiles_webserver/Dockerfile .
+docker build -t ${REPOSITORY}/${TERRAFORM_MANAGER}:${VERSION}    -f docker_build/terraform_manager_worker/Dockerfile .
 
 docker login --username=ictsc --password="cQX6NWcGKexBat87" ${REPOSITORY}
 
 docker push ${REPOSITORY}/${PSTATE_WEB}:${VERSION}
 docker push ${REPOSITORY}/${PSTATE_STATIC_SERVER}:${VERSION}
 docker push ${REPOSITORY}/${TERRAFORM_MANAGER}:${VERSION}
+
+git checkout  ${PSTATE_WEB_FOOTER_PATH}

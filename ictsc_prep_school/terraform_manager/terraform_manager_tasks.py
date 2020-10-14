@@ -379,7 +379,7 @@ terraform {
             variable_body += 'variable "{0}" {{}}\n'.format(attribute.key)
         else:
             provider_body += '\t{0} = "{1}"\n'.format(attribute.key, attribute.value)
-    provider_body += '}'
+    provider_body += '}\n'
 
     f = open(environment_dir + "/" + '{}.tf'.format(tf.provider.provider_name), 'wb')
     f.write(provider_body.encode('utf-8'))
@@ -403,7 +403,7 @@ terraform {
                 variable_body += 'variable "{0}" {{}}\n'.format(variable.key)
             else:
                 variable_body += 'variable "{0}" {{ default = "{1}" }}\n'.format(variable.key, variable.value)
-        f = open(environment_dir + "/" + '{}.tf'.format("variables"), 'wb')
+        f = open(environment_dir + '/variables.tf', 'wb')
         f.write(variable_body.encode('utf-8'))
         f.close()
 

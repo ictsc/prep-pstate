@@ -135,7 +135,7 @@ def apply(environment_id, var):
     NotificationQueue.objects.create(environment=environment)
     try:
         import os
-        os.environ["TF_CLI_ARGS"] = "-auto-approve=true -parallelism=4"
+        os.environ["TF_CLI_ARGS"] = "-auto-approve=true -input=false -parallelism=4"
         tf = Terraform(working_dir=TERRAFORM_ENVIRONMENT_ROOT_PATH + str(environment_id))
         return_code, stdout, stderr = tf.apply(var=var, auto_approve=True)
         os.environ.pop("TF_CLI_ARGS")
@@ -220,7 +220,7 @@ def destroy(environment_id, var):
     NotificationQueue.objects.create(environment=environment)
     try:
         import os
-        os.environ["TF_CLI_ARGS"] = "-auto-approve=true -parallelism=4"
+        os.environ["TF_CLI_ARGS"] = "-auto-approve=true -input=false -parallelism=4"
         tf = Terraform(working_dir=TERRAFORM_ENVIRONMENT_ROOT_PATH + str(environment_id))
         return_code, stdout, stderr = tf.destroy(var=var, auto_approve=True)
         os.environ.pop("TF_CLI_ARGS")
@@ -293,7 +293,7 @@ def direct_apply(environment_id, terraform_file_id, var):
         environment.save()
         NotificationQueue.objects.create(environment=environment)
         import os
-        os.environ["TF_CLI_ARGS"] = "-auto-approve=true -parallelism=4"
+        os.environ["TF_CLI_ARGS"] = "-auto-approve=true -input=false -parallelism=4"
         tf = Terraform(working_dir=TERRAFORM_ENVIRONMENT_ROOT_PATH + str(environment_id))
         return_code, stdout, stderr = tf.apply(var=var, auto_approve=True)
         os.environ.pop("TF_CLI_ARGS")

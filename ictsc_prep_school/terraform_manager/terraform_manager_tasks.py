@@ -357,7 +357,17 @@ def prepare_environment(environment_id, terraform_file_id):
     f.close()
 
     # プロバイダの設定定義ファイルの作成.
-    variable_body = ''
+    variable_body = """\
+terraform {
+  required_providers {
+    sakuracloud = {
+      source  = "sacloud/sakuracloud"
+      version = "1.16.4"
+    }
+  }
+}
+"""
+
     provider_body = 'provider {} {{\n'.format(tf.provider.provider_name)
     for attribute in tf.provider.attribute.all():
         if attribute.value is None or attribute.value == '':

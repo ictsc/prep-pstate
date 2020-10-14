@@ -352,7 +352,7 @@ def prepare_environment(environment_id, terraform_file_id):
     # *.tfファイルのコピー.
     from terraform_manager.models import TerraformFile
     tf = TerraformFile.objects.get(id=terraform_file_id)
-    f = open(environment_dir + "/" + '{}.tf'.format(tf.file_name), 'wb')
+    f = open(environment_dir + "/" + '{}'.format(tf.file_name), 'wb')
     f.write(tf.body.encode('utf-8'))
     f.close()
 
